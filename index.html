@@ -107,6 +107,24 @@ p{margin:0 0 1rem}
 /* FOTO DA CAPA: zoom para cortar as bordas. scale = quanto aproxima, transform-origin ajusta o rosto no centro */
 .capa-foto img{object-position:50% 0;transform:scale(1.45);transform-origin:70.5% 30%}
 
+/* CAPA: paleta Caramelo */
+.capa{--areia:#efe9e1;--texto:#3b322b;--texto-suave:#5f5044;--destaque:#a9825f;--bloco-foto:#d8c3ac;--linha:#d9cfc3;background:var(--areia)}
+.capa .frase{color:var(--destaque)}
+.capa .acoes{align-items:center;gap:1.2rem 2.2rem}
+/* botão principal sólido */
+.capa .btn--solido{background:var(--texto);border-color:var(--texto);color:var(--areia)}
+.capa .btn--solido:hover{background:var(--destaque);border-color:var(--destaque);color:var(--areia)}
+/* links de texto com sublinhado fino */
+.link-capa{display:inline-block;padding:.35rem 0;font-family:var(--corpo);font-size:.75rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--texto);border-bottom:1px solid var(--destaque);transition:color .3s}
+.link-capa:hover{color:var(--destaque)}
+/* números */
+.capa .capa-numeros strong{color:var(--destaque)}
+/* foto com bloco de cor atrás, deslocado 14px para cima e para a esquerda */
+.capa-foto{position:relative}
+.capa-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:var(--bloco-foto);z-index:0}
+.capa-foto .midia{position:relative;z-index:1}
+.capa-foto img{filter:sepia(.12) saturate(1.05)}
+
 
 /* Faixa de marcas */
 .faixa{margin-top:clamp(3rem,7vw,5rem);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);overflow:hidden;background:var(--offwhite)}
@@ -233,10 +251,6 @@ p{margin:0 0 1rem}
   .menu{gap:1.2rem}
   .topo-direita{gap:1.2rem}
 }
-@media (min-width:901px){
-  .capa .acoes{gap:.7rem}
-  .capa .acoes .btn{padding:1rem 1.1rem;letter-spacing:.16em}
-}
 @media (max-width:1024px){
   .galeria{grid-template-columns:repeat(3,1fr)}
 }
@@ -264,7 +278,7 @@ p{margin:0 0 1rem}
   .capa-numeros div{padding-right:.5rem}
   .capa-numeros div+div{padding-left:.7rem}
   .capa-numeros span{font-size:.58rem;letter-spacing:.12em}
-  .capa .acoes .btn{flex:1 1 100%}
+  .capa .acoes .btn--solido{flex:1 1 100%}
   .servicos{grid-template-columns:1fr}
   .depoimentos{grid-template-columns:1fr}
   .galeria{gap:1rem}
@@ -320,10 +334,10 @@ p{margin:0 0 1rem}
       <p class="frase" data-t="capaFrase">Bom gosto que vende.</p>
       <p class="sub" data-t="capaSub">Eu coloco a sua marca na rotina que todo mundo quer ter: vídeos naturais, bonitos e pensados para converter.</p>
       <div class="acoes">
-        <a class="btn" href="#contato" data-t="btnFalar">Falar comigo</a>
-        <a class="btn btn--claro" href="#trabalhos" data-t="btnVer">Ver os trabalhos</a>
-        <!-- BOTÃO DO INSTAGRAM NA CAPA -->
-        <a class="btn" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener" aria-label="Instagram @crisdallaccua">Instagram</a>
+        <a class="btn btn--solido" href="#contato" data-t="btnFalar">Falar comigo</a>
+        <a class="link-capa" href="#trabalhos" data-t="btnVer">Ver os trabalhos</a>
+        <!-- LINK DO INSTAGRAM NA CAPA -->
+        <a class="link-capa" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener" aria-label="Instagram @crisdallaccua">Instagram</a>
       </div>
       <div class="capa-numeros" id="capa-numeros"><!-- preenchido pelo script (array numerosCapa) --></div>
     </div>
