@@ -58,6 +58,24 @@ p{margin:0 0 1rem}
 .sanduiche[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
 .sanduiche[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
 
+/* BARRA DO TOPO MARROM (teste): para voltar ao bege, apague a classe "topo--marrom" da tag header */
+.topo--marrom{background:#382218;border-bottom-color:#382218}
+.topo--marrom .marca-nome{color:#c2bcae}
+.topo--marrom .menu a{color:#c2bcae}
+.topo--marrom .menu a:hover{color:#efe9e1;border-color:#c2bcae}
+.topo--marrom .sanduiche{border-color:#877863}
+.topo--marrom .sanduiche span,.topo--marrom .sanduiche span::before,.topo--marrom .sanduiche span::after{background:#c2bcae}
+.topo--marrom .sanduiche[aria-expanded="true"] span{background:transparent}
+.topo--marrom .idiomas{border-color:#877863}
+.topo--marrom .idioma{color:#c2bcae}
+.topo--marrom .idioma+.idioma{border-left-color:#877863}
+.topo--marrom .idioma[aria-pressed="true"]{background:#c2bcae;color:#382218}
+.topo--marrom :focus-visible{outline-color:#c2bcae}
+@media (max-width:900px){
+  .topo--marrom .menu{background:#382218;border-bottom-color:#877863}
+  .topo--marrom .menu li{border-bottom-color:rgba(194,188,174,.25)}
+}
+
 /* Botão de idioma (PT / EN) */
 .idiomas{display:flex;border:1px solid var(--linha);flex-shrink:0}
 .idioma{background:transparent;border:0;min-width:44px;height:36px;padding:0 .7rem;font-family:var(--corpo);font-size:.68rem;font-weight:400;letter-spacing:.2em;color:var(--texto-suave);cursor:pointer;border-radius:0;transition:background .3s,color .3s}
@@ -72,7 +90,7 @@ p{margin:0 0 1rem}
 .capa .frase{font-family:var(--titulo);font-size:clamp(1.25rem,2.4vw,1.7rem);margin-bottom:.6rem}
 .capa .sub{max-width:34rem;color:var(--texto-suave)}
 .capa .acoes{display:flex;flex-wrap:wrap;gap:1rem;margin:2.2rem 0 3rem}
-.capa-numeros{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--linha);max-width:36rem}
+.capa-numeros{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--linha);max-width:24rem}
 .capa-numeros div{padding:1.4rem 1rem 1.4rem 0}
 .capa-numeros div+div{padding-left:1.2rem;border-left:1px solid var(--linha)}
 .capa-numeros strong{display:block;font-family:var(--titulo);font-weight:400;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.1}
@@ -267,7 +285,7 @@ p{margin:0 0 1rem}
 <a class="pular" href="#conteudo" data-t="pular">Pular para o conteúdo</a>
 
 <!-- ============ MENU FIXO ============ -->
-<header class="topo">
+<header class="topo topo--marrom">
   <div class="wrap">
     <a class="marca-nome" href="#inicio">Cristiane Dall' Accua</a>
     <div class="topo-direita">
@@ -546,8 +564,7 @@ const textos = {
 /* Números da capa (três números curtos) */
 const numerosCapa = [
   { valor: "+412", rotulo: { pt: "vídeos entregues", en: "videos delivered" } },
-  { valor: "+200", rotulo: { pt: "marcas atendidas", en: "brands served" } },
-  { valor: { pt: "+2,2M", en: "+2.2M" }, rotulo: { pt: "views somadas", en: "total views" } } /* soma dos 3 destaques: 393 mil + 1,7M + 117 mil */
+  { valor: "+200", rotulo: { pt: "marcas atendidas", en: "brands served" } }
 ];
 
 /* Marcas da faixa da capa */
