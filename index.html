@@ -88,8 +88,6 @@ p{margin:0 0 1rem}
 .capa-foto{border:1px solid var(--linha);padding:.8rem;background:var(--offwhite)}
 /* FOTO DA CAPA: zoom para cortar as bordas. scale = quanto aproxima, transform-origin ajusta o rosto no centro */
 .capa-foto img{object-position:50% 0;transform:scale(1.45);transform-origin:70.5% 30%}
-.capa-insta{display:inline-block;margin:-1.4rem 0 2.6rem;font-size:.72rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--texto-suave);border-bottom:1px solid var(--nude);padding-bottom:.25rem;transition:color .3s,border-color .3s}
-.capa-insta:hover{color:var(--texto);border-color:var(--texto)}
 
 
 /* Faixa de marcas */
@@ -217,6 +215,10 @@ p{margin:0 0 1rem}
   .menu{gap:1.2rem}
   .topo-direita{gap:1.2rem}
 }
+@media (min-width:901px) and (max-width:1200px){
+  .capa .acoes{gap:.7rem}
+  .capa .acoes .btn{padding:1rem 1.1rem;letter-spacing:.16em}
+}
 @media (max-width:1024px){
   .galeria{grid-template-columns:repeat(3,1fr)}
 }
@@ -303,9 +305,9 @@ p{margin:0 0 1rem}
       <div class="acoes">
         <a class="btn" href="#contato" data-t="btnFalar">Falar comigo</a>
         <a class="btn btn--claro" href="#trabalhos" data-t="btnVer">Ver os trabalhos</a>
+        <!-- BOTÃO DO INSTAGRAM NA CAPA -->
+        <a class="btn btn--claro" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener" aria-label="Instagram @crisdallaccua">Instagram</a>
       </div>
-      <!-- LINK DO INSTAGRAM NA CAPA -->
-      <a class="capa-insta" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener"><span data-t="capaInsta">Instagram</span> @crisdallaccua</a>
       <div class="capa-numeros" id="capa-numeros"><!-- preenchido pelo script (array numerosCapa) --></div>
     </div>
     <div class="capa-foto revela">
@@ -475,7 +477,7 @@ const textos = {
     capaRotulo: "Portfólio · UGC Creator · Influencer",
     capaFrase: "Bom gosto que vende.",
     capaSub: "Eu coloco a sua marca na rotina que todo mundo quer ter: vídeos naturais, bonitos e pensados para converter.",
-    btnFalar: "Falar comigo", btnVer: "Ver os trabalhos", capaInsta: "Instagram",
+    btnFalar: "Falar comigo", btnVer: "Ver os trabalhos",
     fotoCapaAlt: "Cristiane Dall' Accua sorrindo, de blazer branco, em fundo claro",
     faixaAria: "Marcas com quem já trabalhei",
     sobreTitulo: "Sobre mim", sobreRotulo: "Prazer, Cris",
@@ -512,7 +514,7 @@ const textos = {
     capaRotulo: "Portfolio · UGC Creator · Influencer",
     capaFrase: "Good taste that sells.",
     capaSub: "I place your brand in the routine everyone wants to have: natural, beautiful videos designed to convert.",
-    btnFalar: "Get in touch", btnVer: "See my work", capaInsta: "Instagram",
+    btnFalar: "Get in touch", btnVer: "See my work",
     fotoCapaAlt: "Cristiane Dall' Accua smiling, wearing a white blazer, against a light background",
     faixaAria: "Brands I have worked with",
     sobreTitulo: "About me", sobreRotulo: "Nice to meet you",
