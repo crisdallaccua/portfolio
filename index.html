@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cristiane Dall' Accua | Portfólio UGC Creator</title>
-<meta name="description" content="Portfólio UGC de Cristiane Dall' Accua, creator em Porto Alegre. Bom gosto que vende: vídeos UGC para beleza, skincare, moda, comida, casa, fitness e tech.">
+<meta name="description" content="Portfólio UGC de Cristiane Dall' Accua, creator em Porto Alegre. Bom gosto que vende: vídeos UGC para beleza, moda, casal, fitness, casa e decoração, culinária, experiências e tech.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
@@ -172,13 +172,15 @@ p{margin:0 0 1rem}
 .filtro:hover{border-color:var(--texto);color:var(--texto)}
 .filtro[aria-pressed="true"]{background:var(--texto);border-color:var(--texto);color:var(--offwhite)}
 .galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.4vw,1.8rem);list-style:none;padding:0;margin:0}
-.trabalho a{display:block;text-decoration:none}
-.trabalho .midia{margin-bottom:.9rem;transition:opacity .3s}
-.trabalho a:hover .midia{opacity:.85}
-.trabalho h3{font-size:1rem}
-.trabalho p{font-size:.85rem;color:var(--texto-suave);margin:0}
-.trabalho[hidden]{display:none}
-.trabalho.entra{animation:surge .5s ease both}
+.video-card{min-width:0}
+.video-quadro{position:relative;aspect-ratio:9/16;overflow:hidden;background:#d8c3ac}
+.video-capa{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer}
+.video-capa img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.video-capa:hover img{opacity:.88}
+.video-capa:hover .play{background:rgba(59,50,43,.3)}
+.video-quadro iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-legenda{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--texto-suave);margin:.8rem 0 0}
+.video-card.entra{animation:surge .5s ease both}
 @keyframes surge{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* Serviços */
@@ -501,7 +503,7 @@ p{margin:0 0 1rem}
 const textos = {
   pt: {
     docTitulo: "Cristiane Dall' Accua | Portfólio UGC Creator",
-    docDesc: "Portfólio UGC de Cristiane Dall' Accua, creator em Porto Alegre. Bom gosto que vende: vídeos UGC para beleza, skincare, moda, comida, casa, fitness e tech.",
+    docDesc: "Portfólio UGC de Cristiane Dall' Accua, creator em Porto Alegre. Bom gosto que vende: vídeos UGC para beleza, moda, casal, fitness, casa e decoração, culinária, experiências e tech.",
     pular: "Pular para o conteúdo",
     menuAria: "Menu principal", abrirMenu: "Abrir menu", fecharMenu: "Fechar menu", idiomaAria: "Idioma",
     menuSobre: "Sobre", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Números", menuContato: "Contato",
@@ -538,7 +540,7 @@ const textos = {
   },
   en: {
     docTitulo: "Cristiane Dall' Accua | UGC Creator Portfolio",
-    docDesc: "UGC portfolio of Cristiane Dall' Accua, a creator based in Porto Alegre, Brazil. Good taste that sells: UGC videos for beauty, skincare, fashion, food, home, fitness and tech.",
+    docDesc: "UGC portfolio of Cristiane Dall' Accua, a creator based in Porto Alegre, Brazil. Good taste that sells: UGC videos for beauty, fashion, couples, fitness, home and decor, cooking, experiences and tech.",
     pular: "Skip to content",
     menuAria: "Main menu", abrirMenu: "Open menu", fecharMenu: "Close menu", idiomaAria: "Language",
     menuSobre: "About", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Numbers", menuContato: "Contact",
@@ -603,33 +605,90 @@ const destaques = [
     contexto: { pt: "Contexto curto: marca, nicho e objetivo do vídeo.", en: "Short context: brand, niche and goal of the video." } }
 ];
 
-/* Nichos (botões de filtro). A "chave" liga o nicho aos trabalhos abaixo */
+/* VÍDEOS POR NICHO (galeria da seção 03, os vídeos tocam no próprio site)
+   A ordem aqui é a ordem dos botões. Para incluir um vídeo, cole o link do YouTube (shorts ou normal) na lista do nicho.
+   Para criar um nicho novo, copie um bloco inteiro { chave: ..., nome: ..., videos: [...] } e troque os dados. */
 const nichos = [
-  { chave: "beleza",   nome: { pt: "Beleza", en: "Beauty" } },
-  { chave: "skincare", nome: { pt: "Skincare", en: "Skincare" } },
-  { chave: "moda",     nome: { pt: "Moda", en: "Fashion" } },
-  { chave: "comida",   nome: { pt: "Comida", en: "Food" } },
-  { chave: "casa",     nome: { pt: "Casa e decoração", en: "Home and decor" } },
-  { chave: "fitness",  nome: { pt: "Fitness", en: "Fitness" } },
-  { chave: "tech",     nome: { pt: "Tech", en: "Tech" } }
-];
-
-/* Trabalhos da galeria
-   nicho: use uma das chaves acima | link: endereço do vídeo ("#" se ainda não tiver)
-   capa: "" usa o degradê, ou suba a imagem quadrada no GitHub e coloque o nome, ex.: "trabalho1.jpg" */
-const trabalhos = [
-  { nicho: "beleza",   marca: "Marca 01", titulo: { pt: "Vídeo UGC de maquiagem", en: "Makeup UGC video" }, link: "#", capa: "" },
-  { nicho: "beleza",   marca: "Marca 02", titulo: { pt: "Rotina de cabelo", en: "Hair routine" }, link: "#", capa: "" },
-  { nicho: "skincare", marca: "Marca 03", titulo: { pt: "Rotina noturna de skincare", en: "Night skincare routine" }, link: "#", capa: "" },
-  { nicho: "skincare", marca: "Marca 04", titulo: { pt: "Antes e depois com protetor", en: "Sunscreen before and after" }, link: "#", capa: "" },
-  { nicho: "moda",     marca: "Marca 05", titulo: { pt: "Provador em casa", en: "Try on at home" }, link: "#", capa: "" },
-  { nicho: "moda",     marca: "Marca 06", titulo: { pt: "Look da semana", en: "Outfit of the week" }, link: "#", capa: "" },
-  { nicho: "comida",   marca: "Marca 07", titulo: { pt: "Café da manhã caprichado", en: "A lovely breakfast" }, link: "#", capa: "" },
-  { nicho: "comida",   marca: "Marca 08", titulo: { pt: "Receita rápida", en: "Quick recipe" }, link: "#", capa: "" },
-  { nicho: "casa",     marca: "Marca 09", titulo: { pt: "Faxina de domingo", en: "Sunday cleaning" }, link: "#", capa: "" },
-  { nicho: "casa",     marca: "Marca 10", titulo: { pt: "Cantinho decorado", en: "Cozy decor corner" }, link: "#", capa: "" },
-  { nicho: "fitness",  marca: "Marca 11", titulo: { pt: "Treino e suplemento", en: "Workout and supplement" }, link: "#", capa: "" },
-  { nicho: "tech",     marca: "Marca 12", titulo: { pt: "Aplicativo na rotina", en: "App in my routine" }, link: "#", capa: "" }
+  { chave: "beleza", nome: { pt: "Beleza", en: "Beauty" }, videos: [
+      "https://youtube.com/shorts/874zx_g4C10",
+      "https://youtube.com/shorts/cMijf_BG4WY",
+      "https://youtube.com/shorts/z1HS9XDP_eM",
+      "https://youtube.com/shorts/9rv-USVCHTI",
+      "https://youtube.com/shorts/XUV0xuQLdOk",
+      "https://youtube.com/shorts/abf_HF8BpS4",
+      "https://youtube.com/shorts/b2fs5q5_Mrk",
+      "https://youtube.com/shorts/cKZx0V9Mjyo"
+  ] },
+  { chave: "moda", nome: { pt: "Moda", en: "Fashion" }, videos: [
+      "https://youtube.com/shorts/A5k4s6i9HQk",
+      "https://youtube.com/shorts/nw9udFnUMzk",
+      "https://youtube.com/shorts/Jf8jCJnqexM",
+      "https://youtube.com/shorts/ng4ifWUSroE",
+      "https://youtube.com/shorts/ailKLJ6FEuI",
+      "https://youtube.com/shorts/zI0FIvigVpw",
+      "https://youtube.com/shorts/cE6oJi5At4k",
+      "https://youtube.com/shorts/gvaQQKWIHlA"
+  ] },
+  { chave: "casal", nome: { pt: "Casal", en: "Couple" }, videos: [
+      "https://youtube.com/shorts/zhJ0foMyo7I",
+      "https://youtube.com/shorts/yWzNE078sI4",
+      "https://youtube.com/shorts/_yr7nX7WdbM",
+      "https://youtube.com/shorts/6pFGVvTulfI",
+      "https://youtube.com/shorts/MAVEJIcUScY",
+      "https://youtube.com/shorts/TJdWO2m20SY",
+      "https://youtube.com/shorts/imqL-dXzgKw",
+      "https://youtube.com/shorts/45I1OxfoQAs"
+  ] },
+  { chave: "fitness", nome: { pt: "Fitness", en: "Fitness" }, videos: [
+      "https://youtube.com/shorts/efaA_zTnAKY",
+      "https://youtube.com/shorts/T6ZFOHkZ8Po",
+      "https://youtube.com/shorts/lsX_kDsTtB8",
+      "https://youtube.com/shorts/Hhhd6151CmA",
+      "https://youtube.com/shorts/9H7T5fyp9aI",
+      "https://youtube.com/shorts/fYUahv09jqo",
+      "https://youtube.com/shorts/RIk1raRopgg",
+      "https://youtube.com/shorts/irZMV3XC2x4"
+  ] },
+  { chave: "casa", nome: { pt: "Casa e decoração", en: "Home and decor" }, videos: [
+      "https://youtube.com/shorts/y_ZItWQhn6o",
+      "https://youtube.com/shorts/dZwXdSeEuYk",
+      "https://youtube.com/shorts/vLKvo1v6EaA",
+      "https://youtube.com/shorts/kZCDDTGYTY4",
+      "https://youtube.com/shorts/00_qkUmpKQQ",
+      "https://youtube.com/shorts/Tkjm74T4MEw",
+      "https://youtube.com/shorts/Vzx5y4TzXvM",
+      "https://youtube.com/shorts/_nhPiQPW0X8"
+  ] },
+  { chave: "culinaria", nome: { pt: "Culinária", en: "Cooking" }, videos: [
+      "https://youtube.com/shorts/8mTcra2UhSs",
+      "https://youtube.com/shorts/2ftW_HKVlg4",
+      "https://youtube.com/shorts/_pb2l_smDfo",
+      "https://youtube.com/shorts/e1UV_eFa4h4",
+      "https://youtube.com/shorts/XSTzZKnPi20",
+      "https://youtube.com/shorts/8z1hzUgrT8k",
+      "https://youtube.com/shorts/OD-EN0c2sR4",
+      "https://youtube.com/shorts/OLlSa90hbLQ"
+  ] },
+  { chave: "experiencias", nome: { pt: "Experiências", en: "Experiences" }, videos: [
+      "https://youtube.com/shorts/CACU5ZyaB6U",
+      "https://youtube.com/shorts/sB6sbfN6wTw",
+      "https://youtube.com/shorts/VapJSU8yV5Y",
+      "https://youtube.com/shorts/6qB2m3ovgBg",
+      "https://youtube.com/shorts/NxxUqJpf4xE",
+      "https://youtube.com/shorts/U5cx2KKzQDw",
+      "https://youtube.com/shorts/xG2Oj6HcpCU",
+      "https://youtube.com/shorts/ZX0PYCNYaAs"
+  ] },
+  { chave: "tech", nome: { pt: "Tech, apps e educação", en: "Tech, apps and education" }, videos: [
+      "https://youtube.com/shorts/mwCP6ZbEJrc",
+      "https://youtube.com/shorts/7uKmJx0m3KM",
+      "https://youtube.com/shorts/A-lost1LVLQ",
+      "https://youtube.com/shorts/2dpomLsC-P0",
+      "https://youtube.com/shorts/OXIk3mdaFB8",
+      "https://youtube.com/shorts/XdiDPC7Fa5I",
+      "https://youtube.com/shorts/yD940WiulXs",
+      "https://youtube.com/shorts/kQ64KmYQ4Yg"
+  ] }
 ];
 
 /* Serviços (seis) */
@@ -660,7 +719,7 @@ const metricas = [
   { alvo: 412, casas: 0, antes: "", depois: "", rotulo: { pt: "vídeos entregues", en: "videos delivered" } },
   { alvo: 200, casas: 0, antes: "", depois: "", rotulo: { pt: "marcas atendidas", en: "brands served" } },
   { alvo: 2.2, casas: 1, antes: "+", depois: "M", rotulo: { pt: "views nos destaques", en: "views on featured reels" } },
-  { alvo: 7,   casas: 0, antes: "", depois: "", rotulo: { pt: "nichos atendidos", en: "niches covered" } }
+  { alvo: 8,   casas: 0, antes: "", depois: "", rotulo: { pt: "nichos atendidos", en: "niches covered" } }
 ];
 
 /* Resultados de campanha (três): troque pelos números reais */
@@ -693,7 +752,7 @@ const localidade = () => idioma === "en" ? "en-US" : "pt-BR";
 const formata = (v, casas) => v.toLocaleString(localidade(), { minimumFractionDigits: casas, maximumFractionDigits: casas });
 
 let primeiraVez = true;
-let filtroAtual = "todos";
+let filtroAtual = nichos[0].chave;
 let contadoresAnimados = false;
 
 function blocoMidia(capa, formato, legenda, alt) {
@@ -736,17 +795,9 @@ function renderiza() {
       </div>
     </a>`).join("");
 
-  const nomeNicho = Object.fromEntries(nichos.map(n => [n.chave, tr(n.nome)]));
-  $("#filtros").innerHTML = [{ chave: "todos", nome: T("todos") }, ...nichos]
+  $("#filtros").innerHTML = nichos
     .map(n => `<button class="filtro" type="button" data-nicho="${n.chave}" aria-pressed="${n.chave === filtroAtual}">${esc(tr(n.nome))}</button>`).join("");
-  $("#galeria").innerHTML = trabalhos.map(t => `
-    <li class="trabalho" data-nicho="${esc(t.nicho)}"${filtroAtual === "todos" || filtroAtual === t.nicho ? "" : " hidden"}>
-      <a href="${esc(t.link)}" ${t.link !== "#" ? 'target="_blank" rel="noopener"' : ""}>
-        ${blocoMidia(t.capa, "midia--1x1", T("capaQuadrada"), tr(t.titulo) + " " + T("para") + " " + t.marca)}
-        <h3>${esc(tr(t.titulo))}</h3>
-        <p>${esc(t.marca)} · ${esc(nomeNicho[t.nicho] || t.nicho)}</p>
-      </a>
-    </li>`).join("");
+  renderizaGaleria(false);
 
   $("#lista-servicos").innerHTML = servicos.map((s, i) => `
     <li class="servico ${revela}"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${esc(tr(s.titulo))}</h3><p>${esc(tr(s.descricao))}</p></li>`).join("");
@@ -786,18 +837,50 @@ document.querySelectorAll(".idioma").forEach(b => b.addEventListener("click", ()
   $("#ok-nome").textContent = nome;
 }));
 
+/* Galeria de vídeos: mostra a capa do YouTube e só carrega o vídeo quando a pessoa clica */
+function idDoYoutube(link) {
+  const m = String(link).match(/(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)([\w-]{11})/);
+  return m ? m[1] : String(link).trim();
+}
+function renderizaGaleria(animar) {
+  const nicho = nichos.find(n => n.chave === filtroAtual) || nichos[0];
+  const nome = tr(nicho.nome);
+  $("#galeria").innerHTML = nicho.videos.map((link, i) => {
+    const id = idDoYoutube(link), num = String(i + 1).padStart(2, "0");
+    return `
+    <li class="video-card${animar && !semMovimento ? " entra" : ""}">
+      <div class="video-quadro">
+        <button class="video-capa" type="button" data-id="${esc(id)}" data-titulo="${esc(nome)} ${num}" aria-label="${esc(T("assistir"))}: ${esc(nome)} ${num}">
+          <img src="https://i.ytimg.com/vi/${esc(id)}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="video-legenda">${esc(nome)} · ${num}</p>
+    </li>`;
+  }).join("");
+}
+function fechaVideos() {
+  document.querySelectorAll(".video-quadro iframe").forEach(f => {
+    const q = f.parentElement;
+    q.innerHTML = q.dataset.capa;
+  });
+}
+$("#galeria").addEventListener("click", (e) => {
+  const b = e.target.closest(".video-capa");
+  if (!b) return;
+  fechaVideos();
+  const q = b.parentElement;
+  q.dataset.capa = q.innerHTML;
+  q.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.id)}?autoplay=1&playsinline=1&rel=0" title="${esc(b.dataset.titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+});
+
 /* Filtro de nicho */
 $("#filtros").addEventListener("click", (e) => {
   const b = e.target.closest(".filtro");
-  if (!b) return;
+  if (!b || b.dataset.nicho === filtroAtual) return;
   filtroAtual = b.dataset.nicho;
   document.querySelectorAll(".filtro").forEach(x => x.setAttribute("aria-pressed", x === b));
-  document.querySelectorAll(".trabalho").forEach(item => {
-    const mostra = filtroAtual === "todos" || item.dataset.nicho === filtroAtual;
-    item.hidden = !mostra;
-    item.classList.remove("entra");
-    if (mostra && !semMovimento) { void item.offsetWidth; item.classList.add("entra"); }
-  });
+  renderizaGaleria(true);
 });
 
 /* Entrada suave ao rolar + contador */
