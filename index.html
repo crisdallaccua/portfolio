@@ -76,7 +76,7 @@ p{margin:0 0 1rem}
 .capa-numeros div{padding:1.4rem 1rem 1.4rem 0}
 .capa-numeros div+div{padding-left:1.2rem;border-left:1px solid var(--linha)}
 .capa-numeros strong{display:block;font-family:var(--titulo);font-weight:400;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.1}
-.capa-numeros span{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--texto-suave)}
+.capa-numeros span{display:block;line-height:1.5;margin-top:.3rem;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--texto-suave)}
 
 /* Blocos de mídia (placeholders com degradê) */
 .midia{position:relative;width:100%;overflow:hidden;background:linear-gradient(160deg,#e6dbcf 0%,#d5c3b2 55%,#c9b5a3 100%)}
@@ -86,15 +86,11 @@ p{margin:0 0 1rem}
 .midia--9x16{aspect-ratio:9/16}
 .midia--1x1{aspect-ratio:1/1}
 .capa-foto{border:1px solid var(--linha);padding:.8rem;background:var(--offwhite)}
-/* FOTO DA CAPA: zoom para cortar as bordas. scale = quanto aproxima, transform-origin = ponto que fica no centro (o rosto) */
-.capa-foto img{object-position:50% 0;transform:scale(1.35);transform-origin:56% 30%}
+/* FOTO DA CAPA: zoom para cortar as bordas. scale = quanto aproxima, transform-origin ajusta o rosto no centro */
+.capa-foto img{object-position:50% 0;transform:scale(1.45);transform-origin:70.5% 30%}
+.capa-insta{display:inline-block;margin:-1.4rem 0 2.6rem;font-size:.72rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--texto-suave);border-bottom:1px solid var(--nude);padding-bottom:.25rem;transition:color .3s,border-color .3s}
+.capa-insta:hover{color:var(--texto);border-color:var(--texto)}
 
-/* CAPA ESCURA (teste): fundo preto e letras brancas.
-   Para voltar ao bege, apague a classe "capa--escura" da tag section da capa. */
-.capa--escura{--texto:#fdfcfa;--texto-suave:#d3cac0;--linha:rgba(253,252,250,.2);--offwhite:#161311;--nude:#a8927f;background:#0e0c0b;color:var(--texto)}
-.capa--escura .btn--claro{border-color:rgba(253,252,250,.45)}
-.capa--escura .btn--claro:hover{background:var(--texto);color:#0e0c0b}
-.capa--escura .capa-foto{background:#161311}
 
 /* Faixa de marcas */
 .faixa{margin-top:clamp(3rem,7vw,5rem);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);overflow:hidden;background:var(--offwhite)}
@@ -297,10 +293,10 @@ p{margin:0 0 1rem}
 <main id="conteudo">
 
 <!-- ============ CAPA ============ -->
-<section class="capa capa--escura" id="inicio" aria-labelledby="titulo-capa">
+<section class="capa" id="inicio" aria-labelledby="titulo-capa">
   <div class="wrap capa-grade">
     <div class="revela">
-      <p class="rotulo" data-t="capaRotulo">UGC Creator · Porto Alegre</p>
+      <p class="rotulo" data-t="capaRotulo">Portfólio · UGC Creator · Influencer</p>
       <h1 id="titulo-capa">Cristiane<br>Dall' Accua</h1>
       <p class="frase" data-t="capaFrase">Bom gosto que vende.</p>
       <p class="sub" data-t="capaSub">Eu coloco a sua marca na rotina que todo mundo quer ter: vídeos naturais, bonitos e pensados para converter.</p>
@@ -308,6 +304,8 @@ p{margin:0 0 1rem}
         <a class="btn" href="#contato" data-t="btnFalar">Falar comigo</a>
         <a class="btn btn--claro" href="#trabalhos" data-t="btnVer">Ver os trabalhos</a>
       </div>
+      <!-- LINK DO INSTAGRAM NA CAPA -->
+      <a class="capa-insta" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener"><span data-t="capaInsta">Instagram</span> @crisdallaccua</a>
       <div class="capa-numeros" id="capa-numeros"><!-- preenchido pelo script (array numerosCapa) --></div>
     </div>
     <div class="capa-foto revela">
@@ -474,10 +472,10 @@ const textos = {
     pular: "Pular para o conteúdo",
     menuAria: "Menu principal", abrirMenu: "Abrir menu", fecharMenu: "Fechar menu", idiomaAria: "Idioma",
     menuSobre: "Sobre", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Números", menuContato: "Contato",
-    capaRotulo: "UGC Creator · Porto Alegre",
+    capaRotulo: "Portfólio · UGC Creator · Influencer",
     capaFrase: "Bom gosto que vende.",
     capaSub: "Eu coloco a sua marca na rotina que todo mundo quer ter: vídeos naturais, bonitos e pensados para converter.",
-    btnFalar: "Falar comigo", btnVer: "Ver os trabalhos",
+    btnFalar: "Falar comigo", btnVer: "Ver os trabalhos", capaInsta: "Instagram",
     fotoCapaAlt: "Cristiane Dall' Accua sorrindo, de blazer branco, em fundo claro",
     faixaAria: "Marcas com quem já trabalhei",
     sobreTitulo: "Sobre mim", sobreRotulo: "Prazer, Cris",
@@ -511,10 +509,10 @@ const textos = {
     pular: "Skip to content",
     menuAria: "Main menu", abrirMenu: "Open menu", fecharMenu: "Close menu", idiomaAria: "Language",
     menuSobre: "About", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Numbers", menuContato: "Contact",
-    capaRotulo: "UGC Creator · Porto Alegre, Brazil",
+    capaRotulo: "Portfolio · UGC Creator · Influencer",
     capaFrase: "Good taste that sells.",
     capaSub: "I place your brand in the routine everyone wants to have: natural, beautiful videos designed to convert.",
-    btnFalar: "Get in touch", btnVer: "See my work",
+    btnFalar: "Get in touch", btnVer: "See my work", capaInsta: "Instagram",
     fotoCapaAlt: "Cristiane Dall' Accua smiling, wearing a white blazer, against a light background",
     faixaAria: "Brands I have worked with",
     sobreTitulo: "About me", sobreRotulo: "Nice to meet you",
