@@ -86,7 +86,15 @@ p{margin:0 0 1rem}
 .midia--9x16{aspect-ratio:9/16}
 .midia--1x1{aspect-ratio:1/1}
 .capa-foto{border:1px solid var(--linha);padding:.8rem;background:var(--offwhite)}
-.capa-foto img{object-position:50% 15%}
+/* FOTO DA CAPA: zoom para cortar as bordas. scale = quanto aproxima, transform-origin = ponto que fica no centro (o rosto) */
+.capa-foto img{object-position:50% 0;transform:scale(1.35);transform-origin:56% 30%}
+
+/* CAPA ESCURA (teste): fundo preto e letras brancas.
+   Para voltar ao bege, apague a classe "capa--escura" da tag section da capa. */
+.capa--escura{--texto:#fdfcfa;--texto-suave:#d3cac0;--linha:rgba(253,252,250,.2);--offwhite:#161311;--nude:#a8927f;background:#0e0c0b;color:var(--texto)}
+.capa--escura .btn--claro{border-color:rgba(253,252,250,.45)}
+.capa--escura .btn--claro:hover{background:var(--texto);color:#0e0c0b}
+.capa--escura .capa-foto{background:#161311}
 
 /* Faixa de marcas */
 .faixa{margin-top:clamp(3rem,7vw,5rem);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);overflow:hidden;background:var(--offwhite)}
@@ -289,7 +297,7 @@ p{margin:0 0 1rem}
 <main id="conteudo">
 
 <!-- ============ CAPA ============ -->
-<section class="capa" id="inicio" aria-labelledby="titulo-capa">
+<section class="capa capa--escura" id="inicio" aria-labelledby="titulo-capa">
   <div class="wrap capa-grade">
     <div class="revela">
       <p class="rotulo" data-t="capaRotulo">UGC Creator · Porto Alegre</p>
@@ -538,8 +546,8 @@ const textos = {
 
 /* Números da capa (três números curtos) */
 const numerosCapa = [
-  { valor: "412", rotulo: { pt: "vídeos entregues", en: "videos delivered" } },
-  { valor: "200", rotulo: { pt: "marcas atendidas", en: "brands served" } },
+  { valor: "+412", rotulo: { pt: "vídeos entregues", en: "videos delivered" } },
+  { valor: "+200", rotulo: { pt: "marcas atendidas", en: "brands served" } },
   { valor: { pt: "+2,2M", en: "+2.2M" }, rotulo: { pt: "views somadas", en: "total views" } } /* soma dos 3 destaques: 393 mil + 1,7M + 117 mil */
 ];
 
