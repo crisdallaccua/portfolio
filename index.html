@@ -166,22 +166,42 @@ p{margin:0 0 1rem}
 .destaque h3{font-size:1.15rem;margin-bottom:.4rem}
 .destaque p{font-size:.92rem;color:var(--texto-suave);margin:0}
 
-/* Trabalhos */
-.filtros{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem}
-.filtro{background:transparent;border:1px solid var(--linha);color:var(--texto-suave);padding:.7rem 1.2rem;font-family:var(--corpo);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;border-radius:0;transition:all .3s}
-.filtro:hover{border-color:var(--texto);color:var(--texto)}
-.filtro[aria-pressed="true"]{background:var(--texto);border-color:var(--texto);color:var(--offwhite)}
-.galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.4vw,1.8rem);list-style:none;padding:0;margin:0}
-.video-card{min-width:0}
-.video-quadro{position:relative;aspect-ratio:9/16;overflow:hidden;background:#d8c3ac}
-.video-capa{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer}
-.video-capa img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
-.video-capa:hover img{opacity:.88}
-.video-capa:hover .play{background:rgba(59,50,43,.3)}
-.video-quadro iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video-legenda{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--texto-suave);margin:.8rem 0 0}
-.video-card.entra{animation:surge .5s ease both}
-@keyframes surge{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* Trabalhos: categorias com vídeos */
+.cat-abertura{margin-bottom:clamp(3.5rem,8vw,6rem)}
+.cat-etiqueta{display:flex;align-items:center;gap:1rem;margin:0 0 1.6rem;font-size:.72rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:#a9825f}
+.cat-etiqueta::before{content:"";width:48px;height:1px;background:#a9825f;flex-shrink:0}
+.cat-titulo{font-size:clamp(2.2rem,5.4vw,4.2rem);line-height:1.1;color:#3b322b;max-width:17ch}
+.cat-titulo em{font-style:normal;color:#a9825f}
+.cat-apoio{color:#5f5044;max-width:34rem;margin:1.4rem 0 2.6rem}
+.cat-links{display:flex;gap:2.2rem;overflow-x:auto;padding-bottom:.4rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-links::-webkit-scrollbar{display:none}
+.cat-links a{flex-shrink:0;white-space:nowrap;font-size:.7rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:#5f5044;padding:.3rem 0;transition:color .3s}
+.cat-links a:hover{color:#a9825f}
+.categoria{border-top:1px solid #d9cfc3;padding-top:clamp(2rem,4vw,2.8rem)}
+.categoria+.categoria{margin-top:clamp(4.5rem,10vw,8rem)}
+.cat-num{margin:0 0 1rem;font-size:.68rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:#a9825f}
+.cat-topo{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;margin-bottom:clamp(1.6rem,3vw,2.4rem)}
+.cat-topo h3{font-size:clamp(1.9rem,4vw,3rem);color:#3b322b}
+.cat-desc{margin:0;max-width:24rem;text-align:right;font-size:.9rem;line-height:1.6;color:#5f5044}
+.cat-grade{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.8rem,2vw,1.4rem);list-style:none;padding:0;margin:0}
+.vplayer{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#d8c3ac}
+.vplayer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vpilula{position:absolute;top:.8rem;left:.8rem;z-index:2;max-width:calc(100% - 1.6rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:.35rem .75rem;border-radius:999px;background:rgba(239,233,225,.85);color:#3b322b;font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;transition:opacity .4s}
+.vrodape{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:3.6rem 1rem 1rem;background:linear-gradient(to top,rgba(30,22,17,.72),rgba(30,22,17,0));pointer-events:none;transition:opacity .4s}
+.vrodape strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.05rem;line-height:1.2;color:#efe9e1}
+.vrodape span{display:block;margin-top:.3rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#d8c3ac}
+.vplay{position:absolute;inset:0;z-index:3;display:grid;place-items:center;width:100%;padding:0;border:0;border-radius:12px;background:transparent;cursor:pointer}
+.vplay .circulo{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:rgba(239,233,225,.28);border:1px solid rgba(239,233,225,.65);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:transform .3s,opacity .3s}
+.vplay .circulo::before{content:"";margin-left:4px;border-left:13px solid #efe9e1;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.vplay:hover .circulo{transform:scale(1.07)}
+.vplay:focus-visible{outline:2px solid #a9825f;outline-offset:-2px}
+.tocando .circulo,.tocando .vrodape,.tocando .vpilula{opacity:0}
+.sem-video{background:#d9cfc3}
+.sem-video video,.sem-video .vplay{display:none}
+.sem-video::after{content:attr(data-aviso);position:absolute;inset:0;display:grid;place-items:center;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#5f5044}
+.sem-video .vrodape{background:none}
+.sem-video .vrodape strong{color:#3b322b}
+.sem-video .vrodape span{color:#5f5044}
 
 /* Serviços */
 .servicos{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--linha);border-left:1px solid var(--linha);list-style:none;padding:0;margin:0}
@@ -254,9 +274,10 @@ p{margin:0 0 1rem}
   .topo-direita{gap:1.2rem}
 }
 @media (max-width:1024px){
-  .galeria{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:900px){
+  .cat-topo{flex-direction:column;align-items:flex-start;gap:.8rem}
+  .cat-desc{text-align:left}
   .sanduiche{display:block}
   .menu{position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--offwhite);border-bottom:1px solid var(--linha);padding:.5rem clamp(1.25rem,4vw,2.5rem) 1.5rem;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility .3s}
   .menu.aberto{opacity:1;visibility:visible;transform:none}
@@ -270,9 +291,11 @@ p{margin:0 0 1rem}
   .metrica:nth-child(3){border-left:0}
   .metrica:nth-child(n+3){border-top:1px solid var(--linha)}
   .resultados{grid-template-columns:1fr}
-  .galeria{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:600px){
+  .cat-grade{grid-template-columns:repeat(2,1fr)}
+  .vrodape{padding:3rem .8rem .8rem}
+  .vrodape strong{font-size:.95rem}
   .marca-nome{font-size:.8rem;letter-spacing:.06em}
   .idioma{min-width:38px;padding:0 .5rem}
   .cabeca{flex-wrap:wrap}
@@ -283,7 +306,6 @@ p{margin:0 0 1rem}
   .capa .acoes .btn--solido{flex:1 1 100%}
   .servicos{grid-template-columns:1fr}
   .depoimentos{grid-template-columns:1fr}
-  .galeria{gap:1rem}
   .rodape .wrap{flex-direction:column;align-items:flex-start}
 }
 @media (max-width:360px){
@@ -391,12 +413,16 @@ p{margin:0 0 1rem}
   </div>
 </section>
 
-<!-- ============ 03 TRABALHOS ============ -->
-<section class="secao secao--clara" id="trabalhos" aria-labelledby="titulo-trabalhos">
+<!-- ============ 03 TRABALHOS (categorias com vídeos) ============ -->
+<section class="secao" id="trabalhos" aria-labelledby="titulo-trabalhos">
   <div class="wrap">
-    <div class="cabeca revela"><span class="num">03</span><h2 id="titulo-trabalhos" data-t="trabTitulo">Trabalhos por nicho</h2><span class="rotulo" data-t="trabRotulo">Filtre pelo seu</span></div>
-    <div class="filtros revela" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho" data-t-aria="filtrosAria"></div>
-    <ul class="galeria" id="galeria" aria-live="polite"></ul>
+    <div class="cat-abertura revela">
+      <p class="cat-etiqueta" data-t="catEtiqueta">Categorias</p>
+      <h2 id="titulo-trabalhos" class="cat-titulo"><span data-t="catTitulo">Conteúdo para cada tipo de</span> <em data-t="catTituloDestaque">marca.</em></h2>
+      <p class="cat-apoio" data-t="catApoio">Escolha o seu nicho e veja como eu levo produtos para a vida real.</p>
+      <nav class="cat-links" id="cat-links" aria-label="Categorias" data-t-aria="catLinksAria"><!-- preenchido pelo script (array categorias) --></nav>
+    </div>
+    <div id="categorias"><!-- preenchido pelo script (array categorias) --></div>
   </div>
 </section>
 
@@ -536,6 +562,9 @@ const textos = {
     okTexto: "Vou ler com carinho e te respondo em até um dia útil. Se preferir, me chama no WhatsApp.",
     fechar: "Fechar", kitRotulo: "Mídia kit", kitTitulo: "Quer meu mídia kit completo?",
     kitTexto: "Deixa seu nome e e-mail que eu te envio com valores, formatos e resultados.",
+    catEtiqueta: "Categorias", catTitulo: "Conteúdo para cada tipo de", catTituloDestaque: "marca.",
+    catApoio: "Escolha o seu nicho e veja como eu levo produtos para a vida real.", catLinksAria: "Categorias",
+    catNum: "Conteúdo UGC", videoEmBreve: "Vídeo em breve", reproduzir: "Reproduzir vídeo", pausar: "Pausar vídeo",
     btnKit: "Quero receber", kitOkTitulo: "Prontinho!", kitOkTexto: "Em breve o mídia kit chega no seu e-mail."
   },
   en: {
@@ -573,6 +602,9 @@ const textos = {
     okTexto: "I'll read it carefully and reply within one business day. If you prefer, reach me on WhatsApp.",
     fechar: "Close", kitRotulo: "Media kit", kitTitulo: "Want my full media kit?",
     kitTexto: "Leave your name and email and I'll send it with rates, formats and results.",
+    catEtiqueta: "Categories", catTitulo: "Content for every kind of", catTituloDestaque: "brand.",
+    catApoio: "Choose your niche and see how I bring products into real life.", catLinksAria: "Categories",
+    catNum: "UGC content", videoEmBreve: "Video coming soon", reproduzir: "Play video", pausar: "Pause video",
     btnKit: "Send it to me", kitOkTitulo: "All set!", kitOkTexto: "Your media kit will arrive in your inbox soon."
   }
 };
@@ -605,90 +637,38 @@ const destaques = [
     contexto: { pt: "Contexto curto: marca, nicho e objetivo do vídeo.", en: "Short context: brand, niche and goal of the video." } }
 ];
 
-/* VÍDEOS POR NICHO (galeria da seção 03, os vídeos tocam no próprio site)
-   A ordem aqui é a ordem dos botões. Para incluir um vídeo, cole o link do YouTube (shorts ou normal) na lista do nicho.
-   Para criar um nicho novo, copie um bloco inteiro { chave: ..., nome: ..., videos: [...] } e troque os dados. */
-const nichos = [
-  { chave: "beleza", nome: { pt: "Beleza", en: "Beauty" }, videos: [
-      "https://youtube.com/shorts/874zx_g4C10",
-      "https://youtube.com/shorts/cMijf_BG4WY",
-      "https://youtube.com/shorts/z1HS9XDP_eM",
-      "https://youtube.com/shorts/9rv-USVCHTI",
-      "https://youtube.com/shorts/XUV0xuQLdOk",
-      "https://youtube.com/shorts/abf_HF8BpS4",
-      "https://youtube.com/shorts/b2fs5q5_Mrk",
-      "https://youtube.com/shorts/cKZx0V9Mjyo"
-  ] },
-  { chave: "moda", nome: { pt: "Moda", en: "Fashion" }, videos: [
-      "https://youtube.com/shorts/A5k4s6i9HQk",
-      "https://youtube.com/shorts/nw9udFnUMzk",
-      "https://youtube.com/shorts/Jf8jCJnqexM",
-      "https://youtube.com/shorts/ng4ifWUSroE",
-      "https://youtube.com/shorts/ailKLJ6FEuI",
-      "https://youtube.com/shorts/zI0FIvigVpw",
-      "https://youtube.com/shorts/cE6oJi5At4k",
-      "https://youtube.com/shorts/gvaQQKWIHlA"
-  ] },
-  { chave: "casal", nome: { pt: "Casal", en: "Couple" }, videos: [
-      "https://youtube.com/shorts/zhJ0foMyo7I",
-      "https://youtube.com/shorts/yWzNE078sI4",
-      "https://youtube.com/shorts/_yr7nX7WdbM",
-      "https://youtube.com/shorts/6pFGVvTulfI",
-      "https://youtube.com/shorts/MAVEJIcUScY",
-      "https://youtube.com/shorts/TJdWO2m20SY",
-      "https://youtube.com/shorts/imqL-dXzgKw",
-      "https://youtube.com/shorts/45I1OxfoQAs"
-  ] },
-  { chave: "fitness", nome: { pt: "Fitness", en: "Fitness" }, videos: [
-      "https://youtube.com/shorts/efaA_zTnAKY",
-      "https://youtube.com/shorts/T6ZFOHkZ8Po",
-      "https://youtube.com/shorts/lsX_kDsTtB8",
-      "https://youtube.com/shorts/Hhhd6151CmA",
-      "https://youtube.com/shorts/9H7T5fyp9aI",
-      "https://youtube.com/shorts/fYUahv09jqo",
-      "https://youtube.com/shorts/RIk1raRopgg",
-      "https://youtube.com/shorts/irZMV3XC2x4"
-  ] },
-  { chave: "casa", nome: { pt: "Casa e decoração", en: "Home and decor" }, videos: [
-      "https://youtube.com/shorts/y_ZItWQhn6o",
-      "https://youtube.com/shorts/dZwXdSeEuYk",
-      "https://youtube.com/shorts/vLKvo1v6EaA",
-      "https://youtube.com/shorts/kZCDDTGYTY4",
-      "https://youtube.com/shorts/00_qkUmpKQQ",
-      "https://youtube.com/shorts/Tkjm74T4MEw",
-      "https://youtube.com/shorts/Vzx5y4TzXvM",
-      "https://youtube.com/shorts/_nhPiQPW0X8"
-  ] },
-  { chave: "culinaria", nome: { pt: "Culinária", en: "Cooking" }, videos: [
-      "https://youtube.com/shorts/8mTcra2UhSs",
-      "https://youtube.com/shorts/2ftW_HKVlg4",
-      "https://youtube.com/shorts/_pb2l_smDfo",
-      "https://youtube.com/shorts/e1UV_eFa4h4",
-      "https://youtube.com/shorts/XSTzZKnPi20",
-      "https://youtube.com/shorts/8z1hzUgrT8k",
-      "https://youtube.com/shorts/OD-EN0c2sR4",
-      "https://youtube.com/shorts/OLlSa90hbLQ"
-  ] },
-  { chave: "experiencias", nome: { pt: "Experiências", en: "Experiences" }, videos: [
-      "https://youtube.com/shorts/CACU5ZyaB6U",
-      "https://youtube.com/shorts/sB6sbfN6wTw",
-      "https://youtube.com/shorts/VapJSU8yV5Y",
-      "https://youtube.com/shorts/6qB2m3ovgBg",
-      "https://youtube.com/shorts/NxxUqJpf4xE",
-      "https://youtube.com/shorts/U5cx2KKzQDw",
-      "https://youtube.com/shorts/xG2Oj6HcpCU",
-      "https://youtube.com/shorts/ZX0PYCNYaAs"
-  ] },
-  { chave: "tech", nome: { pt: "Tech, apps e educação", en: "Tech, apps and education" }, videos: [
-      "https://youtube.com/shorts/mwCP6ZbEJrc",
-      "https://youtube.com/shorts/7uKmJx0m3KM",
-      "https://youtube.com/shorts/A-lost1LVLQ",
-      "https://youtube.com/shorts/2dpomLsC-P0",
-      "https://youtube.com/shorts/OXIk3mdaFB8",
-      "https://youtube.com/shorts/XdiDPC7Fa5I",
-      "https://youtube.com/shorts/yD940WiulXs",
-      "https://youtube.com/shorts/kQ64KmYQ4Yg"
-  ] }
+/* CATEGORIAS E VÍDEOS (seção 03)
+   A ordem aqui é a ordem da página. Cada vídeo precisa só do nome da marca:
+   o site procura o arquivo na pasta videos do GitHub com o nome da categoria e o número.
+   Exemplo: o 2º vídeo de Beleza é videos/beleza-02.mp4, com a capa videos/beleza-02.jpg.
+   Para usar outro nome de arquivo, escreva assim: { marca: "Profuse", arquivo: "videos/meu-video.mp4", capa: "videos/minha-capa.jpg" }
+   Enquanto o arquivo não existir, aparece um quadro bege escrito "Vídeo em breve". */
+const VIDEOS_POR_CATEGORIA = 8; /* quantos vídeos aparecem em cada categoria */
+const categorias = [
+  { chave: "beleza", nome: { pt: "Beleza", en: "Beauty" },
+    descricao: { pt: "Skincare, make leve e cuidados com um toque sofisticado e natural.", en: "Skincare, light makeup and self care with a sophisticated, natural touch." },
+    videos: [{ marca: "Agustin Fernandez" }, { marca: "Profuse" }, { marca: "Aneethun" }, { marca: "Revlon" }, { marca: "Smart GR" }, { marca: "Rildy" }, { marca: "Boni Natural" }, { marca: "Theoric" }] },
+  { chave: "moda", nome: { pt: "Moda", en: "Fashion" },
+    descricao: { pt: "Looks clássicos e elegantes, do jeito basic not too basic.", en: "Classic, elegant looks, basic but never too basic." },
+    videos: [{ marca: "Villa Griffe" }, { marca: "Donna Guerriera" }, { marca: "Regina Rios" }, { marca: "Opt Óculos" }, { marca: "Camilove" }, { marca: "Flowfa" }, { marca: "Arroganza" }, { marca: "Mirante" }] },
+  { chave: "casal", nome: { pt: "Casal", en: "Couple" },
+    descricao: { pt: "A rotina a dois, leve e real, com espaço para a sua marca.", en: "Life as a couple, light and real, with room for your brand." },
+    videos: [{ marca: "K&J Black" }, { marca: "K&J Black" }, { marca: "Estar Mais" }, { marca: "Abelheiro" }, { marca: "K&J Black" }, { marca: "Guará Plus" }, { marca: "Galiotto" }, { marca: "K&J Black" }] },
+  { chave: "fitness", nome: { pt: "Fitness", en: "Fitness" },
+    descricao: { pt: "Treino, suplementação e bem-estar que cabem na rotina.", en: "Workouts, supplements and wellness that fit into the routine." },
+    videos: [{ marca: "Nutrata" }, { marca: "M.A." }, { marca: "Trinys" }, { marca: "Estar Mais" }, { marca: "Pump Gummy" }, { marca: "Take & Go" }, { marca: "Elementopuro" }, { marca: "Leg Gym" }] },
+  { chave: "casa", nome: { pt: "Casa e decoração", en: "Home and decor" },
+    descricao: { pt: "Ambientes, utensílios e detalhes que deixam a casa com cara de lar.", en: "Spaces, kitchenware and details that make a house feel like home." },
+    videos: [{ marca: "Hoomy" }, { marca: "Cif" }, { marca: "Vinagreen" }, { marca: "Colormaq" }, { marca: "Coala" }, { marca: "AM Bordados" }, { marca: "AM Bordados" }, { marca: "Colormaq" }] },
+  { chave: "culinaria", nome: { pt: "Culinária", en: "Cooking" },
+    descricao: { pt: "Receitas saudáveis e práticas, que dão vontade de provar.", en: "Healthy, practical recipes that make you want a taste." },
+    videos: [{ marca: "Nectar" }, { marca: "Andorinha" }, { marca: "Termolar" }, { marca: "Colormaq" }, { marca: "Galiotto" }, { marca: "Colormaq" }, { marca: "Luigi Limoncello" }, { marca: "Galiotto" }] },
+  { chave: "experiencias", nome: { pt: "Experiências", en: "Experiences" },
+    descricao: { pt: "Viagens, lugares e momentos vividos com a sua marca junto.", en: "Trips, places and moments lived with your brand along." },
+    videos: [{ marca: "Sam's Club" }, { marca: "Sam's Club" }, { marca: "Sam's Club" }, { marca: "Casa Vilemar" }, { marca: "Andy Cabelos" }, { marca: "Hotel Valle D'incanto" }, { marca: "Loja Sirius" }, { marca: "Sam's Club" }] },
+  { chave: "tech", nome: { pt: "Tech, apps e educação", en: "Tech, apps and education" },
+    descricao: { pt: "Apps e serviços digitais explicados de um jeito simples e próximo.", en: "Apps and digital services explained in a simple, friendly way." },
+    videos: [{ marca: "Gymnamic" }, { marca: "Duo Gourmet" }, { marca: "Pitt Company" }, { marca: "iFood" }, { marca: "Duo Gourmet" }, { marca: "TB Financial" }, { marca: "Inglês Sem Neura" }, { marca: "TotalPass" }] }
 ];
 
 /* Serviços (seis) */
@@ -752,7 +732,6 @@ const localidade = () => idioma === "en" ? "en-US" : "pt-BR";
 const formata = (v, casas) => v.toLocaleString(localidade(), { minimumFractionDigits: casas, maximumFractionDigits: casas });
 
 let primeiraVez = true;
-let filtroAtual = nichos[0].chave;
 let contadoresAnimados = false;
 
 function blocoMidia(capa, formato, legenda, alt) {
@@ -795,9 +774,7 @@ function renderiza() {
       </div>
     </a>`).join("");
 
-  $("#filtros").innerHTML = nichos
-    .map(n => `<button class="filtro" type="button" data-nicho="${n.chave}" aria-pressed="${n.chave === filtroAtual}">${esc(tr(n.nome))}</button>`).join("");
-  renderizaGaleria(false);
+  renderizaCategorias(revela);
 
   $("#lista-servicos").innerHTML = servicos.map((s, i) => `
     <li class="servico ${revela}"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${esc(tr(s.titulo))}</h3><p>${esc(tr(s.descricao))}</p></li>`).join("");
@@ -837,51 +814,59 @@ document.querySelectorAll(".idioma").forEach(b => b.addEventListener("click", ()
   $("#ok-nome").textContent = nome;
 }));
 
-/* Galeria de vídeos: mostra a capa do YouTube e só carrega o vídeo quando a pessoa clica */
-function idDoYoutube(link) {
-  const m = String(link).match(/(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)([\w-]{11})/);
-  return m ? m[1] : String(link).trim();
-}
-function renderizaGaleria(animar) {
-  const nicho = nichos.find(n => n.chave === filtroAtual) || nichos[0];
-  const nome = tr(nicho.nome);
-  $("#galeria").innerHTML = nicho.videos.map((link, i) => {
-    const id = idDoYoutube(link), num = String(i + 1).padStart(2, "0");
+/* Categorias com vídeos próprios (tag video, sem player externo) */
+function renderizaCategorias(classeRevela) {
+  $("#cat-links").innerHTML = categorias.map(c => `<a href="#cat-${c.chave}">${esc(tr(c.nome))}</a>`).join("");
+  $("#categorias").innerHTML = categorias.map((c, ci) => {
+    const nome = tr(c.nome);
+    const lista = c.videos.slice(0, VIDEOS_POR_CATEGORIA);
+    while (lista.length < VIDEOS_POR_CATEGORIA) lista.push(null);
+    const cards = lista.map((v, i) => {
+      const num = String(i + 1).padStart(2, "0");
+      if (!v) return `<li><div class="vplayer sem-video" data-aviso="${esc(T("videoEmBreve"))}"></div></li>`;
+      const arquivo = v.arquivo || `videos/${c.chave}-${num}.mp4`;
+      const capa = v.capa || `videos/${c.chave}-${num}.jpg`;
+      return `
+        <li>
+          <div class="vplayer" data-aviso="${esc(T("videoEmBreve"))}">
+            <video src="${esc(arquivo)}" poster="${esc(capa)}" preload="metadata" playsinline></video>
+            <span class="vpilula">${esc(v.marca)}</span>
+            <div class="vrodape"><strong>${esc(v.marca)}</strong><span>${esc(nome)}</span></div>
+            <button class="vplay" type="button" data-rotulo="${esc(v.marca)}, ${esc(nome)}" aria-label="${esc(T("reproduzir"))}: ${esc(v.marca)}, ${esc(nome)}"><span class="circulo" aria-hidden="true"></span></button>
+          </div>
+        </li>`;
+    }).join("");
     return `
-    <li class="video-card${animar && !semMovimento ? " entra" : ""}">
-      <div class="video-quadro">
-        <button class="video-capa" type="button" data-id="${esc(id)}" data-titulo="${esc(nome)} ${num}" aria-label="${esc(T("assistir"))}: ${esc(nome)} ${num}">
-          <img src="https://i.ytimg.com/vi/${esc(id)}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
-          <span class="play" aria-hidden="true"></span>
-        </button>
-      </div>
-      <p class="video-legenda">${esc(nome)} · ${num}</p>
-    </li>`;
+      <article class="categoria ${classeRevela}" id="cat-${c.chave}" aria-labelledby="cat-${c.chave}-titulo">
+        <p class="cat-num">${String(ci + 1).padStart(2, "0")} / ${esc(T("catNum"))}</p>
+        <div class="cat-topo">
+          <h3 id="cat-${c.chave}-titulo">${esc(nome)}</h3>
+          <p class="cat-desc">${esc(tr(c.descricao))}</p>
+        </div>
+        <ul class="cat-grade">${cards}</ul>
+      </article>`;
   }).join("");
+  document.querySelectorAll("#categorias video").forEach(ligaVideo);
 }
-function fechaVideos() {
-  document.querySelectorAll(".video-quadro iframe").forEach(f => {
-    const q = f.parentElement;
-    q.innerHTML = q.dataset.capa;
+function ligaVideo(video) {
+  const caixa = video.parentElement, botao = caixa.querySelector(".vplay");
+  const marcaSemVideo = () => { video.pause(); caixa.classList.add("sem-video"); caixa.classList.remove("tocando"); };
+  video.addEventListener("error", marcaSemVideo);
+  video.addEventListener("play", () => {
+    document.querySelectorAll("#categorias video").forEach(o => { if (o !== video) o.pause(); });
+    caixa.classList.add("tocando");
+    botao.setAttribute("aria-label", `${T("pausar")}: ${botao.dataset.rotulo}`);
+  });
+  video.addEventListener("pause", () => {
+    caixa.classList.remove("tocando");
+    botao.setAttribute("aria-label", `${T("reproduzir")}: ${botao.dataset.rotulo}`);
+  });
+  video.addEventListener("ended", () => { video.currentTime = 0; });
+  botao.addEventListener("click", () => {
+    if (video.paused) { const p = video.play(); if (p && p.catch) p.catch(() => {}); }
+    else video.pause();
   });
 }
-$("#galeria").addEventListener("click", (e) => {
-  const b = e.target.closest(".video-capa");
-  if (!b) return;
-  fechaVideos();
-  const q = b.parentElement;
-  q.dataset.capa = q.innerHTML;
-  q.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.id)}?autoplay=1&playsinline=1&rel=0" title="${esc(b.dataset.titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-});
-
-/* Filtro de nicho */
-$("#filtros").addEventListener("click", (e) => {
-  const b = e.target.closest(".filtro");
-  if (!b || b.dataset.nicho === filtroAtual) return;
-  filtroAtual = b.dataset.nicho;
-  document.querySelectorAll(".filtro").forEach(x => x.setAttribute("aria-pressed", x === b));
-  renderizaGaleria(true);
-});
 
 /* Entrada suave ao rolar + contador */
 if (semMovimento || !("IntersectionObserver" in window)) {
