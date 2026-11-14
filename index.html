@@ -153,7 +153,7 @@ p{margin:0 0 1rem}
 .assinatura small{display:block;font-family:var(--corpo);font-style:normal;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--texto-suave);margin-top:.3rem}
 
 /* Sobre mim (paleta Caramelo) */
-.sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1}
+.sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1;padding-bottom:clamp(4rem,7vw,6rem)}
 /* bloco 1: foto + texto, alinhados pelo topo */
 .sobre .sobre-grade{grid-template-columns:1fr 1.1fr;align-items:start}
 .sobre-foto{position:relative;align-self:start}
@@ -166,34 +166,39 @@ p{margin:0 0 1rem}
 .sobre .sobre-texto p{line-height:1.85;margin:0 0 1.3rem}
 .sobre .sobre-texto strong{font-weight:500;color:#3b322b}
 .sobre-impacto{font-family:var(--titulo);font-size:1.25em;color:#a9825f;white-space:nowrap}
-/* etiquetas: todas iguais, só a primeira preenchida */
-.sobre-tags{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:1.8rem 0 2rem}
-.sobre-tag{padding:.5rem .9rem;border:1px solid #d9cfc3;border-radius:4px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;white-space:nowrap}
-.sobre-tag--destaque{background:#d8c3ac;border-color:#d8c3ac;color:#3b322b}
-/* botões no estilo da capa */
-.sobre-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2.2rem}
-.sobre .btn--solido{background:#3b322b;border-color:#3b322b;color:#efe9e1;border-radius:0}
-.sobre .btn--solido:hover{background:#a9825f;border-color:#a9825f;color:#efe9e1}
-/* bloco 2: como eu trabalho */
-.sobre-metodo{margin-top:clamp(4.5rem,9vw,7rem);padding-top:clamp(3rem,6vw,4.5rem);border-top:1px solid #d9cfc3}
-.metodo-titulo{font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.2;color:#3b322b;max-width:26ch}
-.metodo-titulo em{font-style:normal;color:#a9825f}
-.metodo-lista{display:grid;grid-template-columns:repeat(3,1fr);list-style:none;padding:0;margin:clamp(2.5rem,5vw,3.5rem) 0 0}
-.metodo-lista li{padding:0 clamp(1.5rem,3vw,2.5rem)}
-.metodo-lista li:first-child{padding-left:0}
-.metodo-lista li:last-child{padding-right:0}
-.metodo-lista li+li{border-left:1px solid #d9cfc3}
-.metodo-num{display:block;margin-bottom:.8rem;font-family:var(--titulo);font-size:2.2rem;line-height:1;color:#a9825f}
-.metodo-nome{margin:0 0 .7rem;font-family:var(--titulo);font-weight:400;font-size:1.35rem;color:#3b322b}
-.metodo-lista p{margin:0;color:#5f5044;line-height:1.75}
+/* etiquetas e botão: três do mesmo tamanho, uma de cada cor da paleta */
+.sobre-tags{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;list-style:none;padding:0;margin:1.8rem 0 0}
+.sobre-tags li{display:flex}
+.sobre-tag{display:flex;align-items:center;justify-content:center;width:100%;min-height:46px;padding:.6rem .8rem;border-radius:4px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-align:center;white-space:nowrap}
+.sobre-tag--bege{background:#d8c3ac;color:#3b322b}
+.sobre-tag--caramelo{background:#a9825f;color:#efe9e1}
+a.sobre-tag--marrom{background:#3b322b;color:#efe9e1;text-decoration:none;transition:background .3s}
+a.sobre-tag--marrom:hover{background:#a9825f}
+/* faixa escura: como eu trabalho */
+.faixa-metodo{background:#3b322b;padding:clamp(4.5rem,9vw,7rem) 0}
+.faixa-metodo-grade{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,3.5rem)}
+.faixa-metodo .metodo-titulo{margin:0;max-width:none;font-size:clamp(1.8rem,3.2vw,2.6rem);line-height:1.2;color:#efe9e1}
+.faixa-metodo .metodo-titulo em{display:block;font-style:normal;color:#a9825f}
+.faixa-metodo .metodo-lista{display:grid;grid-template-columns:repeat(3,1fr);list-style:none;padding:0;margin:0}
+.faixa-metodo .metodo-lista li{padding:0 clamp(1.2rem,2.5vw,2rem)}
+.faixa-metodo .metodo-lista li:first-child{padding-left:0}
+.faixa-metodo .metodo-lista li:last-child{padding-right:0}
+.faixa-metodo .metodo-lista li+li{border-left:1px solid #5f5044}
+.faixa-metodo .metodo-num{display:block;margin-bottom:.8rem;font-family:var(--titulo);font-size:2rem;line-height:1;color:#a9825f}
+.faixa-metodo .metodo-nome{margin:0 0 .5rem;font-family:var(--titulo);font-weight:400;font-size:1.3rem;color:#efe9e1}
+.faixa-metodo .metodo-lista p{margin:0;font-size:.95rem;line-height:1.6;color:#d8c3ac}
 @media (max-width:900px){
   .sobre .sobre-grade{grid-template-columns:1fr}
-  .metodo-lista{grid-template-columns:1fr}
-  .metodo-lista li,.metodo-lista li:first-child,.metodo-lista li:last-child{padding:1.6rem 0}
-  .metodo-lista li+li{border-left:0;border-top:1px solid #d9cfc3}
-  .metodo-lista li:first-child{padding-top:0}
+  .faixa-metodo-grade{grid-template-columns:1fr}
+  .faixa-metodo .metodo-lista{grid-template-columns:1fr}
+  .faixa-metodo .metodo-lista li,.faixa-metodo .metodo-lista li:first-child,.faixa-metodo .metodo-lista li:last-child{padding:1.5rem 0}
+  .faixa-metodo .metodo-lista li+li{border-left:0;border-top:1px solid #5f5044}
+  .faixa-metodo .metodo-lista li:first-child{padding-top:0}
+  .faixa-metodo .metodo-lista li:last-child{padding-bottom:0}
 }
 @media (max-width:600px){
+  .sobre-tags{grid-template-columns:1fr 1fr}
+  .sobre-tags li:last-child{grid-column:1 / -1}
   .sobre-acoes{flex-direction:column;align-items:stretch}
   .sobre-acoes .btn,.sobre-acoes .link-capa{width:100%;text-align:center}
   .sobre-acoes .link-capa{padding:.9rem 0}
@@ -459,27 +464,25 @@ p{margin:0 0 1rem}
         <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
         <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
         <p data-t-html="sobreP3"><strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.</p>
-        <ul class="sobre-tags" aria-label="Em números" data-t-aria="sobreTagsAria">
-          <li class="sobre-tag sobre-tag--destaque" data-t="tagVideos">+400 vídeos</li>
-          <li class="sobre-tag" data-t="tagMarcas">+200 marcas</li>
-          <li class="sobre-tag">Porto Alegre · RS</li>
+        <ul class="sobre-tags">
+          <li class="sobre-tag sobre-tag--bege" data-t="tagMarcas">+200 marcas</li>
+          <li class="sobre-tag sobre-tag--caramelo">Porto Alegre · RS</li>
+          <li class="sobre-tag-item"><a class="sobre-tag sobre-tag--marrom" href="#contato" data-t="btnFalar">Falar comigo</a></li>
         </ul>
-        <div class="sobre-acoes">
-          <a class="btn btn--solido" href="#contato" data-t="btnFalar">Falar comigo</a>
-          <a class="link-capa" href="#trabalhos" data-t="btnVerMeus">Ver meus trabalhos</a>
-        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- BLOCO 2: como eu trabalho -->
-    <div class="sobre-metodo revela">
-      <h3 class="metodo-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></h3>
-      <ol class="metodo-lista">
-        <li><span class="metodo-num" aria-hidden="true">i</span><h4 class="metodo-nome" data-t="dif1Nome">Conexão</h4><p data-t="dif1">Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.</p></li>
-        <li><span class="metodo-num" aria-hidden="true">ii</span><h4 class="metodo-nome" data-t="dif2Nome">Criatividade</h4><p data-t="dif2">Ideias e roteiros que fogem do óbvio, com estética cuidada em cada cena para prender a atenção logo nos primeiros segundos.</p></li>
-        <li><span class="metodo-num" aria-hidden="true">iii</span><h4 class="metodo-nome" data-t="dif3Nome">Estratégia</h4><p data-t="dif3">Cada vídeo pensado para o objetivo da marca: despertar desejo, tirar dúvidas e levar à compra.</p></li>
-      </ol>
-    </div>
+<!-- ============ FAIXA COMO EU TRABALHO ============ -->
+<section class="faixa-metodo" aria-labelledby="titulo-metodo">
+  <div class="wrap faixa-metodo-grade revela">
+    <h2 id="titulo-metodo" class="metodo-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></h2>
+    <ol class="metodo-lista">
+      <li><span class="metodo-num" aria-hidden="true">i</span><h3 class="metodo-nome" data-t="dif1Nome">Conexão</h3><p data-t="dif1">Fala de amiga, que gera identificação e confiança.</p></li>
+      <li><span class="metodo-num" aria-hidden="true">ii</span><h3 class="metodo-nome" data-t="dif2Nome">Criatividade</h3><p data-t="dif2">Roteiros fora do óbvio, que prendem nos primeiros segundos.</p></li>
+      <li><span class="metodo-num" aria-hidden="true">iii</span><h3 class="metodo-nome" data-t="dif3Nome">Estratégia</h3><p data-t="dif3">Cada vídeo pensado para despertar desejo e levar à compra.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -628,9 +631,9 @@ const textos = {
     tagVideos: "+400 vídeos", tagMarcas: "+200 marcas", tagFale: "Fale comigo", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
     metodoTitulo: "Cada cena tem uma função:", metodoDestaque: "prender, encantar e vender.",
     metodoIntro: "Crio conteúdos que unem conexão, criatividade e estratégia para gerar resultados para as marcas.",
-    dif1Nome: "Conexão", dif1: "Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.",
-    dif2Nome: "Criatividade", dif2: "Ideias e roteiros que fogem do óbvio, com estética cuidada em cada cena para prender a atenção logo nos primeiros segundos.",
-    dif3Nome: "Estratégia", dif3: "Cada vídeo pensado para o objetivo da marca: despertar desejo, tirar dúvidas e levar à compra.",
+    dif1Nome: "Conexão", dif1: "Fala de amiga, que gera identificação e confiança.",
+    dif2Nome: "Criatividade", dif2: "Roteiros fora do óbvio, que prendem nos primeiros segundos.",
+    dif3Nome: "Estratégia", dif3: "Cada vídeo pensado para despertar desejo e levar à compra.",
     prom1: "Roteiro aprovado por você antes de gravar",
     prom2: "Uma rodada de ajuste inclusa em cada entrega",
     prom3: "Entrega em até 72 horas úteis",
@@ -677,9 +680,9 @@ const textos = {
     tagVideos: "+400 videos", tagMarcas: "+200 brands", tagFale: "Let's talk", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
     metodoTitulo: "Every scene has a purpose:", metodoDestaque: "to hook, to charm and to sell.",
     metodoIntro: "I create content that blends connection, creativity and strategy to drive results for brands.",
-    dif1Nome: "Connection", dif1: "Close, warm communication that women relate to, so viewers trust what I recommend.",
-    dif2Nome: "Creativity", dif2: "Ideas and scripts that go beyond the obvious, with carefully crafted aesthetics to hook attention in the first few seconds.",
-    dif3Nome: "Strategy", dif3: "Every video built around the brand's goal: spark desire, answer questions and drive purchases.",
+    dif1Nome: "Connection", dif1: "Talking like a friend, building identification and trust.",
+    dif2Nome: "Creativity", dif2: "Scripts beyond the obvious that hook in the first seconds.",
+    dif3Nome: "Strategy", dif3: "Every video designed to spark desire and drive purchases.",
     prom1: "Script approved by you before filming",
     prom2: "One round of revisions included in every delivery",
     prom3: "Delivery within 72 business hours",
