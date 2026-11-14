@@ -315,6 +315,12 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 #numeros .metrica .rotulo{color:#5f5044}
 #numeros .depo-cabeca{margin-top:clamp(4rem,8vw,6rem)}
 #numeros .depo-cabeca .cat-titulo{margin:0;max-width:none}
+#numeros .depo-linha{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
+#numeros .depo-canto{margin:0 0 .5rem;max-width:19rem;text-align:right;font-family:var(--corpo);font-size:.85rem;font-weight:300;line-height:1.6;color:#5f5044}
+@media (max-width:700px){
+  #numeros .depo-linha{flex-direction:column;align-items:flex-start;gap:1rem}
+  #numeros .depo-canto{text-align:left;margin:0}
+}
 #numeros .depo-selo{margin:1.4rem 0 0;font-family:var(--corpo);font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;line-height:1.9}
 #numeros .depo-selo b{font-family:var(--titulo);font-weight:400;font-size:1.05rem;letter-spacing:.04em;color:#a9825f}
 #numeros .depo-selo i{font-style:normal;margin:0 .5rem;color:#a9825f}
@@ -322,7 +328,7 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .depo-faixa::before,.depo-faixa::after{content:"";position:absolute;top:0;bottom:0;width:clamp(40px,12vw,180px);z-index:2;pointer-events:none}
 .depo-faixa::before{left:0;background:linear-gradient(to right,#efe9e1,rgba(239,233,225,0))}
 .depo-faixa::after{right:0;background:linear-gradient(to left,#efe9e1,rgba(239,233,225,0))}
-.depo-trilho{display:flex;align-items:stretch;width:max-content;list-style:none;margin:0;padding:0;animation:depoGira 48s linear infinite}
+.depo-trilho{display:flex;align-items:stretch;width:max-content;list-style:none;margin:0;padding:0;animation:depoGira 70s linear infinite}
 .depo-faixa:hover .depo-trilho{animation-play-state:paused}
 @keyframes depoGira{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .depo-card{display:flex;flex-direction:column;width:340px;flex-shrink:0;margin-right:20px;padding:26px;box-sizing:border-box;background:rgba(216,195,172,.22);border:1px solid #d9cfc3;border-radius:12px}
@@ -699,7 +705,10 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
     <div class="metricas revela" id="lista-metricas"></div>
     <div class="depo-cabeca revela">
       <p class="cat-etiqueta" data-t="depoEtiqueta">Depoimentos</p>
-      <h2 id="titulo-numeros" class="cat-titulo"><span data-t="depoTitulo1">O que dizem</span> <em data-t="depoTitulo2">as marcas.</em></h2>
+      <div class="depo-linha">
+        <h2 id="titulo-numeros" class="cat-titulo"><span data-t="depoTitulo1">O que dizem</span> <em data-t="depoTitulo2">as marcas.</em></h2>
+        <p class="depo-canto" data-t="depoCanto">Avaliações reais de marcas que viram o produto virar desejo.</p>
+      </div>
       <p class="depo-selo" data-t-html="depoSelo"></p>
     </div>
   </div>
@@ -830,7 +839,7 @@ const textos = {
     trabTitulo: "Trabalhos por nicho", trabRotulo: "Filtre pelo seu", filtrosAria: "Filtrar trabalhos por nicho", todos: "Todos",
     servTitulo: "Como eu te ajudo", servRotulo: "Serviços",
     numTitulo: "Números e depoimentos", numRotulo: "Resultado que aparece",
-    depoEtiqueta: "Depoimentos", depoTitulo1: "O que dizem", depoTitulo2: "as marcas.", depoVerificada: "Avaliação verificada",
+    depoEtiqueta: "Depoimentos", depoTitulo1: "O que dizem", depoTitulo2: "as marcas.", depoVerificada: "Avaliação verificada", depoCanto: "Avaliações reais de marcas que viram o produto virar desejo.",
     depoSelo: '<b>45</b> avaliações <i>·</i> <b>★ 5,0</b> de média <i>·</i> auditadas na plataforma Seu Influencer',
     contTitulo: "Bora criar juntos", contRotulo: "Contato",
     contFrase: "Me conta da sua marca e do que você precisa.",
@@ -884,7 +893,7 @@ const textos = {
     trabTitulo: "Work by niche", trabRotulo: "Filter by yours", filtrosAria: "Filter work by niche", todos: "All",
     servTitulo: "How I can help", servRotulo: "Services",
     numTitulo: "Numbers and testimonials", numRotulo: "Results that show",
-    depoEtiqueta: "Testimonials", depoTitulo1: "What brands", depoTitulo2: "are saying.", depoVerificada: "Verified review",
+    depoEtiqueta: "Testimonials", depoTitulo1: "What brands", depoTitulo2: "are saying.", depoVerificada: "Verified review", depoCanto: "Real reviews from brands that watched their product become desire.",
     depoSelo: '<b>45</b> reviews <i>·</i> <b>★ 5.0</b> average <i>·</i> audited on the Seu Influencer platform',
     contTitulo: "Let's create together", contRotulo: "Contact",
     contFrase: "Tell me about your brand and what you need.",
@@ -1076,14 +1085,14 @@ const metricas = [
 
 /* Depoimentos do carrossel (avaliações da plataforma Seu Influencer), nesta ordem */
 const depoimentos = [
-  { marca: "Josy Moda Íntima", texto: "A Cris sempre nos surpreende com seu trabalho impecável! Sem dúvidas está no top 3 das nossas melhores UGCs!" },
   { marca: "Amakha Paris", texto: "Vídeo lindo, envolvente e muito bem executado. Dá pra perceber claramente o cuidado, a criatividade e o olhar estratégico em cada detalhe." },
-  { marca: "Rei da Promo", texto: "Entrega foi super natural, com boa iluminação, enquadramento e uma fala muito autêntica, exatamente o estilo que buscamos." },
-  { marca: "Método Levs", texto: "Profissional atenciosa, prestativa e impecável em cada detalhe. Entregou exatamente o que eu precisava, e até além." },
+  { marca: "Josy Moda Íntima", texto: "A Cris sempre nos surpreende com seu trabalho impecável! Sem dúvidas está no top 3 das nossas melhores UGCs!" },
   { marca: "Corneta Jogos", texto: "Ótima campanha realizada junto com a Cris, foi atenciosa e ágil na entrega e alterações do conteúdo! Tivemos um ótimo resultado." },
+  { marca: "Rei da Promo", texto: "Entrega foi super natural, com boa iluminação, enquadramento e uma fala muito autêntica, exatamente o estilo que buscamos." },
+  { marca: "Maldaner Negócios Digitais", texto: "Gostamos demais do resultado do trabalho da Cris, ela entendeu perfeitamente o que buscávamos… Com certeza vamos desenvolver mais trabalhos juntos." },
+  { marca: "Método Levs", texto: "Profissional atenciosa, prestativa e impecável em cada detalhe. Entregou exatamente o que eu precisava, e até além." },
   { marca: "Migração Digital", texto: "Cumpriu os prazos combinados e entregou um conteúdo muito alinhado com a proposta da campanha. Os vídeos ficaram naturais, bem gravados e com ótima comunicação." },
   { marca: "Quitou BR", texto: "Cris foi sensacional, adoramos trabalhar com ela, conseguiu transmitir a mensagem de forma precisa e objetiva. Excelente!" },
-  { marca: "Maldaner Negócios Digitais", texto: "Gostamos demais do resultado do trabalho da Cris, ela entendeu perfeitamente o que buscávamos… Com certeza vamos desenvolver mais trabalhos juntos." },
   { marca: "Cafezale", texto: "Cristiane foi profissional, criativa e entregou um conteúdo de ótima qualidade, bem alinhado com o que foi solicitado. Recomendo!" },
   { marca: "Party Games", texto: "Parabéns pela sua entrega! Gostamos muito, conteúdo real e divertido! Esperamos trabalhar com você novamente em breve." },
   { marca: "Grupo Lima e Pergher", texto: "Adoramos trabalhar com a Cristiane. Ela é criativa e super cuidadosa com as gravações. Super recomendamos o trabalho dela." },
@@ -1179,7 +1188,20 @@ function renderiza() {
     <li class="depo-card"${copia ? ' aria-hidden="true"' : ""}><span class="depo-estrelas" aria-label="5 estrelas">★★★★★</span><blockquote>“${esc(d.texto)}”</blockquote><div class="depo-pe"><strong>${esc(d.marca)}</strong><span><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(T("depoVerificada"))}</span></div></li>`;
   /* a lista vai duas vezes para o carrossel girar sem pulo */
   $("#lista-depoimentos").innerHTML = depoimentos.map(d => cardDepo(d, false)).join("") + depoimentos.map(d => cardDepo(d, true)).join("");
+  ajustaInicioDepo();
 }
+
+/* o carrossel começa com o 1º card (Amakha Paris) na linha do texto da página,
+   e os últimos cards aparecem à esquerda dele, sem espaço vazio */
+function ajustaInicioDepo() {
+  const trilho = $("#lista-depoimentos"), ref = document.querySelector("#numeros .wrap");
+  if (!trilho || !ref) return;
+  const metade = trilho.scrollWidth / 2;
+  const esquerda = ref.getBoundingClientRect().left + parseFloat(getComputedStyle(ref).paddingLeft);
+  const dur = parseFloat(getComputedStyle(trilho).animationDuration) || 70;
+  if (metade > 0) trilho.style.animationDelay = (-dur * (metade - esquerda) / metade) + "s";
+}
+window.addEventListener("load", ajustaInicioDepo);
 
 function anima(el) {
   const alvo = parseFloat(el.dataset.alvo), casas = +el.dataset.casas, antes = el.dataset.antes, depois = el.dataset.depois;
