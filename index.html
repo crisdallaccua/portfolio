@@ -180,6 +180,12 @@ p{margin:0 0 1rem}
 .destaque h3{font-size:1.15rem;margin-bottom:.4rem}
 .destaque p{font-size:.92rem;color:var(--texto-suave);margin:0}
 
+/* Destaques com player próprio: a capa do Instagram já traz o ícone de play */
+.destaque--player .vplayer{border-radius:0}
+.destaque--player .vplay{border-radius:0}
+.destaque--player .vplayer:not(.tocando) .circulo{opacity:0}
+.destaque--player .vplay:focus-visible .circulo{opacity:1}
+
 /* Trabalhos: categorias com vídeos */
 .cat-abertura{margin-bottom:clamp(3.5rem,8vw,6rem)}
 .cat-etiqueta{display:flex;align-items:center;gap:1rem;margin:0 0 1.6rem;font-size:.72rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:#a9825f}
@@ -647,7 +653,7 @@ const marcas = ["Natura","L'Occitane","Dove","Rexona","Omo","Cif","Confort","Pan
    capa: ONDE ENTRA A CAPA. Deixe "" para usar o bloco com degradê,
          ou suba a imagem vertical 9:16 no GitHub e coloque o nome, ex.: "destaque1.jpg" */
 const destaques = [
-  { link: "https://www.instagram.com/reel/DdOs2PZxzyi/", capa: "destaque1.jpg",
+  { link: "https://www.instagram.com/reel/DdOs2PZxzyi/", capa: "destaque1.jpg", youtube: "https://youtube.com/shorts/cMijf_BG4WY",
     numero: { pt: "+393 mil", en: "+393K" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Profuse", en: "Profuse" },
     contexto: { pt: "Skincare · protetor solar ultrafluido FPS 60, mostrado na rotina de cuidados com a pele.", en: "Skincare · ultra-fluid SPF 60 sunscreen, shown in a real skincare routine." } },
@@ -655,7 +661,7 @@ const destaques = [
     numero: { pt: "+1,7M", en: "+1.7M" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Di Santinni", en: "Di Santinni" },
     contexto: { pt: "Moda · sapatilha Moleca apresentada em um look elegante do dia a dia.", en: "Fashion · Moleca ballet flats styled in an elegant everyday look." } },
-  { link: "https://www.instagram.com/reel/DQxoRguADfV/", capa: "destaque3.jpg",
+  { link: "https://www.instagram.com/reel/DQxoRguADfV/", capa: "destaque3.jpg", youtube: "https://youtube.com/shorts/874zx_g4C10",
     numero: { pt: "+117 mil", en: "+117K" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Agustin Fernandez", en: "Agustin Fernandez" },
     contexto: { pt: "Beleza · máscara de cílios aplicada no espelho, do primeiro toque ao resultado final.", en: "Beauty · mascara applied in the mirror, from the first stroke to the final look." } }
@@ -855,19 +861,34 @@ function renderiza() {
 
   $("#capa-numeros").innerHTML = numerosCapa.map(n => `<div><strong>${esc(tr(n.valor))}</strong><span>${esc(tr(n.rotulo))}</span></div>`).join("");
 
-  $("#lista-destaques").innerHTML = destaques.map(d => `
-    <a class="destaque ${revela}" href="${esc(d.link)}" target="_blank" rel="noopener" aria-label="${esc(T("assistir"))}: ${esc(tr(d.titulo))}, ${esc(tr(d.numero))} ${esc(tr(d.rotulo))}">
-      <div class="midia midia--9x16">
-        ${d.capa ? `<img src="${esc(d.capa)}" alt="" loading="lazy" decoding="async">` : `<span class="legenda">${esc(T("capaVideo"))}</span>`}
-        ${d.capa ? "" : `<span class="play" aria-hidden="true"></span>`}
-      </div>
+  $("#lista-destaques").innerHTML = destaques.map(d => {
+    const info = `
       <div class="destaque-info">
         <strong class="grande">${esc(tr(d.numero))}</strong>
         <span class="rotulo">${esc(tr(d.rotulo))}</span>
         <h3>${esc(tr(d.titulo))}</h3>
         <p>${esc(tr(d.contexto))}</p>
-      </div>
-    </a>`).join("");
+      </div>`;
+    const capa = d.capa ? `<img class="vposter" src="${esc(d.capa)}" alt="" loading="lazy" decoding="async">` : "";
+    if (d.youtube) {
+      /* vídeo toca aqui mesmo, no player limpo do site */
+      return `
+    <article class="destaque destaque--player ${revela}">
+      <div class="midia midia--9x16 vplayer vplayer--yt" data-yt="${esc(idDoYoutube(d.youtube))}">
+        ${capa}
+        <button class="vplay" type="button" data-rotulo="${esc(tr(d.titulo))}" aria-label="${esc(T("reproduzir"))}: ${esc(tr(d.titulo))}"><span class="circulo" aria-hidden="true"></span></button>
+      </div>${info}
+    </article>`;
+    }
+    return `
+    <a class="destaque ${revela}" href="${esc(d.link)}" target="_blank" rel="noopener" aria-label="${esc(T("assistir"))}: ${esc(tr(d.titulo))}, ${esc(tr(d.numero))} ${esc(tr(d.rotulo))}">
+      <div class="midia midia--9x16">
+        ${capa || `<span class="legenda">${esc(T("capaVideo"))}</span>`}
+        ${d.capa ? "" : `<span class="play" aria-hidden="true"></span>`}
+      </div>${info}
+    </a>`;
+  }).join("");
+  document.querySelectorAll("#lista-destaques .vplayer--yt").forEach(ligaYoutube);
 
   renderizaCategorias(revela);
 
@@ -953,7 +974,7 @@ function idDoYoutube(link) {
 }
 function pausaTudo(exceto) {
   document.querySelectorAll("#categorias video").forEach(o => { if (o !== exceto) o.pause(); });
-  document.querySelectorAll("#categorias .vplayer--yt.tocando").forEach(caixa => {
+  document.querySelectorAll(".vplayer--yt.tocando").forEach(caixa => {
     if (caixa === exceto) return;
     caixa.querySelector("iframe")?.remove();
     delete caixa.dataset.tocou;
@@ -972,7 +993,7 @@ window.addEventListener("message", (e) => {
   if (!/youtube/.test(e.origin)) return;
   let d; try { d = JSON.parse(e.data); } catch (x) { return; }
   if (!d.info || d.info.playerState !== 1) return;
-  document.querySelectorAll("#categorias .vplayer--yt iframe").forEach(f => {
+  document.querySelectorAll(".vplayer--yt iframe").forEach(f => {
     if (f.contentWindow !== e.source) return;
     const caixa = f.parentElement;
     caixa.dataset.tocou = "1";
