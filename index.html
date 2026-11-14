@@ -245,7 +245,7 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 .destaques-escuro .destaque{border:0;background:none;padding:0}
 .destaques-escuro .destaque .vplayer{border-radius:12px;margin-bottom:1.3rem;background:#5f5044}
 .destaques-escuro .destaque .vplayer .vplay{border-radius:12px}
-.destaques-escuro .vposter{object-fit:cover;object-position:50% 50%}
+.destaques-escuro .vposter{object-fit:cover;object-position:50% 50%;filter:sepia(.12) saturate(1.05)}
 .destaques-escuro .destaque-info{padding:0}
 .destaques-escuro .destaque .grande{color:#a9825f}
 .destaques-escuro .destaque .rotulo{margin:.5rem 0 .7rem;color:#d8c3ac}
@@ -521,11 +521,6 @@ a.sobre-tag--marrom:hover{background:#a9825f}
       <h2 id="titulo-destaques" class="destaques-titulo"><span data-t="destTitulo1">Conteúdos que</span> <em data-t="destTitulo2">mais rodaram.</em></h2>
     </div>
     <div class="destaques" id="lista-destaques"><!-- preenchido pelo script (array destaques) --></div>
-    <!-- TOTAL SOMADO: 393 mil + 1,7M + 117 mil -->
-    <div class="destaques-total revela">
-      <strong data-t="destTotal">+2,2M</strong>
-      <span data-t="destTotalTxt">views somadas só nestes três vídeos</span>
-    </div>
   </div>
 </section>
 
@@ -759,15 +754,15 @@ const marcas = ["Natura","L'Occitane","Dove","Rexona","Omo","Cif","Confort","Pan
    capa: ONDE ENTRA A CAPA. Deixe "" para usar o bloco com degradê,
          ou suba a imagem vertical 9:16 no GitHub e coloque o nome, ex.: "destaque1.jpg" */
 const destaques = [
-  { link: "https://www.instagram.com/reel/DdOs2PZxzyi/", capa: "destaque1.jpg", youtube: "https://youtube.com/shorts/cMijf_BG4WY",
+  { link: "https://www.instagram.com/reel/DdOs2PZxzyi/", capa: "destaque1.jpg?v=2", youtube: "https://youtube.com/shorts/cMijf_BG4WY",
     numero: { pt: "+393 mil", en: "+393K" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Profuse", en: "Profuse" },
     contexto: { pt: "Skincare · protetor solar FPS 60 na rotina", en: "Skincare · SPF 60 sunscreen in a daily routine" } },
-  { link: "https://www.instagram.com/reel/DX68BwCtNYO/", capa: "destaque2.jpg", youtube: "https://youtube.com/shorts/4mo9ijTNsSQ",
+  { link: "https://www.instagram.com/reel/DX68BwCtNYO/", capa: "destaque2.jpg?v=2", youtube: "https://youtube.com/shorts/4mo9ijTNsSQ",
     numero: { pt: "+1,7M", en: "+1.7M" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Di Santinni", en: "Di Santinni" },
-    contexto: { pt: "Moda · sapatilha Moleca em look do dia a dia", en: "Fashion · Moleca flats in an everyday look" } },
-  { link: "https://www.instagram.com/reel/DQxoRguADfV/", capa: "destaque3.jpg", youtube: "https://youtube.com/shorts/874zx_g4C10",
+    contexto: { pt: "Moda · sapatilha Moleca como presente especial", en: "Fashion · Moleca flats as a special gift" } },
+  { link: "https://www.instagram.com/reel/DQxoRguADfV/", capa: "destaque3.jpg?v=2", youtube: "https://youtube.com/shorts/874zx_g4C10",
     numero: { pt: "+117 mil", en: "+117K" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Agustin Fernandez", en: "Agustin Fernandez" },
     contexto: { pt: "Beleza · máscara de cílios, do toque ao resultado", en: "Beauty · mascara, from first stroke to result" } }
