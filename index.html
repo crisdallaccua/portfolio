@@ -309,6 +309,51 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .contato-escuro .contato-ok h3{color:#efe9e1}
 .contato-escuro .contato-ok p{color:#d8c3ac}
 .contato-escuro .contato-ok .rotulo{color:#a9825f}
+/* Processo (fundo escuro) */
+.processo-escuro{background:#3b322b;padding:clamp(5rem,11vw,9rem) 0}
+.processo-escuro .depo-linha{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
+.processo-escuro .cat-titulo{margin:0;max-width:none;color:#efe9e1}
+.processo-escuro .cat-titulo em{font-style:normal;color:#a9825f}
+.processo-escuro .depo-canto{margin:0 0 .5rem;max-width:21rem;text-align:right;font-family:var(--corpo);font-size:.85rem;font-weight:300;line-height:1.6;color:#d8c3ac}
+.proc-trilho{--gap:2.5rem;position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);list-style:none;margin:clamp(3.5rem,7vw,5rem) 0 0;padding:0}
+.proc-trilho::before{content:"";position:absolute;top:28px;left:28px;right:calc(25% - var(--gap) * .75);height:1px;background:#5f5044;transform-origin:left center}
+.proc-etapa{position:relative}
+.proc-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border:1px solid #a9825f;border-radius:50%;background:#3b322b;font-family:var(--titulo);font-size:1.15rem;color:#a9825f}
+.proc-nome{margin:1.6rem 0 .7rem;font-family:var(--corpo);font-size:.7rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:#a9825f}
+.proc-frase{margin:0 0 .8rem;font-family:var(--titulo);font-weight:400;font-size:clamp(1.25rem,1.9vw,1.55rem);line-height:1.25;color:#efe9e1}
+.proc-desc{margin:0;font-family:var(--corpo);font-size:.9rem;font-weight:300;line-height:1.65;color:#d8c3ac;max-width:17rem}
+.proc-espera::before{transform:scaleX(0)}
+.proc-espera .proc-etapa{opacity:0;transform:translateY(18px)}
+.proc-anima::before{transform:scaleX(1);transition:transform 1.6s cubic-bezier(.5,0,.2,1)}
+.proc-anima .proc-etapa{opacity:1;transform:none;transition:opacity .8s ease,transform .8s ease}
+.proc-anima .proc-etapa:nth-child(1){transition-delay:.2s}
+.proc-anima .proc-etapa:nth-child(2){transition-delay:.6s}
+.proc-anima .proc-etapa:nth-child(3){transition-delay:1s}
+.proc-anima .proc-etapa:nth-child(4){transition-delay:1.4s}
+.proc-garantias{margin-top:clamp(3.5rem,7vw,5rem);padding-top:clamp(2rem,4vw,2.8rem);border-top:1px solid #5f5044;text-align:center}
+.proc-garantias ul{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem clamp(1.5rem,4vw,3.5rem);list-style:none;margin:0;padding:0}
+.proc-garantias li{display:flex;align-items:center;gap:.6rem;font-family:var(--corpo);font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#efe9e1}
+.proc-garantias svg{color:#a9825f;flex-shrink:0}
+.proc-cta{display:inline-flex;align-items:center;justify-content:center;margin-top:2.4rem;padding:1.05rem 2.4rem;border-radius:4px;background:#a9825f;color:#efe9e1;font-family:var(--corpo);font-size:.75rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s}
+.proc-cta:hover{background:#efe9e1;color:#3b322b}
+@media (max-width:900px){
+  .proc-trilho{grid-template-columns:repeat(2,1fr);row-gap:3rem}
+  .proc-trilho::before{display:none}
+}
+@media (max-width:700px){
+  .processo-escuro .depo-linha{flex-direction:column;align-items:flex-start;gap:1rem}
+  .processo-escuro .depo-canto{text-align:left;margin:0}
+  .proc-trilho{grid-template-columns:1fr;gap:0}
+  .proc-etapa{display:grid;grid-template-columns:48px 1fr;column-gap:1.2rem;padding-bottom:2.4rem}
+  .proc-etapa:last-child{padding-bottom:0}
+  .proc-num{width:48px;height:48px;font-size:1rem}
+  .proc-etapa:not(:last-child)::after{content:"";position:absolute;left:24px;top:48px;bottom:0;width:1px;background:#5f5044}
+  .proc-nome{margin:.9rem 0 .5rem}
+  .proc-desc{max-width:none}
+  .proc-garantias ul{flex-direction:column;align-items:flex-start;gap:1rem;text-align:left}
+  .proc-cta{display:flex;width:100%;box-sizing:border-box}
+}
+
 /* Fotografia: galeria e lightbox */
 #fotos.fotos-secao{background:#efe9e1}
 #fotos .depo-linha{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
@@ -749,14 +794,6 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
   <p class="lb-conta" id="lb-conta" aria-live="polite"></p>
 </div>
 
-<!-- ============ 04 SERVIÇOS ============ -->
-<section class="secao" id="servicos" aria-labelledby="titulo-servicos">
-  <div class="wrap">
-    <div class="cabeca revela"><span class="num">04</span><h2 id="titulo-servicos" data-t="servTitulo">Como eu te ajudo</h2><span class="rotulo" data-t="servRotulo">Serviços</span></div>
-    <ul class="servicos" id="lista-servicos"></ul>
-  </div>
-</section>
-
 <!-- ============ 05 NÚMEROS E DEPOIMENTOS ============ -->
 <section class="secao depo-secao" id="numeros" aria-labelledby="titulo-numeros">
   <div class="wrap">
@@ -773,6 +810,41 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
   <!-- CARROSSEL DE DEPOIMENTOS: os textos ficam no array "depoimentos", no script -->
   <div class="depo-faixa revela">
     <ul class="depo-trilho" id="lista-depoimentos"></ul>
+  </div>
+</section>
+
+<!-- ============ PROCESSO ============ -->
+<section class="processo-escuro" id="processo" aria-labelledby="titulo-processo">
+  <div class="wrap">
+    <div class="proc-cabeca revela">
+      <p class="cat-etiqueta" data-t="procEtiqueta">Processo</p>
+      <div class="depo-linha">
+        <h2 id="titulo-processo" class="cat-titulo"><span data-t="procTitulo1">Como funciona</span> <em data-t="procTitulo2">a parceria.</em></h2>
+        <p class="depo-canto" data-t="procCanto">Um processo leve e organizado, em parceria com a sua marca do começo ao fim.</p>
+      </div>
+    </div>
+    <ol class="proc-trilho" id="proc-trilho">
+        <li class="proc-etapa"><span class="proc-num">01</span><div class="proc-texto"><p class="proc-nome" data-t="proc1Nome"></p><h3 class="proc-frase" data-t="proc1Frase"></h3><p class="proc-desc" data-t="proc1Desc"></p></div></li>
+        <li class="proc-etapa"><span class="proc-num">02</span><div class="proc-texto"><p class="proc-nome" data-t="proc2Nome"></p><h3 class="proc-frase" data-t="proc2Frase"></h3><p class="proc-desc" data-t="proc2Desc"></p></div></li>
+        <li class="proc-etapa"><span class="proc-num">03</span><div class="proc-texto"><p class="proc-nome" data-t="proc3Nome"></p><h3 class="proc-frase" data-t="proc3Frase"></h3><p class="proc-desc" data-t="proc3Desc"></p></div></li>
+        <li class="proc-etapa"><span class="proc-num">04</span><div class="proc-texto"><p class="proc-nome" data-t="proc4Nome"></p><h3 class="proc-frase" data-t="proc4Frase"></h3><p class="proc-desc" data-t="proc4Desc"></p></div></li>
+    </ol>
+    <div class="proc-garantias revela">
+      <ul>
+        <li><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="procGar1">Roteiro aprovado antes de gravar</span></li>
+        <li><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="procGar2">Uma rodada de ajuste inclusa</span></li>
+        <li><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="procGar3">Entrega com foto de capa</span></li>
+      </ul>
+      <a class="proc-cta" href="#contato" data-t="btnFalar">Falar comigo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 SERVIÇOS ============ -->
+<section class="secao" id="servicos" aria-labelledby="titulo-servicos">
+  <div class="wrap">
+    <div class="cabeca revela"><span class="num">04</span><h2 id="titulo-servicos" data-t="servTitulo">Como eu te ajudo</h2><span class="rotulo" data-t="servRotulo">Serviços</span></div>
+    <ul class="servicos" id="lista-servicos"></ul>
   </div>
 </section>
 
@@ -897,6 +969,12 @@ const textos = {
     trabTitulo: "Trabalhos por nicho", trabRotulo: "Filtre pelo seu", filtrosAria: "Filtrar trabalhos por nicho", todos: "Todos",
     servTitulo: "Como eu te ajudo", servRotulo: "Serviços",
     numTitulo: "Números e depoimentos", numRotulo: "Resultado que aparece",
+    procEtiqueta: "Processo", procTitulo1: "Como funciona", procTitulo2: "a parceria.", procCanto: "Um processo leve e organizado, em parceria com a sua marca do começo ao fim.",
+    proc1Nome: "Briefing", proc1Frase: "Entender a sua marca.", proc1Desc: "Objetivo da campanha, público, tom e referências. Tudo alinhado e com contrato assinado.",
+    proc2Nome: "Roteiro", proc2Frase: "Pensar cada cena.", proc2Desc: "Escrevo o roteiro e envio para sua aprovação, ou gravo a partir do roteiro da sua marca.",
+    proc3Nome: "Gravação", proc3Frase: "Dar vida ao produto.", proc3Desc: "Com o produto em mãos, gravo e edito com cuidado de luz, cenário, áudio e estética.",
+    proc4Nome: "Entrega", proc4Frase: "Pronto para vender.", proc4Desc: "Vídeos em alta resolução pelo Google Drive, com foto de capa, no prazo combinado.",
+    procGar1: "Roteiro aprovado antes de gravar", procGar2: "Uma rodada de ajuste inclusa", procGar3: "Entrega com foto de capa",
     fotosEtiqueta: "Fotografia", fotosTitulo1: "Fotos com", fotosTitulo2: "bom gosto.", fotosCanto: "Fotos lifestyle e de produto, com luz natural e composição pensada. Clique para ver de perto.", fotosBarra: "Fotos", lbFechar: "Fechar", lbAnterior: "Foto anterior", lbProxima: "Próxima foto", fotoAmpliar: "Ver de perto",
     depoEtiqueta: "Depoimentos", depoTitulo1: "O que dizem", depoTitulo2: "as marcas.", depoVerificada: "Avaliação verificada", depoCanto: "Avaliações reais de marcas que viram o produto virar desejo.",
     depoSelo: '<b>45</b> avaliações <i>·</i> <b>★ 5,0</b> de média <i>·</i> auditadas na plataforma Seu Influencer',
@@ -952,6 +1030,12 @@ const textos = {
     trabTitulo: "Work by niche", trabRotulo: "Filter by yours", filtrosAria: "Filter work by niche", todos: "All",
     servTitulo: "How I can help", servRotulo: "Services",
     numTitulo: "Numbers and testimonials", numRotulo: "Results that show",
+    procEtiqueta: "Process", procTitulo1: "How the", procTitulo2: "partnership works.", procCanto: "A light, organized process, working with your brand from start to finish.",
+    proc1Nome: "Briefing", proc1Frase: "Understand your brand.", proc1Desc: "Campaign goal, audience, tone and references. Everything aligned, with a signed contract.",
+    proc2Nome: "Script", proc2Frase: "Think through every scene.", proc2Desc: "I write the script and send it for your approval, or I film from your brand's script.",
+    proc3Nome: "Filming", proc3Frase: "Bring the product to life.", proc3Desc: "With the product in hand, I film and edit with care for light, setting, audio and aesthetics.",
+    proc4Nome: "Delivery", proc4Frase: "Ready to sell.", proc4Desc: "High-resolution videos via Google Drive, with a cover photo, on the agreed deadline.",
+    procGar1: "Script approved before filming", procGar2: "One round of edits included", procGar3: "Delivered with a cover photo",
     fotosEtiqueta: "Photography", fotosTitulo1: "Photos with", fotosTitulo2: "good taste.", fotosCanto: "Lifestyle and product photos, with natural light and thoughtful composition. Click to see up close.", fotosBarra: "Photos", lbFechar: "Close", lbAnterior: "Previous photo", lbProxima: "Next photo", fotoAmpliar: "See up close",
     depoEtiqueta: "Testimonials", depoTitulo1: "What brands", depoTitulo2: "are saying.", depoVerificada: "Verified review", depoCanto: "Real reviews from brands that watched their product become desire.",
     depoSelo: '<b>45</b> reviews <i>·</i> <b>★ 5.0</b> average <i>·</i> audited on the Seu Influencer platform',
@@ -1560,6 +1644,17 @@ function ligaVideo(video) {
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) mostra(atual + (dx < 0 ? 1 : -1));
     x0 = null;
   });
+})();
+
+/* Processo: a linha se desenha e as etapas aparecem uma de cada vez */
+(function () {
+  const trilho = $("#proc-trilho");
+  if (!trilho || semMovimento || !("IntersectionObserver" in window)) return;
+  trilho.classList.add("proc-espera");
+  const obs = new IntersectionObserver((ents) => {
+    ents.forEach(en => { if (en.isIntersecting) { trilho.classList.add("proc-anima"); obs.disconnect(); } });
+  }, { threshold: 0.3 });
+  obs.observe(trilho);
 })();
 
 /* Menu: destaca a seção que está na tela */
