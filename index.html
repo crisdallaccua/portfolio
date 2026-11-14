@@ -175,7 +175,7 @@ p{margin:0 0 1rem}
 a.sobre-tag--marrom{background:#3b322b;color:#efe9e1;text-decoration:none;transition:background .3s}
 a.sobre-tag--marrom:hover{background:#a9825f}
 /* faixa escura: como eu trabalho */
-.faixa-metodo{background:#3b322b;padding:clamp(4.5rem,9vw,7rem) 0}
+.faixa-metodo{background:#3b322b;padding:clamp(3.5rem,7vw,5rem) 0}
 .faixa-metodo-grade{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,3.5rem)}
 .faixa-metodo .metodo-titulo{margin:0;max-width:none;font-size:clamp(1.8rem,3.2vw,2.6rem);line-height:1.2;color:#efe9e1}
 .faixa-metodo .metodo-titulo em{display:block;font-style:normal;color:#a9825f}
@@ -186,7 +186,8 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 .faixa-metodo .metodo-lista li+li{border-left:1px solid #5f5044}
 .faixa-metodo .metodo-num{display:block;margin-bottom:.8rem;font-family:var(--titulo);font-size:2rem;line-height:1;color:#a9825f}
 .faixa-metodo .metodo-nome{margin:0 0 .5rem;font-family:var(--titulo);font-weight:400;font-size:1.3rem;color:#efe9e1}
-.faixa-metodo .metodo-lista p{margin:0;font-size:.95rem;line-height:1.6;color:#d8c3ac}
+.faixa-metodo .metodo-verbo{margin:0 0 .6rem;font-family:var(--titulo);font-weight:400;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.05;color:#a9825f}
+.faixa-metodo .metodo-lista p{margin:0;max-width:24rem;font-size:.92rem;line-height:1.6;color:#d8c3ac}
 @media (max-width:900px){
   .sobre .sobre-grade{grid-template-columns:1fr}
   .faixa-metodo-grade{grid-template-columns:1fr}
@@ -459,11 +460,10 @@ a.sobre-tag--marrom:hover{background:#a9825f}
         </div>
       </div>
       <div class="sobre-texto revela">
-        <p class="sobre-etiqueta">01 / <span data-t="sobreTitulo">Sobre mim</span></p>
+        <p class="sobre-etiqueta" data-t="sobreTitulo">Sobre mim</p>
         <h2 id="titulo-sobre" class="sobre-titulo"><span data-t="sobreOla">Olá, eu sou</span> <em data-t="sobreOlaDestaque">a Cris.</em></h2>
         <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
         <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
-        <p data-t-html="sobreP3"><strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.</p>
         <ul class="sobre-tags">
           <li class="sobre-tag sobre-tag--bege" data-t="tagMarcas">+200 marcas</li>
           <li class="sobre-tag sobre-tag--caramelo">Porto Alegre · RS</li>
@@ -477,11 +477,11 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 <!-- ============ FAIXA COMO EU TRABALHO ============ -->
 <section class="faixa-metodo" aria-labelledby="titulo-metodo">
   <div class="wrap faixa-metodo-grade revela">
-    <h2 id="titulo-metodo" class="metodo-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></h2>
+    <h2 id="titulo-metodo" class="metodo-titulo" data-t="metodoTituloUnico">Cada cena tem uma função.</h2>
     <ol class="metodo-lista">
-      <li><span class="metodo-num" aria-hidden="true">i</span><h3 class="metodo-nome" data-t="dif1Nome">Conexão</h3><p data-t="dif1">Fala de amiga, que gera identificação e confiança.</p></li>
-      <li><span class="metodo-num" aria-hidden="true">ii</span><h3 class="metodo-nome" data-t="dif2Nome">Criatividade</h3><p data-t="dif2">Roteiros fora do óbvio, que prendem nos primeiros segundos.</p></li>
-      <li><span class="metodo-num" aria-hidden="true">iii</span><h3 class="metodo-nome" data-t="dif3Nome">Estratégia</h3><p data-t="dif3">Cada vídeo pensado para despertar desejo e levar à compra.</p></li>
+      <li><h3 class="metodo-verbo" data-t="verbo1">Prender.</h3><p data-t="verbo1Txt">Ganchos que seguram nos primeiros segundos.</p></li>
+      <li><h3 class="metodo-verbo" data-t="verbo2">Encantar.</h3><p data-t="verbo2Txt">Estética e verdade de quem indica pra uma amiga.</p></li>
+      <li><h3 class="metodo-verbo" data-t="verbo3">Vender.</h3><p data-t="verbo3Txt">Cada vídeo pensado para levar à compra.</p></li>
     </ol>
   </div>
 </section>
@@ -629,6 +629,7 @@ const textos = {
     sobreImpacto: "Parece indicação.",
     sobreP3: "<strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.",
     tagVideos: "+400 vídeos", tagMarcas: "+200 marcas", tagFale: "Fale comigo", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
+    metodoTituloUnico: "Cada cena tem uma função.", verbo1: "Prender.", verbo1Txt: "Ganchos que seguram nos primeiros segundos.", verbo2: "Encantar.", verbo2Txt: "Estética e verdade de quem indica pra uma amiga.", verbo3: "Vender.", verbo3Txt: "Cada vídeo pensado para levar à compra.",
     metodoTitulo: "Cada cena tem uma função:", metodoDestaque: "prender, encantar e vender.",
     metodoIntro: "Crio conteúdos que unem conexão, criatividade e estratégia para gerar resultados para as marcas.",
     dif1Nome: "Conexão", dif1: "Fala de amiga, que gera identificação e confiança.",
@@ -678,6 +679,7 @@ const textos = {
     sobreImpacto: "It looks like a recommendation.",
     sobreP3: "<strong>More than 400 videos and 200 brands</strong> later, I still believe the same thing: beautiful content only makes sense when it sells. Maybe that's why <strong>so many brands come back</strong>.",
     tagVideos: "+400 videos", tagMarcas: "+200 brands", tagFale: "Let's talk", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
+    metodoTituloUnico: "Every scene has a purpose.", verbo1: "Hook.", verbo1Txt: "Openings that hold attention in the first seconds.", verbo2: "Charm.", verbo2Txt: "Aesthetics and the honesty of a friend's recommendation.", verbo3: "Sell.", verbo3Txt: "Every video designed to drive the purchase.",
     metodoTitulo: "Every scene has a purpose:", metodoDestaque: "to hook, to charm and to sell.",
     metodoIntro: "I create content that blends connection, creativity and strategy to drive results for brands.",
     dif1Nome: "Connection", dif1: "Talking like a friend, building identification and trust.",
