@@ -286,7 +286,7 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .contato-escuro .contato-titulo{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.1;color:#efe9e1}
 .contato-escuro .contato-titulo em{font-style:normal;color:#a9825f}
 .contato-escuro .contato-grade{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2.5rem,6vw,6rem);align-items:start}
-.contato-escuro .contato-frase{font-family:var(--titulo);font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.35;color:#efe9e1;margin:0 0 1rem}
+.contato-escuro .contato-frase{font-family:var(--titulo);font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.35;color:#efe9e1;margin:0 0 2rem}
 .contato-escuro .contato-apoio{color:#d8c3ac;margin:0 0 1.6rem;line-height:1.75}
 .contato-escuro .contato-agenda{display:flex;align-items:center;gap:.7rem;margin:0 0 2rem;font-size:.7rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:#a9825f}
 .contato-escuro .ponto-pulsante{position:relative;width:8px;height:8px;border-radius:50%;background:#a9825f;flex-shrink:0}
@@ -309,21 +309,27 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .contato-escuro .contato-ok h3{color:#efe9e1}
 .contato-escuro .contato-ok p{color:#d8c3ac}
 .contato-escuro .contato-ok .rotulo{color:#a9825f}
-/* rodapé escuro */
-footer.rodape.rodape-escuro{background:#3b322b;border-top:1px solid #5f5044}
-footer.rodape.rodape-escuro .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.5rem}
-.rodape .rodape-nome{font-family:"Tenor Sans", Georgia, serif;font-weight:300;font-size:16.8px;letter-spacing:2.016px;text-transform:uppercase;color:rgb(194, 188, 174);text-decoration:none;white-space:nowrap}
-footer.rodape.rodape-escuro .redes{justify-content:center}
-footer.rodape.rodape-escuro .redes a{color:#d8c3ac}
-footer.rodape.rodape-escuro .redes a:hover{color:#a9825f}
-footer.rodape.rodape-escuro small{justify-self:end;text-align:right;font-size:.7rem;letter-spacing:.06em;text-transform:none;color:#5f5044}
+/* rodapé claro */
+footer.rodape.rodape-claro{background:#efe9e1;border-top:0;padding:1.6rem 0}
+footer.rodape.rodape-claro .wrap{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:1.5rem}
+footer.rodape.rodape-claro .rodape-marca{display:flex;flex-direction:column;gap:.35rem}
+footer.rodape.rodape-claro .rodape-nome{font-family:"Tenor Sans", Georgia, serif;font-weight:300;font-size:16.8px;letter-spacing:2.016px;text-transform:uppercase;color:#3b322b;text-decoration:none;white-space:nowrap}
+footer.rodape.rodape-claro .rodape-sub{font-family:"Jost",sans-serif;font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#a9825f;line-height:1}
+footer.rodape.rodape-claro .rodape-direita{display:flex;align-items:center;gap:1.4rem}
+footer.rodape.rodape-claro .redes{display:flex;align-items:center;flex-wrap:wrap;gap:.7rem}
+footer.rodape.rodape-claro .redes a{font-family:"Jost",sans-serif;font-size:.68rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;text-decoration:none;transition:color .3s}
+footer.rodape.rodape-claro .redes a:hover{color:#a9825f}
+footer.rodape.rodape-claro .ponto-sep{color:#5f5044;font-size:.7rem}
+footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-transform:none;color:#5f5044;white-space:nowrap}
 @media (max-width:900px){
   .contato-escuro .contato-grade{grid-template-columns:1fr}
   .contato-escuro .contato-whats{display:flex;width:100%}
   .contato-escuro .contato-sec{flex-direction:column}
   .contato-escuro .contato-sec a{text-align:center}
-  footer.rodape.rodape-escuro .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}
-  footer.rodape.rodape-escuro small{justify-self:center;text-align:center}
+  footer.rodape.rodape-claro .wrap{flex-direction:column;align-items:center;text-align:center;gap:1rem}
+  footer.rodape.rodape-claro .rodape-marca{align-items:center}
+  footer.rodape.rodape-claro .rodape-direita{flex-direction:column;gap:.6rem}
+  footer.rodape.rodape-claro .redes{justify-content:center}
 }
 
 /* Trabalhos: categorias com vídeos */
@@ -638,13 +644,11 @@ footer.rodape.rodape-escuro small{justify-self:end;text-align:right;font-size:.7
   <div class="wrap">
     <div class="contato-cabeca revela">
       <p class="cat-etiqueta" data-t="contEtiqueta">Contato</p>
-      <h2 id="titulo-contato" class="contato-titulo"><span data-t="contTitulo1">Bora criar</span> <em data-t="contTitulo2">juntos?</em></h2>
+      <h2 id="titulo-contato" class="contato-titulo"><span data-t="contTitulo1">Vamos criar</span> <em data-t="contTitulo2">juntos?</em></h2>
     </div>
     <div class="contato-grade">
       <div class="contato-intro revela">
         <p class="contato-frase" data-t="contFrase">Me conta da sua marca e do que você precisa.</p>
-        <p class="contato-apoio" data-t="contApoio">Respondo em até um dia útil. Atendo marcas de todo o Brasil, a partir de Porto Alegre.</p>
-        <p class="contato-agenda"><span class="ponto-pulsante" aria-hidden="true"></span><span data-t="contAgenda">Agenda aberta para dezembro e janeiro</span></p>
         <a class="contato-whats" href="https://wa.me/5551996627564?text=Ol%C3%A1%2C%20Cris!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20uma%20parceria." target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.5 14.7L2.2 21.8l5-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.7 7.6c.3-.5.6-.5.9-.5h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.6.8c-.1.2-.2.3 0 .6.6 1.1 1.5 2 2.6 2.6.3.2.4.1.6 0l.8-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.3.4.5 0 .5-.2 1.4-.9 1.9-.6.5-1.6.7-2.8.3-3-1-5.4-3.5-6.3-6.4-.3-1 .1-2 .8-2.6z" fill="currentColor"/></svg>
           <span data-t="contWhats">Chamar no WhatsApp</span>
@@ -678,16 +682,21 @@ footer.rodape.rodape-escuro small{justify-self:end;text-align:right;font-size:.7
 </main>
 
 <!-- ============ RODAPÉ ============ -->
-<footer class="rodape rodape-escuro">
+<footer class="rodape rodape-claro">
   <div class="wrap">
-    <a class="rodape-nome" href="#inicio">Cristiane Dall' Accua</a>
-    <div class="redes">
-      <a href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://wa.me/5551996627564" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="mailto:contatocrisdallaccua@gmail.com" data-t="btnEmail">E-mail</a>
-      <!-- TIKTOK: volta aqui quando a Cris passar o usuário certo -->
+    <div class="rodape-marca">
+      <a class="rodape-nome" href="#inicio">Cristiane Dall' Accua</a>
+      <span class="rodape-sub" data-t="rodapeCargo">UGC creator &amp; influencer</span>
     </div>
-    <small>© <span id="ano"></span> Cristiane Dall' Accua · <span data-t="rodapeCargo">UGC creator &amp; influencer</span> · Porto Alegre, RS</small>
+    <div class="rodape-direita">
+      <nav class="redes" aria-label="Redes">
+        <a href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener">Instagram</a><span class="ponto-sep" aria-hidden="true">·</span>
+        <a href="https://wa.me/5551996627564" target="_blank" rel="noopener">WhatsApp</a><span class="ponto-sep" aria-hidden="true">·</span>
+        <a href="mailto:contatocrisdallaccua@gmail.com" data-t="btnEmail">E-mail</a>
+        <!-- TIKTOK: volta aqui quando a Cris passar o usuário certo -->
+      </nav>
+      <small>© <span id="ano"></span></small>
+    </div>
   </div>
 </footer>
 
@@ -768,7 +777,7 @@ const textos = {
     catEtiqueta: "Categorias", catTitulo: "Conteúdo para cada tipo de", catTituloDestaque: "marca.",
     catApoio: "Escolha o seu nicho e veja como eu levo produtos para a vida real.", catLinksAria: "Categorias",
     catNum: "Conteúdo UGC", videoEmBreve: "Vídeo em breve", reproduzir: "Reproduzir vídeo", pausar: "Pausar vídeo",
-    contEtiqueta: "Contato", contTitulo1: "Bora criar", contTitulo2: "juntos?", contApoio: "Respondo em até um dia útil. Atendo marcas de todo o Brasil, a partir de Porto Alegre.",
+    contEtiqueta: "Contato", contTitulo1: "Vamos criar", contTitulo2: "juntos?", contApoio: "Respondo em até um dia útil. Atendo marcas de todo o Brasil, a partir de Porto Alegre.",
     contAgenda: "Agenda aberta para dezembro e janeiro", contWhats: "Chamar no WhatsApp", lblMarca: "Marca / empresa", rodapeCargo: "UGC creator & influencer",
     contErro: "Não consegui enviar agora. Abri o WhatsApp para você falar comigo direto.", okWhats: "Abri o WhatsApp com a sua mensagem pronta. É só tocar em enviar por lá.",
     btnKit: "Quero receber", kitOkTitulo: "Prontinho!", kitOkTexto: "Em breve o mídia kit chega no seu e-mail."
