@@ -280,6 +280,52 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .barra-cat-links a:hover{color:#a9825f}
 .barra-cat-links a.ativo{color:#a9825f;border-bottom-color:#a9825f}
 
+/* CONTATO no fundo escuro */
+.contato-escuro{background:#3b322b;padding:clamp(4.5rem,9vw,7rem) 0}
+.contato-escuro .contato-cabeca{margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.contato-escuro .contato-titulo{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.1;color:#efe9e1}
+.contato-escuro .contato-titulo em{font-style:normal;color:#a9825f}
+.contato-escuro .contato-grade{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2.5rem,6vw,6rem);align-items:start}
+.contato-escuro .contato-frase{font-family:var(--titulo);font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.35;color:#efe9e1;margin:0 0 1rem}
+.contato-escuro .contato-apoio{color:#d8c3ac;margin:0 0 1.6rem;line-height:1.75}
+.contato-escuro .contato-agenda{display:flex;align-items:center;gap:.7rem;margin:0 0 2rem;font-size:.7rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:#a9825f}
+.contato-escuro .ponto-pulsante{position:relative;width:8px;height:8px;border-radius:50%;background:#a9825f;flex-shrink:0}
+.contato-escuro .ponto-pulsante::after{content:"";position:absolute;inset:0;border-radius:50%;background:#a9825f;animation:pulsa 1.8s ease-out infinite}
+@keyframes pulsa{from{transform:scale(1);opacity:.7}to{transform:scale(3);opacity:0}}
+.contato-escuro .contato-whats{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1.15rem 2rem;border-radius:4px;background:#a9825f;color:#efe9e1;font-size:.8rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s}
+.contato-escuro .contato-whats:hover{background:#efe9e1;color:#3b322b}
+.contato-escuro .contato-sec{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+.contato-escuro .contato-sec a{padding:.75rem .9rem;border:1px solid #5f5044;border-radius:4px;color:#efe9e1;font-size:.64rem;font-weight:400;letter-spacing:.1em;white-space:nowrap;text-transform:uppercase;text-decoration:none;transition:border-color .3s,color .3s}
+.contato-escuro .contato-sec a:hover{border-color:#a9825f;color:#a9825f}
+.contato-escuro .sem-caixa-alta{text-transform:none;letter-spacing:.04em;font-size:.78rem}
+.contato-escuro .contato-form .campo label{color:#a9825f}
+.contato-escuro .contato-form .campo input,.contato-escuro .contato-form .campo textarea{border-bottom-color:#5f5044;color:#efe9e1}
+.contato-escuro .contato-form .campo input:focus,.contato-escuro .contato-form .campo textarea:focus{border-bottom-color:#a9825f}
+.contato-escuro .contato-form .campo input:focus-visible,.contato-escuro .contato-form .campo textarea:focus-visible{outline-color:#a9825f}
+.contato-escuro .contato-enviar{border-color:#efe9e1;color:#efe9e1;border-radius:0}
+.contato-escuro .contato-enviar:hover{background:#efe9e1;color:#3b322b}
+.contato-escuro .contato-erro{margin:0;font-size:.85rem;color:#d8c3ac}
+.contato-escuro .contato-ok{background:transparent;border-color:#a9825f}
+.contato-escuro .contato-ok h3{color:#efe9e1}
+.contato-escuro .contato-ok p{color:#d8c3ac}
+.contato-escuro .contato-ok .rotulo{color:#a9825f}
+/* rodapé escuro */
+footer.rodape.rodape-escuro{background:#3b322b;border-top:1px solid #5f5044}
+footer.rodape.rodape-escuro .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.5rem}
+.rodape .rodape-nome{font-family:"Tenor Sans", Georgia, serif;font-weight:300;font-size:16.8px;letter-spacing:2.016px;text-transform:uppercase;color:rgb(194, 188, 174);text-decoration:none;white-space:nowrap}
+footer.rodape.rodape-escuro .redes{justify-content:center}
+footer.rodape.rodape-escuro .redes a{color:#d8c3ac}
+footer.rodape.rodape-escuro .redes a:hover{color:#a9825f}
+footer.rodape.rodape-escuro small{justify-self:end;text-align:right;font-size:.7rem;letter-spacing:.06em;text-transform:none;color:#5f5044}
+@media (max-width:900px){
+  .contato-escuro .contato-grade{grid-template-columns:1fr}
+  .contato-escuro .contato-whats{display:flex;width:100%}
+  .contato-escuro .contato-sec{flex-direction:column}
+  .contato-escuro .contato-sec a{text-align:center}
+  footer.rodape.rodape-escuro .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}
+  footer.rodape.rodape-escuro small{justify-self:center;text-align:center}
+}
+
 /* Trabalhos: categorias com vídeos */
 .cat-abertura{margin-bottom:clamp(3.5rem,8vw,6rem)}
 .cat-etiqueta{display:flex;align-items:center;gap:1rem;margin:0 0 1.6rem;font-size:.72rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:#a9825f}
@@ -588,34 +634,41 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 </section>
 
 <!-- ============ 06 CONTATO ============ -->
-<section class="secao" id="contato" aria-labelledby="titulo-contato">
+<section class="contato-escuro" id="contato" aria-labelledby="titulo-contato">
   <div class="wrap">
-    <div class="cabeca revela"><span class="num">06</span><h2 id="titulo-contato" data-t="contTitulo">Bora criar juntos</h2><span class="rotulo" data-t="contRotulo">Contato</span></div>
+    <div class="contato-cabeca revela">
+      <p class="cat-etiqueta" data-t="contEtiqueta">Contato</p>
+      <h2 id="titulo-contato" class="contato-titulo"><span data-t="contTitulo1">Bora criar</span> <em data-t="contTitulo2">juntos?</em></h2>
+    </div>
     <div class="contato-grade">
       <div class="contato-intro revela">
-        <p class="frase" data-t="contFrase">Me conta da sua marca e do que você precisa. Eu respondo em até um dia útil.</p>
-        <p data-t="contP">Atendo marcas de todo o Brasil a partir de Porto Alegre.</p>
-        <div class="canais">
-          <a class="btn" href="https://wa.me/5551996627564" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">(51) 99662 7564</span></a>
-          <a class="btn" href="mailto:contatocrisdallaccua@gmail.com"><span data-t="btnEmail">E-mail</span> <span aria-hidden="true" data-t="btnEscrever">Escrever</span></a>
-          <a class="btn" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">@crisdallaccua</span></a>
+        <p class="contato-frase" data-t="contFrase">Me conta da sua marca e do que você precisa.</p>
+        <p class="contato-apoio" data-t="contApoio">Respondo em até um dia útil. Atendo marcas de todo o Brasil, a partir de Porto Alegre.</p>
+        <p class="contato-agenda"><span class="ponto-pulsante" aria-hidden="true"></span><span data-t="contAgenda">Agenda aberta para dezembro e janeiro</span></p>
+        <a class="contato-whats" href="https://wa.me/5551996627564?text=Ol%C3%A1%2C%20Cris!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20uma%20parceria." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.5 14.7L2.2 21.8l5-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.7 7.6c.3-.5.6-.5.9-.5h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.6.8c-.1.2-.2.3 0 .6.6 1.1 1.5 2 2.6 2.6.3.2.4.1.6 0l.8-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.3.4.5 0 .5-.2 1.4-.9 1.9-.6.5-1.6.7-2.8.3-3-1-5.4-3.5-6.3-6.4-.3-1 .1-2 .8-2.6z" fill="currentColor"/></svg>
+          <span data-t="contWhats">Chamar no WhatsApp</span>
+        </a>
+        <div class="contato-sec">
+          <a href="mailto:contatocrisdallaccua@gmail.com"><span data-t="lblEmail">E-mail</span> · <span class="sem-caixa-alta">contatocrisdallaccua@gmail.com</span></a>
+          <a href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener">Instagram · <span class="sem-caixa-alta">@crisdallaccua</span></a>
         </div>
       </div>
       <div class="revela">
-        <!-- FORMULÁRIO: hoje ele só mostra a confirmação na tela.
-             Para receber as mensagens no seu e-mail, crie um formulário grátis no Formspree
-             e coloque action="https://formspree.io/f/SEU_CODIGO" method="POST" na tag form,
-             depois apague o "e.preventDefault()" no script (função ligarFormulario). -->
-        <form class="form" id="form-contato" novalidate>
+        <!-- FORMULÁRIO: para as mensagens chegarem no seu e-mail, coloque o código do Formspree em FORMSPREE_ID (no começo do script).
+             Enquanto FORMSPREE_ID estiver vazio, o botão abre o WhatsApp com a mensagem já preenchida. -->
+        <form class="form contato-form" id="form-contato" novalidate>
           <div class="campo"><label class="rotulo" for="c-nome" data-t="lblNome">Nome</label><input id="c-nome" name="nome" type="text" autocomplete="name" required></div>
+          <div class="campo"><label class="rotulo" for="c-marca" data-t="lblMarca">Marca / empresa</label><input id="c-marca" name="marca" type="text" autocomplete="organization"></div>
           <div class="campo"><label class="rotulo" for="c-email" data-t="lblEmail">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
           <div class="campo"><label class="rotulo" for="c-msg" data-t="lblMsg">Mensagem</label><textarea id="c-msg" name="mensagem" required></textarea></div>
-          <div><button class="btn" type="submit" data-t="btnEnviar">Enviar mensagem</button></div>
+          <div><button class="btn contato-enviar" type="submit" data-t="btnEnviar">Enviar mensagem</button></div>
+          <p class="contato-erro" id="erro-contato" hidden data-t="contErro">Não consegui enviar agora. Abri o WhatsApp para você falar comigo direto.</p>
         </form>
-        <div class="confirmacao" id="ok-contato" hidden tabindex="-1">
+        <div class="confirmacao contato-ok" id="ok-contato" hidden tabindex="-1">
           <p class="rotulo" data-t="okRotulo">Mensagem recebida</p>
           <h3><span data-t="okObrigada">Obrigada</span>, <span id="ok-nome"></span>!</h3>
-          <p data-t="okTexto">Vou ler com carinho e te respondo em até um dia útil. Se preferir, me chama no WhatsApp.</p>
+          <p id="ok-texto" data-t="okTexto">Vou ler com carinho e te respondo em até um dia útil. Se preferir, me chama no WhatsApp.</p>
         </div>
       </div>
     </div>
@@ -625,17 +678,16 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 </main>
 
 <!-- ============ RODAPÉ ============ -->
-<footer class="rodape">
+<footer class="rodape rodape-escuro">
   <div class="wrap">
-    <span class="marca-nome">Cristiane Dall' Accua</span>
+    <a class="rodape-nome" href="#inicio">Cristiane Dall' Accua</a>
     <div class="redes">
       <a href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://wa.me/5551996627564" target="_blank" rel="noopener">WhatsApp</a>
       <a href="mailto:contatocrisdallaccua@gmail.com" data-t="btnEmail">E-mail</a>
-      <!-- TIKTOK: troque @seuusuario pelo seu perfil, ou apague esta linha -->
-      <a href="https://www.tiktok.com/@seuusuario" target="_blank" rel="noopener">TikTok</a>
+      <!-- TIKTOK: volta aqui quando a Cris passar o usuário certo -->
     </div>
-    <small>© <span id="ano"></span> Porto Alegre</small>
+    <small>© <span id="ano"></span> Cristiane Dall' Accua · <span data-t="rodapeCargo">UGC creator &amp; influencer</span> · Porto Alegre, RS</small>
   </div>
 </footer>
 
@@ -705,7 +757,7 @@ const textos = {
     numTitulo: "Números e depoimentos", numRotulo: "Resultado que aparece",
     resultadosRotulo: "Resultados de campanha", depoRotulo: "O que dizem as marcas",
     contTitulo: "Bora criar juntos", contRotulo: "Contato",
-    contFrase: "Me conta da sua marca e do que você precisa. Eu respondo em até um dia útil.",
+    contFrase: "Me conta da sua marca e do que você precisa.",
     contP: "Atendo marcas de todo o Brasil a partir de Porto Alegre.",
     btnEmail: "E-mail", btnEscrever: "Escrever",
     lblNome: "Nome", lblEmail: "E-mail", lblMsg: "Mensagem", btnEnviar: "Enviar mensagem",
@@ -716,6 +768,9 @@ const textos = {
     catEtiqueta: "Categorias", catTitulo: "Conteúdo para cada tipo de", catTituloDestaque: "marca.",
     catApoio: "Escolha o seu nicho e veja como eu levo produtos para a vida real.", catLinksAria: "Categorias",
     catNum: "Conteúdo UGC", videoEmBreve: "Vídeo em breve", reproduzir: "Reproduzir vídeo", pausar: "Pausar vídeo",
+    contEtiqueta: "Contato", contTitulo1: "Bora criar", contTitulo2: "juntos?", contApoio: "Respondo em até um dia útil. Atendo marcas de todo o Brasil, a partir de Porto Alegre.",
+    contAgenda: "Agenda aberta para dezembro e janeiro", contWhats: "Chamar no WhatsApp", lblMarca: "Marca / empresa", rodapeCargo: "UGC creator & influencer",
+    contErro: "Não consegui enviar agora. Abri o WhatsApp para você falar comigo direto.", okWhats: "Abri o WhatsApp com a sua mensagem pronta. É só tocar em enviar por lá.",
     btnKit: "Quero receber", kitOkTitulo: "Prontinho!", kitOkTexto: "Em breve o mídia kit chega no seu e-mail."
   },
   en: {
@@ -755,7 +810,7 @@ const textos = {
     numTitulo: "Numbers and testimonials", numRotulo: "Results that show",
     resultadosRotulo: "Campaign results", depoRotulo: "What brands say",
     contTitulo: "Let's create together", contRotulo: "Contact",
-    contFrase: "Tell me about your brand and what you need. I reply within one business day.",
+    contFrase: "Tell me about your brand and what you need.",
     contP: "Based in Porto Alegre, working with brands from Brazil and abroad.",
     btnEmail: "Email", btnEscrever: "Write",
     lblNome: "Name", lblEmail: "Email", lblMsg: "Message", btnEnviar: "Send message",
@@ -766,6 +821,9 @@ const textos = {
     catEtiqueta: "Categories", catTitulo: "Content for every kind of", catTituloDestaque: "brand.",
     catApoio: "Choose your niche and see how I bring products into real life.", catLinksAria: "Categories",
     catNum: "UGC content", videoEmBreve: "Video coming soon", reproduzir: "Play video", pausar: "Pause video",
+    contEtiqueta: "Contact", contTitulo1: "Shall we create", contTitulo2: "together?", contApoio: "I reply within one business day. I work with brands all over Brazil, from Porto Alegre.",
+    contAgenda: "Booking open for December and January", contWhats: "Message me on WhatsApp", lblMarca: "Brand / company", rodapeCargo: "UGC creator & influencer",
+    contErro: "I couldn't send it right now. I opened WhatsApp so you can reach me directly.", okWhats: "I opened WhatsApp with your message ready. Just tap send there.",
     btnKit: "Send it to me", kitOkTitulo: "All set!", kitOkTexto: "Your media kit will arrive in your inbox soon."
   }
 };
@@ -1341,7 +1399,37 @@ function ligarFormulario(form, ok, aoEnviar) {
     form.hidden = true; ok.hidden = false; ok.focus();
   });
 }
-ligarFormulario($("#form-contato"), $("#ok-contato"), (f) => { $("#ok-nome").textContent = f.querySelector("#c-nome").value.trim().split(" ")[0]; });
+/* FORMULÁRIO DE CONTATO
+   FORMSPREE_ID: cole aqui o código do seu formulário no Formspree (ex.: "xyzabcd").
+   Vazio = o botão abre o WhatsApp com a mensagem preenchida. */
+const FORMSPREE_ID = "";
+(function () {
+  const form = $("#form-contato"), ok = $("#ok-contato"), erro = $("#erro-contato");
+  const whatsCom = (d) => {
+    const linhas = [`Olá, Cris! Sou ${d.nome}${d.marca ? " da " + d.marca : ""}.`, d.mensagem, `Meu e-mail: ${d.email}`];
+    return "https://wa.me/5551996627564?text=" + encodeURIComponent(linhas.join("\n\n"));
+  };
+  const mostraOk = (nome, viaWhats) => {
+    $("#ok-nome").textContent = nome.split(" ")[0];
+    if (viaWhats) $("#ok-texto").textContent = T("okWhats");
+    form.hidden = true; ok.hidden = false; ok.focus();
+  };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const invalido = [...form.querySelectorAll("[required]")].find(c => !c.value.trim() || !c.checkValidity());
+    if (invalido) { invalido.focus(); invalido.reportValidity && invalido.reportValidity(); return; }
+    const d = { nome: form.nome.value.trim(), marca: form.marca.value.trim(), email: form.email.value.trim(), mensagem: form.mensagem.value.trim() };
+    if (!FORMSPREE_ID) { window.open(whatsCom(d), "_blank", "noopener"); mostraOk(d.nome, true); return; }
+    const botao = form.querySelector("button[type=submit]"); botao.disabled = true;
+    try {
+      const r = await fetch("https://formspree.io/f/" + FORMSPREE_ID, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify({ ...d, _subject: "Contato pelo portfólio: " + d.nome }) });
+      if (!r.ok) throw new Error("falhou");
+      mostraOk(d.nome, false);
+    } catch (x) {
+      erro.hidden = false; window.open(whatsCom(d), "_blank", "noopener");
+    } finally { botao.disabled = false; }
+  });
+})();
 ligarFormulario($("#form-kit"), $("#ok-kit"));
 
 /* Card de captura: aparece após 7 segundos, uma vez por visita */
