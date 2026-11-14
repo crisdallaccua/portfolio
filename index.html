@@ -152,6 +152,19 @@ p{margin:0 0 1rem}
 .assinatura{font-family:var(--titulo);font-size:1.5rem;font-style:italic;color:var(--marrom);margin-top:1.8rem}
 .assinatura small{display:block;font-family:var(--corpo);font-style:normal;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--texto-suave);margin-top:.3rem}
 
+/* Sobre mim (paleta Caramelo) */
+.sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1}
+.sobre-etiqueta{margin:0 0 1.2rem;font-size:.72rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:#a9825f}
+.sobre-titulo{font-size:clamp(2.2rem,4.8vw,3.8rem);line-height:1.1;color:#3b322b;margin:0 0 2rem}
+.sobre-titulo em{font-style:normal;color:#a9825f}
+.sobre .sobre-texto p{line-height:1.85;margin:0 0 1.4rem}
+.sobre-impacto{font-family:var(--titulo);font-size:1.25em;color:#3b322b;white-space:nowrap}
+.sobre .promessas li span{color:#a9825f}
+.sobre-foto{position:relative}
+.sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;z-index:0}
+.sobre-foto .midia{position:relative;z-index:1}
+.sobre-foto img{filter:sepia(.12) saturate(1.05)}
+
 /* Destaques */
 .destaques{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.25rem,3vw,2.5rem)}
 .destaque{display:block;text-decoration:none;border:1px solid var(--linha);background:var(--offwhite);padding:.8rem .8rem 1.6rem;transition:border-color .35s}
@@ -187,7 +200,13 @@ p{margin:0 0 1rem}
 .vplayer{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#d8c3ac}
 .vplayer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .vposter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.vplayer iframe{position:absolute;inset:0;z-index:4;width:100%;height:100%;border:0}
+/* o player é desenhado 3x maior e reduzido, assim o YouTube entrega a melhor qualidade disponível */
+.vplayer iframe{position:absolute;left:0;top:-20%;width:300%;height:420%;transform:scale(.3333);transform-origin:0 0;z-index:2;border:0;pointer-events:none;opacity:0;transition:opacity .6s}
+.vplayer iframe.pronto{opacity:1}
+.vplayer.toque iframe{pointer-events:auto}
+.vplayer.toque .vplay{pointer-events:none}
+.vplayer--yt.tocando{background:#000}
+.tocando.pausado .circulo{opacity:1}
 .vpilula{position:absolute;top:.8rem;left:.8rem;z-index:2;max-width:calc(100% - 1.6rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:.35rem .75rem;border-radius:999px;background:rgba(239,233,225,.85);color:#3b322b;font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;transition:opacity .4s}
 .vrodape{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:3.6rem 1rem 1rem;background:linear-gradient(to top,rgba(30,22,17,.72),rgba(30,22,17,0));pointer-events:none;transition:opacity .4s}
 .vrodape strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.05rem;line-height:1.2;color:#efe9e1}
@@ -381,11 +400,10 @@ p{margin:0 0 1rem}
 </section>
 
 <!-- ============ 01 SOBRE ============ -->
-<section class="secao secao--clara" id="sobre" aria-labelledby="titulo-sobre">
+<section class="secao sobre" id="sobre" aria-labelledby="titulo-sobre">
   <div class="wrap">
-    <div class="cabeca revela"><span class="num">01</span><h2 id="titulo-sobre" data-t="sobreTitulo">Sobre mim</h2><span class="rotulo" data-t="sobreRotulo">Prazer, Cris</span></div>
     <div class="sobre-grade">
-      <div class="revela">
+      <div class="sobre-foto revela">
         <!-- FOTO DO SOBRE: suba a foto no GitHub (ex.: sobre.jpg) e troque o div abaixo por
              <div class="midia midia--4x5"><img src="sobre.jpg" alt="Cristiane em casa gravando conteúdo" loading="lazy"></div> -->
         <div class="midia midia--4x5" role="img" aria-label="Espaço para foto da creator no dia a dia" data-t-aria="fotoSobreAria">
@@ -393,9 +411,11 @@ p{margin:0 0 1rem}
         </div>
       </div>
       <div class="sobre-texto revela">
-        <p class="abre" data-t="sobreAbre">Oi, eu sou a Cris. Crio conteúdo que parece conversa entre amigas e funciona como vitrine para a sua marca.</p>
-        <p data-t="sobreP1">Moro em Porto Alegre e transformo produtos em momentos que dão vontade de viver: o café da manhã caprichado, o skincare antes de dormir, a casa cheirosa no domingo. Já são mais de 400 vídeos e 200 marcas que confiaram no meu olhar.</p>
-        <p data-t="sobreP2">Cuido de cada detalhe, da luz ao roteiro, para que o seu produto apareça do jeito que ele merece: real, desejável e pronto para vender.</p>
+        <p class="sobre-etiqueta">01 / <span data-t="sobreTitulo">Sobre mim</span></p>
+        <h2 id="titulo-sobre" class="sobre-titulo"><span data-t="sobreOla">Olá, eu sou</span> <em data-t="sobreOlaDestaque">a Cris.</em></h2>
+        <p data-t="sobreP1">Sou criadora de conteúdo UGC e influenciadora, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: viajar, cozinhar, treinar, me cuidar e me vestir bem.</p>
+        <p><span data-t="sobreP2">Meu estilo é clássico e natural, basic not too basic, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
+        <p data-t="sobreP3">Mais de 400 vídeos e 200 marcas depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que tantas marcas voltam.</p>
         <ul class="promessas">
           <li><span>i</span><em style="font-style:normal" data-t="prom1">Roteiro aprovado por você antes de gravar</em></li>
           <li><span>ii</span><em style="font-style:normal" data-t="prom2">Uma rodada de ajuste inclusa em cada entrega</em></li>
@@ -543,9 +563,11 @@ const textos = {
     faixaAria: "Marcas com quem já trabalhei",
     sobreTitulo: "Sobre mim", sobreRotulo: "Prazer, Cris",
     fotoSobreAria: "Espaço para foto da creator no dia a dia", fotoSobreLegenda: "Foto lifestyle 4:5",
-    sobreAbre: "Oi, eu sou a Cris. Crio conteúdo que parece conversa entre amigas e funciona como vitrine para a sua marca.",
-    sobreP1: "Moro em Porto Alegre e transformo produtos em momentos que dão vontade de viver: o café da manhã caprichado, o skincare antes de dormir, a casa cheirosa no domingo. Já são mais de 400 vídeos e 200 marcas que confiaram no meu olhar.",
-    sobreP2: "Cuido de cada detalhe, da luz ao roteiro, para que o seu produto apareça do jeito que ele merece: real, desejável e pronto para vender.",
+    sobreOla: "Olá, eu sou", sobreOlaDestaque: "a Cris.",
+    sobreP1: "Sou criadora de conteúdo UGC e influenciadora, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: viajar, cozinhar, treinar, me cuidar e me vestir bem.",
+    sobreP2: "Meu estilo é clássico e natural, basic not too basic, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.",
+    sobreImpacto: "Parece indicação.",
+    sobreP3: "Mais de 400 vídeos e 200 marcas depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que tantas marcas voltam.",
     prom1: "Roteiro aprovado por você antes de gravar",
     prom2: "Uma rodada de ajuste inclusa em cada entrega",
     prom3: "Entrega em até 72 horas úteis",
@@ -583,9 +605,11 @@ const textos = {
     faixaAria: "Brands I have worked with",
     sobreTitulo: "About me", sobreRotulo: "Nice to meet you",
     fotoSobreAria: "Space for a lifestyle photo of the creator", fotoSobreLegenda: "Lifestyle photo 4:5",
-    sobreAbre: "Hi, I'm Cris. I create content that feels like a chat between friends and works as a showcase for your brand.",
-    sobreP1: "I live in Porto Alegre, Brazil, and turn products into moments people want to live: a lovely breakfast, a bedtime skincare ritual, a fresh smelling home on a Sunday. More than 400 videos and 200 brands have trusted my eye.",
-    sobreP2: "I take care of every detail, from lighting to script, so your product shows up the way it deserves: real, desirable and ready to sell.",
+    sobreOla: "Hi, I'm", sobreOlaDestaque: "Cris.",
+    sobreP1: "I'm a UGC creator and influencer from Porto Alegre, Brazil. I turned what I already lived into my profession: traveling, cooking, working out, taking care of myself and dressing well.",
+    sobreP2: "My style is classic and natural, basic not too basic, and I'm detail oriented about aesthetics: light, color, framing, every scene thought through. That is the care I bring to each product, placing it in a real, beautiful routine where it doesn't look like an ad.",
+    sobreImpacto: "It looks like a recommendation.",
+    sobreP3: "More than 400 videos and 200 brands later, I still believe the same thing: beautiful content only makes sense when it sells. Maybe that's why so many brands come back.",
     prom1: "Script approved by you before filming",
     prom2: "One round of revisions included in every delivery",
     prom3: "Delivery within 72 business hours",
@@ -934,21 +958,57 @@ function pausaTudo(exceto) {
   document.querySelectorAll("#categorias .vplayer--yt.tocando").forEach(caixa => {
     if (caixa === exceto) return;
     caixa.querySelector("iframe")?.remove();
-    caixa.classList.remove("tocando");
+    delete caixa.dataset.tocou;
+    caixa.classList.remove("tocando", "pausado", "toque");
+    const b = caixa.querySelector(".vplay");
+    b.setAttribute("aria-label", `${T("reproduzir")}: ${b.dataset.rotulo}`);
   });
 }
-/* Vídeo do YouTube: mostra a capa e só carrega o player quando a pessoa clica */
+/* Vídeo do YouTube com aparência de player próprio:
+   o player fica sem controles, mais alto que o quadro (as informações do YouTube ficam fora da área visível)
+   e quem controla play e pausa é o botão do site, por cima do vídeo. */
+function comandoYoutube(iframe, func) {
+  iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), "*");
+}
+window.addEventListener("message", (e) => {
+  if (!/youtube/.test(e.origin)) return;
+  let d; try { d = JSON.parse(e.data); } catch (x) { return; }
+  if (!d.info || d.info.playerState !== 1) return;
+  document.querySelectorAll("#categorias .vplayer--yt iframe").forEach(f => {
+    if (f.contentWindow !== e.source) return;
+    const caixa = f.parentElement;
+    caixa.dataset.tocou = "1";
+    caixa.classList.remove("toque", "pausado");
+  });
+});
 function ligaYoutube(caixa) {
   const botao = caixa.querySelector(".vplay");
   botao.addEventListener("click", () => {
+    const atual = caixa.querySelector("iframe");
+    if (atual) {
+      const pausar = !caixa.classList.contains("pausado");
+      if (!pausar) pausaTudo(caixa);
+      comandoYoutube(atual, pausar ? "pauseVideo" : "playVideo");
+      caixa.classList.toggle("pausado", pausar);
+      botao.setAttribute("aria-label", `${T(pausar ? "reproduzir" : "pausar")}: ${botao.dataset.rotulo}`);
+      return;
+    }
     pausaTudo(caixa);
+    const id = encodeURIComponent(caixa.dataset.yt);
     const f = document.createElement("iframe");
-    f.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(caixa.dataset.yt)}?autoplay=1&playsinline=1&rel=0&iv_load_policy=3`;
+    f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&controls=0&rel=0&playsinline=1&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&loop=1&playlist=${id}&enablejsapi=1&vq=hd1080&origin=${encodeURIComponent(location.origin)}`;
     f.title = botao.dataset.rotulo;
-    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
-    f.allowFullscreen = true;
+    f.tabIndex = -1;
+    f.allow = "autoplay; encrypted-media";
+    f.addEventListener("load", () => {
+      setTimeout(() => f.classList.add("pronto"), 1200);
+      /* acompanha se o vídeo começou; alguns celulares (iPhone) exigem um toque direto no vídeo */
+      f.contentWindow.postMessage(JSON.stringify({ event: "listening", id: caixa.dataset.yt }), "*");
+      setTimeout(() => { if (!caixa.dataset.tocou && f.isConnected) { caixa.classList.add("toque"); f.classList.add("pronto"); } }, 3500);
+    });
     caixa.appendChild(f);
     caixa.classList.add("tocando");
+    botao.setAttribute("aria-label", `${T("pausar")}: ${botao.dataset.rotulo}`);
   });
 }
 function ligaVideo(video) {
