@@ -255,6 +255,15 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 .destaques-total strong{font-family:var(--titulo);font-weight:400;font-size:clamp(3rem,7vw,5rem);line-height:1;color:#a9825f}
 .destaques-total span{font-size:1rem;color:#d8c3ac}
 
+/* Barra fixa de categorias */
+.barra-cat{position:fixed;top:68px;left:0;right:0;z-index:99;background:#efe9e1;border-bottom:1px solid #d9cfc3;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .3s,transform .3s,visibility .3s}
+.barra-cat.visivel{opacity:1;visibility:visible;transform:none}
+.barra-cat-links{display:flex;gap:2rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.barra-cat-links::-webkit-scrollbar{display:none}
+.barra-cat-links a{flex-shrink:0;padding:.85rem 0;white-space:nowrap;font-size:.64rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:#5f5044;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.barra-cat-links a:hover{color:#a9825f}
+.barra-cat-links a.ativo{color:#a9825f;border-bottom-color:#a9825f}
+
 /* Trabalhos: categorias com vídeos */
 .cat-abertura{margin-bottom:clamp(3.5rem,8vw,6rem)}
 .cat-etiqueta{display:flex;align-items:center;gap:1rem;margin:0 0 1.6rem;font-size:.72rem;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:#a9825f}
@@ -444,6 +453,9 @@ a.sobre-tag--marrom:hover{background:#a9825f}
     </div>
   </div>
 </header>
+
+<!-- BARRA FIXA DE CATEGORIAS (teste): para desligar, troque BARRA_CATEGORIAS para false no começo do script -->
+<nav class="barra-cat" id="barra-cat" aria-label="Categorias" data-t-aria="catLinksAria" hidden><div class="wrap barra-cat-links" id="barra-cat-links"></div></nav>
 
 <main id="conteudo">
 
@@ -773,13 +785,18 @@ const destaques = [
    Para trocar por um arquivo próprio, suba o MP4 na pasta videos do GitHub e acrescente:
    arquivo: "videos/beleza-01.mp4", capa: "videos/beleza-01.jpg"  (com arquivo, o site usa o MP4 no lugar do YouTube).
    Se faltar vídeo numa categoria, aparece um quadro bege escrito "Vídeo em breve". */
+/* BARRA FIXA DE CATEGORIAS: true liga, false desliga */
+const BARRA_CATEGORIAS = true;
+/* CAPAS PRÓPRIAS: suba a imagem na pasta capas do GitHub com o nome capas/<ID do vídeo>.jpg
+   e coloque o ID aqui. Exemplo: ["A5k4s6i9HQk", "ailKLJ6FEuI"]. Sem o ID aqui, o site usa a capa do YouTube. */
+const CAPAS_PROPRIAS = [];
 const VIDEOS_POR_CATEGORIA = 8; /* quantos vídeos aparecem em cada categoria */
 const categorias = [
   { chave: "beleza", nome: { pt: "Beleza", en: "Beauty" },
-    descricao: { pt: "Skincare, make leve e cuidados com um toque sofisticado e natural.", en: "Skincare, light makeup and self care with a sophisticated, natural touch." },
+    descricao: { pt: "Skincare, cabelo e make com um toque sofisticado e natural.", en: "Skincare, hair and makeup with a sophisticated, natural touch." },
     videos: [
-      { marca: "Agustin Fernandez", youtube: "https://youtube.com/shorts/874zx_g4C10" },
-      { marca: "Profuse", youtube: "https://youtube.com/shorts/cMijf_BG4WY" },
+      { marca: "Natura", youtube: "https://youtube.com/shorts/zD1hoDCzj6U" },
+      { marca: "D'Bianco", youtube: "https://youtube.com/shorts/bl-uVFPBCrQ" },
       { marca: "Aneethun", youtube: "https://youtube.com/shorts/z1HS9XDP_eM" },
       { marca: "Revlon", youtube: "https://youtube.com/shorts/9rv-USVCHTI" },
       { marca: "Smart GR", youtube: "https://youtube.com/shorts/XUV0xuQLdOk" },
@@ -803,11 +820,11 @@ const categorias = [
     descricao: { pt: "A rotina a dois, leve e real, com espaço para a sua marca.", en: "Life as a couple, light and real, with room for your brand." },
     videos: [
       { marca: "K&J Black", youtube: "https://youtube.com/shorts/zhJ0foMyo7I" },
-      { marca: "K&J Black", youtube: "https://youtube.com/shorts/yWzNE078sI4" },
       { marca: "Estar Mais", youtube: "https://youtube.com/shorts/_yr7nX7WdbM" },
+      { marca: "K&J Black", youtube: "https://youtube.com/shorts/yWzNE078sI4" },
       { marca: "Abelheiro", youtube: "https://youtube.com/shorts/6pFGVvTulfI" },
-      { marca: "K&J Black", youtube: "https://youtube.com/shorts/MAVEJIcUScY" },
       { marca: "Guará Plus", youtube: "https://youtube.com/shorts/TJdWO2m20SY" },
+      { marca: "K&J Black", youtube: "https://youtube.com/shorts/MAVEJIcUScY" },
       { marca: "Galiotto", youtube: "https://youtube.com/shorts/imqL-dXzgKw" },
       { marca: "K&J Black", youtube: "https://youtube.com/shorts/45I1OxfoQAs" }
     ] },
@@ -824,25 +841,25 @@ const categorias = [
       { marca: "Leg Gym", youtube: "https://youtube.com/shorts/irZMV3XC2x4" }
     ] },
   { chave: "casa", nome: { pt: "Casa e decoração", en: "Home and decor" },
-    descricao: { pt: "Ambientes, utensílios e detalhes que deixam a casa com cara de lar.", en: "Spaces, kitchenware and details that make a house feel like home." },
+    descricao: { pt: "Da decoração à limpeza: produtos que deixam a rotina da casa mais leve.", en: "From decor to cleaning: products that make home routines lighter." },
     videos: [
       { marca: "Hoomy", youtube: "https://youtube.com/shorts/y_ZItWQhn6o" },
-      { marca: "Cif", youtube: "https://youtube.com/shorts/dZwXdSeEuYk" },
-      { marca: "Vinagreen", youtube: "https://youtube.com/shorts/vLKvo1v6EaA" },
       { marca: "Colormaq", youtube: "https://youtube.com/shorts/kZCDDTGYTY4" },
-      { marca: "Coala", youtube: "https://youtube.com/shorts/00_qkUmpKQQ" },
+      { marca: "Cif", youtube: "https://youtube.com/shorts/dZwXdSeEuYk" },
       { marca: "AM Bordados", youtube: "https://youtube.com/shorts/Tkjm74T4MEw" },
+      { marca: "Vinagreen", youtube: "https://youtube.com/shorts/vLKvo1v6EaA" },
       { marca: "AM Bordados", youtube: "https://youtube.com/shorts/Vzx5y4TzXvM" },
+      { marca: "Coala", youtube: "https://youtube.com/shorts/00_qkUmpKQQ" },
       { marca: "Colormaq", youtube: "https://youtube.com/shorts/_nhPiQPW0X8" }
     ] },
   { chave: "culinaria", nome: { pt: "Culinária", en: "Cooking" },
-    descricao: { pt: "Receitas saudáveis e práticas, que dão vontade de provar.", en: "Healthy, practical recipes that make you want a taste." },
+    descricao: { pt: "Comidas, bebidas e utensílios que dão vontade de provar e brindar.", en: "Food, drinks and kitchenware that make you want to taste and toast." },
     videos: [
+      { marca: "Colormaq", youtube: "https://youtube.com/shorts/e1UV_eFa4h4" },
       { marca: "Nectar", youtube: "https://youtube.com/shorts/8mTcra2UhSs" },
+      { marca: "Galiotto", youtube: "https://youtube.com/shorts/XSTzZKnPi20" },
       { marca: "Andorinha", youtube: "https://youtube.com/shorts/2ftW_HKVlg4" },
       { marca: "Termolar", youtube: "https://youtube.com/shorts/_pb2l_smDfo" },
-      { marca: "Colormaq", youtube: "https://youtube.com/shorts/e1UV_eFa4h4" },
-      { marca: "Galiotto", youtube: "https://youtube.com/shorts/XSTzZKnPi20" },
       { marca: "Colormaq", youtube: "https://youtube.com/shorts/8z1hzUgrT8k" },
       { marca: "Luigi Limoncello", youtube: "https://youtube.com/shorts/OD-EN0c2sR4" },
       { marca: "Galiotto", youtube: "https://youtube.com/shorts/OLlSa90hbLQ" }
@@ -851,23 +868,23 @@ const categorias = [
     descricao: { pt: "Viagens, lugares e momentos vividos com a sua marca junto.", en: "Trips, places and moments lived with your brand along." },
     videos: [
       { marca: "Sam's Club", youtube: "https://youtube.com/shorts/CACU5ZyaB6U" },
-      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/sB6sbfN6wTw" },
-      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/VapJSU8yV5Y" },
       { marca: "Casa Vilemar", youtube: "https://youtube.com/shorts/6qB2m3ovgBg" },
+      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/sB6sbfN6wTw" },
       { marca: "Andy Cabelos", youtube: "https://youtube.com/shorts/NxxUqJpf4xE" },
       { marca: "Hotel Valle D'incanto", youtube: "https://youtube.com/shorts/U5cx2KKzQDw" },
+      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/VapJSU8yV5Y" },
       { marca: "Loja Sirius", youtube: "https://youtube.com/shorts/xG2Oj6HcpCU" },
       { marca: "Sam's Club", youtube: "https://youtube.com/shorts/ZX0PYCNYaAs" }
     ] },
   { chave: "tech", nome: { pt: "Tech, apps e educação", en: "Tech, apps and education" },
-    descricao: { pt: "Apps e serviços digitais explicados de um jeito simples e próximo.", en: "Apps and digital services explained in a simple, friendly way." },
+    descricao: { pt: "Apps, cursos e serviços explicados de um jeito simples e próximo.", en: "Apps, courses and services explained in a simple, friendly way." },
     videos: [
       { marca: "Gymnamic", youtube: "https://youtube.com/shorts/mwCP6ZbEJrc" },
       { marca: "Duo Gourmet", youtube: "https://youtube.com/shorts/7uKmJx0m3KM" },
       { marca: "Pitt Company", youtube: "https://youtube.com/shorts/A-lost1LVLQ" },
       { marca: "iFood", youtube: "https://youtube.com/shorts/2dpomLsC-P0" },
-      { marca: "Duo Gourmet", youtube: "https://youtube.com/shorts/OXIk3mdaFB8" },
       { marca: "TB Financial", youtube: "https://youtube.com/shorts/XdiDPC7Fa5I" },
+      { marca: "Duo Gourmet", youtube: "https://youtube.com/shorts/OXIk3mdaFB8" },
       { marca: "Inglês Sem Neura", youtube: "https://youtube.com/shorts/yD940WiulXs" },
       { marca: "TotalPass", youtube: "https://youtube.com/shorts/kQ64KmYQ4Yg" }
     ] }
@@ -1036,6 +1053,7 @@ document.querySelectorAll(".idioma").forEach(b => b.addEventListener("click", ()
 /* Categorias com vídeos próprios (tag video, sem player externo) */
 function renderizaCategorias(classeRevela) {
   $("#cat-links").innerHTML = categorias.map(c => `<a href="#cat-${c.chave}">${esc(tr(c.nome))}</a>`).join("");
+  $("#barra-cat-links").innerHTML = categorias.map(c => `<a href="#cat-${c.chave}" data-cat="${c.chave}">${esc(tr(c.nome))}</a>`).join("");
   $("#categorias").innerHTML = categorias.map((c, ci) => {
     const nome = tr(c.nome);
     const lista = c.videos.slice(0, VIDEOS_POR_CATEGORIA);
@@ -1046,7 +1064,7 @@ function renderizaCategorias(classeRevela) {
       const yt = !v.arquivo && v.youtube ? idDoYoutube(v.youtube) : "";
       if (!v.arquivo && !yt) return `<li><div class="vplayer sem-video" data-aviso="${esc(T("videoEmBreve"))}"></div></li>`;
       const midia = yt
-        ? `<img class="vposter" src="https://i.ytimg.com/vi/${esc(yt)}/oardefault.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1920">`
+        ? `<img class="vposter" src="${CAPAS_PROPRIAS.includes(yt) ? `capas/${esc(yt)}.jpg` : `https://i.ytimg.com/vi/${esc(yt)}/oardefault.jpg`}" data-capa="capas/${esc(yt)}.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${esc(yt)}/oardefault.jpg'" alt="" loading="lazy" decoding="async" width="1080" height="1920">`
         : `<video src="${esc(v.arquivo)}"${v.capa ? ` poster="${esc(v.capa)}"` : ""} preload="metadata" playsinline></video>`;
       return `
         <li>
@@ -1060,7 +1078,6 @@ function renderizaCategorias(classeRevela) {
     }).join("");
     return `
       <article class="categoria ${classeRevela}" id="cat-${c.chave}" aria-labelledby="cat-${c.chave}-titulo">
-        <p class="cat-num">${String(ci + 1).padStart(2, "0")} / ${esc(T("catNum"))}</p>
         <div class="cat-topo">
           <h3 id="cat-${c.chave}-titulo">${esc(nome)}</h3>
           <p class="cat-desc">${esc(tr(c.descricao))}</p>
@@ -1162,7 +1179,7 @@ function ligaYoutube(caixa) {
         if (caixa.querySelector("iframe")) return;
         criaPlayerYoutube(caixa, true);
         caixa.classList.add("previa");
-      }, 250);
+      }, 300);
     });
     caixa.addEventListener("mouseleave", () => { clearTimeout(espera); tiraPreviaYoutube(caixa); });
   }
@@ -1204,6 +1221,45 @@ function ligaVideo(video) {
     else video.pause();
   });
 }
+
+/* Barra fixa de categorias: aparece depois da capa, destaca a categoria da tela e rola descontando as barras */
+(function () {
+  const barra = $("#barra-cat");
+  if (!BARRA_CATEGORIAS || !barra) return;
+  barra.hidden = false;
+  document.documentElement.classList.add("com-barra-cat");
+  const alturaBarras = () => $(".topo").offsetHeight + (barra.classList.contains("visivel") ? barra.offsetHeight : barra.offsetHeight);
+  const vaiPara = (id) => {
+    const alvo = document.getElementById(id);
+    if (!alvo) return;
+    const y = alvo.getBoundingClientRect().top + scrollY - alturaBarras() - 16;
+    window.scrollTo({ top: y, behavior: semMovimento ? "auto" : "smooth" });
+  };
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('#barra-cat-links a, #cat-links a');
+    if (!a) return;
+    e.preventDefault();
+    vaiPara(a.getAttribute("href").slice(1));
+  });
+  let pedido = false;
+  const atualiza = () => {
+    pedido = false;
+    const capa = $("#inicio");
+    barra.classList.toggle("visivel", capa.getBoundingClientRect().bottom < $(".topo").offsetHeight);
+    const limite = alturaBarras() + 40;
+    let atual = null;
+    document.querySelectorAll("#categorias .categoria").forEach(c => { if (c.getBoundingClientRect().top <= limite) atual = c.id.replace("cat-", ""); });
+    const fim = $("#categorias").getBoundingClientRect().bottom < limite;
+    barra.querySelectorAll("a").forEach(a => {
+      const ativo = !fim && a.dataset.cat === atual;
+      a.classList.toggle("ativo", ativo);
+      if (ativo && barra.dataset.ativo !== atual) a.scrollIntoView({ block: "nearest", inline: "center" });
+    });
+    barra.dataset.ativo = fim ? "" : (atual || "");
+  };
+  window.addEventListener("scroll", () => { if (!pedido) { pedido = true; requestAnimationFrame(atualiza); } }, { passive: true });
+  atualiza();
+})();
 
 /* Entrada suave ao rolar + contador */
 if (semMovimento || !("IntersectionObserver" in window)) {
