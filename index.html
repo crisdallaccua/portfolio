@@ -309,6 +309,40 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .contato-escuro .contato-ok h3{color:#efe9e1}
 .contato-escuro .contato-ok p{color:#d8c3ac}
 .contato-escuro .contato-ok .rotulo{color:#a9825f}
+/* Serviços: cards */
+#servicos.serv-secao{background:#efe9e1}
+#servicos .depo-linha{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
+#servicos .cat-titulo{margin:0;max-width:none}
+#servicos .depo-canto{margin:0 0 .5rem;max-width:19rem;text-align:right;font-family:var(--corpo);font-size:.85rem;font-weight:300;line-height:1.6;color:#5f5044}
+.serv-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch;list-style:none;margin:clamp(2.5rem,5vw,3.5rem) 0 0;padding:0}
+.serv-card{display:flex;flex-direction:column;align-items:flex-start;padding:28px;border-radius:12px;background:rgba(216,195,172,.22);border:1px solid #d9cfc3;box-sizing:border-box}
+.serv-card h3{margin:0 0 .8rem;font-family:var(--titulo);font-weight:400;font-size:1.45rem;line-height:1.2;color:#3b322b}
+.serv-card p{margin:0 0 1.3rem;font-family:var(--corpo);font-size:.92rem;font-weight:300;line-height:1.65;color:#5f5044}
+.serv-selo{margin:0 0 1.1rem;padding:.4rem .65rem;border-radius:4px;background:#a9825f;color:#efe9e1;font-family:var(--corpo);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;line-height:1}
+.serv-tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0 0 1.6rem;padding:0}
+.serv-tags li{padding:.38rem .7rem;border:1px solid #d9cfc3;border-radius:999px;font-family:var(--corpo);font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:#5f5044;line-height:1}
+.serv-btn{margin-top:auto;display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.2rem;border:1px solid #3b322b;border-radius:4px;color:#3b322b;font-family:var(--corpo);font-size:.68rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s,border-color .3s}
+.serv-btn:hover{background:#3b322b;color:#efe9e1}
+.serv-card--destaque{background:#3b322b;border-color:#3b322b}
+.serv-card--destaque h3{color:#efe9e1}
+.serv-card--destaque p{color:#d8c3ac}
+.serv-card--destaque .serv-tags li{border-color:#5f5044;color:#d8c3ac}
+.serv-card--destaque .serv-btn{background:#a9825f;border-color:#a9825f;color:#efe9e1}
+.serv-card--destaque .serv-btn:hover{background:#efe9e1;border-color:#efe9e1;color:#3b322b}
+.serv-pacote{display:flex;align-items:center;justify-content:space-between;gap:2rem;margin-top:16px;padding:clamp(1.5rem,3vw,2.2rem) clamp(1.5rem,3vw,2.4rem);border:1px solid #d9cfc3;border-radius:12px}
+.serv-pacote h3{margin:0 0 .4rem;font-family:var(--titulo);font-weight:400;font-size:1.4rem;color:#3b322b}
+.serv-pacote p{margin:0;font-family:var(--corpo);font-size:.92rem;font-weight:300;line-height:1.6;color:#5f5044}
+.serv-pacote a{flex-shrink:0;padding-bottom:.35rem;border-bottom:1px solid #a9825f;font-family:var(--corpo);font-size:.72rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#3b322b;text-decoration:none;white-space:nowrap;transition:color .3s}
+.serv-pacote a:hover{color:#a9825f}
+@media (max-width:1100px){.serv-cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){
+  #servicos .depo-linha{flex-direction:column;align-items:flex-start;gap:1rem}
+  #servicos .depo-canto{text-align:left;margin:0}
+  .serv-cards{grid-template-columns:1fr}
+  .serv-card{padding:24px}
+  .serv-pacote{flex-direction:column;align-items:flex-start;gap:1.2rem}
+}
+
 /* Processo (fundo escuro) */
 .processo-escuro{background:#3b322b;padding:clamp(5rem,11vw,9rem) 0}
 .processo-escuro .depo-linha{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
@@ -384,7 +418,7 @@ html.lb-aberto{overflow:hidden}
 #numeros.depo-secao{background:#efe9e1;overflow:hidden}
 #numeros .metrica strong{color:#a9825f}
 #numeros .metrica .rotulo{color:#5f5044}
-#numeros .depo-cabeca{margin-top:clamp(4rem,8vw,6rem)}
+#numeros .depo-cabeca{margin-top:0}
 #numeros .depo-cabeca .cat-titulo{margin:0;max-width:none}
 #numeros .depo-linha{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
 #numeros .depo-canto{margin:0 0 .5rem;max-width:19rem;text-align:right;font-family:var(--corpo);font-size:.85rem;font-weight:300;line-height:1.6;color:#5f5044}
@@ -789,7 +823,6 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
 <!-- ============ 05 NÚMEROS E DEPOIMENTOS ============ -->
 <section class="secao depo-secao" id="numeros" aria-labelledby="titulo-numeros">
   <div class="wrap">
-    <div class="metricas revela" id="lista-metricas"></div>
     <div class="depo-cabeca revela">
       <p class="cat-etiqueta" data-t="depoEtiqueta">Depoimentos</p>
       <div class="depo-linha">
@@ -825,10 +858,23 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
 </section>
 
 <!-- ============ 04 SERVIÇOS ============ -->
-<section class="secao" id="servicos" aria-labelledby="titulo-servicos">
+<section class="secao serv-secao" id="servicos" aria-labelledby="titulo-servicos">
   <div class="wrap">
-    <div class="cabeca revela"><span class="num">04</span><h2 id="titulo-servicos" data-t="servTitulo">Como eu te ajudo</h2><span class="rotulo" data-t="servRotulo">Serviços</span></div>
-    <ul class="servicos" id="lista-servicos"></ul>
+    <div class="serv-cabeca revela">
+      <p class="cat-etiqueta" data-t="servEtiqueta">Serviços</p>
+      <div class="depo-linha">
+        <h2 id="titulo-servicos" class="cat-titulo"><span data-t="servTitulo1">Como eu</span> <em data-t="servTitulo2">te ajudo.</em></h2>
+        <p class="depo-canto" data-t="servCanto">Escolha o formato ideal para o momento da sua marca.</p>
+      </div>
+    </div>
+    <ul class="serv-cards" id="lista-servicos"></ul>
+    <div class="serv-pacote revela">
+      <div>
+        <h3 data-t="pacoteTitulo">Precisa de conteúdo todo mês?</h3>
+        <p data-t="pacoteTexto">Monto um pacote recorrente para a sua marca, com calendário e prioridade na agenda.</p>
+      </div>
+      <a href="https://wa.me/5551996627564?text=Ol%C3%A1%2C%20Cris!%20Tenho%20interesse%20em%20um%20pacote%20mensal%20de%20conte%C3%BAdo." target="_blank" rel="noopener"><span data-t="pacoteLink">Montar meu pacote</span> <span aria-hidden="true">↗</span></a>
+    </div>
   </div>
 </section>
 
@@ -951,7 +997,8 @@ const textos = {
     destTitulo: "Conteúdos de destaque", destRotulo: "Os que mais rodaram", destEtiqueta: "Destaques", destTitulo1: "Conteúdos que", destTitulo2: "mais rodaram.", destTotal: "+2,2M", destTotalTxt: "views somadas só nestes três vídeos",
     assistir: "Assistir", capaVideo: "Capa do vídeo 9:16", capaQuadrada: "Capa 1:1", para: "para",
     trabTitulo: "Trabalhos por nicho", trabRotulo: "Filtre pelo seu", filtrosAria: "Filtrar trabalhos por nicho", todos: "Todos",
-    servTitulo: "Como eu te ajudo", servRotulo: "Serviços",
+    servTitulo: "Como eu te ajudo", servRotulo: "Serviços", servEtiqueta: "Serviços", servTitulo1: "Como eu", servTitulo2: "te ajudo.", servCanto: "Escolha o formato ideal para o momento da sua marca.", servMaisPedido: "Mais pedido", servQuero: "Quero esse",
+    pacoteTitulo: "Precisa de conteúdo todo mês?", pacoteTexto: "Monto um pacote recorrente para a sua marca, com calendário e prioridade na agenda.", pacoteLink: "Montar meu pacote",
     numTitulo: "Números e depoimentos", numRotulo: "Resultado que aparece",
     procEtiqueta: "Processo", procTitulo1: "Como funciona", procTitulo2: "a parceria.", procCanto: "Um processo leve e organizado, em parceria com a sua marca do começo ao fim.",
     proc1Nome: "Briefing", proc1Frase: "Entender a sua marca.", proc1Desc: "Objetivo da campanha, público, tom e referências. Tudo alinhado e com contrato assinado.",
@@ -1011,7 +1058,8 @@ const textos = {
     destTitulo: "Featured content", destRotulo: "My top performers", destEtiqueta: "Highlights", destTitulo1: "Content that", destTitulo2: "performed best.", destTotal: "+2.2M", destTotalTxt: "combined views on these three videos alone",
     assistir: "Watch", capaVideo: "Video cover 9:16", capaQuadrada: "Cover 1:1", para: "for",
     trabTitulo: "Work by niche", trabRotulo: "Filter by yours", filtrosAria: "Filter work by niche", todos: "All",
-    servTitulo: "How I can help", servRotulo: "Services",
+    servTitulo: "How I can help", servRotulo: "Services", servEtiqueta: "Services", servTitulo1: "How I", servTitulo2: "can help.", servCanto: "Choose the right format for where your brand is right now.", servMaisPedido: "Most requested", servQuero: "I want this",
+    pacoteTitulo: "Need content every month?", pacoteTexto: "I put together a recurring package for your brand, with a content calendar and priority booking.", pacoteLink: "Build my package",
     numTitulo: "Numbers and testimonials", numRotulo: "Results that show",
     procEtiqueta: "Process", procTitulo1: "How the", procTitulo2: "partnership works.", procCanto: "A light, organized process, working with your brand from start to finish.",
     proc1Nome: "Briefing", proc1Frase: "Understand your brand.", proc1Desc: "Campaign goal, audience, tone and references. Everything aligned, with a signed contract.",
@@ -1180,24 +1228,22 @@ const categorias = [
 
 /* Serviços (seis) */
 const servicos = [
-  { titulo: { pt: "Vídeo UGC", en: "UGC video" },
-    descricao: { pt: "Vídeo vertical gravado por mim, com roteiro, gancho forte e a cara da sua marca, pronto para usar onde quiser.",
-                 en: "A vertical video filmed by me, with a script, a strong hook and your brand's look, ready to use wherever you want." } },
-  { titulo: { pt: "Corte para anúncio", en: "Ad cuts" },
-    descricao: { pt: "Versões curtas do mesmo vídeo, com ganchos diferentes, para testar no tráfego pago e descobrir o que vende mais.",
-                 en: "Short versions of the same video with different hooks, to test in paid ads and find out what sells best." } },
-  { titulo: { pt: "Fotos do produto", en: "Product photos" },
-    descricao: { pt: "Fotos lifestyle com luz natural e composição limpa, para site, loja virtual e redes sociais.",
-                 en: "Lifestyle photos with natural light and clean composition, for your website, online store and social media." } },
-  { titulo: { pt: "Unboxing", en: "Unboxing" },
-    descricao: { pt: "A primeira impressão do produto em vídeo: embalagem, textura e reação verdadeira, do jeito que o público confia.",
-                 en: "The first impression of your product on video: packaging, texture and a genuine reaction, the way audiences trust." } },
-  { titulo: { pt: "Publicação no meu perfil", en: "Post on my profile" },
-    descricao: { pt: "Seu conteúdo publicado no @crisdallaccua, em collab ou não, para alcançar quem já acompanha a minha rotina.",
-                 en: "Your content posted on @crisdallaccua, as a collab or not, to reach the people who already follow my routine." } },
-  { titulo: { pt: "Pacote mensal", en: "Monthly package" },
-    descricao: { pt: "Uma quantidade fixa de vídeos por mês, com calendário e prioridade na agenda, para a sua marca nunca ficar sem conteúdo.",
-                 en: "A fixed number of videos per month, with a content calendar and priority booking, so your brand never runs out of content." } }
+  { titulo: { pt: "Vídeos UGC", en: "UGC videos" }, destaque: true,
+    descricao: { pt: "Vídeos naturais e bonitos, com roteiro e gancho forte, prontos para o orgânico e para anúncios.",
+                 en: "Natural, beautiful videos with a script and a strong hook, ready for organic posts and ads." },
+    tags: { pt: ["Review", "Unboxing", "Uso real"], en: ["Review", "Unboxing", "Real use"] } },
+  { titulo: { pt: "Criativos para anúncio", en: "Ad creatives" },
+    descricao: { pt: "Versões do mesmo vídeo com ganchos diferentes, para testar no tráfego e descobrir o que mais vende.",
+                 en: "Versions of the same video with different hooks, to test in paid traffic and find out what sells best." },
+    tags: { pt: ["Meta", "TikTok", "Testes A/B"], en: ["Meta", "TikTok", "A/B tests"] } },
+  { titulo: { pt: "Fotos de produto", en: "Product photos" },
+    descricao: { pt: "Fotos lifestyle com luz natural e composição limpa, para site, loja virtual e redes.",
+                 en: "Lifestyle photos with natural light and clean composition, for your website, online store and social media." },
+    tags: { pt: ["Lifestyle", "Produto", "E-commerce"], en: ["Lifestyle", "Product", "E-commerce"] } },
+  { titulo: { pt: "Publi no meu perfil", en: "Post on my profile" },
+    descricao: { pt: "Sua marca no @crisdallaccua, falando com quem já acompanha a minha rotina.",
+                 en: "Your brand on @crisdallaccua, talking to the people who already follow my routine." },
+    tags: { pt: ["Reels", "Stories", "Collab"], en: ["Reels", "Stories", "Collab"] } }
 ];
 
 /* Métricas com contador (quatro)
@@ -1218,7 +1264,7 @@ const fotos = [
   { arquivo: "05-beleza-rildy-cabelo.jpg",   nicho: { pt: "Beleza", en: "Beauty" } },
   { arquivo: "06-moda-salto.jpg",            nicho: { pt: "Moda", en: "Fashion" } },
   { arquivo: "07-fitness-cafe.jpg",          nicho: { pt: "Fitness", en: "Fitness" } },
-  { arquivo: "08-lifestyle-drink.jpg",       nicho: { pt: "Lifestyle", en: "Lifestyle" } },
+  { arquivo: "08-gastronomia-doce.jpg",      nicho: { pt: "Gastronomia", en: "Food" } },
   { arquivo: "09-beleza-karite.jpg",         nicho: { pt: "Beleza", en: "Beauty" } }
 ];
 
@@ -1317,11 +1363,18 @@ function renderiza() {
 
   renderizaCategorias(revela);
 
-  $("#lista-servicos").innerHTML = servicos.map((s, i) => `
-    <li class="servico ${revela}"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${esc(tr(s.titulo))}</h3><p>${esc(tr(s.descricao))}</p></li>`).join("");
+  /* o botão "Quero esse" abre o WhatsApp com o nome do serviço (sempre em português, para a Cris) */
+  $("#lista-servicos").innerHTML = servicos.map(s => `
+    <li class="serv-card${s.destaque ? " serv-card--destaque" : ""} ${revela}">
+      ${s.destaque ? `<span class="serv-selo">${esc(T("servMaisPedido"))}</span>` : ""}
+      <h3>${esc(tr(s.titulo))}</h3>
+      <p>${esc(tr(s.descricao))}</p>
+      <ul class="serv-tags">${tr(s.tags).map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <a class="serv-btn" href="https://wa.me/5551996627564?text=${encodeURIComponent("Olá, Cris! Tenho interesse em: " + s.titulo.pt)}" target="_blank" rel="noopener">${esc(T("servQuero"))} <span aria-hidden="true">↗</span></a>
+    </li>`).join("");
 
   const mostraFinal = semMovimento || contadoresAnimados;
-  $("#lista-metricas").innerHTML = metricas.map(m => `
+  if ($("#lista-metricas")) $("#lista-metricas").innerHTML = metricas.map(m => `
     <div class="metrica"><strong data-alvo="${m.alvo}" data-casas="${m.casas}" data-antes="${esc(m.antes)}" data-depois="${esc(m.depois)}">${esc(m.antes)}${formata(mostraFinal ? m.alvo : 0, m.casas)}${esc(m.depois)}</strong><span class="rotulo">${esc(tr(m.rotulo))}</span></div>`).join("");
   const cardDepo = (d, copia) => `
     <li class="depo-card"${copia ? ' aria-hidden="true"' : ""}><span class="depo-estrelas" aria-label="5 estrelas">★★★★★</span><blockquote>“${esc(d.texto)}”</blockquote><div class="depo-pe"><strong>${esc(d.marca)}</strong><span><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(T("depoVerificada"))}</span></div></li>`;
@@ -1678,7 +1731,7 @@ if (semMovimento || !("IntersectionObserver" in window)) {
       obsNum.unobserve(en.target);
     });
   }, { threshold: 0.4 });
-  obsNum.observe($("#lista-metricas"));
+  if ($("#lista-metricas")) obsNum.observe($("#lista-metricas"));
 }
 
 /* Menu sanduíche */
