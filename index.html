@@ -208,6 +208,7 @@ p{margin:0 0 1rem}
 .vplayer.toque .vplay{pointer-events:none}
 .vplayer--yt.tocando{background:#000}
 .tocando.pausado .circulo{opacity:1}
+.previa .circulo{opacity:0}
 .vpilula{position:absolute;top:.8rem;left:.8rem;z-index:2;max-width:calc(100% - 1.6rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:.35rem .75rem;border-radius:999px;background:rgba(239,233,225,.85);color:#3b322b;font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;transition:opacity .4s}
 .vrodape{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:3.6rem 1rem 1rem;background:linear-gradient(to top,rgba(30,22,17,.72),rgba(30,22,17,0));pointer-events:none;transition:opacity .4s}
 .vrodape strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.05rem;line-height:1.2;color:#efe9e1}
@@ -921,7 +922,7 @@ function renderizaCategorias(classeRevela) {
       const yt = !v.arquivo && v.youtube ? idDoYoutube(v.youtube) : "";
       if (!v.arquivo && !yt) return `<li><div class="vplayer sem-video" data-aviso="${esc(T("videoEmBreve"))}"></div></li>`;
       const midia = yt
-        ? `<img class="vposter" src="https://i.ytimg.com/vi/${esc(yt)}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">`
+        ? `<img class="vposter" src="https://i.ytimg.com/vi/${esc(yt)}/oardefault.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1920">`
         : `<video src="${esc(v.arquivo)}"${v.capa ? ` poster="${esc(v.capa)}"` : ""} preload="metadata" playsinline></video>`;
       return `
         <li>
@@ -964,8 +965,8 @@ function pausaTudo(exceto) {
 /* Vídeo do YouTube com aparência de player próprio:
    o player fica sem controles, mais alto que o quadro (as informações do YouTube ficam fora da área visível)
    e quem controla play e pausa é o botão do site, por cima do vídeo. */
-function comandoYoutube(iframe, func) {
-  iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), "*");
+function comandoYoutube(iframe, func, args = []) {
+  iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args }), "*");
 }
 window.addEventListener("message", (e) => {
   if (!/youtube/.test(e.origin)) return;
@@ -978,11 +979,50 @@ window.addEventListener("message", (e) => {
     caixa.classList.remove("toque", "pausado");
   });
 });
+function criaPlayerYoutube(caixa, mudo) {
+  const id = encodeURIComponent(caixa.dataset.yt);
+  const f = document.createElement("iframe");
+  f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1${mudo ? "&mute=1" : ""}&controls=0&rel=0&playsinline=1&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&loop=1&playlist=${id}&enablejsapi=1&vq=hd1080&origin=${encodeURIComponent(location.origin)}`;
+  f.title = caixa.querySelector(".vplay").dataset.rotulo;
+  f.tabIndex = -1;
+  f.setAttribute("aria-hidden", "true");
+  f.allow = "autoplay; encrypted-media";
+  f.addEventListener("load", () => {
+    /* acompanha o estado do vídeo; a imagem de capa só sai quando o vídeo já está rodando */
+    f.contentWindow.postMessage(JSON.stringify({ event: "listening", id: caixa.dataset.yt }), "*");
+    setTimeout(() => f.classList.add("pronto"), 1200);
+    /* alguns celulares (iPhone) exigem um toque direto no vídeo para tocar com som */
+    if (!mudo) setTimeout(() => { if (!caixa.dataset.tocou && f.isConnected) { caixa.classList.add("toque"); f.classList.add("pronto"); } }, 3500);
+  });
+  caixa.appendChild(f);
+  return f;
+}
+function tiraPreviaYoutube(caixa) {
+  if (!caixa.classList.contains("previa") || caixa.classList.contains("tocando")) return;
+  caixa.querySelector("iframe")?.remove();
+  delete caixa.dataset.tocou;
+  caixa.classList.remove("previa");
+}
 function ligaYoutube(caixa) {
   const botao = caixa.querySelector(".vplay");
+
+  /* Prévia no mudo: no computador, o vídeo começa a rodar sem som quando o mouse passa por cima */
+  if (!semMovimento && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    let espera;
+    caixa.addEventListener("mouseenter", () => {
+      if (caixa.querySelector("iframe")) return;
+      espera = setTimeout(() => {
+        if (caixa.querySelector("iframe")) return;
+        criaPlayerYoutube(caixa, true);
+        caixa.classList.add("previa");
+      }, 250);
+    });
+    caixa.addEventListener("mouseleave", () => { clearTimeout(espera); tiraPreviaYoutube(caixa); });
+  }
+
   botao.addEventListener("click", () => {
     const atual = caixa.querySelector("iframe");
-    if (atual) {
+    if (atual && caixa.classList.contains("tocando")) {
       const pausar = !caixa.classList.contains("pausado");
       if (!pausar) pausaTudo(caixa);
       comandoYoutube(atual, pausar ? "pauseVideo" : "playVideo");
@@ -991,19 +1031,17 @@ function ligaYoutube(caixa) {
       return;
     }
     pausaTudo(caixa);
-    const id = encodeURIComponent(caixa.dataset.yt);
-    const f = document.createElement("iframe");
-    f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&controls=0&rel=0&playsinline=1&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&loop=1&playlist=${id}&enablejsapi=1&vq=hd1080&origin=${encodeURIComponent(location.origin)}`;
-    f.title = botao.dataset.rotulo;
-    f.tabIndex = -1;
-    f.allow = "autoplay; encrypted-media";
-    f.addEventListener("load", () => {
-      setTimeout(() => f.classList.add("pronto"), 1200);
-      /* acompanha se o vídeo começou; alguns celulares (iPhone) exigem um toque direto no vídeo */
-      f.contentWindow.postMessage(JSON.stringify({ event: "listening", id: caixa.dataset.yt }), "*");
-      setTimeout(() => { if (!caixa.dataset.tocou && f.isConnected) { caixa.classList.add("toque"); f.classList.add("pronto"); } }, 3500);
-    });
-    caixa.appendChild(f);
+    if (atual) {
+      /* a prévia vira o player: volta ao começo e liga o som */
+      comandoYoutube(atual, "seekTo", [0, true]);
+      comandoYoutube(atual, "unMute");
+      comandoYoutube(atual, "setVolume", [100]);
+      comandoYoutube(atual, "playVideo");
+      atual.classList.add("pronto");
+      caixa.classList.remove("previa");
+    } else {
+      criaPlayerYoutube(caixa, false);
+    }
     caixa.classList.add("tocando");
     botao.setAttribute("aria-label", `${T("pausar")}: ${botao.dataset.rotulo}`);
   });
