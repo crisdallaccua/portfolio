@@ -330,12 +330,6 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .proc-anima .proc-etapa:nth-child(2){transition-delay:.6s}
 .proc-anima .proc-etapa:nth-child(3){transition-delay:1s}
 .proc-anima .proc-etapa:nth-child(4){transition-delay:1.4s}
-.proc-garantias{margin-top:clamp(3.5rem,7vw,5rem);padding-top:clamp(2rem,4vw,2.8rem);border-top:1px solid #5f5044;text-align:center}
-.proc-garantias ul{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem clamp(1.5rem,4vw,3.5rem);list-style:none;margin:0;padding:0}
-.proc-garantias li{display:flex;align-items:center;gap:.6rem;font-family:var(--corpo);font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#efe9e1}
-.proc-garantias svg{color:#a9825f;flex-shrink:0}
-.proc-cta{display:inline-flex;align-items:center;justify-content:center;margin-top:2.4rem;padding:1.05rem 2.4rem;border-radius:4px;background:#a9825f;color:#efe9e1;font-family:var(--corpo);font-size:.75rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s}
-.proc-cta:hover{background:#efe9e1;color:#3b322b}
 @media (max-width:900px){
   .proc-trilho{grid-template-columns:repeat(2,1fr);row-gap:3rem}
   .proc-trilho::before{display:none}
@@ -350,8 +344,6 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
   .proc-etapa:not(:last-child)::after{content:"";position:absolute;left:24px;top:48px;bottom:0;width:1px;background:#5f5044}
   .proc-nome{margin:.9rem 0 .5rem}
   .proc-desc{max-width:none}
-  .proc-garantias ul{flex-direction:column;align-items:flex-start;gap:1rem;text-align:left}
-  .proc-cta{display:flex;width:100%;box-sizing:border-box}
 }
 
 /* Fotografia: galeria e lightbox */
@@ -829,14 +821,6 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
         <li class="proc-etapa"><span class="proc-num">03</span><div class="proc-texto"><p class="proc-nome" data-t="proc3Nome"></p><h3 class="proc-frase" data-t="proc3Frase"></h3><p class="proc-desc" data-t="proc3Desc"></p></div></li>
         <li class="proc-etapa"><span class="proc-num">04</span><div class="proc-texto"><p class="proc-nome" data-t="proc4Nome"></p><h3 class="proc-frase" data-t="proc4Frase"></h3><p class="proc-desc" data-t="proc4Desc"></p></div></li>
     </ol>
-    <div class="proc-garantias revela">
-      <ul>
-        <li><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="procGar1">Roteiro aprovado antes de gravar</span></li>
-        <li><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="procGar2">Uma rodada de ajuste inclusa</span></li>
-        <li><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="procGar3">Entrega com foto de capa</span></li>
-      </ul>
-      <a class="proc-cta" href="#contato" data-t="btnFalar">Falar comigo</a>
-    </div>
   </div>
 </section>
 
@@ -974,7 +958,6 @@ const textos = {
     proc2Nome: "Roteiro", proc2Frase: "Pensar cada cena.", proc2Desc: "Escrevo o roteiro e envio para sua aprovação, ou gravo a partir do roteiro da sua marca.",
     proc3Nome: "Gravação", proc3Frase: "Dar vida ao produto.", proc3Desc: "Com o produto em mãos, gravo e edito com cuidado de luz, cenário, áudio e estética.",
     proc4Nome: "Entrega", proc4Frase: "Pronto para vender.", proc4Desc: "Vídeos em alta resolução pelo Google Drive, com foto de capa, no prazo combinado.",
-    procGar1: "Roteiro aprovado antes de gravar", procGar2: "Uma rodada de ajuste inclusa", procGar3: "Entrega com foto de capa",
     fotosEtiqueta: "Fotografia", fotosTitulo1: "Fotos com", fotosTitulo2: "bom gosto.", fotosCanto: "Fotos lifestyle e de produto, com luz natural e composição pensada. Clique para ver de perto.", fotosBarra: "Fotos", lbFechar: "Fechar", lbAnterior: "Foto anterior", lbProxima: "Próxima foto", fotoAmpliar: "Ver de perto",
     depoEtiqueta: "Depoimentos", depoTitulo1: "O que dizem", depoTitulo2: "as marcas.", depoVerificada: "Avaliação verificada", depoCanto: "Avaliações reais de marcas que viram o produto virar desejo.",
     depoSelo: '<b>45</b> avaliações <i>·</i> <b>★ 5,0</b> de média <i>·</i> auditadas na plataforma Seu Influencer',
@@ -1035,7 +1018,6 @@ const textos = {
     proc2Nome: "Script", proc2Frase: "Think through every scene.", proc2Desc: "I write the script and send it for your approval, or I film from your brand's script.",
     proc3Nome: "Filming", proc3Frase: "Bring the product to life.", proc3Desc: "With the product in hand, I film and edit with care for light, setting, audio and aesthetics.",
     proc4Nome: "Delivery", proc4Frase: "Ready to sell.", proc4Desc: "High-resolution videos via Google Drive, with a cover photo, on the agreed deadline.",
-    procGar1: "Script approved before filming", procGar2: "One round of edits included", procGar3: "Delivered with a cover photo",
     fotosEtiqueta: "Photography", fotosTitulo1: "Photos with", fotosTitulo2: "good taste.", fotosCanto: "Lifestyle and product photos, with natural light and thoughtful composition. Click to see up close.", fotosBarra: "Photos", lbFechar: "Close", lbAnterior: "Previous photo", lbProxima: "Next photo", fotoAmpliar: "See up close",
     depoEtiqueta: "Testimonials", depoTitulo1: "What brands", depoTitulo2: "are saying.", depoVerificada: "Verified review", depoCanto: "Real reviews from brands that watched their product become desire.",
     depoSelo: '<b>45</b> reviews <i>·</i> <b>★ 5.0</b> average <i>·</i> audited on the Seu Influencer platform',
