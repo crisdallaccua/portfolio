@@ -154,17 +154,45 @@ p{margin:0 0 1rem}
 
 /* Sobre mim (paleta Caramelo) */
 .sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1}
+.sobre .sobre-grade{align-items:stretch}
 .sobre-etiqueta{margin:0 0 1.2rem;font-size:.72rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:#a9825f}
 .sobre-titulo{font-size:clamp(2.2rem,4.8vw,3.8rem);line-height:1.1;color:#3b322b;margin:0 0 2rem}
 .sobre-titulo em{font-style:italic;color:#a9825f}
-.sobre-foto img{object-position:50% 45%}
 .sobre .sobre-texto p{line-height:1.85;margin:0 0 1.4rem}
-.sobre-impacto{font-family:var(--titulo);font-size:1.25em;color:#3b322b;white-space:nowrap}
-.sobre .promessas li span{color:#a9825f}
-.sobre-foto{position:relative}
-.sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;z-index:0}
-.sobre-foto .midia{position:relative;z-index:1}
-.sobre-foto img{filter:sepia(.12) saturate(1.05)}
+.sobre .sobre-texto strong{font-weight:500;color:#3b322b}
+.sobre-impacto{font-family:var(--titulo);font-size:1.25em;color:#a9825f;white-space:nowrap}
+/* foto: mesma altura do texto, recortada para a pessoa ficar em destaque */
+.sobre-foto{position:relative;display:flex}
+.sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;border-radius:8px;z-index:0}
+.sobre-foto .midia{position:relative;z-index:1;flex:1;min-height:440px;border-radius:8px;overflow:hidden}
+.sobre-foto img{object-fit:cover;object-position:48% 100%;transform:scale(1.45);transform-origin:47% 100%;filter:sepia(.12) saturate(1.05)}
+/* etiquetas */
+.sobre-tags{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:2rem 0 2.2rem}
+.sobre-tag{padding:.45rem 1rem;border:1px solid #d9cfc3;border-radius:999px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;white-space:nowrap}
+.sobre-tag--destaque{background:#d8c3ac;border-color:#d8c3ac;color:#3b322b}
+/* botões */
+.sobre-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2.2rem}
+.sobre .btn--solido{background:#3b322b;border-color:#3b322b;color:#efe9e1}
+.sobre .btn--solido:hover{background:#a9825f;border-color:#a9825f;color:#efe9e1}
+/* como eu trabalho */
+.sobre-metodo{margin-top:clamp(4rem,9vw,6.5rem);padding-top:clamp(2.5rem,5vw,3.5rem);border-top:1px solid #d9cfc3}
+.metodo-titulo{font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.2;color:#3b322b;max-width:24ch}
+.metodo-titulo em{font-style:normal;color:#a9825f}
+.metodo-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem);list-style:none;padding:0;margin:clamp(2rem,4vw,3rem) 0 0}
+.metodo-lista li{border-top:1px solid #d9cfc3;padding-top:1.4rem}
+.metodo-num{display:block;font-family:var(--titulo);font-size:1.4rem;color:#a9825f;margin-bottom:.6rem}
+.metodo-lista p{margin:0;color:#5f5044;line-height:1.7}
+.sobre-assinatura{margin:clamp(2.5rem,5vw,3.5rem) 0 0;font-family:var(--titulo);font-size:1.5rem;color:#3b322b}
+.sobre-assinatura small{display:block;margin-top:.35rem;font-family:var(--corpo);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:#a9825f}
+@media (max-width:900px){
+  .sobre-foto .midia{flex:none;width:100%;min-height:0;aspect-ratio:4/5}
+  .metodo-lista{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .sobre-acoes{flex-direction:column;align-items:stretch}
+  .sobre-acoes .btn,.sobre-acoes .link-capa{width:100%;text-align:center}
+  .sobre-acoes .link-capa{padding:.9rem 0}
+}
 
 /* Destaques */
 .destaques{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.25rem,3vw,2.5rem)}
@@ -414,17 +442,37 @@ p{margin:0 0 1rem}
       <div class="sobre-foto revela">
         <!-- FOTO DO SOBRE: o arquivo sobre.jpg fica na mesma pasta do index.html no GitHub.
              Para trocar, suba outra foto com o mesmo nome (sobre.jpg). -->
-        <div class="midia midia--4x5">
+        <div class="midia">
           <img src="sobre.jpg?v=2" alt="Cristiane Dall' Accua sorrindo de roupa branca em frente à Fontana di Trevi, em Roma" data-t-alt="fotoSobreAlt" width="960" height="1280" loading="lazy">
         </div>
       </div>
       <div class="sobre-texto revela">
         <p class="sobre-etiqueta">01 / <span data-t="sobreTitulo">Sobre mim</span></p>
         <h2 id="titulo-sobre" class="sobre-titulo"><span data-t="sobreOla">Olá, eu sou</span> <em data-t="sobreOlaDestaque">a Cris.</em></h2>
-        <p data-t="sobreP1">Sou criadora de conteúdo UGC e influenciadora, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: viajar, cozinhar, treinar, me cuidar e me vestir bem.</p>
-        <p><span data-t="sobreP2">Meu estilo é clássico e natural, basic not too basic, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
-        <p data-t="sobreP3">Mais de 400 vídeos e 200 marcas depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que tantas marcas voltam.</p>
+        <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
+        <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
+        <p data-t-html="sobreP3"><strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.</p>
+        <ul class="sobre-tags" aria-label="Em números" data-t-aria="sobreTagsAria">
+          <li class="sobre-tag sobre-tag--destaque" data-t="tagVideos">+400 vídeos</li>
+          <li class="sobre-tag" data-t="tagMarcas">+200 marcas</li>
+          <li class="sobre-tag">Porto Alegre · RS</li>
+        </ul>
+        <div class="sobre-acoes">
+          <a class="btn btn--solido" href="#contato" data-t="btnFalar">Falar comigo</a>
+          <a class="link-capa" href="#trabalhos" data-t="btnVerMeus">Ver meus trabalhos</a>
+        </div>
       </div>
+    </div>
+
+    <!-- COMO EU TRABALHO -->
+    <div class="sobre-metodo revela">
+      <h3 class="metodo-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></h3>
+      <ol class="metodo-lista">
+        <li><span class="metodo-num" aria-hidden="true">i</span><p data-t="prom1">Roteiro aprovado por você antes de gravar</p></li>
+        <li><span class="metodo-num" aria-hidden="true">ii</span><p data-t="prom2">Uma rodada de ajuste inclusa em cada entrega</p></li>
+        <li><span class="metodo-num" aria-hidden="true">iii</span><p data-t="prom3">Entrega em até 72 horas úteis</p></li>
+      </ol>
+      <p class="sobre-assinatura">Cristiane Dall' Accua<small>UGC Creator</small></p>
     </div>
   </div>
 </section>
@@ -567,10 +615,12 @@ const textos = {
     fotoSobreAlt: "Cristiane Dall' Accua sorrindo de roupa branca em frente à Fontana di Trevi, em Roma",
     fotoSobreAria: "Espaço para foto da creator no dia a dia", fotoSobreLegenda: "Foto lifestyle 4:5",
     sobreOla: "Olá, eu sou", sobreOlaDestaque: "a Cris.",
-    sobreP1: "Sou criadora de conteúdo UGC e influenciadora, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: viajar, cozinhar, treinar, me cuidar e me vestir bem.",
-    sobreP2: "Meu estilo é clássico e natural, basic not too basic, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.",
+    sobreP1: "Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.",
+    sobreP2: "Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.",
     sobreImpacto: "Parece indicação.",
-    sobreP3: "Mais de 400 vídeos e 200 marcas depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que tantas marcas voltam.",
+    sobreP3: "<strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.",
+    tagVideos: "+400 vídeos", tagMarcas: "+200 marcas", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
+    metodoTitulo: "Cada cena tem uma função:", metodoDestaque: "prender, encantar e vender.",
     prom1: "Roteiro aprovado por você antes de gravar",
     prom2: "Uma rodada de ajuste inclusa em cada entrega",
     prom3: "Entrega em até 72 horas úteis",
@@ -610,10 +660,12 @@ const textos = {
     fotoSobreAlt: "Cristiane Dall' Accua smiling in white in front of the Trevi Fountain in Rome",
     fotoSobreAria: "Space for a lifestyle photo of the creator", fotoSobreLegenda: "Lifestyle photo 4:5",
     sobreOla: "Hi, I'm", sobreOlaDestaque: "Cris.",
-    sobreP1: "I'm a UGC creator and influencer from Porto Alegre, Brazil. I turned what I already lived into my profession: traveling, cooking, working out, taking care of myself and dressing well.",
-    sobreP2: "My style is classic and natural, basic not too basic, and I'm detail oriented about aesthetics: light, color, framing, every scene thought through. That is the care I bring to each product, placing it in a real, beautiful routine where it doesn't look like an ad.",
+    sobreP1: "I'm a <strong>UGC creator and influencer</strong> from Porto Alegre, Brazil. I turned what I already lived into my profession: <strong>traveling, cooking, working out, taking care of myself and dressing well</strong>.",
+    sobreP2: "My style is classic and natural, <strong>basic not too basic</strong>, and I'm detail oriented about aesthetics: light, color, framing, every scene thought through. That is the care I bring to each product, placing it in a real, beautiful routine where it doesn't look like an ad.",
     sobreImpacto: "It looks like a recommendation.",
-    sobreP3: "More than 400 videos and 200 brands later, I still believe the same thing: beautiful content only makes sense when it sells. Maybe that's why so many brands come back.",
+    sobreP3: "<strong>More than 400 videos and 200 brands</strong> later, I still believe the same thing: beautiful content only makes sense when it sells. Maybe that's why <strong>so many brands come back</strong>.",
+    tagVideos: "+400 videos", tagMarcas: "+200 brands", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
+    metodoTitulo: "Every scene has a purpose:", metodoDestaque: "to hook, to charm and to sell.",
     prom1: "Script approved by you before filming",
     prom2: "One round of revisions included in every delivery",
     prom3: "Delivery within 72 business hours",
@@ -849,6 +901,8 @@ function aplicaTextosFixos() {
   document.title = T("docTitulo");
   document.querySelector('meta[name="description"]').setAttribute("content", T("docDesc"));
   document.querySelectorAll("[data-t]").forEach(el => el.textContent = T(el.dataset.t));
+  /* textos com palavras em destaque (escritos aqui no código, não vêm de fora) */
+  document.querySelectorAll("[data-t-html]").forEach(el => el.innerHTML = T(el.dataset.tHtml));
   document.querySelectorAll("[data-t-aria]").forEach(el => el.setAttribute("aria-label", T(el.dataset.tAria)));
   document.querySelectorAll("[data-t-alt]").forEach(el => el.setAttribute("alt", T(el.dataset.tAlt)));
   document.querySelectorAll(".idioma").forEach(b => b.setAttribute("aria-pressed", b.dataset.idioma === idioma));
@@ -1166,7 +1220,18 @@ function fechaCaptura() {
 }
 let jaViu = false;
 try { jaViu = sessionStorage.getItem("kitVisto") === "1"; } catch (e) {}
-if (!jaViu) setTimeout(abreCaptura, 7000);
+/* o card aparece quando a pessoa chega na seção de serviços (perto do fim da página), uma vez por visita */
+if (!jaViu) {
+  const alvo = document.querySelector("#servicos");
+  if ("IntersectionObserver" in window && alvo) {
+    const obsKit = new IntersectionObserver((itens) => {
+      if (!itens.some(it => it.isIntersecting)) return;
+      obsKit.disconnect();
+      setTimeout(abreCaptura, 1200);
+    }, { threshold: 0.25 });
+    obsKit.observe(alvo);
+  }
+}
 captura.addEventListener("click", (e) => { if (e.target.closest("[data-fechar]")) fechaCaptura(); });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { if (!captura.hidden) fechaCaptura(); else if (menu.classList.contains("aberto")) { fechaMenu(); botaoMenu.focus(); } }
