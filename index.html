@@ -59,21 +59,36 @@ p{margin:0 0 1rem}
 .sanduiche[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
 
 /* BARRA DO TOPO MARROM (teste): para voltar ao bege, apague a classe "topo--marrom" da tag header */
-.topo--marrom{background:#382218;border-bottom-color:#382218}
-.topo--marrom .marca-nome{color:#c2bcae}
-.topo--marrom .menu a{color:#c2bcae}
-.topo--marrom .menu a:hover{color:#efe9e1;border-color:#c2bcae}
-.topo--marrom .sanduiche{border-color:#877863}
-.topo--marrom .sanduiche span,.topo--marrom .sanduiche span::before,.topo--marrom .sanduiche span::after{background:#c2bcae}
+/* MENU SUPERIOR */
+.topo--marrom{background:#3b322b;border-bottom-color:#3b322b}
+.topo-marca{display:flex;flex-direction:column;gap:.3rem;text-decoration:none;line-height:1}
+.topo-nome{font-family:var(--titulo);font-weight:400;font-size:21px;letter-spacing:2px;text-transform:uppercase;color:#efe9e1;white-space:nowrap}
+.topo-sub{font-family:var(--corpo);font-weight:400;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#a9825f;white-space:nowrap}
+.topo--marrom .menu{align-items:center}
+.topo--marrom .menu a{color:#d8c3ac;border-bottom:1px solid transparent}
+.topo--marrom .menu a:hover,.topo--marrom .menu a.ativo{color:#efe9e1;border-color:#a9825f}
+.topo--marrom .menu a.topo-cta{display:inline-block;padding:.75rem 1.2rem;border:0;border-radius:4px;background:#a9825f;color:#efe9e1;letter-spacing:.2em;transition:background .3s,color .3s}
+.topo--marrom .menu a.topo-cta:hover{background:#efe9e1;color:#3b322b}
+.topo--marrom .sanduiche{border-color:#5f5044}
+.topo--marrom .sanduiche span,.topo--marrom .sanduiche span::before,.topo--marrom .sanduiche span::after{background:#efe9e1}
 .topo--marrom .sanduiche[aria-expanded="true"] span{background:transparent}
-.topo--marrom .idiomas{border-color:#877863}
-.topo--marrom .idioma{color:#c2bcae}
-.topo--marrom .idioma+.idioma{border-left-color:#877863}
-.topo--marrom .idioma[aria-pressed="true"]{background:#c2bcae;color:#382218}
-.topo--marrom :focus-visible{outline-color:#c2bcae}
+.topo--marrom .idiomas{border-color:#5f5044}
+.topo--marrom .idioma{color:#d8c3ac}
+.topo--marrom .idioma+.idioma{border-left-color:#5f5044}
+.topo--marrom .idioma[aria-pressed="true"]{background:#d8c3ac;color:#3b322b}
+.topo--marrom :focus-visible{outline-color:#d8c3ac}
+.menu-idiomas{display:none}
 @media (max-width:900px){
-  .topo--marrom .menu{background:#382218;border-bottom-color:#877863}
-  .topo--marrom .menu li{border-bottom-color:rgba(194,188,174,.25)}
+  .topo--marrom .menu{background:#3b322b;border-bottom-color:#5f5044;align-items:stretch}
+  .topo--marrom .menu li{border-bottom-color:rgba(216,195,172,.2)}
+  .topo--marrom .menu li.menu-cta{border-bottom:0;padding-top:1rem}
+  .topo--marrom .menu a.topo-cta{display:block;text-align:center;padding:1rem}
+  .topo-nome{font-size:16px;letter-spacing:1.5px}
+  .topo-sub{font-size:8px;letter-spacing:2px}
+}
+@media (max-width:600px){
+  .topo .topo-direita .idiomas-topo{display:none}
+  .topo--marrom .menu li.menu-idiomas{display:flex;justify-content:center;border-bottom:0;padding:1rem 0 .2rem}
 }
 
 /* Botão de idioma (PT / EN) */
@@ -435,21 +450,24 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 <!-- ============ MENU FIXO ============ -->
 <header class="topo topo--marrom">
   <div class="wrap">
-    <a class="marca-nome" href="#inicio">Cristiane Dall' Accua</a>
+    <a class="topo-marca" href="#inicio" aria-label="Cristiane Dall' Accua, voltar ao topo">
+      <span class="topo-nome">Cristiane Dall' Accua</span>
+      <span class="topo-sub" data-t="marcaSub">UGC Creator &amp; Influencer</span>
+    </a>
     <div class="topo-direita">
       <nav aria-label="Menu principal" data-t-aria="menuAria">
         <button class="sanduiche" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span></button>
         <ul class="menu" id="menu">
-          <li><a href="#sobre" data-t="menuSobre">Sobre</a></li>
-          <li><a href="#destaques" data-t="menuDestaques">Destaques</a></li>
-          <li><a href="#trabalhos" data-t="menuTrabalhos">Trabalhos</a></li>
-          <li><a href="#servicos" data-t="menuServicos">Serviços</a></li>
-          <li><a href="#numeros" data-t="menuNumeros">Números</a></li>
-          <li><a href="#contato" data-t="menuContato">Contato</a></li>
+          <li><a href="#sobre" data-t="menuSobre" data-secao="sobre">Sobre</a></li>
+          <li><a href="#destaques" data-t="menuDestaques" data-secao="destaques">Destaques</a></li>
+          <li><a href="#trabalhos" data-t="menuCategorias" data-secao="trabalhos">Categorias</a></li>
+          <li class="menu-cta"><a class="topo-cta" href="#contato" data-t="btnFalar">Falar comigo</a></li>
+          <!-- PT / EN dentro do menu, só no celular -->
+          <li class="menu-idiomas"><div class="idiomas" role="group" aria-label="Idioma" data-t-aria="idiomaAria"><button class="idioma" type="button" data-idioma="pt" aria-pressed="true" lang="pt-BR" aria-label="Português">PT</button><button class="idioma" type="button" data-idioma="en" aria-pressed="false" lang="en" aria-label="English">EN</button></div></li>
         </ul>
       </nav>
       <!-- BOTÃO DE IDIOMA: troca o site entre português e inglês (a escolha fica salva no navegador) -->
-      <div class="idiomas" role="group" aria-label="Idioma" data-t-aria="idiomaAria">
+      <div class="idiomas idiomas-topo" role="group" aria-label="Idioma" data-t-aria="idiomaAria">
         <button class="idioma" type="button" data-idioma="pt" aria-pressed="true" lang="pt-BR" aria-label="Português">PT</button>
         <button class="idioma" type="button" data-idioma="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
       </div>
@@ -658,7 +676,7 @@ const textos = {
     docDesc: "Portfólio UGC de Cristiane Dall' Accua, creator em Porto Alegre. Bom gosto que vende: vídeos UGC para beleza, moda, casal, fitness, casa e decoração, culinária, experiências e tech.",
     pular: "Pular para o conteúdo",
     menuAria: "Menu principal", abrirMenu: "Abrir menu", fecharMenu: "Fechar menu", idiomaAria: "Idioma",
-    menuSobre: "Sobre", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Números", menuContato: "Contato",
+    menuSobre: "Sobre", menuCategorias: "Categorias", marcaSub: "UGC Creator & Influencer", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Números", menuContato: "Contato",
     capaRotulo: "Portfólio · UGC Creator · Influencer",
     capaFrase: "Bom gosto que vende.",
     capaSub: "Eu coloco a sua marca na rotina que todo mundo quer ter: vídeos naturais, bonitos e pensados para converter.",
@@ -708,7 +726,7 @@ const textos = {
     docDesc: "UGC portfolio of Cristiane Dall' Accua, a creator based in Porto Alegre, Brazil. Good taste that sells: UGC videos for beauty, fashion, couples, fitness, home and decor, cooking, experiences and tech.",
     pular: "Skip to content",
     menuAria: "Main menu", abrirMenu: "Open menu", fecharMenu: "Close menu", idiomaAria: "Language",
-    menuSobre: "About", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Numbers", menuContato: "Contact",
+    menuSobre: "About", menuCategorias: "Categories", marcaSub: "UGC Creator & Influencer", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Numbers", menuContato: "Contact",
     capaRotulo: "Portfolio · UGC Creator · Influencer",
     capaFrase: "Good taste that sells.",
     capaSub: "I place your brand in the routine everyone wants to have: natural, beautiful videos designed to convert.",
@@ -1261,6 +1279,23 @@ function ligaVideo(video) {
   };
   window.addEventListener("scroll", () => { if (!pedido) { pedido = true; requestAnimationFrame(atualiza); } }, { passive: true });
   atualiza();
+})();
+
+/* Menu: destaca a seção que está na tela */
+(function () {
+  const links = [...document.querySelectorAll('.menu a[data-secao]')];
+  let pedido = false;
+  const marca = () => {
+    pedido = false;
+    const limite = $(".topo").offsetHeight + ($("#barra-cat")?.offsetHeight || 0) + 60;
+    let atual = null;
+    links.forEach(a => { const sec = document.getElementById(a.dataset.secao); if (sec && sec.getBoundingClientRect().top <= limite) atual = a.dataset.secao; });
+    const trab = document.getElementById("trabalhos");
+    if (atual === "trabalhos" && trab.getBoundingClientRect().bottom < limite) atual = null;
+    links.forEach(a => a.classList.toggle("ativo", a.dataset.secao === atual));
+  };
+  window.addEventListener("scroll", () => { if (!pedido) { pedido = true; requestAnimationFrame(marca); } }, { passive: true });
+  marca();
 })();
 
 /* Entrada suave ao rolar + contador */
