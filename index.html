@@ -165,11 +165,15 @@ p{margin:0 0 1rem}
 .sobre-foto{position:relative;display:flex}
 .sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;border-radius:8px;z-index:0}
 .sobre-foto .midia{position:relative;z-index:1;flex:1;min-height:440px;border-radius:8px;overflow:hidden}
-.sobre-foto img{object-fit:cover;object-position:48% 100%;transform:scale(1.45);transform-origin:47% 100%;filter:sepia(.12) saturate(1.05)}
+.sobre-foto img{object-fit:cover;object-position:62% 100%;transform:scale(1.12);transform-origin:55% 100%;filter:sepia(.12) saturate(1.05)}
 /* etiquetas */
 .sobre-tags{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:2rem 0 2.2rem}
 .sobre-tag{padding:.45rem 1rem;border:1px solid #d9cfc3;border-radius:999px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;white-space:nowrap}
-.sobre-tag--destaque{background:#d8c3ac;border-color:#d8c3ac;color:#3b322b}
+.sobre-tags li{display:flex}
+.sobre-tag--bege{background:#d8c3ac;border-color:#d8c3ac;color:#3b322b}
+.sobre-tag--caramelo{background:#a9825f;border-color:#a9825f;color:#efe9e1}
+a.sobre-tag--marrom{background:#3b322b;border-color:#3b322b;color:#efe9e1;text-decoration:none;transition:background .3s,border-color .3s}
+a.sobre-tag--marrom:hover{background:#a9825f;border-color:#a9825f}
 /* botões */
 .sobre-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2.2rem}
 .sobre .btn--solido{background:#3b322b;border-color:#3b322b;color:#efe9e1}
@@ -452,15 +456,11 @@ p{margin:0 0 1rem}
         <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
         <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
         <p data-t-html="sobreP3"><strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.</p>
-        <ul class="sobre-tags" aria-label="Em números" data-t-aria="sobreTagsAria">
-          <li class="sobre-tag sobre-tag--destaque" data-t="tagVideos">+400 vídeos</li>
-          <li class="sobre-tag" data-t="tagMarcas">+200 marcas</li>
-          <li class="sobre-tag">Porto Alegre · RS</li>
+        <ul class="sobre-tags">
+          <li class="sobre-tag sobre-tag--bege" data-t="tagMarcas">+200 marcas trabalhadas</li>
+          <li class="sobre-tag sobre-tag--caramelo">Porto Alegre · RS</li>
+          <li><a class="sobre-tag sobre-tag--marrom" href="#contato" data-t="tagFale">Fale comigo</a></li>
         </ul>
-        <div class="sobre-acoes">
-          <a class="btn btn--solido" href="#contato" data-t="btnFalar">Falar comigo</a>
-          <a class="link-capa" href="#trabalhos" data-t="btnVerMeus">Ver meus trabalhos</a>
-        </div>
       </div>
     </div>
 
@@ -619,7 +619,7 @@ const textos = {
     sobreP2: "Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.",
     sobreImpacto: "Parece indicação.",
     sobreP3: "<strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.",
-    tagVideos: "+400 vídeos", tagMarcas: "+200 marcas", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
+    tagVideos: "+400 vídeos", tagMarcas: "+200 marcas trabalhadas", tagFale: "Fale comigo", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
     metodoTitulo: "Cada cena tem uma função:", metodoDestaque: "prender, encantar e vender.",
     prom1: "Roteiro aprovado por você antes de gravar",
     prom2: "Uma rodada de ajuste inclusa em cada entrega",
@@ -664,7 +664,7 @@ const textos = {
     sobreP2: "My style is classic and natural, <strong>basic not too basic</strong>, and I'm detail oriented about aesthetics: light, color, framing, every scene thought through. That is the care I bring to each product, placing it in a real, beautiful routine where it doesn't look like an ad.",
     sobreImpacto: "It looks like a recommendation.",
     sobreP3: "<strong>More than 400 videos and 200 brands</strong> later, I still believe the same thing: beautiful content only makes sense when it sells. Maybe that's why <strong>so many brands come back</strong>.",
-    tagVideos: "+400 videos", tagMarcas: "+200 brands", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
+    tagVideos: "+400 videos", tagMarcas: "+200 brands worked with", tagFale: "Let's talk", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
     metodoTitulo: "Every scene has a purpose:", metodoDestaque: "to hook, to charm and to sell.",
     prom1: "Script approved by you before filming",
     prom2: "One round of revisions included in every delivery",
