@@ -309,6 +309,40 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .contato-escuro .contato-ok h3{color:#efe9e1}
 .contato-escuro .contato-ok p{color:#d8c3ac}
 .contato-escuro .contato-ok .rotulo{color:#a9825f}
+/* Números e depoimentos: carrossel */
+#numeros.depo-secao{background:#efe9e1;overflow:hidden}
+#numeros .metrica strong{color:#a9825f}
+#numeros .metrica .rotulo{color:#5f5044}
+#numeros .depo-cabeca{margin-top:clamp(4rem,8vw,6rem)}
+#numeros .depo-cabeca .cat-titulo{margin:0;max-width:none}
+#numeros .depo-selo{margin:1.4rem 0 0;font-family:var(--corpo);font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;line-height:1.9}
+#numeros .depo-selo b{font-family:var(--titulo);font-weight:400;font-size:1.05rem;letter-spacing:.04em;color:#a9825f}
+#numeros .depo-selo i{font-style:normal;margin:0 .5rem;color:#a9825f}
+.depo-faixa{position:relative;margin-top:clamp(2.5rem,5vw,3.5rem)}
+.depo-faixa::before,.depo-faixa::after{content:"";position:absolute;top:0;bottom:0;width:clamp(40px,12vw,180px);z-index:2;pointer-events:none}
+.depo-faixa::before{left:0;background:linear-gradient(to right,#efe9e1,rgba(239,233,225,0))}
+.depo-faixa::after{right:0;background:linear-gradient(to left,#efe9e1,rgba(239,233,225,0))}
+.depo-trilho{display:flex;align-items:stretch;width:max-content;list-style:none;margin:0;padding:0;animation:depoGira 48s linear infinite}
+.depo-faixa:hover .depo-trilho{animation-play-state:paused}
+@keyframes depoGira{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.depo-card{display:flex;flex-direction:column;width:340px;flex-shrink:0;margin-right:20px;padding:26px;box-sizing:border-box;background:rgba(216,195,172,.22);border:1px solid #d9cfc3;border-radius:12px}
+.depo-estrelas{color:#a9825f;font-size:.95rem;letter-spacing:.22em}
+.depo-card blockquote{margin:1rem 0 1.4rem;font-family:var(--titulo);font-size:1.08rem;line-height:1.55;color:#3b322b}
+.depo-pe{margin-top:auto;padding-top:1rem;border-top:1px solid #d9cfc3}
+.depo-pe strong{display:block;font-family:var(--corpo);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#3b322b}
+.depo-pe span{display:flex;align-items:center;gap:.4rem;margin-top:.4rem;font-family:var(--corpo);font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:#a9825f}
+@media (max-width:700px){
+  .depo-card{width:280px;padding:22px;margin-right:14px}
+  .depo-card blockquote{font-size:1rem}
+}
+@media (prefers-reduced-motion: reduce){
+  .depo-faixa{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .depo-faixa::before,.depo-faixa::after{display:none}
+  .depo-trilho{animation:none;padding:0 1.25rem}
+  .depo-card{scroll-snap-align:start}
+  .depo-card[aria-hidden="true"]{display:none}
+}
+
 /* contato: foto, botões e card do formulário */
 .so-leitor{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .contato-escuro .contato-grade{align-items:center}
@@ -660,14 +694,18 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
 </section>
 
 <!-- ============ 05 NÚMEROS E DEPOIMENTOS ============ -->
-<section class="secao secao--clara" id="numeros" aria-labelledby="titulo-numeros">
+<section class="secao depo-secao" id="numeros" aria-labelledby="titulo-numeros">
   <div class="wrap">
-    <div class="cabeca revela"><span class="num">05</span><h2 id="titulo-numeros" data-t="numTitulo">Números e depoimentos</h2><span class="rotulo" data-t="numRotulo">Resultado que aparece</span></div>
     <div class="metricas revela" id="lista-metricas"></div>
-    <p class="rotulo sub-titulo revela" data-t="resultadosRotulo">Resultados de campanha</p>
-    <ul class="resultados" id="lista-resultados"></ul>
-    <p class="rotulo sub-titulo revela" data-t="depoRotulo">O que dizem as marcas</p>
-    <ul class="depoimentos" id="lista-depoimentos"></ul>
+    <div class="depo-cabeca revela">
+      <p class="cat-etiqueta" data-t="depoEtiqueta">Depoimentos</p>
+      <h2 id="titulo-numeros" class="cat-titulo"><span data-t="depoTitulo1">O que dizem</span> <em data-t="depoTitulo2">as marcas.</em></h2>
+      <p class="depo-selo" data-t-html="depoSelo"></p>
+    </div>
+  </div>
+  <!-- CARROSSEL DE DEPOIMENTOS: os textos ficam no array "depoimentos", no script -->
+  <div class="depo-faixa revela">
+    <ul class="depo-trilho" id="lista-depoimentos"></ul>
   </div>
 </section>
 
@@ -792,7 +830,8 @@ const textos = {
     trabTitulo: "Trabalhos por nicho", trabRotulo: "Filtre pelo seu", filtrosAria: "Filtrar trabalhos por nicho", todos: "Todos",
     servTitulo: "Como eu te ajudo", servRotulo: "Serviços",
     numTitulo: "Números e depoimentos", numRotulo: "Resultado que aparece",
-    resultadosRotulo: "Resultados de campanha", depoRotulo: "O que dizem as marcas",
+    depoEtiqueta: "Depoimentos", depoTitulo1: "O que dizem", depoTitulo2: "as marcas.", depoVerificada: "Avaliação verificada",
+    depoSelo: '<b>45</b> avaliações <i>·</i> <b>★ 5,0</b> de média <i>·</i> auditadas na plataforma Seu Influencer',
     contTitulo: "Bora criar juntos", contRotulo: "Contato",
     contFrase: "Me conta da sua marca e do que você precisa.",
     contP: "Atendo marcas de todo o Brasil a partir de Porto Alegre.",
@@ -845,7 +884,8 @@ const textos = {
     trabTitulo: "Work by niche", trabRotulo: "Filter by yours", filtrosAria: "Filter work by niche", todos: "All",
     servTitulo: "How I can help", servRotulo: "Services",
     numTitulo: "Numbers and testimonials", numRotulo: "Results that show",
-    resultadosRotulo: "Campaign results", depoRotulo: "What brands say",
+    depoEtiqueta: "Testimonials", depoTitulo1: "What brands", depoTitulo2: "are saying.", depoVerificada: "Verified review",
+    depoSelo: '<b>45</b> reviews <i>·</i> <b>★ 5.0</b> average <i>·</i> audited on the Seu Influencer platform',
     contTitulo: "Let's create together", contRotulo: "Contact",
     contFrase: "Tell me about your brand and what you need.",
     contP: "Based in Porto Alegre, working with brands from Brazil and abroad.",
@@ -1028,25 +1068,28 @@ const servicos = [
 /* Métricas com contador (quatro)
    alvo: número final | casas: casas decimais | antes / depois: texto antes e depois do número */
 const metricas = [
-  { alvo: 412, casas: 0, antes: "", depois: "", rotulo: { pt: "vídeos entregues", en: "videos delivered" } },
-  { alvo: 200, casas: 0, antes: "", depois: "", rotulo: { pt: "marcas atendidas", en: "brands served" } },
+  { alvo: 412, casas: 0, antes: "+", depois: "", rotulo: { pt: "vídeos entregues", en: "videos delivered" } },
+  { alvo: 200, casas: 0, antes: "+", depois: "", rotulo: { pt: "marcas atendidas", en: "brands served" } },
   { alvo: 2.2, casas: 1, antes: "+", depois: "M", rotulo: { pt: "views nos destaques", en: "views on featured reels" } },
   { alvo: 8,   casas: 0, antes: "", depois: "", rotulo: { pt: "nichos atendidos", en: "niches covered" } }
 ];
 
-/* Resultados de campanha (três): troque pelos números reais */
-const resultados = [
-  { numero: "00%", rotulo: { pt: "RESULTADO 01", en: "RESULT 01" }, contexto: { pt: "Marca 01: descreva aqui o resultado real da campanha.", en: "Brand 01: describe the real campaign result here." } },
-  { numero: "00%", rotulo: { pt: "RESULTADO 02", en: "RESULT 02" }, contexto: { pt: "Marca 02: descreva aqui o resultado real da campanha.", en: "Brand 02: describe the real campaign result here." } },
-  { numero: "00x", rotulo: { pt: "RESULTADO 03", en: "RESULT 03" }, contexto: { pt: "Marca 03: descreva aqui o resultado real da campanha.", en: "Brand 03: describe the real campaign result here." } }
-];
-
-/* Depoimentos (quatro): troque pelo texto real, nome e empresa */
+/* Depoimentos do carrossel (avaliações da plataforma Seu Influencer), nesta ordem */
 const depoimentos = [
-  { texto: { pt: "TEXTO DO DEPOIMENTO 01: cole aqui o que o cliente falou sobre o seu trabalho.", en: "TESTIMONIAL 01: paste what the client said about your work here." }, nome: "Cliente 01", empresa: "Empresa 01" },
-  { texto: { pt: "TEXTO DO DEPOIMENTO 02: cole aqui o que o cliente falou sobre o seu trabalho.", en: "TESTIMONIAL 02: paste what the client said about your work here." }, nome: "Cliente 02", empresa: "Empresa 02" },
-  { texto: { pt: "TEXTO DO DEPOIMENTO 03: cole aqui o que o cliente falou sobre o seu trabalho.", en: "TESTIMONIAL 03: paste what the client said about your work here." }, nome: "Cliente 03", empresa: "Empresa 03" },
-  { texto: { pt: "TEXTO DO DEPOIMENTO 04: cole aqui o que o cliente falou sobre o seu trabalho.", en: "TESTIMONIAL 04: paste what the client said about your work here." }, nome: "Cliente 04", empresa: "Empresa 04" }
+  { marca: "Josy Moda Íntima", texto: "A Cris sempre nos surpreende com seu trabalho impecável! Sem dúvidas está no top 3 das nossas melhores UGCs!" },
+  { marca: "Amakha Paris", texto: "Vídeo lindo, envolvente e muito bem executado. Dá pra perceber claramente o cuidado, a criatividade e o olhar estratégico em cada detalhe." },
+  { marca: "Rei da Promo", texto: "Entrega foi super natural, com boa iluminação, enquadramento e uma fala muito autêntica, exatamente o estilo que buscamos." },
+  { marca: "Método Levs", texto: "Profissional atenciosa, prestativa e impecável em cada detalhe. Entregou exatamente o que eu precisava, e até além." },
+  { marca: "Corneta Jogos", texto: "Ótima campanha realizada junto com a Cris, foi atenciosa e ágil na entrega e alterações do conteúdo! Tivemos um ótimo resultado." },
+  { marca: "Migração Digital", texto: "Cumpriu os prazos combinados e entregou um conteúdo muito alinhado com a proposta da campanha. Os vídeos ficaram naturais, bem gravados e com ótima comunicação." },
+  { marca: "Quitou BR", texto: "Cris foi sensacional, adoramos trabalhar com ela, conseguiu transmitir a mensagem de forma precisa e objetiva. Excelente!" },
+  { marca: "Maldaner Negócios Digitais", texto: "Gostamos demais do resultado do trabalho da Cris, ela entendeu perfeitamente o que buscávamos… Com certeza vamos desenvolver mais trabalhos juntos." },
+  { marca: "Cafezale", texto: "Cristiane foi profissional, criativa e entregou um conteúdo de ótima qualidade, bem alinhado com o que foi solicitado. Recomendo!" },
+  { marca: "Party Games", texto: "Parabéns pela sua entrega! Gostamos muito, conteúdo real e divertido! Esperamos trabalhar com você novamente em breve." },
+  { marca: "Grupo Lima e Pergher", texto: "Adoramos trabalhar com a Cristiane. Ela é criativa e super cuidadosa com as gravações. Super recomendamos o trabalho dela." },
+  { marca: "F-Stop", texto: "Adorei o trabalho da Cristiane. Muito atenciosa, cumpriu o prazo e o material ficou maravilhoso." },
+  { marca: "Ponto B", texto: "Excelente trabalho! Gostamos muito da entrega, e foi uma pessoa super tranquila de conversar e alinhar os objetivos." },
+  { marca: "Fressen Joias", texto: "Adoramos o conteúdo, Cris foi rápida e prestativa conosco!" }
 ];
 
 /* =====================================================================
@@ -1132,10 +1175,10 @@ function renderiza() {
   const mostraFinal = semMovimento || contadoresAnimados;
   $("#lista-metricas").innerHTML = metricas.map(m => `
     <div class="metrica"><strong data-alvo="${m.alvo}" data-casas="${m.casas}" data-antes="${esc(m.antes)}" data-depois="${esc(m.depois)}">${esc(m.antes)}${formata(mostraFinal ? m.alvo : 0, m.casas)}${esc(m.depois)}</strong><span class="rotulo">${esc(tr(m.rotulo))}</span></div>`).join("");
-  $("#lista-resultados").innerHTML = resultados.map(r => `
-    <li class="resultado ${revela}"><strong>${esc(tr(r.numero))}</strong><span class="rotulo">${esc(tr(r.rotulo))}</span><p>${esc(tr(r.contexto))}</p></li>`).join("");
-  $("#lista-depoimentos").innerHTML = depoimentos.map(d => `
-    <li class="depoimento ${revela}"><figure style="margin:0"><blockquote>${esc(tr(d.texto))}</blockquote><figcaption><cite><b>${esc(tr(d.nome))}</b> · ${esc(tr(d.empresa))}</cite></figcaption></figure></li>`).join("");
+  const cardDepo = (d, copia) => `
+    <li class="depo-card"${copia ? ' aria-hidden="true"' : ""}><span class="depo-estrelas" aria-label="5 estrelas">★★★★★</span><blockquote>“${esc(d.texto)}”</blockquote><div class="depo-pe"><strong>${esc(d.marca)}</strong><span><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(T("depoVerificada"))}</span></div></li>`;
+  /* a lista vai duas vezes para o carrossel girar sem pulo */
+  $("#lista-depoimentos").innerHTML = depoimentos.map(d => cardDepo(d, false)).join("") + depoimentos.map(d => cardDepo(d, true)).join("");
 }
 
 function anima(el) {
