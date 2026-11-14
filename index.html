@@ -154,54 +154,44 @@ p{margin:0 0 1rem}
 
 /* Sobre mim (paleta Caramelo) */
 .sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1}
-.sobre .sobre-grade{align-items:stretch}
+/* bloco 1: foto + texto, alinhados pelo topo */
+.sobre .sobre-grade{grid-template-columns:1fr 1.1fr;align-items:start}
+.sobre-foto{position:relative;align-self:start}
+.sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;border-radius:8px;z-index:0}
+.sobre-foto .midia{position:relative;z-index:1;aspect-ratio:4/5;border-radius:8px;overflow:hidden}
+.sobre-foto img{object-fit:cover;object-position:50% 80%;filter:sepia(.12) saturate(1.05)}
 .sobre-etiqueta{margin:0 0 1.2rem;font-size:.72rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:#a9825f}
-.sobre-titulo{font-size:clamp(2.2rem,4.8vw,3.8rem);line-height:1.1;color:#3b322b;margin:0 0 2rem}
+.sobre-titulo{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.1;color:#3b322b;margin:0 0 1.8rem}
 .sobre-titulo em{font-style:italic;color:#a9825f}
-.sobre .sobre-texto p{line-height:1.85;margin:0 0 1.4rem}
+.sobre .sobre-texto p{line-height:1.85;margin:0 0 1.3rem}
 .sobre .sobre-texto strong{font-weight:500;color:#3b322b}
 .sobre-impacto{font-family:var(--titulo);font-size:1.25em;color:#a9825f;white-space:nowrap}
-/* foto: mesma altura do texto, recortada para a pessoa ficar em destaque */
-.sobre-foto{position:relative;display:flex}
-.sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;border-radius:8px;z-index:0}
-.sobre-foto .midia{position:relative;z-index:1;flex:1;min-height:440px;border-radius:8px;overflow:hidden}
-.sobre-foto img{object-fit:cover;object-position:62% 100%;transform:scale(1.12);transform-origin:55% 100%;filter:sepia(.12) saturate(1.05)}
-/* diferenciais compactos dentro do Sobre mim */
-.sobre-dif{margin:2.2rem 0 0;padding-top:1.6rem;border-top:1px solid #d9cfc3}
-.sobre .sobre-texto .dif-titulo{margin:0 0 .8rem;font-family:var(--titulo);font-size:1.3rem;line-height:1.35;color:#3b322b}
-.dif-titulo em{font-style:normal;color:#a9825f}
-.dif-lista{list-style:none;padding:0;margin:0}
-.dif-lista li{display:grid;grid-template-columns:2.2rem 1fr;gap:.4rem;padding:.8rem 0;border-bottom:1px solid #d9cfc3}
-.dif-lista .metodo-num{margin:0;font-size:1.1rem;line-height:1.4}
-.dif-lista strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.05rem;color:#3b322b}
-.sobre .sobre-texto .dif-lista p{margin:.2rem 0 0;font-size:.92rem;line-height:1.6;color:#5f5044}
-/* etiquetas */
-.sobre-tags{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:2rem 0 2.2rem}
-.sobre-tag{padding:.45rem 1rem;border:1px solid #d9cfc3;border-radius:999px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;white-space:nowrap}
-.sobre-tags li{display:flex}
-.sobre-tag--bege{background:#d8c3ac;border-color:#d8c3ac;color:#3b322b}
-.sobre-tag--caramelo{background:#a9825f;border-color:#a9825f;color:#efe9e1}
-a.sobre-tag--marrom{background:#3b322b;border-color:#3b322b;color:#efe9e1;text-decoration:none;transition:background .3s,border-color .3s}
-a.sobre-tag--marrom:hover{background:#a9825f;border-color:#a9825f}
-/* botões */
+/* etiquetas: todas iguais, só a primeira preenchida */
+.sobre-tags{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:1.8rem 0 2rem}
+.sobre-tag{padding:.5rem .9rem;border:1px solid #d9cfc3;border-radius:4px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;white-space:nowrap}
+.sobre-tag--destaque{background:#d8c3ac;border-color:#d8c3ac;color:#3b322b}
+/* botões no estilo da capa */
 .sobre-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2.2rem}
-.sobre .btn--solido{background:#3b322b;border-color:#3b322b;color:#efe9e1}
+.sobre .btn--solido{background:#3b322b;border-color:#3b322b;color:#efe9e1;border-radius:0}
 .sobre .btn--solido:hover{background:#a9825f;border-color:#a9825f;color:#efe9e1}
-/* como eu trabalho */
-.sobre-metodo{margin-top:clamp(4rem,9vw,6.5rem);padding-top:clamp(2.5rem,5vw,3.5rem);border-top:1px solid #d9cfc3}
-.metodo-titulo{font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.2;color:#3b322b;max-width:24ch}
+/* bloco 2: como eu trabalho */
+.sobre-metodo{margin-top:clamp(4.5rem,9vw,7rem);padding-top:clamp(3rem,6vw,4.5rem);border-top:1px solid #d9cfc3}
+.metodo-titulo{font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.2;color:#3b322b;max-width:26ch}
 .metodo-titulo em{font-style:normal;color:#a9825f}
-.metodo-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem);list-style:none;padding:0;margin:clamp(2rem,4vw,3rem) 0 0}
-.metodo-lista li{border-top:1px solid #d9cfc3;padding-top:1.4rem}
-.metodo-num{display:block;font-family:var(--titulo);font-size:1.4rem;color:#a9825f;margin-bottom:.6rem}
-.metodo-lista p{margin:0;color:#5f5044;line-height:1.7}
-.metodo-nome{margin:0 0 .6rem;font-family:var(--titulo);font-weight:400;font-size:1.3rem;color:#3b322b}
-.metodo-intro{margin:1.2rem 0 0;max-width:40rem;color:#5f5044;line-height:1.8}
-.sobre-assinatura{margin:clamp(2.5rem,5vw,3.5rem) 0 0;font-family:var(--titulo);font-size:1.5rem;color:#3b322b}
-.sobre-assinatura small{display:block;margin-top:.35rem;font-family:var(--corpo);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:#a9825f}
+.metodo-lista{display:grid;grid-template-columns:repeat(3,1fr);list-style:none;padding:0;margin:clamp(2.5rem,5vw,3.5rem) 0 0}
+.metodo-lista li{padding:0 clamp(1.5rem,3vw,2.5rem)}
+.metodo-lista li:first-child{padding-left:0}
+.metodo-lista li:last-child{padding-right:0}
+.metodo-lista li+li{border-left:1px solid #d9cfc3}
+.metodo-num{display:block;margin-bottom:.8rem;font-family:var(--titulo);font-size:2.2rem;line-height:1;color:#a9825f}
+.metodo-nome{margin:0 0 .7rem;font-family:var(--titulo);font-weight:400;font-size:1.35rem;color:#3b322b}
+.metodo-lista p{margin:0;color:#5f5044;line-height:1.75}
 @media (max-width:900px){
-  .sobre-foto .midia{flex:none;width:100%;min-height:0;aspect-ratio:4/5}
+  .sobre .sobre-grade{grid-template-columns:1fr}
   .metodo-lista{grid-template-columns:1fr}
+  .metodo-lista li,.metodo-lista li:first-child,.metodo-lista li:last-child{padding:1.6rem 0}
+  .metodo-lista li+li{border-left:0;border-top:1px solid #d9cfc3}
+  .metodo-lista li:first-child{padding-top:0}
 }
 @media (max-width:600px){
   .sobre-acoes{flex-direction:column;align-items:stretch}
@@ -453,6 +443,8 @@ a.sobre-tag--marrom:hover{background:#a9825f;border-color:#a9825f}
 <!-- ============ 01 SOBRE ============ -->
 <section class="secao sobre" id="sobre" aria-labelledby="titulo-sobre">
   <div class="wrap">
+
+    <!-- BLOCO 1: apresentação (foto + texto) -->
     <div class="sobre-grade">
       <div class="sobre-foto revela">
         <!-- FOTO DO SOBRE: o arquivo sobre.jpg fica na mesma pasta do index.html no GitHub.
@@ -462,26 +454,31 @@ a.sobre-tag--marrom:hover{background:#a9825f;border-color:#a9825f}
         </div>
       </div>
       <div class="sobre-texto revela">
-        <p class="sobre-etiqueta" data-t="sobreTitulo">Sobre mim</p>
+        <p class="sobre-etiqueta">01 / <span data-t="sobreTitulo">Sobre mim</span></p>
         <h2 id="titulo-sobre" class="sobre-titulo"><span data-t="sobreOla">Olá, eu sou</span> <em data-t="sobreOlaDestaque">a Cris.</em></h2>
         <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
         <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
         <p data-t-html="sobreP3"><strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.</p>
-        <!-- COMO EU TRABALHO (diferenciais) -->
-        <div class="sobre-dif">
-          <p class="dif-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></p>
-          <ol class="dif-lista">
-            <li><span class="metodo-num" aria-hidden="true">i</span><div><strong data-t="dif1Nome">Conexão</strong><p data-t="dif1">Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.</p></div></li>
-            <li><span class="metodo-num" aria-hidden="true">ii</span><div><strong data-t="dif2Nome">Criatividade</strong><p data-t="dif2">Ideias e roteiros que fogem do óbvio, com estética cuidada em cada cena para prender a atenção logo nos primeiros segundos.</p></div></li>
-            <li><span class="metodo-num" aria-hidden="true">iii</span><div><strong data-t="dif3Nome">Estratégia</strong><p data-t="dif3">Cada vídeo pensado para o objetivo da marca: despertar desejo, tirar dúvidas e levar à compra.</p></div></li>
-          </ol>
-        </div>
-        <ul class="sobre-tags">
-          <li class="sobre-tag sobre-tag--bege" data-t="tagMarcas">+200 marcas trabalhadas</li>
-          <li class="sobre-tag sobre-tag--caramelo">Porto Alegre · RS</li>
-          <li><a class="sobre-tag sobre-tag--marrom" href="#contato" data-t="tagFale">Fale comigo</a></li>
+        <ul class="sobre-tags" aria-label="Em números" data-t-aria="sobreTagsAria">
+          <li class="sobre-tag sobre-tag--destaque" data-t="tagVideos">+400 vídeos</li>
+          <li class="sobre-tag" data-t="tagMarcas">+200 marcas</li>
+          <li class="sobre-tag">Porto Alegre · RS</li>
         </ul>
+        <div class="sobre-acoes">
+          <a class="btn btn--solido" href="#contato" data-t="btnFalar">Falar comigo</a>
+          <a class="link-capa" href="#trabalhos" data-t="btnVerMeus">Ver meus trabalhos</a>
+        </div>
       </div>
+    </div>
+
+    <!-- BLOCO 2: como eu trabalho -->
+    <div class="sobre-metodo revela">
+      <h3 class="metodo-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></h3>
+      <ol class="metodo-lista">
+        <li><span class="metodo-num" aria-hidden="true">i</span><h4 class="metodo-nome" data-t="dif1Nome">Conexão</h4><p data-t="dif1">Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.</p></li>
+        <li><span class="metodo-num" aria-hidden="true">ii</span><h4 class="metodo-nome" data-t="dif2Nome">Criatividade</h4><p data-t="dif2">Ideias e roteiros que fogem do óbvio, com estética cuidada em cada cena para prender a atenção logo nos primeiros segundos.</p></li>
+        <li><span class="metodo-num" aria-hidden="true">iii</span><h4 class="metodo-nome" data-t="dif3Nome">Estratégia</h4><p data-t="dif3">Cada vídeo pensado para o objetivo da marca: despertar desejo, tirar dúvidas e levar à compra.</p></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -628,7 +625,7 @@ const textos = {
     sobreP2: "Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.",
     sobreImpacto: "Parece indicação.",
     sobreP3: "<strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.",
-    tagVideos: "+400 vídeos", tagMarcas: "+200 marcas trabalhadas", tagFale: "Fale comigo", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
+    tagVideos: "+400 vídeos", tagMarcas: "+200 marcas", tagFale: "Fale comigo", sobreTagsAria: "Em números", btnVerMeus: "Ver meus trabalhos",
     metodoTitulo: "Cada cena tem uma função:", metodoDestaque: "prender, encantar e vender.",
     metodoIntro: "Crio conteúdos que unem conexão, criatividade e estratégia para gerar resultados para as marcas.",
     dif1Nome: "Conexão", dif1: "Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.",
@@ -677,7 +674,7 @@ const textos = {
     sobreP2: "My style is classic and natural, <strong>basic not too basic</strong>, and I'm detail oriented about aesthetics: light, color, framing, every scene thought through. That is the care I bring to each product, placing it in a real, beautiful routine where it doesn't look like an ad.",
     sobreImpacto: "It looks like a recommendation.",
     sobreP3: "<strong>More than 400 videos and 200 brands</strong> later, I still believe the same thing: beautiful content only makes sense when it sells. Maybe that's why <strong>so many brands come back</strong>.",
-    tagVideos: "+400 videos", tagMarcas: "+200 brands worked with", tagFale: "Let's talk", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
+    tagVideos: "+400 videos", tagMarcas: "+200 brands", tagFale: "Let's talk", sobreTagsAria: "In numbers", btnVerMeus: "See my work",
     metodoTitulo: "Every scene has a purpose:", metodoDestaque: "to hook, to charm and to sell.",
     metodoIntro: "I create content that blends connection, creativity and strategy to drive results for brands.",
     dif1Nome: "Connection", dif1: "Close, warm communication that women relate to, so viewers trust what I recommend.",
