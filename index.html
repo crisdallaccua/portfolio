@@ -258,6 +258,9 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 /* Barra fixa de categorias */
 .barra-cat{position:fixed;top:68px;left:0;right:0;z-index:99;background:#efe9e1;border-bottom:1px solid #d9cfc3;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .3s,transform .3s,visibility .3s}
 .barra-cat.visivel{opacity:1;visibility:visible;transform:none}
+/* com a barra sempre visível, o conteúdo começa abaixo das duas barras */
+html.com-barra-cat{scroll-padding-top:125px}
+html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .barra-cat-links{display:flex;gap:2rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .barra-cat-links::-webkit-scrollbar{display:none}
 .barra-cat-links a{flex-shrink:0;padding:.85rem 0;white-space:nowrap;font-size:.64rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:#5f5044;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
@@ -789,7 +792,7 @@ const destaques = [
 const BARRA_CATEGORIAS = true;
 /* CAPAS PRÓPRIAS: suba a imagem na pasta capas do GitHub com o nome capas/<ID do vídeo>.jpg
    e coloque o ID aqui. Exemplo: ["A5k4s6i9HQk", "ailKLJ6FEuI"]. Sem o ID aqui, o site usa a capa do YouTube. */
-const CAPAS_PROPRIAS = [];
+const CAPAS_PROPRIAS = ["A5k4s6i9HQk", "ailKLJ6FEuI", "yWzNE078sI4", "TJdWO2m20SY", "imqL-dXzgKw", "lsX_kDsTtB8", "9H7T5fyp9aI", "irZMV3XC2x4", "Vzx5y4TzXvM", "e1UV_eFa4h4", "CACU5ZyaB6U", "xG2Oj6HcpCU", "7uKmJx0m3KM"];
 const VIDEOS_POR_CATEGORIA = 8; /* quantos vídeos aparecem em cada categoria */
 const categorias = [
   { chave: "beleza", nome: { pt: "Beleza", en: "Beauty" },
@@ -1244,8 +1247,7 @@ function ligaVideo(video) {
   let pedido = false;
   const atualiza = () => {
     pedido = false;
-    const capa = $("#inicio");
-    barra.classList.toggle("visivel", capa.getBoundingClientRect().bottom < $(".topo").offsetHeight);
+    barra.classList.add("visivel");
     const limite = alturaBarras() + 40;
     let atual = null;
     document.querySelectorAll("#categorias .categoria").forEach(c => { if (c.getBoundingClientRect().top <= limite) atual = c.id.replace("cat-", ""); });
