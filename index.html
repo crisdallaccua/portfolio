@@ -309,6 +309,38 @@ html.com-barra-cat .capa{padding-top:calc(68px + 42px + clamp(3rem,8vw,6rem))}
 .contato-escuro .contato-ok h3{color:#efe9e1}
 .contato-escuro .contato-ok p{color:#d8c3ac}
 .contato-escuro .contato-ok .rotulo{color:#a9825f}
+/* contato: foto, botões e card do formulário */
+.so-leitor{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.contato-escuro .contato-grade{align-items:center}
+.contato-escuro .contato-avatar{display:block;width:72px;height:72px;border-radius:50%;object-fit:cover;padding:3px;border:2px solid #a9825f;background:#3b322b;box-sizing:border-box;margin:0 0 16px}
+.contato-escuro .contato-intro .cat-etiqueta{margin-bottom:1.2rem}
+.contato-escuro .contato-intro .contato-titulo{margin:0 0 24px}
+.contato-escuro .contato-intro .contato-frase{margin:0 0 28px}
+.contato-escuro .contato-botoes{display:flex;flex-wrap:wrap;gap:10px}
+.contato-escuro .cbtn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;height:44px;padding:0 1.1rem;border:1px solid #a9825f;border-radius:4px;background:transparent;color:#d8c3ac;font-family:var(--corpo);font-size:.66rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-sizing:border-box;transition:background .3s,color .3s,border-color .3s}
+.contato-escuro .cbtn svg{flex-shrink:0}
+.contato-escuro .cbtn:hover{background:#a9825f;border-color:#a9825f;color:#efe9e1}
+.contato-escuro .cbtn-whats{background:#efe9e1;border-color:#efe9e1;color:#3b322b}
+.contato-escuro .contato-card{background:rgba(239,233,225,.05);border:1px solid #5f5044;border-radius:12px;padding:28px}
+.contato-escuro .contato-form{grid-template-columns:1fr 1fr;gap:14px}
+.contato-escuro .contato-form .campo-largo{grid-column:1 / -1}
+.contato-escuro .contato-form .campo input,.contato-escuro .contato-form .campo textarea{background:rgba(239,233,225,.06);border:1px solid #5f5044;border-radius:6px;padding:.8rem .95rem;color:#efe9e1;font-size:.95rem}
+.contato-escuro .contato-form .campo textarea{min-height:140px}
+.contato-escuro .contato-form .campo input:focus,.contato-escuro .contato-form .campo textarea:focus{border-color:#a9825f;outline:none}
+.contato-escuro .contato-form .campo input:focus-visible,.contato-escuro .contato-form .campo textarea:focus-visible{outline:none;border-color:#a9825f}
+.contato-escuro .contato-form ::placeholder{color:rgba(216,195,172,.6);opacity:1}
+.contato-escuro .contato-form .contato-enviar{background:#a9825f;border:1px solid #a9825f;color:#efe9e1;border-radius:4px}
+.contato-escuro .contato-form .contato-enviar:hover{background:#efe9e1;border-color:#efe9e1;color:#3b322b}
+@media (max-width:900px){
+  .contato-escuro .contato-botoes .cbtn{flex:1 1 calc(50% - 5px)}
+  .contato-escuro .contato-botoes .cbtn-whats{flex-basis:100%}
+}
+@media (max-width:560px){
+  .contato-escuro .contato-avatar{width:60px;height:60px}
+  .contato-escuro .contato-card{padding:20px}
+  .contato-escuro .contato-form{grid-template-columns:1fr}
+  .contato-escuro .cbtn{padding:0 .6rem;letter-spacing:.1em}
+}
 /* rodapé claro */
 footer.rodape.rodape-claro{background:#efe9e1;border-top:0;padding:1.6rem 0}
 footer.rodape.rodape-claro .wrap{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:1.5rem}
@@ -642,32 +674,28 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
 <!-- ============ 06 CONTATO ============ -->
 <section class="contato-escuro" id="contato" aria-labelledby="titulo-contato">
   <div class="wrap">
-    <div class="contato-cabeca revela">
-      <p class="cat-etiqueta" data-t="contEtiqueta">Contato</p>
-      <h2 id="titulo-contato" class="contato-titulo"><span data-t="contTitulo1">Vamos criar</span> <em data-t="contTitulo2">juntos?</em></h2>
-    </div>
     <div class="contato-grade">
       <div class="contato-intro revela">
+        <img class="contato-avatar" src="contato-avatar.jpg" alt="Cristiane Dall' Accua" width="72" height="72">
+        <p class="cat-etiqueta" data-t="contEtiqueta">Contato</p>
+        <h2 id="titulo-contato" class="contato-titulo"><span data-t="contTitulo1">Vamos criar</span> <em data-t="contTitulo2">juntos?</em></h2>
         <p class="contato-frase" data-t="contFrase">Me conta da sua marca e do que você precisa.</p>
-        <a class="contato-whats" href="https://wa.me/5551996627564?text=Ol%C3%A1%2C%20Cris!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20uma%20parceria." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.5 14.7L2.2 21.8l5-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.7 7.6c.3-.5.6-.5.9-.5h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.6.8c-.1.2-.2.3 0 .6.6 1.1 1.5 2 2.6 2.6.3.2.4.1.6 0l.8-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.3.4.5 0 .5-.2 1.4-.9 1.9-.6.5-1.6.7-2.8.3-3-1-5.4-3.5-6.3-6.4-.3-1 .1-2 .8-2.6z" fill="currentColor"/></svg>
-          <span data-t="contWhats">Chamar no WhatsApp</span>
-        </a>
-        <div class="contato-sec">
-          <a href="mailto:contatocrisdallaccua@gmail.com"><span data-t="lblEmail">E-mail</span> · <span class="sem-caixa-alta">contatocrisdallaccua@gmail.com</span></a>
-          <a href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener">Instagram · <span class="sem-caixa-alta">@crisdallaccua</span></a>
+        <div class="contato-botoes">
+          <a class="cbtn cbtn-whats" href="https://wa.me/5551996627564?text=Ol%C3%A1%2C%20Cris!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20uma%20parceria." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L3 21l4.4-1.1A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 8.2c.2-.4.5-.4.7-.4h.5c.2 0 .3 0 .5.4l.6 1.5c.1.2 0 .3 0 .5l-.5.6c-.1.1-.1.3 0 .5.5.9 1.2 1.6 2.1 2.1.2.1.3.1.5 0l.6-.7c.1-.2.3-.2.5-.1l1.5.7c.2.1.3.2.3.4 0 .4-.2 1.1-.7 1.5-.5.4-1.3.5-2.2.2-2.4-.8-4.3-2.8-5-5.1-.2-.8.1-1.6.6-2.1z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg><span>WhatsApp</span></a>
+          <a class="cbtn" href="mailto:contatocrisdallaccua@gmail.com"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span data-t="lblEmail">E-mail</span></a>
+          <a class="cbtn" href="https://www.instagram.com/crisdallaccua/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="17" cy="7" r=".9" fill="currentColor"/></svg><span>@crisdallaccua</span></a>
         </div>
       </div>
-      <div class="revela">
+      <div class="revela contato-card">
         <!-- FORMULÁRIO: para as mensagens chegarem no seu e-mail, coloque o código do Formspree em FORMSPREE_ID (no começo do script).
              Enquanto FORMSPREE_ID estiver vazio, o botão abre o WhatsApp com a mensagem já preenchida. -->
         <form class="form contato-form" id="form-contato" novalidate>
-          <div class="campo"><label class="rotulo" for="c-nome" data-t="lblNome">Nome</label><input id="c-nome" name="nome" type="text" autocomplete="name" required></div>
-          <div class="campo"><label class="rotulo" for="c-marca" data-t="lblMarca">Marca / empresa</label><input id="c-marca" name="marca" type="text" autocomplete="organization"></div>
-          <div class="campo"><label class="rotulo" for="c-email" data-t="lblEmail">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="campo"><label class="rotulo" for="c-msg" data-t="lblMsg">Mensagem</label><textarea id="c-msg" name="mensagem" required></textarea></div>
-          <div><button class="btn contato-enviar" type="submit" data-t="btnEnviar">Enviar mensagem</button></div>
-          <p class="contato-erro" id="erro-contato" hidden data-t="contErro">Não consegui enviar agora. Abri o WhatsApp para você falar comigo direto.</p>
+          <div class="campo"><label class="so-leitor" for="c-nome" data-t="lblNome">Nome</label><input id="c-nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome" data-t-ph="phNome"></div>
+          <div class="campo"><label class="so-leitor" for="c-email" data-t="lblEmail">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email" required placeholder="Seu e-mail" data-t-ph="phEmail"></div>
+          <div class="campo campo-largo"><label class="so-leitor" for="c-marca" data-t="lblMarca">Marca / empresa</label><input id="c-marca" name="marca" type="text" autocomplete="organization" placeholder="Marca / empresa" data-t-ph="phMarca"></div>
+          <div class="campo campo-largo"><label class="so-leitor" for="c-msg" data-t="lblMsg">Mensagem</label><textarea id="c-msg" name="mensagem" required placeholder="O que você precisa? Formato, prazo, quantidade..." data-t-ph="phMsg"></textarea></div>
+          <div class="campo-largo"><button class="btn contato-enviar" type="submit"><span data-t="btnEnviar">Enviar mensagem</span> <span aria-hidden="true">↗</span></button></div>
+          <p class="contato-erro campo-largo" id="erro-contato" hidden data-t="contErro">Não consegui enviar agora. Abri o WhatsApp para você falar comigo direto.</p>
         </form>
         <div class="confirmacao contato-ok" id="ok-contato" hidden tabindex="-1">
           <p class="rotulo" data-t="okRotulo">Mensagem recebida</p>
@@ -769,7 +797,7 @@ const textos = {
     contFrase: "Me conta da sua marca e do que você precisa.",
     contP: "Atendo marcas de todo o Brasil a partir de Porto Alegre.",
     btnEmail: "E-mail", btnEscrever: "Escrever",
-    lblNome: "Nome", lblEmail: "E-mail", lblMsg: "Mensagem", btnEnviar: "Enviar mensagem",
+    lblNome: "Nome", lblEmail: "E-mail", lblMsg: "Mensagem", phNome: "Seu nome", phEmail: "Seu e-mail", phMarca: "Marca / empresa", phMsg: "O que você precisa? Formato, prazo, quantidade...", btnEnviar: "Enviar mensagem",
     okRotulo: "Mensagem recebida", okObrigada: "Obrigada",
     okTexto: "Vou ler com carinho e te respondo em até um dia útil. Se preferir, me chama no WhatsApp.",
     fechar: "Fechar", kitRotulo: "Mídia kit", kitTitulo: "Quer meu mídia kit completo?",
@@ -822,7 +850,7 @@ const textos = {
     contFrase: "Tell me about your brand and what you need.",
     contP: "Based in Porto Alegre, working with brands from Brazil and abroad.",
     btnEmail: "Email", btnEscrever: "Write",
-    lblNome: "Name", lblEmail: "Email", lblMsg: "Message", btnEnviar: "Send message",
+    lblNome: "Name", lblEmail: "Email", lblMsg: "Message", phNome: "Your name", phEmail: "Your email", phMarca: "Brand / company", phMsg: "What do you need? Format, deadline, quantity...", btnEnviar: "Send message",
     okRotulo: "Message received", okObrigada: "Thank you",
     okTexto: "I'll read it carefully and reply within one business day. If you prefer, reach me on WhatsApp.",
     fechar: "Close", kitRotulo: "Media kit", kitTitulo: "Want my full media kit?",
@@ -1055,6 +1083,7 @@ function aplicaTextosFixos() {
   /* textos com palavras em destaque (escritos aqui no código, não vêm de fora) */
   document.querySelectorAll("[data-t-html]").forEach(el => el.innerHTML = T(el.dataset.tHtml));
   document.querySelectorAll("[data-t-aria]").forEach(el => el.setAttribute("aria-label", T(el.dataset.tAria)));
+  document.querySelectorAll("[data-t-ph]").forEach(el => el.setAttribute("placeholder", T(el.dataset.tPh)));
   document.querySelectorAll("[data-t-alt]").forEach(el => el.setAttribute("alt", T(el.dataset.tAlt)));
   document.querySelectorAll(".idioma").forEach(b => b.setAttribute("aria-pressed", b.dataset.idioma === idioma));
   const aberto = $("#menu").classList.contains("aberto");
