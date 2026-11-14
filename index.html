@@ -186,6 +186,8 @@ p{margin:0 0 1rem}
 .cat-grade{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.8rem,2vw,1.4rem);list-style:none;padding:0;margin:0}
 .vplayer{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#d8c3ac}
 .vplayer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vposter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vplayer iframe{position:absolute;inset:0;z-index:4;width:100%;height:100%;border:0}
 .vpilula{position:absolute;top:.8rem;left:.8rem;z-index:2;max-width:calc(100% - 1.6rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:.35rem .75rem;border-radius:999px;background:rgba(239,233,225,.85);color:#3b322b;font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;transition:opacity .4s}
 .vrodape{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:3.6rem 1rem 1rem;background:linear-gradient(to top,rgba(30,22,17,.72),rgba(30,22,17,0));pointer-events:none;transition:opacity .4s}
 .vrodape strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.05rem;line-height:1.2;color:#efe9e1}
@@ -638,37 +640,108 @@ const destaques = [
 ];
 
 /* CATEGORIAS E VÍDEOS (seção 03)
-   A ordem aqui é a ordem da página. Cada vídeo precisa só do nome da marca:
-   o site procura o arquivo na pasta videos do GitHub com o nome da categoria e o número.
-   Exemplo: o 2º vídeo de Beleza é videos/beleza-02.mp4, com a capa videos/beleza-02.jpg.
-   Para usar outro nome de arquivo, escreva assim: { marca: "Profuse", arquivo: "videos/meu-video.mp4", capa: "videos/minha-capa.jpg" }
-   Enquanto o arquivo não existir, aparece um quadro bege escrito "Vídeo em breve". */
+   A ordem aqui é a ordem da página. Cada vídeo tem o nome da marca e o link do YouTube.
+   Para trocar por um arquivo próprio, suba o MP4 na pasta videos do GitHub e acrescente:
+   arquivo: "videos/beleza-01.mp4", capa: "videos/beleza-01.jpg"  (com arquivo, o site usa o MP4 no lugar do YouTube).
+   Se faltar vídeo numa categoria, aparece um quadro bege escrito "Vídeo em breve". */
 const VIDEOS_POR_CATEGORIA = 8; /* quantos vídeos aparecem em cada categoria */
 const categorias = [
   { chave: "beleza", nome: { pt: "Beleza", en: "Beauty" },
     descricao: { pt: "Skincare, make leve e cuidados com um toque sofisticado e natural.", en: "Skincare, light makeup and self care with a sophisticated, natural touch." },
-    videos: [{ marca: "Agustin Fernandez" }, { marca: "Profuse" }, { marca: "Aneethun" }, { marca: "Revlon" }, { marca: "Smart GR" }, { marca: "Rildy" }, { marca: "Boni Natural" }, { marca: "Theoric" }] },
+    videos: [
+      { marca: "Agustin Fernandez", youtube: "https://youtube.com/shorts/874zx_g4C10" },
+      { marca: "Profuse", youtube: "https://youtube.com/shorts/cMijf_BG4WY" },
+      { marca: "Aneethun", youtube: "https://youtube.com/shorts/z1HS9XDP_eM" },
+      { marca: "Revlon", youtube: "https://youtube.com/shorts/9rv-USVCHTI" },
+      { marca: "Smart GR", youtube: "https://youtube.com/shorts/XUV0xuQLdOk" },
+      { marca: "Rildy", youtube: "https://youtube.com/shorts/abf_HF8BpS4" },
+      { marca: "Boni Natural", youtube: "https://youtube.com/shorts/b2fs5q5_Mrk" },
+      { marca: "Theoric", youtube: "https://youtube.com/shorts/cKZx0V9Mjyo" }
+    ] },
   { chave: "moda", nome: { pt: "Moda", en: "Fashion" },
     descricao: { pt: "Looks clássicos e elegantes, do jeito basic not too basic.", en: "Classic, elegant looks, basic but never too basic." },
-    videos: [{ marca: "Villa Griffe" }, { marca: "Donna Guerriera" }, { marca: "Regina Rios" }, { marca: "Opt Óculos" }, { marca: "Camilove" }, { marca: "Flowfa" }, { marca: "Arroganza" }, { marca: "Mirante" }] },
+    videos: [
+      { marca: "Villa Griffe", youtube: "https://youtube.com/shorts/A5k4s6i9HQk" },
+      { marca: "Donna Guerriera", youtube: "https://youtube.com/shorts/nw9udFnUMzk" },
+      { marca: "Regina Rios", youtube: "https://youtube.com/shorts/Jf8jCJnqexM" },
+      { marca: "Opt Óculos", youtube: "https://youtube.com/shorts/ng4ifWUSroE" },
+      { marca: "Camilove", youtube: "https://youtube.com/shorts/ailKLJ6FEuI" },
+      { marca: "Flowfa", youtube: "https://youtube.com/shorts/zI0FIvigVpw" },
+      { marca: "Arroganza", youtube: "https://youtube.com/shorts/cE6oJi5At4k" },
+      { marca: "Mirante", youtube: "https://youtube.com/shorts/gvaQQKWIHlA" }
+    ] },
   { chave: "casal", nome: { pt: "Casal", en: "Couple" },
     descricao: { pt: "A rotina a dois, leve e real, com espaço para a sua marca.", en: "Life as a couple, light and real, with room for your brand." },
-    videos: [{ marca: "K&J Black" }, { marca: "K&J Black" }, { marca: "Estar Mais" }, { marca: "Abelheiro" }, { marca: "K&J Black" }, { marca: "Guará Plus" }, { marca: "Galiotto" }, { marca: "K&J Black" }] },
+    videos: [
+      { marca: "K&J Black", youtube: "https://youtube.com/shorts/zhJ0foMyo7I" },
+      { marca: "K&J Black", youtube: "https://youtube.com/shorts/yWzNE078sI4" },
+      { marca: "Estar Mais", youtube: "https://youtube.com/shorts/_yr7nX7WdbM" },
+      { marca: "Abelheiro", youtube: "https://youtube.com/shorts/6pFGVvTulfI" },
+      { marca: "K&J Black", youtube: "https://youtube.com/shorts/MAVEJIcUScY" },
+      { marca: "Guará Plus", youtube: "https://youtube.com/shorts/TJdWO2m20SY" },
+      { marca: "Galiotto", youtube: "https://youtube.com/shorts/imqL-dXzgKw" },
+      { marca: "K&J Black", youtube: "https://youtube.com/shorts/45I1OxfoQAs" }
+    ] },
   { chave: "fitness", nome: { pt: "Fitness", en: "Fitness" },
     descricao: { pt: "Treino, suplementação e bem-estar que cabem na rotina.", en: "Workouts, supplements and wellness that fit into the routine." },
-    videos: [{ marca: "Nutrata" }, { marca: "M.A." }, { marca: "Trinys" }, { marca: "Estar Mais" }, { marca: "Pump Gummy" }, { marca: "Take & Go" }, { marca: "Elementopuro" }, { marca: "Leg Gym" }] },
+    videos: [
+      { marca: "Nutrata", youtube: "https://youtube.com/shorts/efaA_zTnAKY" },
+      { marca: "M.A.", youtube: "https://youtube.com/shorts/T6ZFOHkZ8Po" },
+      { marca: "Trinys", youtube: "https://youtube.com/shorts/lsX_kDsTtB8" },
+      { marca: "Estar Mais", youtube: "https://youtube.com/shorts/Hhhd6151CmA" },
+      { marca: "Pump Gummy", youtube: "https://youtube.com/shorts/9H7T5fyp9aI" },
+      { marca: "Take & Go", youtube: "https://youtube.com/shorts/fYUahv09jqo" },
+      { marca: "Elementopuro", youtube: "https://youtube.com/shorts/RIk1raRopgg" },
+      { marca: "Leg Gym", youtube: "https://youtube.com/shorts/irZMV3XC2x4" }
+    ] },
   { chave: "casa", nome: { pt: "Casa e decoração", en: "Home and decor" },
     descricao: { pt: "Ambientes, utensílios e detalhes que deixam a casa com cara de lar.", en: "Spaces, kitchenware and details that make a house feel like home." },
-    videos: [{ marca: "Hoomy" }, { marca: "Cif" }, { marca: "Vinagreen" }, { marca: "Colormaq" }, { marca: "Coala" }, { marca: "AM Bordados" }, { marca: "AM Bordados" }, { marca: "Colormaq" }] },
+    videos: [
+      { marca: "Hoomy", youtube: "https://youtube.com/shorts/y_ZItWQhn6o" },
+      { marca: "Cif", youtube: "https://youtube.com/shorts/dZwXdSeEuYk" },
+      { marca: "Vinagreen", youtube: "https://youtube.com/shorts/vLKvo1v6EaA" },
+      { marca: "Colormaq", youtube: "https://youtube.com/shorts/kZCDDTGYTY4" },
+      { marca: "Coala", youtube: "https://youtube.com/shorts/00_qkUmpKQQ" },
+      { marca: "AM Bordados", youtube: "https://youtube.com/shorts/Tkjm74T4MEw" },
+      { marca: "AM Bordados", youtube: "https://youtube.com/shorts/Vzx5y4TzXvM" },
+      { marca: "Colormaq", youtube: "https://youtube.com/shorts/_nhPiQPW0X8" }
+    ] },
   { chave: "culinaria", nome: { pt: "Culinária", en: "Cooking" },
     descricao: { pt: "Receitas saudáveis e práticas, que dão vontade de provar.", en: "Healthy, practical recipes that make you want a taste." },
-    videos: [{ marca: "Nectar" }, { marca: "Andorinha" }, { marca: "Termolar" }, { marca: "Colormaq" }, { marca: "Galiotto" }, { marca: "Colormaq" }, { marca: "Luigi Limoncello" }, { marca: "Galiotto" }] },
+    videos: [
+      { marca: "Nectar", youtube: "https://youtube.com/shorts/8mTcra2UhSs" },
+      { marca: "Andorinha", youtube: "https://youtube.com/shorts/2ftW_HKVlg4" },
+      { marca: "Termolar", youtube: "https://youtube.com/shorts/_pb2l_smDfo" },
+      { marca: "Colormaq", youtube: "https://youtube.com/shorts/e1UV_eFa4h4" },
+      { marca: "Galiotto", youtube: "https://youtube.com/shorts/XSTzZKnPi20" },
+      { marca: "Colormaq", youtube: "https://youtube.com/shorts/8z1hzUgrT8k" },
+      { marca: "Luigi Limoncello", youtube: "https://youtube.com/shorts/OD-EN0c2sR4" },
+      { marca: "Galiotto", youtube: "https://youtube.com/shorts/OLlSa90hbLQ" }
+    ] },
   { chave: "experiencias", nome: { pt: "Experiências", en: "Experiences" },
     descricao: { pt: "Viagens, lugares e momentos vividos com a sua marca junto.", en: "Trips, places and moments lived with your brand along." },
-    videos: [{ marca: "Sam's Club" }, { marca: "Sam's Club" }, { marca: "Sam's Club" }, { marca: "Casa Vilemar" }, { marca: "Andy Cabelos" }, { marca: "Hotel Valle D'incanto" }, { marca: "Loja Sirius" }, { marca: "Sam's Club" }] },
+    videos: [
+      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/CACU5ZyaB6U" },
+      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/sB6sbfN6wTw" },
+      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/VapJSU8yV5Y" },
+      { marca: "Casa Vilemar", youtube: "https://youtube.com/shorts/6qB2m3ovgBg" },
+      { marca: "Andy Cabelos", youtube: "https://youtube.com/shorts/NxxUqJpf4xE" },
+      { marca: "Hotel Valle D'incanto", youtube: "https://youtube.com/shorts/U5cx2KKzQDw" },
+      { marca: "Loja Sirius", youtube: "https://youtube.com/shorts/xG2Oj6HcpCU" },
+      { marca: "Sam's Club", youtube: "https://youtube.com/shorts/ZX0PYCNYaAs" }
+    ] },
   { chave: "tech", nome: { pt: "Tech, apps e educação", en: "Tech, apps and education" },
     descricao: { pt: "Apps e serviços digitais explicados de um jeito simples e próximo.", en: "Apps and digital services explained in a simple, friendly way." },
-    videos: [{ marca: "Gymnamic" }, { marca: "Duo Gourmet" }, { marca: "Pitt Company" }, { marca: "iFood" }, { marca: "Duo Gourmet" }, { marca: "TB Financial" }, { marca: "Inglês Sem Neura" }, { marca: "TotalPass" }] }
+    videos: [
+      { marca: "Gymnamic", youtube: "https://youtube.com/shorts/mwCP6ZbEJrc" },
+      { marca: "Duo Gourmet", youtube: "https://youtube.com/shorts/7uKmJx0m3KM" },
+      { marca: "Pitt Company", youtube: "https://youtube.com/shorts/A-lost1LVLQ" },
+      { marca: "iFood", youtube: "https://youtube.com/shorts/2dpomLsC-P0" },
+      { marca: "Duo Gourmet", youtube: "https://youtube.com/shorts/OXIk3mdaFB8" },
+      { marca: "TB Financial", youtube: "https://youtube.com/shorts/XdiDPC7Fa5I" },
+      { marca: "Inglês Sem Neura", youtube: "https://youtube.com/shorts/yD940WiulXs" },
+      { marca: "TotalPass", youtube: "https://youtube.com/shorts/kQ64KmYQ4Yg" }
+    ] }
 ];
 
 /* Serviços (seis) */
@@ -824,12 +897,15 @@ function renderizaCategorias(classeRevela) {
     const cards = lista.map((v, i) => {
       const num = String(i + 1).padStart(2, "0");
       if (!v) return `<li><div class="vplayer sem-video" data-aviso="${esc(T("videoEmBreve"))}"></div></li>`;
-      const arquivo = v.arquivo || `videos/${c.chave}-${num}.mp4`;
-      const capa = v.capa || `videos/${c.chave}-${num}.jpg`;
+      const yt = !v.arquivo && v.youtube ? idDoYoutube(v.youtube) : "";
+      if (!v.arquivo && !yt) return `<li><div class="vplayer sem-video" data-aviso="${esc(T("videoEmBreve"))}"></div></li>`;
+      const midia = yt
+        ? `<img class="vposter" src="https://i.ytimg.com/vi/${esc(yt)}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">`
+        : `<video src="${esc(v.arquivo)}"${v.capa ? ` poster="${esc(v.capa)}"` : ""} preload="metadata" playsinline></video>`;
       return `
         <li>
-          <div class="vplayer" data-aviso="${esc(T("videoEmBreve"))}">
-            <video src="${esc(arquivo)}" poster="${esc(capa)}" preload="metadata" playsinline></video>
+          <div class="vplayer${yt ? " vplayer--yt" : ""}" data-aviso="${esc(T("videoEmBreve"))}"${yt ? ` data-yt="${esc(yt)}"` : ""}>
+            ${midia}
             <span class="vpilula">${esc(v.marca)}</span>
             <div class="vrodape"><strong>${esc(v.marca)}</strong><span>${esc(nome)}</span></div>
             <button class="vplay" type="button" data-rotulo="${esc(v.marca)}, ${esc(nome)}" aria-label="${esc(T("reproduzir"))}: ${esc(v.marca)}, ${esc(nome)}"><span class="circulo" aria-hidden="true"></span></button>
@@ -847,13 +923,40 @@ function renderizaCategorias(classeRevela) {
       </article>`;
   }).join("");
   document.querySelectorAll("#categorias video").forEach(ligaVideo);
+  document.querySelectorAll("#categorias .vplayer--yt").forEach(ligaYoutube);
+}
+function idDoYoutube(link) {
+  const m = String(link).match(/(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)([\w-]{11})/);
+  return m ? m[1] : String(link).trim();
+}
+function pausaTudo(exceto) {
+  document.querySelectorAll("#categorias video").forEach(o => { if (o !== exceto) o.pause(); });
+  document.querySelectorAll("#categorias .vplayer--yt.tocando").forEach(caixa => {
+    if (caixa === exceto) return;
+    caixa.querySelector("iframe")?.remove();
+    caixa.classList.remove("tocando");
+  });
+}
+/* Vídeo do YouTube: mostra a capa e só carrega o player quando a pessoa clica */
+function ligaYoutube(caixa) {
+  const botao = caixa.querySelector(".vplay");
+  botao.addEventListener("click", () => {
+    pausaTudo(caixa);
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(caixa.dataset.yt)}?autoplay=1&playsinline=1&rel=0&iv_load_policy=3`;
+    f.title = botao.dataset.rotulo;
+    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    f.allowFullscreen = true;
+    caixa.appendChild(f);
+    caixa.classList.add("tocando");
+  });
 }
 function ligaVideo(video) {
   const caixa = video.parentElement, botao = caixa.querySelector(".vplay");
   const marcaSemVideo = () => { video.pause(); caixa.classList.add("sem-video"); caixa.classList.remove("tocando"); };
   video.addEventListener("error", marcaSemVideo);
   video.addEventListener("play", () => {
-    document.querySelectorAll("#categorias video").forEach(o => { if (o !== video) o.pause(); });
+    pausaTudo(video);
     caixa.classList.add("tocando");
     botao.setAttribute("aria-label", `${T("pausar")}: ${botao.dataset.rotulo}`);
   });
