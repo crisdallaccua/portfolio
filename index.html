@@ -155,21 +155,33 @@ p{margin:0 0 1rem}
 /* Sobre mim (paleta Caramelo) */
 .sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1;padding-bottom:clamp(4rem,7vw,6rem)}
 /* bloco 1: foto + texto, alinhados pelo topo */
-.sobre .sobre-grade{grid-template-columns:1fr 1.1fr;align-items:start}
+.sobre .sobre-grade{grid-template-columns:1.1fr 1fr;align-items:start}
 .sobre-foto{position:relative;align-self:start}
 .sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;border-radius:8px;z-index:0}
 .sobre-foto .midia{position:relative;z-index:1;aspect-ratio:4/5;border-radius:8px;overflow:hidden}
 .sobre-foto img{object-fit:cover;object-position:50% 80%;filter:sepia(.12) saturate(1.05)}
 .sobre-etiqueta{margin:0 0 1.2rem;font-size:.72rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:#a9825f}
-.sobre-titulo{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.1;color:#3b322b;margin:0 0 1.8rem}
+.sobre-titulo{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.1;color:#3b322b;margin:0 0 1.1rem}
 .sobre-titulo em{font-style:italic;color:#a9825f}
-.sobre .sobre-texto p{line-height:1.85;margin:0 0 1.3rem}
+.sobre .sobre-texto p{line-height:1.85;margin:0 0 .9rem}
 .sobre .sobre-texto strong{font-weight:500;color:#3b322b}
 .sobre-impacto{font-family:var(--titulo);font-size:1.25em;color:#a9825f;white-space:nowrap}
+/* bloco claro: cada cena tem uma função */
+.sobre-verbos{margin:.4rem 0 0;padding:1.1rem 0 .4rem;border-top:1px solid #d9cfc3;border-bottom:1px solid #d9cfc3}
+.sobre .sobre-texto .verbos-titulo{margin:0 0 .6rem;font-family:var(--titulo);font-weight:400;font-size:1.35rem;line-height:1.3;color:#3b322b}
+.verbos-lista{list-style:none;padding:0;margin:0}
+.verbos-lista li{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:1rem;padding:.55rem 0}
+.verbos-lista li+li{border-top:1px solid #d9cfc3}
+.verbo{font-family:var(--titulo);font-size:1.35rem;line-height:1.2;color:#a9825f}
+.sobre .sobre-texto .verbos-lista p{margin:0;font-size:.9rem;line-height:1.5;color:#5f5044}
+/* coluna da direita com a mesma altura da foto: caixinhas alinhadas à base */
+.sobre .sobre-grade{align-items:stretch}
+.sobre .sobre-texto{display:flex;flex-direction:column}
+.sobre .sobre-tags{margin-top:auto;padding-top:1.1rem}
 /* etiquetas e botão: três do mesmo tamanho, uma de cada cor da paleta */
 .sobre-tags{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;list-style:none;padding:0;margin:1.8rem 0 0}
 .sobre-tags li{display:flex}
-.sobre-tag{display:flex;align-items:center;justify-content:center;width:100%;min-height:46px;padding:.6rem .8rem;border-radius:4px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-align:center;white-space:nowrap}
+.sobre-tag{display:flex;align-items:center;justify-content:center;width:100%;padding:10px .6rem;border-radius:4px;font-size:.66rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;text-align:center;white-space:nowrap}
 .sobre-tag--bege{background:#d8c3ac;color:#3b322b}
 .sobre-tag--caramelo{background:#a9825f;color:#efe9e1}
 a.sobre-tag--marrom{background:#3b322b;color:#efe9e1;text-decoration:none;transition:background .3s}
@@ -464,6 +476,15 @@ a.sobre-tag--marrom:hover{background:#a9825f}
         <h2 id="titulo-sobre" class="sobre-titulo"><span data-t="sobreOla">Olá, eu sou</span> <em data-t="sobreOlaDestaque">a Cris.</em></h2>
         <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
         <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
+        <!-- CADA CENA TEM UMA FUNÇÃO -->
+        <div class="sobre-verbos">
+          <h3 class="verbos-titulo" data-t="metodoTituloUnico">Cada cena tem uma função.</h3>
+          <ul class="verbos-lista">
+            <li><span class="verbo" data-t="verbo1">Prender.</span><p data-t="verbo1Txt">Ganchos que seguram nos primeiros segundos.</p></li>
+            <li><span class="verbo" data-t="verbo2">Encantar.</span><p data-t="verbo2Txt">Estética e verdade de quem indica pra uma amiga.</p></li>
+            <li><span class="verbo" data-t="verbo3">Vender.</span><p data-t="verbo3Txt">Cada vídeo pensado para levar à compra.</p></li>
+          </ul>
+        </div>
         <ul class="sobre-tags">
           <li class="sobre-tag sobre-tag--bege" data-t="tagMarcas">+200 marcas</li>
           <li class="sobre-tag sobre-tag--caramelo">Porto Alegre · RS</li>
@@ -471,18 +492,6 @@ a.sobre-tag--marrom:hover{background:#a9825f}
         </ul>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ FAIXA COMO EU TRABALHO ============ -->
-<section class="faixa-metodo" aria-labelledby="titulo-metodo">
-  <div class="wrap faixa-metodo-grade revela">
-    <h2 id="titulo-metodo" class="metodo-titulo" data-t="metodoTituloUnico">Cada cena tem uma função.</h2>
-    <ol class="metodo-lista">
-      <li><h3 class="metodo-verbo" data-t="verbo1">Prender.</h3><p data-t="verbo1Txt">Ganchos que seguram nos primeiros segundos.</p></li>
-      <li><h3 class="metodo-verbo" data-t="verbo2">Encantar.</h3><p data-t="verbo2Txt">Estética e verdade de quem indica pra uma amiga.</p></li>
-      <li><h3 class="metodo-verbo" data-t="verbo3">Vender.</h3><p data-t="verbo3Txt">Cada vídeo pensado para levar à compra.</p></li>
-    </ol>
   </div>
 </section>
 
