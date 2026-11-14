@@ -166,6 +166,15 @@ p{margin:0 0 1rem}
 .sobre-foto::before{content:"";position:absolute;inset:0;transform:translate(-14px,-14px);background:#d8c3ac;border-radius:8px;z-index:0}
 .sobre-foto .midia{position:relative;z-index:1;flex:1;min-height:440px;border-radius:8px;overflow:hidden}
 .sobre-foto img{object-fit:cover;object-position:62% 100%;transform:scale(1.12);transform-origin:55% 100%;filter:sepia(.12) saturate(1.05)}
+/* diferenciais compactos dentro do Sobre mim */
+.sobre-dif{margin:2.2rem 0 0;padding-top:1.6rem;border-top:1px solid #d9cfc3}
+.sobre .sobre-texto .dif-titulo{margin:0 0 .8rem;font-family:var(--titulo);font-size:1.3rem;line-height:1.35;color:#3b322b}
+.dif-titulo em{font-style:normal;color:#a9825f}
+.dif-lista{list-style:none;padding:0;margin:0}
+.dif-lista li{display:grid;grid-template-columns:2.2rem 1fr;gap:.4rem;padding:.8rem 0;border-bottom:1px solid #d9cfc3}
+.dif-lista .metodo-num{margin:0;font-size:1.1rem;line-height:1.4}
+.dif-lista strong{display:block;font-family:var(--titulo);font-weight:400;font-size:1.05rem;color:#3b322b}
+.sobre .sobre-texto .dif-lista p{margin:.2rem 0 0;font-size:.92rem;line-height:1.6;color:#5f5044}
 /* etiquetas */
 .sobre-tags{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;padding:0;margin:2rem 0 2.2rem}
 .sobre-tag{padding:.45rem 1rem;border:1px solid #d9cfc3;border-radius:999px;font-size:.66rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#5f5044;white-space:nowrap}
@@ -458,24 +467,21 @@ a.sobre-tag--marrom:hover{background:#a9825f;border-color:#a9825f}
         <p data-t-html="sobreP1">Sou <strong>criadora de conteúdo UGC e influenciadora</strong>, de Porto Alegre. Transformei em profissão aquilo que eu já vivia: <strong>viajar, cozinhar, treinar, me cuidar e me vestir bem</strong>.</p>
         <p><span data-t-html="sobreP2">Meu estilo é clássico e natural, <strong>basic not too basic</strong>, e sou detalhista com estética: luz, cor, enquadramento, cada cena pensada. É com esse cuidado que eu levo cada produto para uma rotina real e bonita, onde ele não parece anúncio.</span> <span class="sobre-impacto" data-t="sobreImpacto">Parece indicação.</span></p>
         <p data-t-html="sobreP3"><strong>Mais de 400 vídeos e 200 marcas</strong> depois, sigo acreditando no mesmo: conteúdo bonito só faz sentido quando vende. Talvez seja por isso que <strong>tantas marcas voltam</strong>.</p>
+        <!-- COMO EU TRABALHO (diferenciais) -->
+        <div class="sobre-dif">
+          <p class="dif-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></p>
+          <ol class="dif-lista">
+            <li><span class="metodo-num" aria-hidden="true">i</span><div><strong data-t="dif1Nome">Conexão</strong><p data-t="dif1">Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.</p></div></li>
+            <li><span class="metodo-num" aria-hidden="true">ii</span><div><strong data-t="dif2Nome">Criatividade</strong><p data-t="dif2">Ideias e roteiros que fogem do óbvio, com estética cuidada em cada cena para prender a atenção logo nos primeiros segundos.</p></div></li>
+            <li><span class="metodo-num" aria-hidden="true">iii</span><div><strong data-t="dif3Nome">Estratégia</strong><p data-t="dif3">Cada vídeo pensado para o objetivo da marca: despertar desejo, tirar dúvidas e levar à compra.</p></div></li>
+          </ol>
+        </div>
         <ul class="sobre-tags">
           <li class="sobre-tag sobre-tag--bege" data-t="tagMarcas">+200 marcas trabalhadas</li>
           <li class="sobre-tag sobre-tag--caramelo">Porto Alegre · RS</li>
           <li><a class="sobre-tag sobre-tag--marrom" href="#contato" data-t="tagFale">Fale comigo</a></li>
         </ul>
       </div>
-    </div>
-
-    <!-- COMO EU TRABALHO -->
-    <div class="sobre-metodo revela">
-      <h3 class="metodo-titulo"><span data-t="metodoTitulo">Cada cena tem uma função:</span> <em data-t="metodoDestaque">prender, encantar e vender.</em></h3>
-      <p class="metodo-intro" data-t="metodoIntro">Crio conteúdos que unem conexão, criatividade e estratégia para gerar resultados para as marcas.</p>
-      <ol class="metodo-lista">
-        <li><span class="metodo-num" aria-hidden="true">i</span><h4 class="metodo-nome" data-t="dif1Nome">Conexão</h4><p data-t="dif1">Comunicação próxima, que gera identificação com mulheres e faz quem assiste confiar no que eu indico.</p></li>
-        <li><span class="metodo-num" aria-hidden="true">ii</span><h4 class="metodo-nome" data-t="dif2Nome">Criatividade</h4><p data-t="dif2">Ideias e roteiros que fogem do óbvio, com estética cuidada em cada cena para prender a atenção logo nos primeiros segundos.</p></li>
-        <li><span class="metodo-num" aria-hidden="true">iii</span><h4 class="metodo-nome" data-t="dif3Nome">Estratégia</h4><p data-t="dif3">Cada vídeo pensado para o objetivo da marca: despertar desejo, tirar dúvidas e levar à compra.</p></li>
-      </ol>
-      <p class="sobre-assinatura">Cristiane Dall' Accua<small>UGC Creator</small></p>
     </div>
   </div>
 </section>
