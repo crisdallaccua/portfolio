@@ -153,7 +153,7 @@ p{margin:0 0 1rem}
 .assinatura small{display:block;font-family:var(--corpo);font-style:normal;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--texto-suave);margin-top:.3rem}
 
 /* Sobre mim (paleta Caramelo) */
-.sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1;padding-bottom:clamp(4rem,7vw,6rem)}
+.sobre{--texto:#3b322b;--texto-suave:#5f5044;--linha:#d9cfc3;background:#efe9e1;padding-bottom:clamp(3rem,5vw,4.5rem)}
 /* bloco 1: foto + texto, alinhados pelo topo */
 .sobre .sobre-grade{grid-template-columns:1.1fr 1fr;align-items:start}
 .sobre-foto{position:relative;align-self:start}
@@ -236,6 +236,24 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 .destaque--player .vplay{border-radius:0}
 .destaque--player .vplayer:not(.tocando) .circulo{opacity:0}
 .destaque--player .vplay:focus-visible .circulo{opacity:1}
+
+/* Destaques no fundo escuro */
+.destaques-escuro{background:#3b322b;padding:clamp(4.5rem,9vw,7rem) 0}
+.destaques-cabeca{margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.destaques-titulo{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.1;color:#efe9e1}
+.destaques-titulo em{font-style:normal;color:#a9825f}
+.destaques-escuro .destaque{border:0;background:none;padding:0}
+.destaques-escuro .destaque .vplayer{border-radius:12px;margin-bottom:1.3rem;background:#5f5044}
+.destaques-escuro .destaque .vplayer .vplay{border-radius:12px}
+.destaques-escuro .vposter{object-fit:cover;object-position:50% 50%}
+.destaques-escuro .destaque-info{padding:0}
+.destaques-escuro .destaque .grande{color:#a9825f}
+.destaques-escuro .destaque .rotulo{margin:.5rem 0 .7rem;color:#d8c3ac}
+.destaques-escuro .destaque p{color:#d8c3ac;font-size:.92rem}
+.destaques-escuro .destaque--player .vplayer:not(.tocando) .circulo{opacity:1}
+.destaques-total{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:.4rem 1.2rem;margin-top:clamp(3rem,6vw,4.5rem);padding-top:clamp(2rem,4vw,3rem);border-top:1px solid #5f5044;text-align:center}
+.destaques-total strong{font-family:var(--titulo);font-weight:400;font-size:clamp(3rem,7vw,5rem);line-height:1;color:#a9825f}
+.destaques-total span{font-size:1rem;color:#d8c3ac}
 
 /* Trabalhos: categorias com vídeos */
 .cat-abertura{margin-bottom:clamp(3.5rem,8vw,6rem)}
@@ -496,10 +514,18 @@ a.sobre-tag--marrom:hover{background:#a9825f}
 </section>
 
 <!-- ============ 02 DESTAQUES ============ -->
-<section class="secao" id="destaques" aria-labelledby="titulo-destaques">
+<section class="destaques-escuro" id="destaques" aria-labelledby="titulo-destaques">
   <div class="wrap">
-    <div class="cabeca revela"><span class="num">02</span><h2 id="titulo-destaques" data-t="destTitulo">Conteúdos de destaque</h2><span class="rotulo" data-t="destRotulo">Os que mais rodaram</span></div>
+    <div class="destaques-cabeca revela">
+      <p class="cat-etiqueta" data-t="destEtiqueta">Destaques</p>
+      <h2 id="titulo-destaques" class="destaques-titulo"><span data-t="destTitulo1">Conteúdos que</span> <em data-t="destTitulo2">mais rodaram.</em></h2>
+    </div>
     <div class="destaques" id="lista-destaques"><!-- preenchido pelo script (array destaques) --></div>
+    <!-- TOTAL SOMADO: 393 mil + 1,7M + 117 mil -->
+    <div class="destaques-total revela">
+      <strong data-t="destTotal">+2,2M</strong>
+      <span data-t="destTotalTxt">views somadas só nestes três vídeos</span>
+    </div>
   </div>
 </section>
 
@@ -647,7 +673,7 @@ const textos = {
     prom1: "Roteiro aprovado por você antes de gravar",
     prom2: "Uma rodada de ajuste inclusa em cada entrega",
     prom3: "Entrega em até 72 horas úteis",
-    destTitulo: "Conteúdos de destaque", destRotulo: "Os que mais rodaram",
+    destTitulo: "Conteúdos de destaque", destRotulo: "Os que mais rodaram", destEtiqueta: "Destaques", destTitulo1: "Conteúdos que", destTitulo2: "mais rodaram.", destTotal: "+2,2M", destTotalTxt: "views somadas só nestes três vídeos",
     assistir: "Assistir", capaVideo: "Capa do vídeo 9:16", capaQuadrada: "Capa 1:1", para: "para",
     trabTitulo: "Trabalhos por nicho", trabRotulo: "Filtre pelo seu", filtrosAria: "Filtrar trabalhos por nicho", todos: "Todos",
     servTitulo: "Como eu te ajudo", servRotulo: "Serviços",
@@ -697,7 +723,7 @@ const textos = {
     prom1: "Script approved by you before filming",
     prom2: "One round of revisions included in every delivery",
     prom3: "Delivery within 72 business hours",
-    destTitulo: "Featured content", destRotulo: "My top performers",
+    destTitulo: "Featured content", destRotulo: "My top performers", destEtiqueta: "Highlights", destTitulo1: "Content that", destTitulo2: "performed best.", destTotal: "+2.2M", destTotalTxt: "combined views on these three videos alone",
     assistir: "Watch", capaVideo: "Video cover 9:16", capaQuadrada: "Cover 1:1", para: "for",
     trabTitulo: "Work by niche", trabRotulo: "Filter by yours", filtrosAria: "Filter work by niche", todos: "All",
     servTitulo: "How I can help", servRotulo: "Services",
@@ -736,15 +762,15 @@ const destaques = [
   { link: "https://www.instagram.com/reel/DdOs2PZxzyi/", capa: "destaque1.jpg", youtube: "https://youtube.com/shorts/cMijf_BG4WY",
     numero: { pt: "+393 mil", en: "+393K" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Profuse", en: "Profuse" },
-    contexto: { pt: "Skincare · protetor solar ultrafluido FPS 60, mostrado na rotina de cuidados com a pele.", en: "Skincare · ultra-fluid SPF 60 sunscreen, shown in a real skincare routine." } },
-  { link: "https://www.instagram.com/reel/DX68BwCtNYO/", capa: "destaque2.jpg",
+    contexto: { pt: "Skincare · protetor solar FPS 60 na rotina", en: "Skincare · SPF 60 sunscreen in a daily routine" } },
+  { link: "https://www.instagram.com/reel/DX68BwCtNYO/", capa: "destaque2.jpg", youtube: "https://youtube.com/shorts/4mo9ijTNsSQ",
     numero: { pt: "+1,7M", en: "+1.7M" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Di Santinni", en: "Di Santinni" },
-    contexto: { pt: "Moda · sapatilha Moleca apresentada em um look elegante do dia a dia.", en: "Fashion · Moleca ballet flats styled in an elegant everyday look." } },
+    contexto: { pt: "Moda · sapatilha Moleca em look do dia a dia", en: "Fashion · Moleca flats in an everyday look" } },
   { link: "https://www.instagram.com/reel/DQxoRguADfV/", capa: "destaque3.jpg", youtube: "https://youtube.com/shorts/874zx_g4C10",
     numero: { pt: "+117 mil", en: "+117K" }, rotulo: { pt: "views no reels", en: "reel views" },
     titulo: { pt: "Agustin Fernandez", en: "Agustin Fernandez" },
-    contexto: { pt: "Beleza · máscara de cílios aplicada no espelho, do primeiro toque ao resultado final.", en: "Beauty · mascara applied in the mirror, from the first stroke to the final look." } }
+    contexto: { pt: "Beleza · máscara de cílios, do toque ao resultado", en: "Beauty · mascara, from first stroke to result" } }
 ];
 
 /* CATEGORIAS E VÍDEOS (seção 03)
@@ -948,7 +974,6 @@ function renderiza() {
       <div class="destaque-info">
         <strong class="grande">${esc(tr(d.numero))}</strong>
         <span class="rotulo">${esc(tr(d.rotulo))}</span>
-        <h3>${esc(tr(d.titulo))}</h3>
         <p>${esc(tr(d.contexto))}</p>
       </div>`;
     const capa = d.capa ? `<img class="vposter" src="${esc(d.capa)}" alt="" loading="lazy" decoding="async">` : "";
@@ -958,6 +983,7 @@ function renderiza() {
     <article class="destaque destaque--player ${revela}">
       <div class="midia midia--9x16 vplayer vplayer--yt" data-yt="${esc(idDoYoutube(d.youtube))}">
         ${capa}
+        <span class="vpilula">${esc(tr(d.titulo))}</span>
         <button class="vplay" type="button" data-rotulo="${esc(tr(d.titulo))}" aria-label="${esc(T("reproduzir"))}: ${esc(tr(d.titulo))}"><span class="circulo" aria-hidden="true"></span></button>
       </div>${info}
     </article>`;
