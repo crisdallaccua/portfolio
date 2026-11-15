@@ -906,8 +906,7 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
         </div>
       </div>
       <div class="revela contato-card">
-        <!-- FORMULÁRIO: para as mensagens chegarem no seu e-mail, coloque o código do Formspree em FORMSPREE_ID (no começo do script).
-             Enquanto FORMSPREE_ID estiver vazio, o botão abre o WhatsApp com a mensagem já preenchida. -->
+        <!-- FORMULÁRIO: as mensagens vão para o e-mail em EMAIL_FORMULARIO (no script), pelo FormSubmit. Se falhar, abre o WhatsApp. -->
         <form class="form contato-form" id="form-contato" novalidate>
           <div class="campo"><label class="so-leitor" for="c-nome" data-t="lblNome">Nome</label><input id="c-nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome" data-t-ph="phNome"></div>
           <div class="campo"><label class="so-leitor" for="c-email" data-t="lblEmail">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email" required placeholder="Seu e-mail" data-t-ph="phEmail"></div>
@@ -1790,9 +1789,10 @@ function ligarFormulario(form, ok, aoEnviar) {
   });
 }
 /* FORMULÁRIO DE CONTATO
-   FORMSPREE_ID: cole aqui o código do seu formulário no Formspree (ex.: "xyzabcd").
-   Vazio = o botão abre o WhatsApp com a mensagem preenchida. */
-const FORMSPREE_ID = "";
+   As mensagens chegam no e-mail abaixo pelo serviço gratuito FormSubmit (formsubmit.co).
+   Se o envio falhar, o site abre o WhatsApp com a mensagem pronta, para o contato não se perder.
+   Vazio = sempre abre o WhatsApp. */
+const EMAIL_FORMULARIO = "contatocrisdallaccua@gmail.com";
 (function () {
   const form = $("#form-contato"), ok = $("#ok-contato"), erro = $("#erro-contato");
   const whatsCom = (d) => {
@@ -1809,11 +1809,12 @@ const FORMSPREE_ID = "";
     const invalido = [...form.querySelectorAll("[required]")].find(c => !c.value.trim() || !c.checkValidity());
     if (invalido) { invalido.focus(); invalido.reportValidity && invalido.reportValidity(); return; }
     const d = { nome: form.nome.value.trim(), marca: form.marca.value.trim(), email: form.email.value.trim(), mensagem: form.mensagem.value.trim() };
-    if (!FORMSPREE_ID) { window.open(whatsCom(d), "_blank", "noopener"); mostraOk(d.nome, true); return; }
+    if (!EMAIL_FORMULARIO) { window.open(whatsCom(d), "_blank", "noopener"); mostraOk(d.nome, true); return; }
     const botao = form.querySelector("button[type=submit]"); botao.disabled = true;
     try {
-      const r = await fetch("https://formspree.io/f/" + FORMSPREE_ID, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify({ ...d, _subject: "Contato pelo portfólio: " + d.nome }) });
-      if (!r.ok) throw new Error("falhou");
+      const r = await fetch("https://formsubmit.co/ajax/" + EMAIL_FORMULARIO, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify({ Nome: d.nome, "Marca / empresa": d.marca || "-", "E-mail": d.email, Mensagem: d.mensagem, _replyto: d.email, _subject: "Novo contato pelo portfólio: " + d.nome + (d.marca ? " (" + d.marca + ")" : ""), _template: "table", _captcha: "false" }) });
+      const res = await r.json().catch(() => ({}));
+      if (!r.ok || String(res.success) !== "true") throw new Error("falhou");
       mostraOk(d.nome, false);
     } catch (x) {
       erro.hidden = false; window.open(whatsCom(d), "_blank", "noopener");
