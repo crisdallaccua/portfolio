@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Entrar · Painel da Cris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{min-height:100vh;display:grid;place-items:center;padding:1.25rem;background:#efe9e1;color:#3b322b;font-family:"Jost",system-ui,sans-serif;font-weight:300;font-size:15px;line-height:1.6}
+  .cartao{width:100%;max-width:380px;background:#f7f3ee;border:1px solid #d9cfc3;border-radius:12px;padding:32px 28px}
+  .marca{margin:0 0 4px;font-size:11px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#a9825f}
+  h1{margin:0 0 22px;font-size:20px;font-weight:400;letter-spacing:.01em}
+  label{display:block;margin:0 0 6px;font-size:12px;font-weight:400;color:#5f5044}
+  input{width:100%;height:44px;margin:0 0 16px;padding:0 12px;border:1px solid #d9cfc3;border-radius:6px;background:#fff;color:#3b322b;font:inherit;font-size:15px}
+  input:focus{outline:none;border-color:#a9825f;box-shadow:0 0 0 3px rgba(169,130,95,.18)}
+  .botao{width:100%;height:46px;border:0;border-radius:4px;background:#3b322b;color:#efe9e1;font:inherit;font-size:13px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+  .botao:hover{background:#5f5044}
+  .botao:disabled{opacity:.6;cursor:wait}
+  .link{display:inline-block;margin-top:16px;padding:0;border:0;background:none;color:#5f5044;font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  .link:hover{color:#a9825f}
+  .faixa{margin:0 0 16px;padding:10px 12px;border-radius:6px;font-size:13px;line-height:1.45}
+  .faixa--erro{background:#f4dcd6;color:#8a3b2c;border:1px solid #e8c3b9}
+  .faixa--ok{background:#e1e8d9;color:#45603b;border:1px solid #cad8bd}
+  .dica{margin:-6px 0 18px;font-size:12px;color:#5f5044}
+  [hidden]{display:none!important}
+  .voltar{display:block;margin-top:22px;text-align:center;font-size:12px;color:#5f5044;text-decoration:none}
+  .voltar:hover{color:#a9825f}
+</style>
+</head>
+<body>
+<main class="cartao">
+  <p class="marca">Cris Dall' Accua</p>
+
+  <!-- ENTRAR -->
+  <form id="form-entrar" novalidate>
+    <h1>Entrar no painel</h1>
+    <p class="faixa" id="aviso" role="alert" hidden></p>
+    <label for="email">E-mail</label>
+    <input id="email" name="email" type="email" autocomplete="username" required>
+    <label for="senha">Senha</label>
+    <input id="senha" name="senha" type="password" autocomplete="current-password" required>
+    <button class="botao" type="submit" id="btn-entrar">Entrar</button>
+    <button class="link" type="button" id="btn-esqueci">Esqueci minha senha</button>
+  </form>
+
+  <!-- NOVA SENHA (aparece quando você abre o link do e-mail de recuperação) -->
+  <form id="form-nova" novalidate hidden>
+    <h1>Criar uma senha nova</h1>
+    <p class="faixa" id="aviso-nova" role="alert" hidden></p>
+    <label for="nova">Senha nova</label>
+    <input id="nova" type="password" autocomplete="new-password" minlength="8" required>
+    <p class="dica">Pelo menos 8 caracteres.</p>
+    <button class="botao" type="submit" id="btn-nova">Salvar e entrar</button>
+  </form>
+
+  <a class="voltar" href="../">Voltar para o portfólio</a>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/banco.js"></script>
+<script>
+const $ = (s) => document.querySelector(s);
+const sb = window.sb;
+const ADMIN = "../admin/";
+
+function mostra(el, texto, tipo) {
+  el.textContent = texto;
+  el.className = "faixa faixa--" + (tipo || "erro");
+  el.hidden = false;
+}
+
+/* Traduz os erros do Supabase. Nunca mostra o texto em inglês. */
+function traduz(erro) {
+  const m = String((erro && (erro.message || erro.code)) || "").toLowerCase();
+  if (m.includes("invalid login") || m.includes("invalid_credentials") || m.includes("invalid credentials")) return "E-mail ou senha incorretos";
+  if (m.includes("not confirmed")) return "Esse e-mail ainda não foi confirmado. Confirme pelo link que chegou no e-mail.";
+  if (m.includes("rate limit") || m.includes("too many")) return "Muitas tentativas seguidas. Espere alguns minutos e tente de novo.";
+  if (m.includes("should be different")) return "A senha nova precisa ser diferente da antiga.";
+  if (m.includes("password") && m.includes("characters")) return "A senha precisa ter pelo menos 8 caracteres.";
+  if (m.includes("fetch") || m.includes("network")) return "Sem conexão com o banco. Confira a internet e tente de novo.";
+  return "Não deu certo agora. Tente de novo em instantes.";
+}
+
+const veioDoEmailDeRecuperacao = /type=recovery/.test(location.hash + location.search);
+
+function abreNovaSenha() {
+  $("#form-entrar").hidden = true;
+  $("#form-nova").hidden = false;
+  $("#nova").focus();
+}
+
+(async function inicio() {
+  if (!sb) { mostra($("#aviso"), "Não consegui carregar o sistema de login. Recarregue a página."); return; }
+
+  sb.auth.onAuthStateChange((evento) => { if (evento === "PASSWORD_RECOVERY") abreNovaSenha(); });
+
+  if (veioDoEmailDeRecuperacao) { abreNovaSenha(); return; }
+
+  /* Já tem sessão aberta? Vai direto para o painel. */
+  const { data } = await sb.auth.getSession();
+  if (data && data.session) { location.replace(ADMIN); return; }
+  $("#email").focus();
+})();
+
+/* ENTRAR */
+$("#form-entrar").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const aviso = $("#aviso"); aviso.hidden = true;
+  const email = $("#email").value.trim(), senha = $("#senha").value;
+  if (!email || !senha) { mostra(aviso, "Preencha o e-mail e a senha."); return; }
+  const botao = $("#btn-entrar"); botao.disabled = true; botao.textContent = "Entrando...";
+  try {
+    const { error } = await sb.auth.signInWithPassword({ email, password: senha });
+    if (error) throw error;
+    location.replace(ADMIN);
+  } catch (erro) {
+    mostra(aviso, traduz(erro));
+    botao.disabled = false; botao.textContent = "Entrar";
+  }
+});
+
+/* ESQUECI MINHA SENHA */
+$("#btn-esqueci").addEventListener("click", async () => {
+  const aviso = $("#aviso");
+  const email = $("#email").value.trim();
+  if (!email) { mostra(aviso, "Escreva o seu e-mail no campo acima e clique de novo em Esqueci minha senha."); $("#email").focus(); return; }
+  const volta = location.origin + location.pathname;
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: volta });
+  if (error) { mostra(aviso, traduz(error)); return; }
+  mostra(aviso, "Pronto. Se esse e-mail tiver acesso, chega uma mensagem com o link para criar uma senha nova. Olhe também a caixa de spam.", "ok");
+});
+
+/* SALVAR A SENHA NOVA */
+$("#form-nova").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const aviso = $("#aviso-nova"); aviso.hidden = true;
+  const senha = $("#nova").value;
+  if (senha.length < 8) { mostra(aviso, "A senha precisa ter pelo menos 8 caracteres."); return; }
+  const botao = $("#btn-nova"); botao.disabled = true;
+  const { error } = await sb.auth.updateUser({ password: senha });
+  botao.disabled = false;
+  if (error) { mostra(aviso, traduz(error)); return; }
+  mostra(aviso, "Senha nova salva. Abrindo o painel...", "ok");
+  setTimeout(() => location.replace(ADMIN), 900);
+});
+</script>
+</body>
+</html>
