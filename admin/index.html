@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="verificando">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel · Cris Dall' Accua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Nada aparece antes de conferir a sessão */
+html.verificando body{visibility:hidden}
+
+:root{
+  --areia:#efe9e1; --texto:#3b322b; --suave:#5f5044; --caramelo:#a9825f; --nude:#d8c3ac; --linha:#d9cfc3;
+  --papel:#f7f3ee; --branco:#fffdfa;
+  --verde:#4f6b45; --verde-bg:#e1e8d9; --amarelo:#8a6a1f; --amarelo-bg:#f5e6bf; --vermelho:#9a3b2b; --vermelho-bg:#f4dcd6;
+  --menu:232px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--areia);color:var(--texto);font-family:"Jost",system-ui,sans-serif;font-weight:300;font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+svg.ic{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- MENU LATERAL ---------- */
+.menu{position:fixed;top:0;left:0;bottom:0;width:var(--menu);display:flex;flex-direction:column;background:var(--papel);border-right:1px solid var(--linha);z-index:30;transition:transform .25s}
+.menu-topo{padding:22px 20px 14px}
+.menu-topo strong{display:block;font-weight:400;font-size:15px}
+.menu-topo span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--caramelo)}
+.menu nav{flex:1;overflow-y:auto;padding:6px 12px}
+.menu h2{margin:18px 8px 6px;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--suave);opacity:.75}
+.menu nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;margin:1px 0;border-radius:6px;color:var(--suave);text-decoration:none;font-weight:400}
+.menu nav a:hover{background:rgba(169,130,95,.08);color:var(--texto)}
+.menu nav a.ativo{background:rgba(169,130,95,.16);color:var(--texto)}
+.menu nav a.ativo svg{color:var(--caramelo)}
+.menu-pe{padding:14px 20px 18px;border-top:1px solid var(--linha);font-size:12px;color:var(--suave)}
+.menu-pe .email{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px}
+.sair{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--linha);border-radius:4px;background:transparent;cursor:pointer;font-size:12px}
+.sair:hover{border-color:var(--caramelo);color:var(--caramelo)}
+.veu{position:fixed;inset:0;background:rgba(59,50,43,.35);z-index:25}
+
+/* ---------- CONTEÚDO ---------- */
+.conteudo{margin-left:var(--menu);min-height:100vh;padding:22px 28px 60px}
+.topo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.topo h1{margin:0;font-size:18px;font-weight:400}
+.sanduiche{display:none;width:38px;height:38px;place-items:center;border:1px solid var(--linha);border-radius:6px;background:var(--papel);cursor:pointer}
+@media (max-width:900px){
+  .menu{transform:translateX(-100%)}
+  .menu.aberto{transform:none;box-shadow:0 0 40px rgba(0,0,0,.15)}
+  .conteudo{margin-left:0;padding:14px 14px 60px}
+  .sanduiche{display:grid}
+}
+
+/* ---------- AVISOS ---------- */
+.avisos{margin:0 0 16px;padding:12px 14px;border:1px solid #e8c3b9;border-radius:8px;background:var(--vermelho-bg);color:var(--vermelho);font-size:13px}
+.avisos strong{font-weight:500}
+.avisos ul{margin:6px 0 0;padding-left:18px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);max-width:calc(100% - 28px);padding:10px 16px;border-radius:6px;background:var(--texto);color:var(--areia);font-size:13px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.toast.erro{background:var(--vermelho)}
+
+/* ---------- PEÇAS ---------- */
+.cartao{background:var(--branco);border:1px solid var(--linha);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.cartao h3{margin:0 0 12px;font-size:13px;font-weight:400;color:var(--suave)}
+.faixa-num{display:grid;grid-template-columns:repeat(var(--n,5),1fr);background:var(--branco);border:1px solid var(--linha);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.faixa-num>div{padding:12px 16px;border-left:1px solid var(--linha);min-width:0}
+.faixa-num>div:first-child{border-left:0}
+.faixa-num span{display:block;font-size:11px;color:var(--suave)}
+.faixa-num strong{display:block;font-size:18px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.faixa-num small{display:block;font-size:11px;color:var(--suave)}
+@media (max-width:900px){.faixa-num{grid-template-columns:repeat(2,1fr)}.faixa-num>div{border-left:0;border-top:1px solid var(--linha)}.faixa-num>div:nth-child(-n+2){border-top:0}.faixa-num>div:nth-child(even){border-left:1px solid var(--linha)}}
+.duas{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+@media (max-width:1000px){.duas{grid-template-columns:1fr}}
+.vazio{margin:0;padding:18px 4px;color:var(--suave);font-size:13px;text-align:center}
+
+.barra-ferr{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px}
+.barra-ferr .esp{flex:1}
+.busca{height:36px;min-width:220px;padding:0 12px;border:1px solid var(--linha);border-radius:6px;background:var(--branco)}
+.busca:focus,.campo input:focus,.campo select:focus,.campo textarea:focus,select.sel:focus{outline:none;border-color:var(--caramelo);box-shadow:0 0 0 3px rgba(169,130,95,.15)}
+select.sel{height:36px;padding:0 10px;border:1px solid var(--linha);border-radius:6px;background:var(--branco)}
+.btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border:1px solid var(--linha);border-radius:4px;background:var(--branco);cursor:pointer;font-size:13px;font-weight:400;white-space:nowrap;text-decoration:none}
+.btn:hover{border-color:var(--caramelo);color:var(--caramelo)}
+.btn--forte{background:var(--texto);border-color:var(--texto);color:var(--areia)}
+.btn--forte:hover{background:var(--suave);border-color:var(--suave);color:var(--areia)}
+.btn--perigo{color:var(--vermelho)}
+.btn--perigo:hover{border-color:var(--vermelho);color:var(--vermelho)}
+.icone{display:inline-grid;place-items:center;width:30px;height:30px;padding:0;border:0;border-radius:6px;background:transparent;color:var(--suave);cursor:pointer}
+.icone:hover{background:rgba(169,130,95,.12);color:var(--texto)}
+.chips{display:inline-flex;border:1px solid var(--linha);border-radius:6px;overflow:hidden;background:var(--branco)}
+.chips button{height:34px;padding:0 12px;border:0;border-left:1px solid var(--linha);background:transparent;cursor:pointer;font-size:13px}
+.chips button:first-child{border-left:0}
+.chips button.ativo{background:rgba(169,130,95,.16);color:var(--texto);font-weight:400}
+
+.pilula{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:400;white-space:nowrap;line-height:1.6}
+.p-exemplo{background:#ece4da;color:var(--suave);border:1px dashed var(--nude)}
+.p-site{background:#efe3d4;color:#7a5a3e}
+.s-lead{background:#efe3d4;color:#7a5a3e}
+.s-conversando{background:var(--amarelo-bg);color:var(--amarelo)}
+.s-cliente{background:var(--verde-bg);color:var(--verde)}
+.s-parada{background:#e6e2dd;color:#7d746c}
+.t-conteudo{background:#e9e2f0;color:#5d4a73}
+.t-publicidade{background:#dde7ee;color:#3c5a6e}
+.st-0{background:#f0ebe4;color:var(--suave)} .st-1{background:#ece1d3;color:#6e5640} .st-2{background:#f3e3c8;color:#80612a}
+.st-3{background:#f0d7c4;color:#87503a} .st-4{background:#e7d6e3;color:#6b4762} .st-5{background:var(--verde-bg);color:var(--verde)} .st-6{background:var(--verde);color:#fff}
+.pg-pendente{background:var(--amarelo-bg);color:var(--amarelo)}
+.pg-pago{background:var(--verde-bg);color:var(--verde)}
+.alerta-v{background:var(--vermelho-bg);color:var(--vermelho)}
+.alerta-a{background:var(--amarelo-bg);color:var(--amarelo)}
+
+/* ---------- TABELAS ---------- */
+.tabela-caixa{overflow-x:auto;background:var(--branco);border:1px solid var(--linha);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:var(--papel);text-align:left;font-weight:400;font-size:11px;letter-spacing:.06em;color:var(--suave);padding:9px 10px;border-bottom:1px solid var(--linha);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #ece5dc;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr.clicavel{cursor:pointer}
+tbody tr.clicavel:hover td{background:#faf6f1}
+td.num,th.num{text-align:right}
+td.acoes{white-space:nowrap;text-align:right}
+td .sub{display:block;font-size:11px;color:var(--suave)}
+.corta{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+th.ordena{cursor:pointer;user-select:none}
+th.ordena:hover{color:var(--texto)}
+th .seta{display:inline-block;width:12px;margin-left:3px;opacity:.3}
+th.ativa{color:var(--texto)}
+th.ativa .seta{opacity:1;color:var(--caramelo)}
+tr.favorita td:first-child{box-shadow:inset 3px 0 0 var(--caramelo)}
+.estrela{color:#c9b9a6}
+.estrela.on{color:var(--caramelo)}
+tr.grupo td{background:var(--papel);font-size:12px;color:var(--suave);font-weight:400;padding:7px 10px}
+tr.grupo b{font-weight:500;color:var(--texto)}
+tr.escondido td{opacity:.5}
+tr.arrastando td{background:#f3ebe0}
+.alca{cursor:grab;touch-action:none;color:#b9a891}
+.alca:active{cursor:grabbing}
+
+/* ---------- GRÁFICO ---------- */
+.grafico{display:flex;align-items:flex-end;gap:6px;height:160px;padding-top:18px}
+.grafico .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.grafico .bar{width:100%;max-width:26px;background:var(--nude);border-radius:4px 4px 0 0;min-height:2px;position:relative}
+.grafico .col.hoje .bar{background:var(--caramelo)}
+.grafico .bar i{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-style:normal;font-size:10px;color:var(--suave)}
+.grafico .dia{margin-top:6px;font-size:10px;color:var(--suave);white-space:nowrap}
+.origens{list-style:none;margin:0;padding:0}
+.origens li{margin:0 0 10px}
+.origens .linha{display:flex;justify-content:space-between;font-size:13px}
+.origens .trilho{height:6px;margin-top:4px;border-radius:999px;background:#efe7dd;overflow:hidden}
+.origens .trilho b{display:block;height:100%;background:var(--caramelo);border-radius:999px}
+
+/* ---------- CALENDÁRIO ---------- */
+.cal-mes{min-width:150px;font-size:15px;font-weight:400;text-align:center}
+.cal{background:var(--branco);border:1px solid var(--linha);border-radius:12px;overflow:hidden}
+.cal-cab,.cal-grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.cal-cab div{padding:8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);background:var(--papel);border-bottom:1px solid var(--linha)}
+.cal-dia{position:relative;min-height:112px;padding:6px 6px 8px;border-right:1px solid #ece5dc;border-bottom:1px solid #ece5dc;cursor:pointer}
+.cal-dia:nth-child(7n){border-right:0}
+.cal-dia:hover{background:#fbf8f4}
+.cal-dia.fora{background:#f8f5f1}
+.cal-dia.fora .cal-n,.cal-dia.fora .cal-item{opacity:.45}
+.cal-n{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 4px;border-radius:999px;font-size:12px}
+.cal-dia.hoje .cal-n{background:var(--caramelo);color:#fff;font-weight:500}
+.cal-dia.hoje{background:#fbf6ef}
+.cal-mais-btn{position:absolute;top:5px;right:5px;width:24px;height:24px;border:0;border-radius:6px;background:rgba(169,130,95,.15);color:var(--texto);font-size:16px;line-height:1;cursor:pointer;opacity:0;transition:opacity .15s}
+.cal-dia:hover .cal-mais-btn,.cal-mais-btn:focus{opacity:1}
+.cal-item{display:block;width:100%;margin-top:3px;padding:2px 6px;border:0;border-radius:4px;text-align:left;font-size:11.5px;line-height:1.45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;border-left:3px solid}
+.ti-gravar{background:#f3e3d6;border-color:#b5704f}
+.ti-editar{background:#e9e2f0;border-color:#7d62a0}
+.ti-postar{background:#dde9dc;border-color:#5d8456}
+.ti-prazo{background:#f7ecd9;border-color:var(--caramelo)}
+.cal-item.feito{text-decoration:line-through;opacity:.55}
+.cal-ver{display:block;margin-top:3px;padding:0 4px;border:0;background:none;font-size:11px;color:var(--caramelo);cursor:pointer;font-weight:400}
+.legenda{display:flex;flex-wrap:wrap;gap:12px;margin:10px 2px 0;font-size:11px;color:var(--suave)}
+.legenda span{display:inline-flex;align-items:center;gap:5px}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:2px;border-left:3px solid}
+@media (max-width:700px){
+  .cal-dia{min-height:74px;padding:3px}
+  .cal-item{font-size:10px;padding:1px 3px;border-left-width:2px}
+  .cal-cab div{padding:6px 3px;font-size:9px;text-align:center}
+  .cal-mais-btn{display:none}
+}
+.atraso{list-style:none;margin:0;padding:0}
+.atraso li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #ece5dc}
+.atraso li:last-child{border-bottom:0}
+.atraso .txt{flex:1;min-width:0}
+.atraso .txt span{display:block;font-size:11px;color:var(--suave)}
+
+/* ---------- CHECKLIST ---------- */
+.sub-abas{display:flex;gap:4px;margin-bottom:16px;overflow-x:auto;border-bottom:1px solid var(--linha)}
+.sub-abas button{flex-shrink:0;padding:9px 12px;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;font-size:13px;color:var(--suave);margin-bottom:-1px}
+.sub-abas button.ativo{color:var(--texto);border-bottom-color:var(--caramelo);font-weight:400}
+.progresso{height:6px;border-radius:999px;background:#efe7dd;overflow:hidden}
+.progresso b{display:block;height:100%;background:var(--caramelo);border-radius:999px;transition:width .3s}
+.geral{display:flex;align-items:center;gap:14px}
+.geral .progresso{flex:1}
+.geral strong{font-weight:400;font-size:13px;white-space:nowrap}
+details.bloco{background:var(--branco);border:1px solid var(--linha);border-radius:12px;margin-bottom:10px;overflow:hidden}
+details.bloco>summary{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none}
+details.bloco>summary::-webkit-details-marker{display:none}
+details.bloco>summary .tit{flex:1;min-width:0}
+details.bloco>summary .tit b{display:block;font-weight:400;font-size:14px}
+details.bloco>summary .tit span{display:block;font-size:12px;color:var(--suave)}
+details.bloco>summary .mini{width:90px}
+details.bloco>summary .cont{font-size:11px;color:var(--suave);width:38px;text-align:right}
+details.bloco>summary .seta-d{transition:transform .2s;color:var(--suave)}
+details.bloco[open]>summary .seta-d{transform:rotate(180deg)}
+.bloco-corpo{padding:0 16px 14px}
+.porque{margin:0 0 12px;padding:10px 12px;border-radius:6px;background:var(--papel);font-size:13px;color:var(--suave)}
+.porque b{font-weight:500;color:var(--texto)}
+.item{display:flex;gap:10px;padding:9px 0;border-top:1px solid #f0e9e0;cursor:pointer}
+.item input{width:17px;height:17px;margin:2px 0 0;accent-color:var(--caramelo);flex-shrink:0;cursor:pointer}
+.item b{display:block;font-weight:400}
+.item span{display:block;font-size:12px;color:var(--suave)}
+.item.ok b{text-decoration:line-through;color:var(--suave)}
+.grade-ref{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.ref{position:relative;display:block;padding:0;border:0;border-radius:12px;overflow:hidden;aspect-ratio:9/16;cursor:pointer;text-align:left;background:var(--nude)}
+.ref img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ref .emo{position:absolute;top:10px;left:10px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(255,253,250,.9);font-size:17px}
+.ref .info{position:absolute;left:0;right:0;bottom:0;padding:40px 12px 12px;background:linear-gradient(transparent,rgba(30,24,20,.82));color:#fff}
+.ref .info b{display:block;font-weight:400;font-size:14px;line-height:1.3}
+.ref .info span{display:block;font-size:11px;opacity:.85;margin-top:3px}
+.ficha h4{margin:16px 0 4px;font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--caramelo)}
+.ficha p{margin:0}
+.gancho{padding:12px 14px;border-left:3px solid var(--caramelo);background:var(--papel);border-radius:0 6px 6px 0;font-size:14px}
+.beats{list-style:none;margin:0;padding:0}
+.beats li{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:8px 0;border-top:1px solid #f0e9e0}
+.beats li:first-child{border-top:0}
+.beats .t{font-size:11px;color:var(--caramelo);font-weight:500;padding-top:2px}
+.beats b{font-weight:500}
+.erros{margin:0;padding-left:18px;color:var(--suave)}
+.nichos{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.nicho{background:var(--branco);border:1px solid var(--linha);border-radius:12px;padding:14px 16px}
+.nicho h3{margin:0 0 8px;font-size:14px;font-weight:400}
+.nicho li{margin:0 0 10px}
+.nicho li b{display:block;font-weight:400}
+.nicho li q{display:block;font-size:12px;color:var(--suave);quotes:"\201C" "\201D"}
+.nicho ul{margin:0;padding-left:16px}
+.como-usar{margin:0;padding-left:18px;color:var(--suave)}
+.como-usar li{margin-bottom:5px}
+textarea.roteiro{width:100%;min-height:170px;padding:12px;border:1px solid var(--linha);border-radius:6px;background:var(--branco);resize:vertical;line-height:1.6}
+
+/* ---------- JANELA (formulários) ---------- */
+dialog{width:min(560px,calc(100% - 24px));max-height:calc(100vh - 40px);padding:0;border:1px solid var(--linha);border-radius:12px;background:var(--branco);color:var(--texto);box-shadow:0 30px 80px rgba(0,0,0,.25)}
+dialog.largo{width:min(760px,calc(100% - 24px))}
+dialog::backdrop{background:rgba(59,50,43,.4)}
+.jan-topo{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--linha);position:sticky;top:0;background:var(--branco);z-index:1}
+.jan-topo h2{flex:1;margin:0;font-size:15px;font-weight:400}
+.jan-corpo{padding:16px 18px}
+.jan-pe{display:flex;gap:8px;align-items:center;padding:12px 18px;border-top:1px solid var(--linha);position:sticky;bottom:0;background:var(--branco)}
+.jan-pe .esp{flex:1}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.campo{display:flex;flex-direction:column;gap:4px}
+.campo.cheio{grid-column:1/-1}
+.campo label{font-size:12px;color:var(--suave)}
+.campo input,.campo select,.campo textarea{height:38px;padding:0 10px;border:1px solid var(--linha);border-radius:6px;background:#fff}
+.campo textarea{height:auto;min-height:80px;padding:8px 10px;resize:vertical}
+.campo .dica{font-size:11px;color:var(--suave)}
+.campo.marca-check{flex-direction:row;align-items:center;gap:8px}
+.campo.marca-check input{width:17px;height:17px;accent-color:var(--caramelo)}
+.campo.marca-check label{font-size:13px;color:var(--texto)}
+@media (max-width:560px){.campos{grid-template-columns:1fr}}
+.lista-dia{list-style:none;margin:0;padding:0}
+.lista-dia li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0e9e0}
+.lista-dia .txt{flex:1;min-width:0}
+.lista-dia .txt span{display:block;font-size:11px;color:var(--suave)}
+.carregando{padding:30px;text-align:center;color:var(--suave)}
+</style>
+</head>
+<body>
+
+<aside class="menu" id="menu" aria-label="Menu do painel">
+  <div class="menu-topo"><strong>Cris Dall' Accua</strong><span>painel</span></div>
+  <nav>
+    <h2>meu site</h2>
+    <a href="#portfolio" data-aba="portfolio"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Portfólio</a>
+    <a href="#marcas" data-aba="marcas"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>Marcas</a>
+    <h2>minha rotina</h2>
+    <a href="#calendario" data-aba="calendario"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendário</a>
+    <a href="#campanhas" data-aba="campanhas"><svg class="ic" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Campanhas</a>
+    <a href="#checklist" data-aba="checklist"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checklist</a>
+  </nav>
+  <div class="menu-pe">
+    <span class="email" id="meu-email"></span>
+    <button class="sair" type="button" id="btn-sair"><svg class="ic" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 8l-4 4 4 4M6 12h10"/></svg>Sair</button>
+  </div>
+</aside>
+<div class="veu" id="veu" hidden></div>
+
+<main class="conteudo">
+  <header class="topo">
+    <button class="sanduiche" type="button" id="btn-menu" aria-label="Abrir menu"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <h1 id="titulo">Portfólio</h1>
+  </header>
+
+  <div class="avisos" id="avisos" role="status" hidden></div>
+
+  <section id="aba-portfolio" data-aba="portfolio" hidden></section>
+  <section id="aba-marcas" data-aba="marcas" hidden></section>
+  <section id="aba-calendario" data-aba="calendario" hidden></section>
+  <section id="aba-campanhas" data-aba="campanhas" hidden></section>
+  <section id="aba-checklist" data-aba="checklist" hidden></section>
+</main>
+
+<dialog id="janela"></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/biblioteca.js"></script>
+<script>
+/* =====================================================================
+   1. ANTES DE TUDO: CONFERE A SESSÃO
+   Sem sessão, vai para o login. A página só aparece depois disso.
+   ===================================================================== */
+const sb = window.sb;
+const LOGIN = "../login/";
+let minhaSessao = null;
+
+(async function confereSessao() {
+  if (!sb) {
+    document.documentElement.classList.remove("verificando");
+    document.body.innerHTML = '<p style="padding:40px;font-family:Jost,sans-serif">Não consegui carregar o sistema do painel. Confira a internet e recarregue a página.</p>';
+    return;
+  }
+  let sessao = null;
+  try { const r = await sb.auth.getSession(); sessao = r.data && r.data.session; } catch (e) {}
+  if (!sessao) { location.replace(LOGIN); return; }
+  const email = String(sessao.user && sessao.user.email || "").toLowerCase();
+  if (window.BANCO.emailDaCris && email !== window.BANCO.emailDaCris.toLowerCase()) {
+    await sb.auth.signOut(); location.replace(LOGIN); return;
+  }
+  minhaSessao = sessao;
+  sb.auth.onAuthStateChange((evento, s) => { if (evento === "SIGNED_OUT" || !s) location.replace(LOGIN); });
+  document.documentElement.classList.remove("verificando");
+  iniciaPainel();
+})();
+
+/* =====================================================================
+   2. FERRAMENTAS
+   ===================================================================== */
+const $ = (s, el) => (el || document).querySelector(s);
+const $$ = (s, el) => [...(el || document).querySelectorAll(s)];
+const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pad = (n) => String(n).padStart(2, "0");
+const isoLocal = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const hojeISO = () => isoLocal(new Date());
+const dataDeISO = (s) => { const [a, m, d] = String(s).slice(0, 10).split("-").map(Number); return new Date(a, (m || 1) - 1, d || 1); };
+const diasAte = (iso) => Math.round((dataDeISO(iso) - dataDeISO(hojeISO())) / 86400000);
+const dataCurta = (iso) => iso ? dataDeISO(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }) : "";
+const dataLonga = (iso) => iso ? dataDeISO(iso).toLocaleDateString("pt-BR") : "";
+const reais = (v) => (Number(v) || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const divide = (a, b) => (Number(b) > 0 ? (Number(a) || 0) / Number(b) : 0);
+const numero = (v) => (Number(v) || 0).toLocaleString("pt-BR");
+const sem = (t) => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const dias = (n) => n === 1 ? "1 dia" : `${n} dias`;
+
+function toast(texto, erro) {
+  const t = $("#toast");
+  t.textContent = texto; t.className = "toast" + (erro ? " erro" : ""); t.hidden = false;
+  clearTimeout(toast.tm); toast.tm = setTimeout(() => (t.hidden = true), erro ? 6000 : 2600);
+}
+
+const ICONE = {
+  olho: '<svg class="ic" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  olhoFechado: '<svg class="ic" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.9 8.3 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>',
+  lapis: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4zM14 6l4 4"/></svg>',
+  lixo: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
+  alca: '<svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></svg>',
+  mais: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  baixar: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+  whats: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z"/></svg>',
+  insta: '<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>',
+  estrela: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  estrelaCheia: '<svg class="ic" viewBox="0 0 24 24" style="fill:currentColor"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  esq: '<svg class="ic" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>',
+  dir: '<svg class="ic" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>',
+  fechar: '<svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  abaixo: '<svg class="ic seta-d" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>',
+  check: '<svg class="ic" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>',
+  play: '<svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
+};
+
+/* =====================================================================
+   3. LEITURA DO BANCO, SEM NUNCA DEIXAR A PÁGINA EM BRANCO
+   Se faltar uma tabela ou um campo, o painel avisa lá em cima e segue.
+   ===================================================================== */
+const CAMPOS = {
+  videos: ["titulo", "link", "nicho", "formato", "marca", "destaque", "ordem", "visivel"],
+  marcas: ["nome", "instagram", "email", "telefone", "situacao", "obs", "ultimo_contato"],
+  calendario: ["titulo", "marca", "tipo", "data", "status"],
+  campanhas: ["campanha", "cliente", "tipo", "status", "qtd", "valor", "prazo", "pagamento", "ativa", "favorita"],
+  marcados: ["chave"],
+  visitas: ["data", "pagina", "origem"]
+};
+const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas" };
+const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [] };
+const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true };
+const avisos = new Map();
+
+function avisa(chave, texto) { avisos.set(chave, texto); mostraAvisos(); }
+function mostraAvisos() {
+  const caixa = $("#avisos");
+  if (!avisos.size) { caixa.hidden = true; return; }
+  caixa.innerHTML = `<strong>O painel abriu, mas faltou uma parte no banco.</strong> O resto funciona normal.<ul>${[...avisos.values()].map(t => `<li>${esc(t)}</li>`).join("")}</ul>Para resolver, rode de novo o arquivo banco.sql no SQL Editor do Supabase.`;
+  caixa.hidden = false;
+}
+
+/* Traduz os erros do banco para português */
+function explica(erro, tabela) {
+  const msg = String(erro && erro.message || "");
+  const cod = String(erro && erro.code || "");
+  const nome = NOME_TABELA[tabela] || tabela;
+  const campo = (msg.match(/column ["']?([\w.]+)["']?/i) || msg.match(/the ['"](\w+)['"] column/i) || [])[1];
+  if (cod === "42P01" || cod === "PGRST205" || /does not exist|could not find the table/i.test(msg) && !campo) return `A tabela "${nome}" não existe no banco.`;
+  if (cod === "42703" || cod === "PGRST204" || campo) return `Falta o campo "${String(campo || "").split(".").pop()}" na tabela "${nome}".`;
+  if (cod === "42501" || /permission|row-level security/i.test(msg)) return `O banco não deixou mexer em "${nome}". Confira se você entrou com o e-mail certo.`;
+  if (cod === "23514") return `Um valor não é aceito na tabela "${nome}". Confira as opções escolhidas.`;
+  if (cod === "23502") return `Falta preencher um campo obrigatório em "${nome}".`;
+  if (/fetch|network|failed/i.test(msg)) return "Sem conexão com o banco. Confira a internet.";
+  return `Não deu certo em "${nome}". Tente de novo em instantes.`;
+}
+
+async function carrega(tabela, ajusta) {
+  try {
+    let q = sb.from(tabela).select("*");
+    if (ajusta) q = ajusta(q);
+    const { data, error } = await q;
+    if (error) throw error;
+    funciona[tabela] = true;
+    avisos.delete("t:" + tabela);
+    const linhas = Array.isArray(data) ? data : [];
+    if (linhas.length) {
+      const faltam = CAMPOS[tabela].filter(c => !(c in linhas[0]));
+      faltam.forEach(c => avisa(`c:${tabela}:${c}`, `Falta o campo "${c}" na tabela "${NOME_TABELA[tabela]}". O que depende dele fica vazio.`));
+    }
+    mostraAvisos();
+    return linhas;
+  } catch (erro) {
+    funciona[tabela] = false;
+    avisa("t:" + tabela, explica(erro, tabela));
+    return [];
+  }
+}
+
+async function carregaTudo() {
+  const desde = new Date(); desde.setHours(0, 0, 0, 0); desde.setDate(desde.getDate() - 13);
+  const [v, m, c, k, mk, vi] = await Promise.all([
+    carrega("videos", q => q.order("ordem", { ascending: true })),
+    carrega("marcas", q => q.order("criado_em", { ascending: false })),
+    carrega("calendario", q => q.order("data", { ascending: true })),
+    carrega("campanhas", q => q.order("criado_em", { ascending: false })),
+    carrega("marcados"),
+    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000))
+  ]);
+  dados.videos = v; dados.marcas = m; dados.calendario = c; dados.campanhas = k; dados.visitas = vi;
+  dados.marcados = new Map(mk.filter(r => r.marcado !== false).map(r => [r.chave, true]));
+}
+
+/* Salvar, apagar e trocar um campo. Depois recarrega só aquela tabela. */
+async function salva(tabela, id, valores) {
+  const pedido = id ? sb.from(tabela).update(valores).eq("id", id) : sb.from(tabela).insert(valores);
+  const { error } = await pedido;
+  if (error) { toast(explica(error, tabela), true); return false; }
+  await recarrega(tabela);
+  return true;
+}
+async function apaga(tabela, id, pergunta) {
+  if (!confirm(pergunta || "Apagar? Isso não dá para desfazer.")) return false;
+  const { error } = await sb.from(tabela).delete().eq("id", id);
+  if (error) { toast(explica(error, tabela), true); return false; }
+  toast("Apagado.");
+  await recarrega(tabela);
+  return true;
+}
+async function recarrega(tabela) {
+  if (tabela === "videos") dados.videos = await carrega("videos", q => q.order("ordem", { ascending: true }));
+  if (tabela === "marcas") dados.marcas = await carrega("marcas", q => q.order("criado_em", { ascending: false }));
+  if (tabela === "calendario") dados.calendario = await carrega("calendario", q => q.order("data", { ascending: true }));
+  if (tabela === "campanhas") dados.campanhas = await carrega("campanhas", q => q.order("criado_em", { ascending: false }));
+  desenhaAba(abaAtual);
+}
+
+/* =====================================================================
+   4. JANELA DE FORMULÁRIO (serve para tudo: vídeo, marca, item, campanha)
+   ===================================================================== */
+const janela = $("#janela");
+janela.addEventListener("click", (e) => { if (e.target === janela) janela.close(); });
+
+function abreJanela(titulo, corpo, pe, largo) {
+  janela.className = largo ? "largo" : "";
+  janela.innerHTML = `
+    <div class="jan-topo"><h2>${esc(titulo)}</h2><button class="icone" type="button" data-fecha aria-label="Fechar">${ICONE.fechar}</button></div>
+    <div class="jan-corpo">${corpo}</div>${pe ? `<div class="jan-pe">${pe}</div>` : ""}`;
+  $("[data-fecha]", janela).addEventListener("click", () => janela.close());
+  if (!janela.open) janela.showModal();
+  return janela;
+}
+
+/* campos: [{ nome, rotulo, tipo, opcoes, valor, obrigatorio, cheio, dica }] */
+function abreFormulario({ titulo, campos, aoSalvar, aoApagar }) {
+  const html = campos.map(c => {
+    const id = "f-" + c.nome, req = c.obrigatorio ? " required" : "", v = c.valor == null ? "" : c.valor;
+    let entrada;
+    if (c.tipo === "checkbox") return `<div class="campo marca-check ${c.cheio ? "cheio" : ""}"><input type="checkbox" id="${id}" name="${c.nome}"${c.valor ? " checked" : ""}><label for="${id}">${esc(c.rotulo)}</label></div>`;
+    if (c.tipo === "select") entrada = `<select id="${id}" name="${c.nome}"${req}>${c.opcoes.map(o => { const [val, txt] = Array.isArray(o) ? o : [o, o]; return `<option value="${esc(val)}"${String(val) === String(v) ? " selected" : ""}>${esc(txt)}</option>`; }).join("")}</select>`;
+    else if (c.tipo === "textarea") entrada = `<textarea id="${id}" name="${c.nome}"${req}>${esc(v)}</textarea>`;
+    else entrada = `<input id="${id}" name="${c.nome}" type="${c.tipo || "text"}" value="${esc(v)}"${c.tipo === "number" ? ' step="any" min="0"' : ""}${req}>`;
+    return `<div class="campo ${c.cheio ? "cheio" : ""}"><label for="${id}">${esc(c.rotulo)}${c.obrigatorio ? " *" : ""}</label>${entrada}${c.dica ? `<span class="dica">${esc(c.dica)}</span>` : ""}</div>`;
+  }).join("");
+  abreJanela(titulo, `<form id="form-jan" class="campos" novalidate>${html}</form>`,
+    `${aoApagar ? `<button class="btn btn--perigo" type="button" id="jan-apagar">${ICONE.lixo}Apagar</button>` : ""}<span class="esp"></span><button class="btn" type="button" data-cancela>Cancelar</button><button class="btn btn--forte" type="button" id="jan-salvar">Salvar</button>`);
+  const form = $("#form-jan");
+  $("[data-cancela]", janela).addEventListener("click", () => janela.close());
+  const envia = async () => {
+    const faltando = campos.find(c => c.obrigatorio && !String(form.elements[c.nome].value).trim());
+    if (faltando) { form.elements[faltando.nome].focus(); toast(`Preencha: ${faltando.rotulo}`, true); return; }
+    const valores = {};
+    campos.forEach(c => {
+      const el = form.elements[c.nome];
+      if (c.tipo === "checkbox") valores[c.nome] = el.checked;
+      else if (c.tipo === "number") valores[c.nome] = el.value === "" ? 0 : Number(String(el.value).replace(",", "."));
+      else { const t = String(el.value).trim(); valores[c.nome] = t === "" ? null : t; }
+    });
+    const b = $("#jan-salvar"); b.disabled = true;
+    const ok = await aoSalvar(valores);
+    b.disabled = false;
+    if (ok !== false) { janela.close(); toast("Salvo."); }
+  };
+  $("#jan-salvar").addEventListener("click", envia);
+  form.addEventListener("submit", (e) => { e.preventDefault(); envia(); });
+  form.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName === "INPUT") { e.preventDefault(); envia(); } });
+  if (aoApagar) $("#jan-apagar").addEventListener("click", async () => { if (await aoApagar()) janela.close(); });
+  const primeiro = form.querySelector("input,select,textarea"); if (primeiro) primeiro.focus();
+}
+
+function baixaCSV(nomeArquivo, colunas, linhas) {
+  const cel = (v) => { const t = String(v == null ? "" : v); return /[;"\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+  const texto = [colunas.map(c => cel(c[0])).join(";"), ...linhas.map(l => colunas.map(c => cel(c[1](l))).join(";"))].join("\r\n");
+  const blob = new Blob(["﻿" + texto], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = nomeArquivo;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+const pilulaExemplo = (r) => r && r.exemplo ? ' <span class="pilula p-exemplo">exemplo</span>' : "";
+
+/* =====================================================================
+   5. NAVEGAÇÃO ENTRE AS ABAS
+   ===================================================================== */
+const ABAS = { portfolio: "Portfólio", marcas: "Marcas", calendario: "Calendário", campanhas: "Campanhas", checklist: "Checklist do portfólio" };
+let abaAtual = "portfolio";
+
+function vaiPara(aba) {
+  if (!ABAS[aba]) aba = "portfolio";
+  abaAtual = aba;
+  $("#titulo").textContent = ABAS[aba];
+  document.title = ABAS[aba] + " · Painel da Cris";
+  $$(".menu nav a").forEach(a => a.classList.toggle("ativo", a.dataset.aba === aba));
+  $$("main section[data-aba]").forEach(s => (s.hidden = s.dataset.aba !== aba));
+  fechaMenu();
+  desenhaAba(aba);
+}
+let carregado = false;
+function desenhaAba(aba) {
+  const caixa = $("#aba-" + aba);
+  if (!carregado) { caixa.innerHTML = '<div class="carregando">Carregando...</div>'; return; }
+  try { DESENHA[aba](caixa); }
+  catch (erro) {
+    console.error(erro);
+    caixa.innerHTML = `<div class="cartao"><p class="vazio">Esta parte não conseguiu abrir agora. As outras abas continuam funcionando. Recarregue a página para tentar de novo.</p></div>`;
+  }
+}
+function abreMenu() { $("#menu").classList.add("aberto"); $("#veu").hidden = false; }
+function fechaMenu() { $("#menu").classList.remove("aberto"); $("#veu").hidden = true; }
+
+async function iniciaPainel() {
+  $("#meu-email").textContent = minhaSessao.user.email || "";
+  try { localStorage.setItem("nao-contar-visita", "1"); } catch (e) {}
+  $("#btn-menu").addEventListener("click", abreMenu);
+  $("#veu").addEventListener("click", fechaMenu);
+  $("#btn-sair").addEventListener("click", async () => { await sb.auth.signOut(); location.replace(LOGIN); });
+  window.addEventListener("hashchange", () => vaiPara(location.hash.slice(1)));
+  const inicial = location.hash.slice(1);
+  vaiPara(inicial);
+  await carregaTudo();
+  carregado = true;
+  desenhaAba(abaAtual);
+}
+
+/* =====================================================================
+   6. ABA PORTFÓLIO
+   ===================================================================== */
+const NICHOS_SITE = ["Beleza", "Moda", "Casal", "Fitness", "Casa e decoração", "Culinária", "Experiências", "Tech, apps e educação"];
+const VIDEOS_POR_NICHO_NO_SITE = 8;
+const FORMATOS = ["", "Vídeo UGC", "Criativo para anúncio", "Publi no perfil", "Unboxing", "Review"];
+const ehYoutube = (l) => /(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)[\w-]{11}/.test(String(l || ""));
+
+const DESENHA = {};
+DESENHA.portfolio = function (caixa) {
+  const hoje = hojeISO();
+  /* visitas por dia, últimos 14 dias */
+  const diasLista = [];
+  for (let i = 13; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); diasLista.push(isoLocal(d)); }
+  const porDia = Object.fromEntries(diasLista.map(d => [d, 0]));
+  const porOrigem = {};
+  dados.visitas.forEach(v => {
+    if (!v.data) return;
+    const d = isoLocal(new Date(v.data));
+    if (d in porDia) porDia[d]++;
+    const o = String(v.origem || "Direto").trim() || "Direto";
+    porOrigem[o] = (porOrigem[o] || 0) + 1;
+  });
+  const total14 = Object.values(porDia).reduce((a, b) => a + b, 0);
+  const totalHoje = porDia[hoje] || 0;
+  const origens = Object.entries(porOrigem).sort((a, b) => b[1] - a[1]);
+  const noAr = dados.videos.filter(v => v.visivel !== false && !v.exemplo);
+  const contaNicho = {};
+  noAr.forEach(v => { if (v.nicho) contaNicho[v.nicho] = (contaNicho[v.nicho] || 0) + 1; });
+  const nichoForte = Object.entries(contaNicho).sort((a, b) => b[1] - a[1])[0];
+  const maior = Math.max(0, ...Object.values(porDia));
+
+  const grafico = total14 === 0
+    ? `<p class="vazio">Quando as pessoas começarem a visitar o seu portfólio, aqui aparece uma barra para cada dia das últimas duas semanas, mostrando quantas visitas o site teve.</p>`
+    : `<div class="grafico">${diasLista.map(d => {
+        const n = porDia[d], h = Math.round(divide(n, maior) * 100);
+        return `<div class="col${d === hoje ? " hoje" : ""}" title="${dataLonga(d)}: ${n} visita(s)"><div class="bar" style="height:${h}%">${n ? `<i>${n}</i>` : ""}</div><span class="dia">${dataCurta(d)}</span></div>`;
+      }).join("")}</div>`;
+  const listaOrigens = !origens.length
+    ? `<p class="vazio">Aqui vai aparecer de onde as pessoas chegam no seu site: Instagram, Google, WhatsApp, link direto e outros.</p>`
+    : `<ul class="origens">${origens.slice(0, 8).map(([o, n]) => `<li><div class="linha"><span>${esc(o)}</span><span>${n}</span></div><div class="trilho"><b style="width:${Math.round(divide(n, total14) * 100)}%"></b></div></li>`).join("")}</ul>`;
+
+  caixa.innerHTML = `
+    <div class="faixa-num" style="--n:5">
+      <div><span>Visitas em 14 dias</span><strong>${numero(total14)}</strong></div>
+      <div><span>Visitas hoje</span><strong>${numero(totalHoje)}</strong></div>
+      <div><span>Vídeos no ar</span><strong>${numero(noAr.length)}</strong></div>
+      <div><span>Nicho mais forte</span><strong title="${esc(nichoForte ? nichoForte[0] : "")}">${nichoForte ? esc(nichoForte[0]) : "Nenhum ainda"}</strong>${nichoForte ? `<small>${nichoForte[1]} vídeo(s)</small>` : ""}</div>
+      <div><span>De onde mais vêm</span><strong>${origens.length ? esc(origens[0][0]) : "Ainda nada"}</strong></div>
+    </div>
+    ${funciona.visitas ? "" : '<p class="vazio">As visitas não puderam ser lidas. Veja o aviso lá em cima.</p>'}
+    <div class="duas">
+      <div class="cartao"><h3>Visitas nos últimos 14 dias</h3>${grafico}</div>
+      <div class="cartao"><h3>Por onde chegaram</h3>${listaOrigens}</div>
+    </div>
+    <div class="barra-ferr">
+      <strong style="font-weight:400;font-size:14px">Meus vídeos</strong><span class="esp"></span>
+      <button class="btn btn--forte" type="button" id="add-video">${ICONE.mais}Adicionar vídeo</button>
+    </div>
+    <div class="tabela-caixa">${tabelaVideos()}</div>
+    <p style="font-size:12px;color:var(--suave);margin:8px 2px 0">Arraste pela alcinha para mudar a ordem dentro do nicho. O site mostra até ${VIDEOS_POR_NICHO_NO_SITE} vídeos visíveis por nicho, na ordem desta tabela.</p>`;
+
+  $("#add-video").addEventListener("click", () => formVideo());
+  const tb = $("tbody", caixa);
+  if (!tb) return;
+  tb.addEventListener("click", async (e) => {
+    const tr = e.target.closest("tr[data-id]"); if (!tr) return;
+    const v = dados.videos.find(x => String(x.id) === tr.dataset.id); if (!v) return;
+    if (e.target.closest("[data-olho]")) { await salva("videos", v.id, { visivel: v.visivel === false }); toast(v.visivel === false ? "Vídeo aparecendo no site." : "Vídeo escondido do site."); return; }
+    if (e.target.closest("[data-apaga]")) { await apaga("videos", v.id, `Apagar o vídeo "${v.titulo || v.marca || ""}"? Isso não dá para desfazer.`); return; }
+    if (e.target.closest("[data-edita]")) formVideo(v);
+  });
+  ligaArrasto(tb);
+};
+
+function tabelaVideos() {
+  if (!funciona.videos) return `<p class="vazio">Não consegui ler a tabela de vídeos. Veja o aviso lá em cima.</p>`;
+  if (!dados.videos.length) return `<p class="vazio">Nenhum vídeo ainda. Clique em Adicionar vídeo.</p>`;
+  const grupos = [...NICHOS_SITE];
+  dados.videos.forEach(v => { const n = v.nicho || "Sem nicho"; if (!grupos.includes(n)) grupos.push(n); });
+  const linhas = grupos.map((g, gi) => {
+    const lista = dados.videos.filter(v => (v.nicho || "Sem nicho") === g);
+    if (!lista.length) return "";
+    const visiveis = lista.filter(v => v.visivel !== false && !v.exemplo).length;
+    const foraDoSite = !NICHOS_SITE.includes(g);
+    const nota = foraDoSite ? " · este nicho não existe no site, então esses vídeos não aparecem lá"
+      : visiveis > VIDEOS_POR_NICHO_NO_SITE ? ` · ${visiveis} visíveis, o site mostra só os ${VIDEOS_POR_NICHO_NO_SITE} primeiros` : ` · ${visiveis} no site`;
+    return `<tr class="grupo"><td colspan="7"><b>${esc(g)}</b>${esc(nota)}</td></tr>` + lista.map(v => `
+      <tr data-id="${esc(v.id)}" data-grupo="${gi}" class="${v.visivel === false ? "escondido" : ""}">
+        <td style="width:34px"><span class="icone alca" title="Arraste para mudar a ordem" aria-label="Arrastar">${ICONE.alca}</span></td>
+        <td><span class="corta" style="display:block">${esc(v.titulo || "")}${pilulaExemplo(v)}</span>${v.marca && v.marca !== v.titulo ? `<span class="sub">${esc(v.marca)}</span>` : ""}</td>
+        <td class="corta"><a href="${esc(v.link || "#")}" target="_blank" rel="noopener" style="color:var(--suave)">${esc(String(v.link || "").replace(/^https?:\/\/(www\.)?/, ""))}</a>${v.link && !ehYoutube(v.link) ? '<span class="sub" style="color:var(--vermelho)">o site só toca links do YouTube</span>' : ""}</td>
+        <td>${esc(v.formato || "")}</td>
+        <td>${esc(v.destaque || "")}</td>
+        <td class="acoes">
+          <button class="icone" type="button" data-olho title="${v.visivel === false ? "Escondido. Clique para mostrar no site" : "No site. Clique para esconder"}">${v.visivel === false ? ICONE.olhoFechado : ICONE.olho}</button>
+          <button class="icone" type="button" data-edita title="Editar">${ICONE.lapis}</button>
+          <button class="icone" type="button" data-apaga title="Apagar">${ICONE.lixo}</button>
+        </td>
+      </tr>`).join("");
+  }).join("");
+  return `<table><thead><tr><th></th><th>Título</th><th>Link</th><th>Formato</th><th>Destaque</th><th></th></tr></thead><tbody>${linhas}</tbody></table>`;
+}
+
+function formVideo(v) {
+  const novo = !v; v = v || {};
+  abreFormulario({
+    titulo: novo ? "Adicionar vídeo" : "Editar vídeo",
+    campos: [
+      { nome: "titulo", rotulo: "Título", valor: v.titulo, obrigatorio: true },
+      { nome: "marca", rotulo: "Marca", valor: v.marca, dica: "É o nome que aparece em cima do vídeo no site." },
+      { nome: "link", rotulo: "Link do YouTube", valor: v.link, obrigatorio: true, cheio: true, dica: "Ex: https://youtube.com/shorts/... O site toca só links do YouTube." },
+      { nome: "nicho", rotulo: "Nicho (categoria do site)", tipo: "select", opcoes: NICHOS_SITE.includes(v.nicho) || !v.nicho ? NICHOS_SITE : [v.nicho, ...NICHOS_SITE], valor: v.nicho || NICHOS_SITE[0] },
+      { nome: "formato", rotulo: "Formato", tipo: "select", opcoes: (FORMATOS.includes(v.formato || "") ? FORMATOS : [v.formato, ...FORMATOS]).map(o => o ? o : ["", "Não informado"]), valor: v.formato || "" },
+      { nome: "destaque", rotulo: "Destaque", valor: v.destaque, dica: 'Ex: "2,4M views"' },
+      { nome: "visivel", rotulo: "Mostrar no site", tipo: "checkbox", valor: novo ? true : v.visivel !== false }
+    ],
+    aoSalvar: async (val) => {
+      if (novo) {
+        /* vídeo novo entra no começo do nicho, para aparecer logo no site */
+        const doNicho = dados.videos.filter(x => x.nicho === val.nicho).map(x => Number(x.ordem) || 0);
+        val.ordem = doNicho.length ? Math.min(...doNicho) - 10 : 0;
+      }
+      return salva("videos", v.id, val);
+    },
+    aoApagar: novo ? null : () => apaga("videos", v.id, `Apagar o vídeo "${v.titulo || ""}"? Isso não dá para desfazer.`)
+  });
+}
+
+/* Arrastar pela alcinha (funciona com mouse e com o dedo) */
+function ligaArrasto(tbody) {
+  tbody.addEventListener("pointerdown", (e) => {
+    const alca = e.target.closest(".alca"); if (!alca) return;
+    e.preventDefault();
+    const linha = alca.closest("tr"), grupo = linha.dataset.grupo;
+    const antes = $$(`tr[data-grupo="${grupo}"]`, tbody).map(r => r.dataset.id).join(",");
+    linha.classList.add("arrastando");
+    alca.setPointerCapture(e.pointerId);
+    const move = (ev) => {
+      const outras = $$(`tr[data-grupo="${grupo}"]`, tbody).filter(r => r !== linha);
+      if (!outras.length) return;
+      const alvo = outras.find(r => { const b = r.getBoundingClientRect(); return ev.clientY < b.top + b.height / 2; });
+      if (alvo) { if (alvo.previousElementSibling !== linha) tbody.insertBefore(linha, alvo); }
+      else { const ultima = outras[outras.length - 1]; if (ultima.nextElementSibling !== linha) ultima.after(linha); }
+    };
+    const solta = async () => {
+      alca.removeEventListener("pointermove", move);
+      alca.removeEventListener("pointerup", solta);
+      alca.removeEventListener("pointercancel", solta);
+      linha.classList.remove("arrastando");
+      const ids = $$(`tr[data-grupo="${grupo}"]`, tbody).map(r => r.dataset.id);
+      if (ids.join(",") === antes) return;
+      const lista = ids.map(id => dados.videos.find(v => String(v.id) === id));
+      const ordens = lista.map(v => Number(v.ordem) || 0).sort((a, b) => a - b);
+      /* se havia ordens repetidas, refaz a numeração para não empatar */
+      const unicas = new Set(ordens).size === ordens.length ? ordens : ordens.map((o, i) => ordens[0] + i * 10);
+      const mudancas = lista.map((v, i) => ({ v, nova: unicas[i] })).filter(x => Number(x.v.ordem) !== x.nova);
+      const res = await Promise.all(mudancas.map(x => sb.from("videos").update({ ordem: x.nova }).eq("id", x.v.id)));
+      const erro = res.find(r => r.error);
+      if (erro) toast(explica(erro.error, "videos"), true); else toast("Ordem salva. O site já mostra assim.");
+      await recarrega("videos");
+    };
+    alca.addEventListener("pointermove", move);
+    alca.addEventListener("pointerup", solta);
+    alca.addEventListener("pointercancel", solta);
+  });
+}
+
+/* =====================================================================
+   7. ABA MARCAS
+   ===================================================================== */
+const SITUACOES = [["lead", "Lead"], ["conversando", "Conversando"], ["cliente", "Cliente"], ["parada", "Parada"]];
+const nomeSituacao = (s) => (SITUACOES.find(x => x[0] === s) || [s, s || ""])[1];
+const estadoMarcas = { busca: "", situacao: "" };
+const linkInsta = (i) => { const h = String(i || "").trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/^@/, "").replace(/\/.*$/, ""); return h ? "https://instagram.com/" + encodeURIComponent(h) : ""; };
+const arroba = (i) => { const h = String(i || "").trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/^@/, "").replace(/\/.*$/, ""); return h ? "@" + h : ""; };
+const linkWhats = (t) => { let n = String(t || "").replace(/\D/g, ""); if (!n) return ""; if (n.length <= 11) n = "55" + n.replace(/^0+/, ""); return "https://wa.me/" + n; };
+
+DESENHA.marcas = function (caixa) {
+  if (!caixa.dataset.pronto) {
+    caixa.innerHTML = `
+      <div class="barra-ferr">
+        <input class="busca" type="search" id="m-busca" placeholder="Buscar por nome, @ ou e-mail" aria-label="Buscar marca">
+        <select class="sel" id="m-sit" aria-label="Filtrar por situação"><option value="">Todas as situações</option>${SITUACOES.map(s => `<option value="${s[0]}">${s[1]}</option>`).join("")}</select>
+        <span class="esp"></span>
+        <button class="btn" type="button" id="m-csv">${ICONE.baixar}Baixar CSV</button>
+        <button class="btn btn--forte" type="button" id="m-add">${ICONE.mais}Adicionar marca</button>
+      </div>
+      <div id="m-tabela"></div>`;
+    caixa.dataset.pronto = "1";
+    $("#m-busca").addEventListener("input", (e) => { estadoMarcas.busca = e.target.value; tabelaMarcas(); });
+    $("#m-sit").addEventListener("change", (e) => { estadoMarcas.situacao = e.target.value; tabelaMarcas(); });
+    $("#m-add").addEventListener("click", () => formMarca());
+    $("#m-csv").addEventListener("click", () => baixaCSV(`marcas-${hojeISO()}.csv`, [
+      ["Marca", r => r.nome], ["Instagram", r => arroba(r.instagram)], ["E-mail", r => r.email], ["Telefone", r => r.telefone],
+      ["Situação", r => nomeSituacao(r.situacao)], ["Observação", r => r.obs], ["Último contato", r => dataLonga(r.ultimo_contato)], ["Veio de", r => r.origem === "site" ? "Formulário do site" : "Painel"]
+    ], marcasFiltradas()));
+    $("#m-tabela").addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      const tr = e.target.closest("tr[data-id]"); if (!tr) return;
+      const r = dados.marcas.find(x => String(x.id) === tr.dataset.id); if (r) formMarca(r);
+    });
+  }
+  tabelaMarcas();
+};
+function marcasFiltradas() {
+  const b = sem(estadoMarcas.busca).replace(/^@/, "");
+  return dados.marcas.filter(r => (!estadoMarcas.situacao || r.situacao === estadoMarcas.situacao)
+    && (!b || [r.nome, r.instagram, r.email].some(c => sem(c).includes(b))));
+}
+function tabelaMarcas() {
+  const alvo = $("#m-tabela");
+  if (!funciona.marcas) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Não consegui ler a tabela de marcas. Veja o aviso lá em cima.</p></div>`; return; }
+  const lista = marcasFiltradas();
+  if (!dados.marcas.length) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Sua base está vazia. Clique em Adicionar marca, ou espere os contatos do formulário do site chegarem aqui.</p></div>`; return; }
+  alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr><th>Marca</th><th>Instagram</th><th>E-mail</th><th>Telefone</th><th>Situação</th><th>Observação</th><th>Último contato</th></tr></thead><tbody>${
+    lista.length ? lista.map(r => {
+      const w = linkWhats(r.telefone), ig = linkInsta(r.instagram);
+      return `<tr class="clicavel" data-id="${esc(r.id)}">
+        <td><span style="font-weight:400">${esc(r.nome)}</span>${pilulaExemplo(r)}${r.origem === "site" ? ' <span class="pilula p-site">veio do site</span>' : ""}</td>
+        <td>${ig ? `<a href="${ig}" target="_blank" rel="noopener" style="color:var(--caramelo);text-decoration:none">${esc(arroba(r.instagram))}</a>` : ""}</td>
+        <td class="corta">${r.email ? `<a href="mailto:${esc(r.email)}" style="color:inherit">${esc(r.email)}</a>` : ""}</td>
+        <td style="white-space:nowrap">${esc(r.telefone || "")}${w ? ` <a class="icone" href="${w}" target="_blank" rel="noopener" title="Abrir no WhatsApp" style="color:var(--verde);vertical-align:middle">${ICONE.whats}</a>` : ""}</td>
+        <td><span class="pilula s-${esc(r.situacao)}">${esc(nomeSituacao(r.situacao))}</span></td>
+        <td class="corta" title="${esc(r.obs || "")}">${esc(r.obs || "")}</td>
+        <td style="white-space:nowrap">${esc(dataLonga(r.ultimo_contato))}</td>
+      </tr>`;
+    }).join("") : `<tr><td colspan="7"><p class="vazio">Nenhuma marca encontrada com essa busca.</p></td></tr>`
+  }</tbody></table></div><p style="font-size:12px;color:var(--suave);margin:8px 2px 0">${lista.length} de ${dados.marcas.length} marca(s). Clique na linha para editar.</p>`;
+}
+function formMarca(r) {
+  const novo = !r; r = r || {};
+  abreFormulario({
+    titulo: novo ? "Adicionar marca" : "Editar marca",
+    campos: [
+      { nome: "nome", rotulo: "Marca", valor: r.nome, obrigatorio: true },
+      { nome: "situacao", rotulo: "Situação", tipo: "select", opcoes: SITUACOES, valor: r.situacao || "lead" },
+      { nome: "instagram", rotulo: "Instagram", valor: r.instagram, dica: "Ex: @marca" },
+      { nome: "email", rotulo: "E-mail", tipo: "email", valor: r.email },
+      { nome: "telefone", rotulo: "Telefone", tipo: "tel", valor: r.telefone, dica: "Com DDD. Ex: 51 99999 0000" },
+      { nome: "ultimo_contato", rotulo: "Último contato", tipo: "date", valor: r.ultimo_contato || (novo ? hojeISO() : "") },
+      { nome: "obs", rotulo: "Observação", tipo: "textarea", valor: r.obs, cheio: true }
+    ],
+    aoSalvar: (val) => salva("marcas", r.id, val),
+    aoApagar: novo ? null : () => apaga("marcas", r.id, `Apagar a marca "${r.nome}" da sua base? Isso não dá para desfazer.`)
+  });
+}
+
+/* =====================================================================
+   8. ABA CALENDÁRIO
+   ===================================================================== */
+const TIPOS_CAL = [["gravar", "Gravar"], ["editar", "Editar"], ["postar", "Postar"]];
+const estadoCal = { ano: new Date().getFullYear(), mes: new Date().getMonth(), filtro: "todos" };
+
+function itensDoCalendario() {
+  const itens = [];
+  if (estadoCal.filtro !== "prazos") dados.calendario.forEach(c => {
+    if (!c.data) return;
+    if (estadoCal.filtro !== "todos" && c.tipo !== estadoCal.filtro) return;
+    itens.push({ origem: "cal", id: c.id, data: String(c.data).slice(0, 10), tipo: c.tipo || "gravar", texto: c.titulo || "", marca: c.marca, feito: c.status === "feito", reg: c });
+  });
+  if (estadoCal.filtro === "todos" || estadoCal.filtro === "prazos") dados.campanhas.forEach(k => {
+    if (!k.prazo || k.ativa === false) return;
+    itens.push({ origem: "camp", id: k.id, data: String(k.prazo).slice(0, 10), tipo: "prazo", texto: "Prazo: " + (k.campanha || ""), marca: k.cliente, feito: k.status === "Entregue", reg: k });
+  });
+  return itens;
+}
+
+DESENHA.calendario = function (caixa) {
+  const { ano, mes } = estadoCal;
+  const primeiro = new Date(ano, mes, 1);
+  const recuo = (primeiro.getDay() + 6) % 7;
+  const diasNoMes = new Date(ano, mes + 1, 0).getDate();
+  const semanas = Math.ceil((recuo + diasNoMes) / 7);
+  const inicio = new Date(ano, mes, 1 - recuo);
+  const hoje = hojeISO();
+  const itens = itensDoCalendario();
+  const porDia = {};
+  itens.forEach(i => (porDia[i.data] = porDia[i.data] || []).push(i));
+  const nomeMes = primeiro.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+
+  let celulas = "";
+  for (let i = 0; i < semanas * 7; i++) {
+    const d = new Date(inicio); d.setDate(inicio.getDate() + i);
+    const iso = isoLocal(d), lista = porDia[iso] || [];
+    const fora = d.getMonth() !== mes;
+    celulas += `<div class="cal-dia${fora ? " fora" : ""}${iso === hoje ? " hoje" : ""}" data-dia="${iso}">
+      <span class="cal-n">${d.getDate()}</span>
+      <button class="cal-mais-btn" type="button" data-novo="${iso}" aria-label="Adicionar em ${dataLonga(iso)}">+</button>
+      ${lista.slice(0, 3).map(it => `<button type="button" class="cal-item ti-${esc(it.tipo)}${it.feito ? " feito" : ""}" data-item="${it.origem}:${esc(it.id)}" title="${esc(it.texto)}${it.marca ? " · " + esc(it.marca) : ""}">${esc(it.texto)}</button>`).join("")}
+      ${lista.length > 3 ? `<button type="button" class="cal-ver" data-ver="${iso}">+${lista.length - 3} mais</button>` : ""}
+    </div>`;
+  }
+
+  /* Ficou pra trás: itens não feitos com data antes de hoje, e prazos vencidos de campanhas não entregues */
+  const atrasados = [
+    ...dados.calendario.filter(c => c.data && String(c.data).slice(0, 10) < hoje && c.status !== "feito").map(c => ({ origem: "cal", id: c.id, data: String(c.data).slice(0, 10), tipo: c.tipo, texto: c.titulo, marca: c.marca })),
+    ...dados.campanhas.filter(k => k.prazo && String(k.prazo).slice(0, 10) < hoje && k.status !== "Entregue" && k.ativa !== false).map(k => ({ origem: "camp", id: k.id, data: String(k.prazo).slice(0, 10), tipo: "prazo", texto: "Prazo: " + (k.campanha || ""), marca: k.cliente }))
+  ].sort((a, b) => a.data.localeCompare(b.data));
+
+  caixa.innerHTML = `
+    <div class="barra-ferr">
+      <button class="icone" type="button" id="c-ant" aria-label="Mês anterior">${ICONE.esq}</button>
+      <span class="cal-mes">${esc(nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1))}</span>
+      <button class="icone" type="button" id="c-prox" aria-label="Próximo mês">${ICONE.dir}</button>
+      <button class="btn" type="button" id="c-hoje">Este mês</button>
+      <span class="esp"></span>
+      <div class="chips" id="c-filtro">${[["todos", "Todos"], ...TIPOS_CAL, ["prazos", "Prazos"]].map(([v, t]) => `<button type="button" data-f="${v}" class="${estadoCal.filtro === v ? "ativo" : ""}">${t}</button>`).join("")}</div>
+      <button class="btn btn--forte" type="button" id="c-add">${ICONE.mais}Adicionar</button>
+    </div>
+    <div class="cal">
+      <div class="cal-cab">${["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].map(d => `<div>${d}</div>`).join("")}</div>
+      <div class="cal-grade" id="c-grade">${celulas}</div>
+    </div>
+    <div class="legenda"><span><i class="ti-gravar"></i>Gravar</span><span><i class="ti-editar"></i>Editar</span><span><i class="ti-postar"></i>Postar</span><span><i class="ti-prazo"></i>Prazo de campanha (vem sozinho da aba Campanhas)</span></div>
+    ${funciona.calendario ? "" : '<p class="vazio">Não consegui ler a tabela do calendário. Veja o aviso lá em cima.</p>'}
+    <div class="cartao" style="margin-top:16px"><h3>Ficou pra trás</h3>${atrasados.length ? `<ul class="atraso">${atrasados.map(a => {
+      const n = -diasAte(a.data);
+      return `<li><span class="pilula alerta-v">há ${dias(n)}</span><div class="txt">${esc(a.texto)}<span>${esc(a.tipo === "prazo" ? "prazo de campanha" : nomeTipo(a.tipo))}${a.marca ? " · " + esc(a.marca) : ""} · era ${dataLonga(a.data)}</span></div>${a.origem === "cal" ? `<button class="btn" type="button" data-feito="${esc(a.id)}">${ICONE.check}Feito</button>` : `<button class="btn" type="button" data-camp="${esc(a.id)}">Abrir</button>`}</li>`;
+    }).join("")}</ul>` : '<p class="vazio">Nada atrasado. Tudo em dia.</p>'}</div>`;
+
+  $("#c-ant").addEventListener("click", () => mudaMes(-1));
+  $("#c-prox").addEventListener("click", () => mudaMes(1));
+  $("#c-hoje").addEventListener("click", () => { const d = new Date(); estadoCal.ano = d.getFullYear(); estadoCal.mes = d.getMonth(); desenhaAba("calendario"); });
+  $("#c-filtro").addEventListener("click", (e) => { const b = e.target.closest("[data-f]"); if (b) { estadoCal.filtro = b.dataset.f; desenhaAba("calendario"); } });
+  $("#c-add").addEventListener("click", () => formCal(null, hoje));
+  $("#c-grade").addEventListener("click", (e) => {
+    const item = e.target.closest("[data-item]");
+    if (item) { abreItem(item.dataset.item); return; }
+    const ver = e.target.closest("[data-ver]");
+    if (ver) { abreDia(ver.dataset.ver); return; }
+    const dia = e.target.closest("[data-dia]");
+    if (dia) formCal(null, dia.dataset.dia);
+  });
+  caixa.querySelectorAll("[data-feito]").forEach(b => b.addEventListener("click", () => salva("calendario", b.dataset.feito, { status: "feito" }).then(ok => ok && toast("Marcado como feito."))));
+  caixa.querySelectorAll("[data-camp]").forEach(b => b.addEventListener("click", () => { const k = dados.campanhas.find(x => String(x.id) === b.dataset.camp); if (k) formCampanha(k); }));
+};
+const nomeTipo = (t) => (TIPOS_CAL.find(x => x[0] === t) || [t, t || ""])[1];
+function mudaMes(n) { const d = new Date(estadoCal.ano, estadoCal.mes + n, 1); estadoCal.ano = d.getFullYear(); estadoCal.mes = d.getMonth(); desenhaAba("calendario"); }
+function abreItem(chave) {
+  const [origem, id] = chave.split(":");
+  if (origem === "camp") { const k = dados.campanhas.find(x => String(x.id) === id); if (k) formCampanha(k); return; }
+  const c = dados.calendario.find(x => String(x.id) === id); if (c) formCal(c);
+}
+function abreDia(iso) {
+  const lista = itensDoCalendario().filter(i => i.data === iso);
+  abreJanela(dataDeISO(iso).toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" }),
+    lista.length ? `<ul class="lista-dia">${lista.map(i => `<li><span class="pilula ${i.tipo === "prazo" ? "pg-pendente" : "p-site"}">${esc(i.tipo === "prazo" ? "Prazo" : nomeTipo(i.tipo))}</span><div class="txt"${i.feito ? ' style="text-decoration:line-through;opacity:.6"' : ""}>${esc(i.texto)}${i.marca ? `<span>${esc(i.marca)}</span>` : ""}</div><button class="btn" type="button" data-abre="${i.origem}:${esc(i.id)}">Abrir</button></li>`).join("")}</ul>` : '<p class="vazio">Nada neste dia.</p>',
+    `<span class="esp"></span><button class="btn btn--forte" type="button" id="dia-add">${ICONE.mais}Adicionar neste dia</button>`);
+  $$("[data-abre]", janela).forEach(b => b.addEventListener("click", () => abreItem(b.dataset.abre)));
+  $("#dia-add").addEventListener("click", () => formCal(null, iso));
+}
+function formCal(c, dataInicial) {
+  const novo = !c; c = c || {};
+  abreFormulario({
+    titulo: novo ? "Adicionar no calendário" : "Editar item do calendário",
+    campos: [
+      { nome: "titulo", rotulo: "O que é", valor: c.titulo, obrigatorio: true, cheio: true },
+      { nome: "marca", rotulo: "Marca", valor: c.marca },
+      { nome: "tipo", rotulo: "Tipo", tipo: "select", opcoes: TIPOS_CAL, valor: c.tipo || "gravar" },
+      { nome: "data", rotulo: "Data", tipo: "date", valor: c.data ? String(c.data).slice(0, 10) : dataInicial, obrigatorio: true },
+      { nome: "status", rotulo: "Status", tipo: "select", opcoes: [["a fazer", "A fazer"], ["feito", "Feito"]], valor: c.status || "a fazer" }
+    ],
+    aoSalvar: (val) => salva("calendario", c.id, val),
+    aoApagar: novo ? null : () => apaga("calendario", c.id, `Apagar "${c.titulo}" do calendário? Isso não dá para desfazer.`)
+  });
+}
+
+/* =====================================================================
+   9. ABA CAMPANHAS
+   ===================================================================== */
+const FUNIL = ["Briefing", "Roteiro", "Aprovação Roteiro", "Gravação", "Edição", "Aprovado", "Entregue"];
+const estadoCamp = { filtro: "todas", busca: "", col: "prazo", asc: true };
+const COLUNAS_CAMP = [
+  ["favorita", "", (k) => (k.favorita ? 0 : 1)],
+  ["campanha", "Campanha", (k) => sem(k.campanha)],
+  ["cliente", "Cliente", (k) => sem(k.cliente)],
+  ["tipo", "Tipo", (k) => sem(k.tipo)],
+  ["status", "Status", (k) => { const i = FUNIL.indexOf(k.status); return i < 0 ? 99 : i; }],
+  ["qtd", "Qtd", (k) => Number(k.qtd) || 0, "num"],
+  ["valor", "Valor", (k) => Number(k.valor) || 0, "num"],
+  ["prazo", "Prazo", (k) => k.prazo ? String(k.prazo).slice(0, 10) : null],
+  ["pagamento", "Pagamento", (k) => k.pagamento === "pago" ? 1 : 0]
+];
+
+function avisoPrazo(k) {
+  if (!k.prazo || k.status === "Entregue") return "";
+  const n = diasAte(k.prazo);
+  if (n < 0) return `<span class="pilula alerta-v">atrasada ${dias(-n)}</span>`;
+  if (n === 0) return `<span class="pilula alerta-a">vence hoje</span>`;
+  if (n <= 3) return `<span class="pilula alerta-a">vence em ${dias(n)}</span>`;
+  return "";
+}
+
+DESENHA.campanhas = function (caixa) {
+  if (!caixa.dataset.pronto) {
+    caixa.innerHTML = `<div id="k-faixa"></div>
+      <div class="barra-ferr">
+        <div class="chips" id="k-filtro">${[["todas", "Todas"], ["ativas", "Ativas"], ["finalizadas", "Finalizadas"]].map(([v, t]) => `<button type="button" data-f="${v}">${t}</button>`).join("")}</div>
+        <input class="busca" type="search" id="k-busca" placeholder="Buscar campanha ou cliente" aria-label="Buscar campanha">
+        <span class="esp"></span>
+        <button class="btn" type="button" id="k-csv">${ICONE.baixar}Baixar</button>
+        <button class="btn btn--forte" type="button" id="k-add">${ICONE.mais}Adicionar campanha</button>
+      </div>
+      <div id="k-tabela"></div>`;
+    caixa.dataset.pronto = "1";
+    $("#k-filtro").addEventListener("click", (e) => { const b = e.target.closest("[data-f]"); if (b) { estadoCamp.filtro = b.dataset.f; tabelaCampanhas(); } });
+    $("#k-busca").addEventListener("input", (e) => { estadoCamp.busca = e.target.value; tabelaCampanhas(); });
+    $("#k-add").addEventListener("click", () => formCampanha());
+    $("#k-csv").addEventListener("click", () => baixaCSV(`campanhas-${hojeISO()}.csv`, [
+      ["Favorita", k => k.favorita ? "sim" : ""], ["Campanha", k => k.campanha], ["Cliente", k => k.cliente], ["Tipo", k => k.tipo], ["Status", k => k.status],
+      ["Qtd", k => k.qtd], ["Valor", k => (Number(k.valor) || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2 })], ["Prazo", k => dataLonga(k.prazo)],
+      ["Pagamento", k => k.pagamento === "pago" ? "Pago" : "Pendente"], ["Ativa", k => k.ativa === false ? "Finalizada" : "Ativa"]
+    ], campanhasOrdenadas()));
+    $("#k-tabela").addEventListener("click", async (e) => {
+      const th = e.target.closest("th[data-col]");
+      if (th) { const c = th.dataset.col; if (estadoCamp.col === c) estadoCamp.asc = !estadoCamp.asc; else { estadoCamp.col = c; estadoCamp.asc = true; } tabelaCampanhas(); return; }
+      const tr = e.target.closest("tr[data-id]"); if (!tr) return;
+      const k = dados.campanhas.find(x => String(x.id) === tr.dataset.id); if (!k) return;
+      if (e.target.closest("[data-estrela]")) { await salva("campanhas", k.id, { favorita: !k.favorita }); return; }
+      formCampanha(k);
+    });
+  }
+  /* faixa de números */
+  const todas = dados.campanhas;
+  const ativas = todas.filter(k => k.ativa !== false).length;
+  const valorTotal = todas.reduce((s, k) => s + (Number(k.valor) || 0), 0);
+  const qtdTotal = todas.reduce((s, k) => s + (Number(k.qtd) || 0), 0);
+  const aReceber = todas.filter(k => k.pagamento !== "pago").reduce((s, k) => s + (Number(k.valor) || 0), 0);
+  const recebido = todas.filter(k => k.pagamento === "pago").reduce((s, k) => s + (Number(k.valor) || 0), 0);
+  $("#k-faixa").innerHTML = `<div class="faixa-num" style="--n:4">
+    <div><span>Campanhas</span><strong>${numero(todas.length)}</strong></div>
+    <div><span>Ativas</span><strong>${numero(ativas)}</strong></div>
+    <div><span>Valor total</span><strong>${reais(valorTotal)}</strong><small>ticket médio por vídeo: ${reais(divide(valorTotal, qtdTotal))}</small></div>
+    <div><span>A receber</span><strong>${reais(aReceber)}</strong><small>já recebido: ${reais(recebido)}</small></div>
+  </div>`;
+  $$("#k-filtro button").forEach(b => b.classList.toggle("ativo", b.dataset.f === estadoCamp.filtro));
+  tabelaCampanhas();
+};
+function campanhasOrdenadas() {
+  const b = sem(estadoCamp.busca);
+  const col = COLUNAS_CAMP.find(c => c[0] === estadoCamp.col) || COLUNAS_CAMP[7];
+  const dir = estadoCamp.asc ? 1 : -1;
+  return dados.campanhas
+    .filter(k => estadoCamp.filtro === "todas" || (estadoCamp.filtro === "ativas" ? k.ativa !== false : k.ativa === false))
+    .filter(k => !b || sem(k.campanha).includes(b) || sem(k.cliente).includes(b))
+    .slice().sort((x, y) => {
+      const a = col[2](x), c = col[2](y);
+      if (a === null && c === null) return 0;
+      if (a === null) return 1;   /* sem prazo vai sempre pro fim */
+      if (c === null) return -1;
+      if (typeof a === "string") return a.localeCompare(c, "pt-BR") * dir;
+      return (a - c) * dir;
+    });
+}
+function tabelaCampanhas() {
+  $$("#k-filtro button").forEach(b => b.classList.toggle("ativo", b.dataset.f === estadoCamp.filtro));
+  const alvo = $("#k-tabela");
+  if (!funciona.campanhas) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Não consegui ler a tabela de campanhas. Veja o aviso lá em cima.</p></div>`; return; }
+  if (!dados.campanhas.length) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Nenhuma campanha ainda. Clique em Adicionar campanha.</p></div>`; return; }
+  const lista = campanhasOrdenadas();
+  const cab = COLUNAS_CAMP.map(([c, t, , cls]) => {
+    const ativa = estadoCamp.col === c;
+    const seta = ativa ? (estadoCamp.asc ? "↑" : "↓") : "↕";
+    return `<th class="ordena${ativa ? " ativa" : ""}${cls ? " " + cls : ""}" data-col="${c}" title="Ordenar">${t || '<span class="sr">Favorita</span>★'}<span class="seta">${seta}</span></th>`;
+  }).join("");
+  alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr>${cab}</tr></thead><tbody>${
+    lista.length ? lista.map(k => {
+      const si = FUNIL.indexOf(k.status);
+      return `<tr class="clicavel${k.favorita ? " favorita" : ""}" data-id="${esc(k.id)}"${k.ativa === false ? ' style="opacity:.7"' : ""}>
+        <td style="width:40px"><button class="icone estrela${k.favorita ? " on" : ""}" type="button" data-estrela title="${k.favorita ? "Tirar destaque" : "Destacar"}">${k.favorita ? ICONE.estrelaCheia : ICONE.estrela}</button></td>
+        <td style="min-width:170px">${esc(k.campanha)}${pilulaExemplo(k)}${k.ativa === false ? '<span class="sub">finalizada</span>' : ""}</td>
+        <td>${esc(k.cliente || "")}</td>
+        <td>${k.tipo ? `<span class="pilula t-${sem(k.tipo).replace(/[^a-z]/g, "")}">${esc(k.tipo)}</span>` : ""}</td>
+        <td>${k.status ? `<span class="pilula st-${si < 0 ? 0 : si}">${esc(k.status)}</span>` : ""}</td>
+        <td class="num">${numero(k.qtd)}</td>
+        <td class="num" style="white-space:nowrap">${reais(k.valor)}</td>
+        <td style="white-space:nowrap">${esc(dataLonga(k.prazo))} ${avisoPrazo(k)}</td>
+        <td><span class="pilula pg-${k.pagamento === "pago" ? "pago" : "pendente"}">${k.pagamento === "pago" ? "Pago" : "Pendente"}</span></td>
+      </tr>`;
+    }).join("") : `<tr><td colspan="9"><p class="vazio">Nenhuma campanha com esse filtro.</p></td></tr>`
+  }</tbody></table></div>`;
+}
+function formCampanha(k) {
+  const novo = !k; k = k || {};
+  abreFormulario({
+    titulo: novo ? "Adicionar campanha" : "Editar campanha",
+    campos: [
+      { nome: "campanha", rotulo: "Campanha", valor: k.campanha, obrigatorio: true },
+      { nome: "cliente", rotulo: "Cliente", valor: k.cliente },
+      { nome: "tipo", rotulo: "Tipo", tipo: "select", opcoes: ["Conteúdo", "Publicidade"], valor: k.tipo || "Conteúdo" },
+      { nome: "status", rotulo: "Status", tipo: "select", opcoes: FUNIL, valor: k.status || "Briefing" },
+      { nome: "qtd", rotulo: "Quantidade de vídeos", tipo: "number", valor: k.qtd == null ? 1 : k.qtd },
+      { nome: "valor", rotulo: "Valor total (R$)", tipo: "number", valor: k.valor == null ? "" : k.valor },
+      { nome: "prazo", rotulo: "Prazo", tipo: "date", valor: k.prazo ? String(k.prazo).slice(0, 10) : "" },
+      { nome: "pagamento", rotulo: "Pagamento", tipo: "select", opcoes: [["pendente", "Pendente"], ["pago", "Pago"]], valor: k.pagamento || "pendente" },
+      { nome: "ativa", rotulo: "Ativa (desmarque quando finalizar)", tipo: "checkbox", valor: novo ? true : k.ativa !== false },
+      { nome: "favorita", rotulo: "Destacar com estrela", tipo: "checkbox", valor: !!k.favorita }
+    ],
+    aoSalvar: (val) => salva("campanhas", k.id, val),
+    aoApagar: novo ? null : () => apaga("campanhas", k.id, `Apagar a campanha "${k.campanha}"? Isso não dá para desfazer.`)
+  });
+}
+
+/* =====================================================================
+   10. ABA CHECKLIST (conteúdo de js/biblioteca.js, usado sem alterar)
+   ===================================================================== */
+const B = window.Biblioteca || null;
+const SUBABAS = [["checklist", "Checklist do portfólio"], ["referencias", "Referências de vídeo"], ["roteiros", "Roteiros"], ["nichos", "Ideias por nicho"], ["revisar", "Revisar meu roteiro"]];
+let subAba = "checklist";
+const CORES_REF = { coral: "#e8b4a0", rosa: "#e9c4c4", mostarda: "#e3c77f", terra: "#c9a27e", oliva: "#b8be94", areia: "#e2d5c3" };
+const idShort = (l) => (String(l || "").match(/(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)([\w-]{11})/) || [])[1] || "";
+const lista = (x) => Array.isArray(x) ? x : [];
+
+async function marca(chave, ligado) {
+  if (ligado) dados.marcados.set(chave, true); else dados.marcados.delete(chave);
+  if (!funciona.marcados) { toast("Não ficou salvo: a tabela marcados não está no banco.", true); return; }
+  const { error } = ligado
+    ? await sb.from("marcados").upsert({ chave, marcado: true, atualizado_em: new Date().toISOString() })
+    : await sb.from("marcados").delete().eq("chave", chave);
+  if (error) toast(explica(error, "marcados"), true);
+}
+
+DESENHA.checklist = function (caixa) {
+  if (!B) { caixa.innerHTML = '<div class="cartao"><p class="vazio">Não encontrei o arquivo js/biblioteca.js. Ele precisa estar publicado junto com o site para esta aba funcionar.</p></div>'; return; }
+  caixa.innerHTML = `<div class="sub-abas" role="tablist">${SUBABAS.map(([v, t]) => `<button type="button" role="tab" data-sub="${v}" class="${subAba === v ? "ativo" : ""}">${t}</button>`).join("")}</div><div id="sub-corpo"></div>`;
+  $(".sub-abas", caixa).addEventListener("click", (e) => { const b = e.target.closest("[data-sub]"); if (b) { subAba = b.dataset.sub; DESENHA.checklist(caixa); } });
+  const corpo = $("#sub-corpo");
+  try { SUB[subAba](corpo); }
+  catch (erro) { console.error(erro); corpo.innerHTML = '<div class="cartao"><p class="vazio">Esta parte não conseguiu abrir agora. As outras continuam funcionando.</p></div>'; }
+};
+const SUB = {};
+
+SUB.checklist = function (corpo) {
+  const secoes = lista(B.CHECKLIST);
+  const conta = (s) => lista(s.itens).filter((_, i) => dados.marcados.has(`check:${s.id}:${i}`)).length;
+  const totalItens = secoes.reduce((t, s) => t + lista(s.itens).length, 0);
+  const desenha = () => {
+    const feitos = secoes.reduce((t, s) => t + conta(s), 0);
+    const pct = Math.round(divide(feitos, totalItens) * 100);
+    const abertos = new Set($$("details.bloco[open]", corpo).map(d => d.dataset.id));
+    corpo.innerHTML = `
+      <div class="cartao"><div class="geral"><strong>Seu portfólio está ${pct}% pronto</strong><div class="progresso"><b style="width:${pct}%"></b></div><strong>${feitos} de ${totalItens}</strong></div></div>
+      ${!funciona.marcados ? '<p class="vazio">O que você marcar agora não vai ficar salvo, porque a tabela marcados não está no banco.</p>' : ""}
+      ${secoes.map(s => {
+        const n = lista(s.itens).length, f = conta(s), p = Math.round(divide(f, n) * 100);
+        return `<details class="bloco" data-id="${esc(s.id)}"${abertos.has(String(s.id)) ? " open" : ""}>
+          <summary><span style="font-size:20px">${esc(s.emoji || "")}</span><span class="tit"><b>${esc(s.nome)}</b><span>${esc(s.resumo || "")}</span></span><span class="progresso mini"><b style="width:${p}%"></b></span><span class="cont">${f}/${n}</span>${ICONE.abaixo}</summary>
+          <div class="bloco-corpo">
+            ${s.porque ? `<p class="porque"><b>Por que:</b> ${esc(s.porque)}</p>` : ""}
+            ${lista(s.itens).map((it, i) => { const ch = `check:${s.id}:${i}`, ok = dados.marcados.has(ch); return `<label class="item${ok ? " ok" : ""}"><input type="checkbox" data-chave="${esc(ch)}"${ok ? " checked" : ""}><span><b>${esc(it.t)}</b><span>${esc(it.d || "")}</span></span></label>`; }).join("")}
+          </div></details>`;
+      }).join("")}`;
+    $$("input[data-chave]", corpo).forEach(inp => inp.addEventListener("change", async () => { await marca(inp.dataset.chave, inp.checked); desenha(); }));
+  };
+  desenha();
+};
+
+SUB.referencias = function (corpo) {
+  const refs = lista(B.REFERENCIAS);
+  corpo.innerHTML = `<div class="grade-ref">${refs.map((r, i) => {
+    const id = idShort(r.youtube);
+    return `<button class="ref" type="button" data-i="${i}" style="background:${CORES_REF[r.cor] || "var(--nude)"}">
+      ${id ? `<img src="https://i.ytimg.com/vi/${esc(id)}/oardefault.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${esc(id)}/hqdefault.jpg'">` : ""}
+      <span class="emo">${esc(r.emoji || "")}</span>
+      <span class="info"><b>${esc(r.titulo)}</b><span>${esc([r.estilo, r.duracao, r.marca].filter(Boolean).join(" · "))}</span></span>
+    </button>`;
+  }).join("")}</div>`;
+  corpo.querySelectorAll(".ref").forEach(b => b.addEventListener("click", () => fichaReferencia(refs[+b.dataset.i])));
+};
+function fichaReferencia(r) {
+  /* os textos da biblioteca já vêm com <b> e <em>, por isso o roteiro entra como está */
+  const corpo = `<div class="ficha">
+    <p style="font-size:12px;color:var(--suave)">${esc([r.emoji, r.estilo, r.audiencia, r.duracao, r.marca].filter(Boolean).join(" · "))}</p>
+    ${r.gancho ? `<h4>O gancho</h4><p class="gancho">${esc(r.gancho)}</p>` : ""}
+    ${r.porque ? `<h4>Por que funciona</h4><p>${esc(r.porque)}</p>` : ""}
+    ${r.diferencial ? `<h4>O diferencial</h4><p>${esc(r.diferencial)}</p>` : ""}
+    ${r.erro ? `<h4>O erro comum</h4><p>${esc(r.erro)}</p>` : ""}
+    ${lista(r.roteiro).length ? `<h4>O roteiro</h4><ul class="beats">${lista(r.roteiro).map(b => `<li><span class="t">${esc(b.t)}</span><span>${b.o || ""}</span></li>`).join("")}</ul>` : ""}
+  </div>`;
+  abreJanela(r.titulo || "Referência", corpo, r.youtube ? `<span class="esp"></span><a class="btn btn--forte" href="${esc(r.youtube)}" target="_blank" rel="noopener">${ICONE.play}Assistir</a>` : "", true);
+}
+
+SUB.roteiros = function (corpo) {
+  corpo.innerHTML = lista(B.TIPOS).map(t => `<details class="bloco">
+    <summary><span style="font-size:20px">${esc(t.emoji || "")}</span><span class="tit"><b>${esc(t.nome)}</b><span>${esc(t.duracao || "")}</span></span>${ICONE.abaixo}</summary>
+    <div class="bloco-corpo">
+      ${t.porque ? `<p class="porque"><b>Quando usar:</b> ${esc(t.porque)}</p>` : ""}
+      <ul class="beats">${lista(t.beats).map(b => `<li><span class="t">${esc(b.t)}</span><span>${b.o || ""}</span></li>`).join("")}</ul>
+      ${lista(t.erros).length ? `<p style="margin:12px 0 4px;font-size:12px;color:var(--suave)">Erros comuns</p><ul class="erros">${lista(t.erros).map(e => `<li>${esc(e)}</li>`).join("")}</ul>` : ""}
+    </div></details>`).join("");
+};
+
+SUB.nichos = function (corpo) {
+  const comoUsar = lista(B.COMO_USAR);
+  corpo.innerHTML = `${comoUsar.length ? `<details class="bloco"><summary><span class="tit"><b>Como usar os ganchos</b></span>${ICONE.abaixo}</summary><div class="bloco-corpo"><ul class="como-usar">${comoUsar.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div></details>` : ""}
+    <div class="nichos">${lista(B.NICHOS).map(n => `<div class="nicho"><h3>${esc(n.emoji || "")} ${esc(n.nome)}</h3><ul>${lista(n.ideias).map(i => `<li><b>${esc(i.t)}</b>${i.gancho ? `<q>${esc(i.gancho)}</q>` : ""}</li>`).join("")}</ul></div>`).join("")}</div>`;
+};
+
+SUB.revisar = function (corpo) {
+  const blocos = lista(B.REVISAO);
+  let texto = ""; try { texto = localStorage.getItem("roteiro-em-revisao") || ""; } catch (e) {}
+  const chaves = [];
+  blocos.forEach((b, bi) => lista(b.itens).forEach((_, i) => chaves.push(`revisao:${bi}:${i}`)));
+  const desenha = () => {
+    const feitos = chaves.filter(c => dados.marcados.has(c)).length;
+    const pct = Math.round(divide(feitos, chaves.length) * 100);
+    corpo.innerHTML = `
+      <div class="cartao"><h3>Cole aqui o seu roteiro</h3><textarea class="roteiro" id="rev-texto" placeholder="Cole o roteiro e confira item por item embaixo.">${esc(texto)}</textarea></div>
+      <div class="cartao"><div class="geral"><strong>Revisão ${pct}% feita</strong><div class="progresso"><b style="width:${pct}%"></b></div><button class="btn" type="button" id="rev-limpa">Começar outra revisão</button></div></div>
+      ${blocos.map((b, bi) => `<div class="cartao"><h3 style="color:var(--texto);font-size:14px">${esc(b.emoji || "")} ${esc(b.bloco)}</h3>
+        ${lista(b.itens).map((it, i) => { const ch = `revisao:${bi}:${i}`, ok = dados.marcados.has(ch); return `<label class="item${ok ? " ok" : ""}"><input type="checkbox" data-chave="${ch}"${ok ? " checked" : ""}><span><b>${esc(it.t)}</b><span>${esc(it.d || "")}</span></span></label>`; }).join("")}
+      </div>`).join("")}`;
+    $("#rev-texto").addEventListener("input", (e) => { texto = e.target.value; try { localStorage.setItem("roteiro-em-revisao", texto); } catch (x) {} });
+    $$("input[data-chave]", corpo).forEach(inp => inp.addEventListener("change", async () => { await marca(inp.dataset.chave, inp.checked); desenha(); }));
+    $("#rev-limpa").addEventListener("click", async () => {
+      if (!confirm("Limpar o roteiro e desmarcar todos os itens da revisão?")) return;
+      texto = ""; try { localStorage.removeItem("roteiro-em-revisao"); } catch (x) {}
+      const marcadas = chaves.filter(c => dados.marcados.has(c));
+      marcadas.forEach(c => dados.marcados.delete(c));
+      if (funciona.marcados && marcadas.length) await sb.from("marcados").delete().like("chave", "revisao:%");
+      desenha();
+    });
+  };
+  desenha();
+};
+</script>
+</body>
+</html>
