@@ -946,6 +946,7 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
   </div>
 </footer>
 
+<script src="js/banco.js"></script>
 <script>
 /* =====================================================================
    DADOS DO PORTFÓLIO: edite aqui sem mexer no HTML
@@ -1804,11 +1805,24 @@ const EMAIL_FORMULARIO = "contatocrisdallaccua@gmail.com";
     if (viaWhats) $("#ok-texto").textContent = T("okWhats");
     form.hidden = true; ok.hidden = false; ok.focus();
   };
+  /* Também guarda o contato na base de marcas do painel, como Lead */
+  const salvaNaBase = (d) => {
+    const B = window.BANCO;
+    if (!B || !window.fetch) return Promise.resolve(false);
+    const agora = new Date(), hoje = agora.getFullYear() + "-" + String(agora.getMonth() + 1).padStart(2, "0") + "-" + String(agora.getDate()).padStart(2, "0");
+    const obs = ["Contato: " + d.nome, d.mensagem ? "Mensagem: " + d.mensagem : ""].filter(Boolean).join("\n");
+    return fetch(B.url + "/rest/v1/marcas", {
+      method: "POST",
+      headers: { apikey: B.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ nome: (d.marca || d.nome).slice(0, 150), email: d.email.slice(0, 200), obs: obs.slice(0, 4000), situacao: "lead", origem: "site", ultimo_contato: hoje })
+    }).then(r => r.ok).catch(() => false);
+  };
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const invalido = [...form.querySelectorAll("[required]")].find(c => !c.value.trim() || !c.checkValidity());
     if (invalido) { invalido.focus(); invalido.reportValidity && invalido.reportValidity(); return; }
     const d = { nome: form.nome.value.trim(), marca: form.marca.value.trim(), email: form.email.value.trim(), mensagem: form.mensagem.value.trim() };
+    const naBase = salvaNaBase(d);
     if (!EMAIL_FORMULARIO) { window.open(whatsCom(d), "_blank", "noopener"); mostraOk(d.nome, true); return; }
     const botao = form.querySelector("button[type=submit]"); botao.disabled = true;
     try {
@@ -1817,7 +1831,9 @@ const EMAIL_FORMULARIO = "contatocrisdallaccua@gmail.com";
       if (!r.ok || String(res.success) !== "true") throw new Error("falhou");
       mostraOk(d.nome, false);
     } catch (x) {
-      erro.hidden = false; window.open(whatsCom(d), "_blank", "noopener");
+      /* se o e-mail falhou mas o contato entrou na base, já está tudo certo */
+      if (await naBase) mostraOk(d.nome, false);
+      else { erro.hidden = false; window.open(whatsCom(d), "_blank", "noopener"); }
     } finally { botao.disabled = false; }
   });
 })();
@@ -1825,6 +1841,66 @@ const EMAIL_FORMULARIO = "contatocrisdallaccua@gmail.com";
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && menu.classList.contains("aberto")) { fechaMenu(); botaoMenu.focus(); }
 });
+
+/* VÍDEOS DO PAINEL
+   O site já abre com a lista de categorias escrita acima (reserva).
+   Logo em seguida busca os vídeos da tabela "videos" do painel. Se vierem,
+   troca a lista pelos do painel. Se o banco não responder, fica a reserva. */
+const ehLinkYoutube = (l) => /(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)[\w-]{11}/.test(String(l || ""));
+(async function videosDoPainel() {
+  const B = window.BANCO;
+  if (!B || !window.fetch) return;
+  try {
+    const ctl = "AbortController" in window ? new AbortController() : null;
+    const limite = setTimeout(() => ctl && ctl.abort(), 6000);
+    const r = await fetch(B.url + "/rest/v1/videos?select=titulo,link,nicho,marca,ordem&visivel=eq.true&exemplo=eq.false&order=ordem.asc",
+      { headers: { apikey: B.chave }, signal: ctl ? ctl.signal : undefined });
+    clearTimeout(limite);
+    if (!r.ok) return;
+    const linhas = await r.json();
+    if (!Array.isArray(linhas) || !linhas.length) return;
+    const norm = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    let mudou = false;
+    categorias.forEach(c => {
+      const novos = linhas
+        .filter(l => norm(l.nicho) === norm(c.nome.pt) || norm(l.nicho) === c.chave)
+        .filter(l => ehLinkYoutube(l.link))
+        .map(l => ({ marca: l.marca || l.titulo || "", youtube: l.link }));
+      const atuais = c.videos.map(v => ({ marca: v.marca, youtube: v.youtube }));
+      if (JSON.stringify(novos) !== JSON.stringify(atuais)) { c.videos = novos; mudou = true; }
+    });
+    if (mudou) renderizaCategorias("revela visivel");
+  } catch (e) { /* sem banco, o site segue com a reserva */ }
+})();
+
+/* REGISTRO DE VISITA
+   Grava só a data, a página e de onde a pessoa veio. Sem cookie, sem serviço
+   de fora e sem pedir nada. Conta uma vez por aba aberta. Não conta as suas
+   próprias visitas no aparelho em que você entra no painel. */
+(function registraVisita() {
+  const B = window.BANCO;
+  if (!B || !window.fetch) return;
+  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) return;
+  try { if (localStorage.getItem("nao-contar-visita")) return; } catch (e) {}
+  try { if (sessionStorage.getItem("visita-contada")) return; sessionStorage.setItem("visita-contada", "1"); } catch (e) {}
+  let origem = new URLSearchParams(location.search).get("utm_source") || "";
+  if (!origem && document.referrer) {
+    try {
+      const h = new URL(document.referrer).hostname.replace(/^www\./, "");
+      if (h && h !== location.hostname.replace(/^www\./, "")) origem = h;
+    } catch (e) {}
+  }
+  const nomes = [[/instagram/, "Instagram"], [/google/, "Google"], [/whatsapp|^wa\.me$/, "WhatsApp"], [/tiktok/, "TikTok"], [/facebook|^fb\.|^m\.me$/, "Facebook"],
+    [/linkedin|^lnkd\.in$/, "LinkedIn"], [/youtube|^youtu\.be$/, "YouTube"], [/bing/, "Bing"], [/linktr\.ee|linktree/, "Linktree"], [/^t\.co$|twitter|^x\.com$/, "X"],
+    [/pinterest/, "Pinterest"], [/seuinfluencer/, "Seu Influencer"], [/mail\.|outlook|gmail/, "E-mail"]];
+  const achou = nomes.find(([re]) => re.test(origem.toLowerCase()));
+  origem = achou ? achou[1] : (origem || "Direto");
+  fetch(B.url + "/rest/v1/visitas", {
+    method: "POST", keepalive: true,
+    headers: { apikey: B.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
+    body: JSON.stringify({ pagina: location.pathname.slice(0, 300), origem: origem.slice(0, 100) })
+  }).catch(() => {});
+})();
 
 /* Ano automático no rodapé */
 $("#ano").textContent = new Date().getFullYear();
