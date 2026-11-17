@@ -698,7 +698,12 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
   .depo-canto{font-size:.85rem}
 
   /* capa */
-  .capa,html.com-barra-cat .capa{padding-top:calc(68px + 1.4rem)}
+  .capa{padding-top:calc(68px + 1.4rem)}
+  /* barra de categorias sempre fixa no celular: fina (40px) e a capa começa abaixo dela */
+  html.com-barra-cat .capa{padding-top:calc(68px + 40px + 1.4rem)}
+  html.com-barra-cat{scroll-padding-top:120px}
+  .barra-cat-links{gap:1.6rem}
+  .barra-cat-links a{height:40px;display:flex;align-items:center;padding:0;font-size:.6rem}
   .capa h1{font-size:2.25rem;margin:.8rem 0 1.2rem}
   .capa-foto{margin-bottom:1.4rem}
   .capa .frase{margin-bottom:.4rem}
@@ -1831,8 +1836,6 @@ function ligaVideo(video) {
     vaiPara(a.getAttribute("href").slice(1));
   });
   let pedido = false;
-  /* no celular, a barra só aparece da seção Categorias até o fim das Fotos */
-  const celular = window.matchMedia("(max-width:700px)");
   const atualiza = () => {
     pedido = false;
     const limite = alturaBarras() + 40;
@@ -1841,8 +1844,7 @@ function ligaVideo(video) {
     const secFotos = $("#fotos");
     if (secFotos && secFotos.getBoundingClientRect().top <= limite) atual = "fotos";
     const fim = (secFotos || $("#categorias")).getBoundingClientRect().bottom < limite;
-    const chegou = $("#trabalhos").getBoundingClientRect().top <= $(".topo").offsetHeight + 1;
-    barra.classList.toggle("visivel", !celular.matches || (chegou && !fim));
+    barra.classList.add("visivel");
     barra.querySelectorAll("a").forEach(a => {
       const ativo = !fim && a.dataset.cat === atual;
       a.classList.toggle("ativo", ativo);
