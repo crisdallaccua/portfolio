@@ -680,6 +680,107 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
 @media (max-width:360px){
   .marca-nome{font-size:.7rem}
 }
+/* =====================================================================
+   CELULAR COMPACTO (até 700px). No computador nada disso vale.
+   Linhas que deslizam para o lado, espaços e letras menores.
+   ===================================================================== */
+@media (max-width:700px){
+  body{font-size:15px}
+
+  /* espaço em cima e embaixo de cada seção */
+  .secao,.destaques-escuro,.processo-escuro,.contato-escuro{padding:2.5rem 0}
+  .sobre{padding-bottom:2.5rem}
+
+  /* títulos das seções */
+  .cat-titulo,.destaques-titulo,.contato-escuro .contato-titulo,.sobre-titulo{font-size:1.75rem}
+  .cat-etiqueta,.sobre-etiqueta{margin-bottom:.7rem}
+  .depo-linha{gap:.6rem!important}
+  .depo-canto{font-size:.85rem}
+
+  /* capa */
+  .capa,html.com-barra-cat .capa{padding-top:calc(68px + 1.4rem)}
+  .capa h1{font-size:2.25rem;margin:.8rem 0 1.2rem}
+  .capa-foto{margin-bottom:1.4rem}
+  .capa .frase{margin-bottom:.4rem}
+  .capa .acoes{margin:1.4rem 0 1.4rem;gap:1rem 2rem}
+  .capa-numeros{display:flex;max-width:none}
+  .capa-numeros div,.capa-numeros div+div{flex:1;display:flex;align-items:center;gap:.6rem;padding:.9rem 0}
+  .capa-numeros div+div{padding-left:.9rem}
+  .capa-numeros strong{font-size:1.35rem}
+  .capa-numeros span{margin-top:0;font-size:.56rem;letter-spacing:.12em;line-height:1.4}
+  .faixa{margin-top:1.6rem}
+  .faixa-trilho span{padding:.8rem 1.2rem}
+
+  /* sobre */
+  .sobre-grade{gap:1.8rem}
+  .sobre .sobre-texto p{line-height:1.7}
+
+  /* linhas que deslizam: base comum */
+  .cat-grade,.destaques,.serv-cards{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;--borda:clamp(1.25rem,4vw,2.5rem);margin-left:calc(-1 * var(--borda));margin-right:calc(-1 * var(--borda));padding:0 var(--borda);scroll-padding:0 var(--borda)}
+  .cat-grade::-webkit-scrollbar,.destaques::-webkit-scrollbar,.serv-cards::-webkit-scrollbar{display:none}
+  .cat-grade>li,.destaques>*,.serv-cards>li{scroll-snap-align:start;flex-shrink:0}
+  /* o que fica fora da tela, de lado, não espera a animação de entrada */
+  .destaques .revela,.serv-cards .revela{opacity:1;transform:none}
+
+  /* 1. categorias: uma linha por categoria, vídeos de 110px */
+  .cat-abertura{margin-bottom:1.6rem}
+  .cat-apoio{margin:.7rem 0 1rem}
+  .categoria{padding-top:1rem}
+  .categoria+.categoria{margin-top:1.6rem}
+  .cat-topo{gap:.2rem;margin-bottom:.8rem}
+  .cat-topo h3{font-size:1.4rem}
+  .cat-desc{font-size:.85rem;line-height:1.5}
+  .cat-grade>li{width:110px}
+  .cat-grade .vplayer,.cat-grade .vplay{border-radius:8px}
+  .cat-grade .vpilula,.cat-grade .vrodape span{display:none}
+  .cat-grade .vrodape{padding:1.6rem .5rem .5rem}
+  .cat-grade .vrodape strong{font-size:.72rem;line-height:1.25}
+  .cat-grade .vplay .circulo{width:34px;height:34px}
+  .cat-grade .vplay .circulo::before{margin-left:3px;border-left-width:9px;border-top-width:6px;border-bottom-width:6px}
+  .cat-grade .sem-video::after{font-size:.5rem;letter-spacing:.14em}
+
+  /* 2. destaques: 3 vídeos numa linha, 180px cada */
+  .destaques-cabeca{margin-bottom:1.4rem}
+  .destaques{max-width:none;margin-top:0;margin-bottom:0}
+  .destaques>*{width:180px}
+  .destaques-escuro .destaque .vplayer{margin-bottom:.8rem}
+  .destaques-escuro .destaque .vpilula{font-size:.55rem}
+  .destaque .grande{font-size:1.7rem}
+  .destaques-escuro .destaque .rotulo{margin:.3rem 0 .4rem;font-size:.62rem;letter-spacing:.2em}
+  .destaques-escuro .destaque p{font-size:.82rem;line-height:1.5}
+  .destaques-total{margin-top:1.8rem;padding-top:1.4rem}
+  .destaques-total strong{font-size:2.6rem}
+
+  /* 6. fotos: 3 colunas menores */
+  .fotos-grade{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:1.4rem}
+  .fotos-grade li:last-child{grid-column:auto}
+  .foto{border-radius:6px}
+
+  /* 7. serviços: cards numa linha, 1,2 card por tela */
+  .serv-cards{margin-top:1.4rem;align-items:stretch}
+  .serv-cards>li{width:78vw}
+  .serv-card{padding:20px}
+  .serv-card h3{font-size:1.3rem}
+  .serv-pacote{margin-top:12px;padding:1.3rem;gap:1rem}
+
+  /* depoimentos */
+  #numeros .depo-selo{margin-top:.9rem}
+  .depo-faixa{margin-top:1.4rem}
+  .depo-card{padding:18px}
+
+  /* processo */
+  .proc-trilho{margin-top:1.6rem}
+  .proc-etapa{padding-bottom:1.4rem}
+  .proc-nome{margin:.7rem 0 .35rem}
+  .proc-frase{margin-bottom:.4rem}
+
+  /* contato */
+  .contato-escuro .contato-grade{gap:1.8rem}
+  .contato-escuro .contato-intro .contato-titulo{margin:0 0 .8rem}
+  .contato-escuro .contato-intro .contato-frase{font-size:1.2rem;margin:0 0 1.2rem}
+  .contato-escuro .contato-avatar{margin-bottom:10px}
+  .contato-escuro .contato-form .campo textarea{min-height:110px}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
@@ -1664,15 +1765,18 @@ function ligaVideo(video) {
     vaiPara(a.getAttribute("href").slice(1));
   });
   let pedido = false;
+  /* no celular, a barra só aparece da seção Categorias até o fim das Fotos */
+  const celular = window.matchMedia("(max-width:700px)");
   const atualiza = () => {
     pedido = false;
-    barra.classList.add("visivel");
     const limite = alturaBarras() + 40;
     let atual = null;
     document.querySelectorAll("#categorias .categoria").forEach(c => { if (c.getBoundingClientRect().top <= limite) atual = c.id.replace("cat-", ""); });
     const secFotos = $("#fotos");
     if (secFotos && secFotos.getBoundingClientRect().top <= limite) atual = "fotos";
     const fim = (secFotos || $("#categorias")).getBoundingClientRect().bottom < limite;
+    const chegou = $("#trabalhos").getBoundingClientRect().top <= $(".topo").offsetHeight + 1;
+    barra.classList.toggle("visivel", !celular.matches || (chegou && !fim));
     barra.querySelectorAll("a").forEach(a => {
       const ativo = !fim && a.dataset.cat === atual;
       a.classList.toggle("ativo", ativo);
@@ -1681,6 +1785,7 @@ function ligaVideo(video) {
     barra.dataset.ativo = fim ? "" : (atual || "");
   };
   window.addEventListener("scroll", () => { if (!pedido) { pedido = true; requestAnimationFrame(atualiza); } }, { passive: true });
+  window.addEventListener("resize", () => { if (!pedido) { pedido = true; requestAnimationFrame(atualiza); } });
   atualiza();
 })();
 
