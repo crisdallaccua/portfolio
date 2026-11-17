@@ -662,6 +662,21 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
   .depoimentos{grid-template-columns:1fr}
   .rodape .wrap{flex-direction:column;align-items:flex-start}
 }
+/* CAPA NO CELULAR (até 900px): rótulo e nome, depois a foto, depois o resto.
+   No computador nada disso vale: texto à esquerda, foto à direita. */
+@media (max-width:900px){
+  .capa{padding-top:calc(68px + 1.6rem)}
+  html.com-barra-cat .capa{padding-top:calc(68px + 42px + 1.6rem)}
+  .capa-grade{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .capa-texto{display:contents}
+  .capa-texto>*{order:3}
+  .capa-texto .rotulo,.capa h1{order:1}
+  .capa h1{margin:1rem 0 1.6rem}
+  .capa-foto{order:2;margin:14px 0 1.8rem}
+  .capa-foto .midia{aspect-ratio:1/1}
+  /* FOTO DA CAPA NO CELULAR (quadrada): scale = quanto aproxima, transform-origin ajusta o rosto no centro */
+  .capa-foto img{transform:scale(1.4);transform-origin:71.5% 35%}
+}
 @media (max-width:360px){
   .marca-nome{font-size:.7rem}
 }
@@ -712,7 +727,7 @@ footer.rodape.rodape-claro small{font-size:.62rem;letter-spacing:.08em;text-tran
 <!-- ============ CAPA ============ -->
 <section class="capa" id="inicio" aria-labelledby="titulo-capa">
   <div class="wrap capa-grade">
-    <div class="revela">
+    <div class="capa-texto revela">
       <p class="rotulo" data-t="capaRotulo">Portfólio · UGC Creator · Influencer</p>
       <h1 id="titulo-capa">Cristiane<br>Dall' Accua</h1>
       <p class="frase" data-t="capaFrase">Bom gosto que vende.</p>
