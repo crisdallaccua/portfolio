@@ -5,7 +5,36 @@
   "objetivo": "Mostrar que o Sport Whey Choco Mousse é gostoso e cremoso, com um teste sincero só com água e uma receita de poucos passos, do preparo até a primeira colherada.",
   "formato": "Vídeo vertical · cerca de 46 s",
   "creator": "Cris Dall' Accua",
+  "imagem": {
+    "src": "https://dobro.fbitsstatic.net/img/p/sport-whey-protein-sabor-choco-mousse-450g-150322/336842-1.jpg",
+    "alt": "Pote do Sport Whey Protein Choco Mousse 450 g"
+  },
   "gancho": "Se você toma whey de uma vez, sem respirar, pra não sentir o gosto… para tudo.",
+  "clima": {
+    "texto": "Cozinha clara, luz natural e textura em close. O clima é de sobremesa caseira, sem cara de academia.",
+    "imagem": {
+      "src": "https://dobro.fbitsstatic.net/img/p/sport-whey-protein-sabor-choco-mousse-450g-150322/336842-2.jpg",
+      "alt": "Pote e coqueteleira do Sport Whey Choco Mousse",
+      "legenda": "Referência da marca para o tom de chocolate e a luz."
+    },
+    "itens": [
+      {
+        "nome": "Chocolate",
+        "cor": "#5A3A2E",
+        "texto": "O cremoso da mousse em close lento"
+      },
+      {
+        "nome": "Morango",
+        "cor": "#C2453D",
+        "texto": "O toque de cor por cima da taça"
+      },
+      {
+        "nome": "Linho",
+        "cor": "#EFE9E1",
+        "texto": "Bancada clara e luz de janela"
+      }
+    ]
+  },
   "cenas": [
     {
       "fala": "Se você toma whey de uma vez, sem respirar, pra não sentir o gosto… para tudo.",
