@@ -280,6 +280,7 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
     <h2>minha rotina</h2>
     <a href="#calendario" data-aba="calendario"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendário</a>
     <a href="#campanhas" data-aba="campanhas"><svg class="ic" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Campanhas</a>
+    <a href="#roteiros" data-aba="roteiros"><svg class="ic" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg>Roteiros</a>
     <a href="#checklist" data-aba="checklist"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checklist</a>
   </nav>
   <div class="menu-pe">
@@ -301,6 +302,7 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
   <section id="aba-marcas" data-aba="marcas" hidden></section>
   <section id="aba-calendario" data-aba="calendario" hidden></section>
   <section id="aba-campanhas" data-aba="campanhas" hidden></section>
+  <section id="aba-roteiros" data-aba="roteiros" hidden></section>
   <section id="aba-checklist" data-aba="checklist" hidden></section>
 </main>
 
@@ -393,11 +395,12 @@ const CAMPOS = {
   calendario: ["titulo", "marca", "tipo", "data", "status"],
   campanhas: ["campanha", "cliente", "tipo", "status", "qtd", "valor", "prazo", "pagamento", "ativa", "favorita"],
   marcados: ["chave"],
-  visitas: ["data", "pagina", "origem"]
+  visitas: ["data", "pagina", "origem"],
+  roteiro_respostas: ["roteiro", "marca", "decisao", "cenas", "geral", "resolvida"]
 };
-const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas" };
-const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [] };
-const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true };
+const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas", roteiro_respostas: "respostas dos roteiros" };
+const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [], roteiro_respostas: [] };
+const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true, roteiro_respostas: true };
 const avisos = new Map();
 
 function avisa(chave, texto) { avisos.set(chave, texto); mostraAvisos(); }
@@ -447,14 +450,16 @@ async function carrega(tabela, ajusta) {
 
 async function carregaTudo() {
   const desde = new Date(); desde.setHours(0, 0, 0, 0); desde.setDate(desde.getDate() - 13);
-  const [v, m, c, k, mk, vi] = await Promise.all([
+  const [v, m, c, k, mk, vi, ro] = await Promise.all([
     carrega("videos", q => q.order("ordem", { ascending: true })),
     carrega("marcas", q => q.order("criado_em", { ascending: false })),
     carrega("calendario", q => q.order("data", { ascending: true })),
     carrega("campanhas", q => q.order("criado_em", { ascending: false })),
     carrega("marcados"),
-    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000))
+    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000)),
+    carrega("roteiro_respostas", q => q.order("criado_em", { ascending: false }))
   ]);
+  dados.roteiro_respostas = ro;
   dados.videos = v; dados.marcas = m; dados.calendario = c; dados.campanhas = k; dados.visitas = vi;
   dados.marcados = new Map(mk.filter(r => r.marcado !== false).map(r => [r.chave, true]));
 }
@@ -480,6 +485,7 @@ async function recarrega(tabela) {
   if (tabela === "marcas") dados.marcas = await carrega("marcas", q => q.order("criado_em", { ascending: false }));
   if (tabela === "calendario") dados.calendario = await carrega("calendario", q => q.order("data", { ascending: true }));
   if (tabela === "campanhas") dados.campanhas = await carrega("campanhas", q => q.order("criado_em", { ascending: false }));
+  if (tabela === "roteiro_respostas") dados.roteiro_respostas = await carrega("roteiro_respostas", q => q.order("criado_em", { ascending: false }));
   desenhaAba(abaAtual);
 }
 
@@ -551,7 +557,7 @@ const pilulaExemplo = (r) => r && r.exemplo ? ' <span class="pilula p-exemplo">e
 /* =====================================================================
    5. NAVEGAÇÃO ENTRE AS ABAS
    ===================================================================== */
-const ABAS = { portfolio: "Portfólio", marcas: "Marcas", calendario: "Calendário", campanhas: "Campanhas", checklist: "Checklist do portfólio" };
+const ABAS = { portfolio: "Portfólio", marcas: "Marcas", calendario: "Calendário", campanhas: "Campanhas", roteiros: "Respostas dos roteiros", checklist: "Checklist do portfólio" };
 let abaAtual = "portfolio";
 
 function vaiPara(aba) {
@@ -1113,6 +1119,45 @@ async function marca(chave, ligado) {
     : await sb.from("marcados").delete().eq("chave", chave);
   if (error) toast(explica(error, "marcados"), true);
 }
+
+/* =====================================================================
+   ABA ROTEIROS: respostas das marcas na página crisdallaccua.com/roteiro
+   ===================================================================== */
+DESENHA.roteiros = function (caixa) {
+  const lista = dados.roteiro_respostas || [];
+  const abertas = lista.filter(r => !r.resolvida).length;
+  const quando = (t) => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }); };
+  caixa.innerHTML = `
+    <div class="cartao"><p style="margin:0;font-size:13px;color:var(--suave)">Cada roteiro tem um link próprio, como <b>crisdallaccua.com/roteiro/?id=nome-do-roteiro</b>. Quando a marca aprova ou pede ajuste, a resposta aparece aqui. ${abertas ? `<b>${abertas} ${abertas === 1 ? "resposta aberta" : "respostas abertas"}.</b>` : ""}</p></div>
+    ${lista.length ? lista.map(r => {
+      const cenas = Array.isArray(r.cenas) ? r.cenas : [];
+      return `<div class="cartao" data-id="${esc(r.id)}" style="${r.resolvida ? "opacity:.6" : ""}">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px">
+          <strong style="font-weight:500">${esc(r.marca || "Marca")}</strong>
+          <span class="pilula" style="${r.decisao === "aprovado" ? "background:#e3ecdf;color:#3f5b37" : "background:#f3e1d3;color:#8a4b23"}">${r.decisao === "aprovado" ? "Aprovado" : "Pediu ajuste"}</span>
+          ${r.resolvida ? '<span class="pilula p-exemplo">resolvida</span>' : ""}
+          <span style="margin-left:auto;font-size:12px;color:var(--suave)">${esc(quando(r.criado_em))}</span>
+        </div>
+        <p style="margin:0 0 6px;font-size:13px;color:var(--suave)">${esc(r.titulo || r.roteiro)}${r.nome ? " · respondido por " + esc(r.nome) : ""}</p>
+        ${cenas.length ? `<ul style="margin:8px 0;padding-left:18px">${cenas.map(c => `<li><b>Cena ${esc(c.cena)}:</b> ${esc(c.comentario)}</li>`).join("")}</ul>` : ""}
+        ${r.geral ? `<p style="margin:8px 0"><b>Comentário geral:</b> ${esc(r.geral)}</p>` : ""}
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+          <a class="btn" href="../roteiro/?id=${encodeURIComponent(r.roteiro)}" target="_blank" rel="noopener">Abrir roteiro</a>
+          <button class="btn" type="button" data-resolver="${esc(r.id)}">${r.resolvida ? "Reabrir" : "Marcar como resolvida"}</button>
+          <button class="btn" type="button" data-apagar="${esc(r.id)}">Apagar</button>
+        </div>
+      </div>`;
+    }).join("") : '<div class="cartao"><p class="vazio">Nenhuma resposta ainda. Quando uma marca responder a um roteiro, ela aparece aqui.</p></div>'}`;
+  caixa.onclick = async (e) => {
+    const res = e.target.closest("[data-resolver]"), ap = e.target.closest("[data-apagar]");
+    if (res) {
+      const r = lista.find(x => String(x.id) === res.dataset.resolver); if (!r) return;
+      await salva("roteiro_respostas", r.id, { resolvida: !r.resolvida });
+    } else if (ap) {
+      await apaga("roteiro_respostas", ap.dataset.apagar, "Apagar esta resposta? Isso não dá para desfazer.");
+    }
+  };
+};
 
 DESENHA.checklist = function (caixa) {
   if (!B) { caixa.innerHTML = '<div class="cartao"><p class="vazio">Não encontrei o arquivo js/biblioteca.js. Ele precisa estar publicado junto com o site para esta aba funcionar.</p></div>'; return; }
