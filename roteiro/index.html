@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Roteiro · Cris Dall' Accua</title>
+<meta name="description" content="Roteiro para aprovação. Leia com calma, comente cada cena e aprove em poucos cliques.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cris Dall' Accua">
+<meta property="og:title" content="Roteiro para aprovação · Cris Dall' Accua">
+<meta property="og:description" content="Leia com calma, comente cada cena e aprove em poucos cliques.">
+<meta property="og:image" content="https://crisdallaccua.com/roteiro/previa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cris Dall' Accua · Roteiro para aprovação">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3B322B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
@@ -93,6 +104,8 @@ footer{text-align:center;font-size:.85rem;color:var(--apoio);padding-top:36px}
 {
 // As respostas vão para a tabela roteiro_respostas do banco do painel (Supabase).
 const B = window.BANCO || null;
+// Script do Google na conta da Cris que manda um e-mail a cada resposta.
+const AVISO_URL = "https://script.google.com/macros/s/AKfycbx4cPyVQKWyL5uyEJOJQ7soa3-CkD47Wz-mkmVfnUEFVZhsiI9b0WTZJdnEhy8tDTIM0A/exec";
 
 const app = document.getElementById('app');
 const id = (new URLSearchParams(location.search).get('id') || '').replace(/[^a-z0-9-]/gi, '');
@@ -201,6 +214,7 @@ function render(r) {
       const resp = await fetch(B.url + '/rest/v1/roteiro_respostas', { method: 'POST',
         headers: { apikey: B.chave, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify(corpo) });
       if (!resp.ok) throw new Error('falha ' + resp.status);
+      if (AVISO_URL.startsWith('https://')) { try { fetch(AVISO_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(corpo) }); } catch (e) {} }
       try { localStorage.removeItem(chave); } catch (e) {}
       app.innerHTML = `<section class="card feito"><span class="rot">Resposta enviada</span>
         <h2>${decisao === 'aprovado' ? 'Roteiro <em>aprovado</em>. Obrigada!' : 'Recebi os <em>ajustes</em>. Obrigada!'}</h2>
