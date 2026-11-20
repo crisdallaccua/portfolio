@@ -1,0 +1,76 @@
+{
+  "marca": "Dobro",
+  "campanha": "Sport Whey Protein Choco Mousse",
+  "titulo": "Whey sem sacrifício",
+  "objetivo": "Mostrar que o Sport Whey Choco Mousse é gostoso e cremoso, com um teste sincero só com água e uma receita de poucos passos, do preparo até a primeira colherada.",
+  "formato": "Vídeo vertical · cerca de 46 s",
+  "creator": "Cris Dall' Accua",
+  "gancho": "Se você toma whey de uma vez, sem respirar, pra não sentir o gosto… para tudo.",
+  "cenas": [
+    {
+      "fala": "Se você toma whey de uma vez, sem respirar, pra não sentir o gosto… para tudo.",
+      "visual": "Tranco o nariz, viro uma coqueteleira de uma vez e faço careta. O pote do Choco Mousse fica em primeiro plano na bancada, com o rótulo para a câmera.",
+      "tela": "toma whey sem respirar?",
+      "tempo": "0 a 3 s"
+    },
+    {
+      "fala": "Eu já terminei pote assim, gente, no sacrifício. A gente acha que whey tem que ser ruim, né?",
+      "visual": "Largo a coqueteleira, ainda com cara de \"eca\", e falo para a câmera.",
+      "tela": "no sacrifício",
+      "tempo": "3 a 8 s"
+    },
+    {
+      "fala": "Até que eu descobri que a Dobro ouviu mais de 2 mil pessoas antes de lançar esse aqui, o Sport Whey Choco Mousse, pra entender o que elas queriam num whey. Aí fiquei curiosa.",
+      "visual": "Pego o pote da bancada, giro devagar e abro a tampa.",
+      "tela": "+2 mil pessoas ouvidas",
+      "tempo": "8 a 15 s"
+    },
+    {
+      "fala": "Então provei do jeito mais honesto: só com água, como diz no pote. Gente… é bom! É chocolate mesmo, sem aquele gosto de adoçante.",
+      "visual": "Coloco 2 scoops no copo com água e bato com o mixer. Mostro o copo por dentro, dou o primeiro gole e reajo.",
+      "tela": "teste sincero: só com água",
+      "tempo": "15 a 22 s"
+    },
+    {
+      "fala": "Se ele já é bom assim, puro… imagina numa sobremesa. Iogurte natural, dois scoops, mixer… olha que cremoso.",
+      "visual": "Bato o iogurte natural com 2 scoops no mixer e despejo na taça, em close lento da textura.",
+      "tela": "só 3 ingredientes",
+      "tempo": "22 a 29 s"
+    },
+    {
+      "fala": "Morango por cima e… gente, ficou igual mousse de chocolate com morango. Esse azedinho do morango com o chocolate fica perfeito.",
+      "visual": "Coloco os morangos picados na taça, dou a primeira colherada em close e reajo.",
+      "tela": "primeira colherada",
+      "tempo": "29 a 35 s"
+    },
+    {
+      "fala": "E o melhor: é adoçado com estévia, sem açúcar adicionado, e tem 21 gramas de proteína por dose.",
+      "visual": "Deixo o pote ao lado da taça e aponto a composição no rótulo.",
+      "tela": "21 g de proteína · adoçado com estévia",
+      "tempo": "35 a 39 s"
+    },
+    {
+      "fala": "Whey bom é isso: você não toma no sacrifício, você espera a hora. Se você também cansou, entra no site da Dobro e conhece o Choco Mousse.",
+      "visual": "Apareço com a taça e o pote, dou uma colherada final e sorrio.",
+      "tela": "soudobro.com.br",
+      "tempo": "39 a 46 s"
+    }
+  ],
+  "naoPodeFaltar": [
+    "Caminho C: receita com poucos passos, do preparo até a primeira colherada",
+    "Impressão sincera ao provar, do caminho A",
+    "Sabor Choco Mousse",
+    "Produto aparecendo logo no início",
+    "Textura cremosa no shake e na receita",
+    "Impressões do preparo, da textura e do sabor com as minhas palavras",
+    "Adoçado com estévia e 21 g de proteína por dose"
+  ],
+  "gravacao": [
+    "Luz natural de janela, numa cozinha clara",
+    "Roupa básica em tom neutro, sem estampa e sem marca aparente",
+    "Microfone de lapela, com a fala direto para a câmera",
+    "Na cena 1, coqueteleira sem marca e shake de cor neutra",
+    "Pote sempre com o rótulo legível; receita servida em taça de vidro",
+    "Fecho gravado em duas versões, com e sem o CTA do site; texto na tela opcional"
+  ]
+}
