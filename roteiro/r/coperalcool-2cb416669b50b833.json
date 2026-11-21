@@ -1,0 +1,75 @@
+{
+  "marca": "Coperalcool",
+  "campanha": "Fim de Ano com Coperalcool · Segredos da Natureza",
+  "titulo": "Cozinhei pra família",
+  "objetivo": "Mostrar o Segredos da Natureza na limpeza rápida antes da visita chegar: depois de cozinhar para a família, ele limpa a cozinha e troca o cheiro de comida pelo cheirinho da essência. Vídeo de conversão, levando ao site da Coperalcool.",
+  "formato": "Vídeo vertical · 15 a 25 s",
+  "creator": "Cris Dall' Accua",
+  "imagem": {
+    "src": "https://images.tcdn.com.br/img/img_prod/1276830/combo_coperalcool_segredos_da_natureza_500_ml_1_20260218235227_e835fb6e6615.jpg",
+    "alt": "Linha Coperalcool Bacfree Segredos da Natureza 500 ml"
+  },
+  "gancho": "Sabe quando tu cozinha pra receber a família?",
+  "clima": {
+    "texto": "Cozinha de verdade, com a correria do preparo e depois a bancada limpa e a mesa posta. O clima é de casa cheia, aconchego e família chegando.",
+    "imagem": {
+      "src": "https://images.tcdn.com.br/img/img_prod/1276830/combo_coperalcool_segredos_da_natureza_500_ml_323_5_adef6539ec8ea18b8cb08dd98fa02340.jpg",
+      "alt": "Segredos da Natureza sobre um pano na bancada da cozinha",
+      "legenda": "Referência da marca para a cena de bancada."
+    },
+    "itens": [
+      { "nome": "Bancada", "cor": "#3A3A38", "texto": "A cozinha voltando ao normal depois do preparo" },
+      { "nome": "Ervas", "cor": "#6E8B5B", "texto": "O frescor que toma o lugar do cheiro de comida" },
+      { "nome": "Ceia", "cor": "#B5523B", "texto": "O calor da mesa posta e da família chegando" }
+    ]
+  },
+  "cenas": [
+    {
+      "fala": "Sabe quando tu cozinha pra receber a família?",
+      "visual": "Tiro uma travessa do forno, de avental, e olho para a câmera.",
+      "tempo": "0 a 3 s"
+    },
+    {
+      "fala": "A comida fica pronta, mas a cozinha vira um caos, né?",
+      "visual": "Panorâmica rápida da bancada com farinha, panelas e travessas. Abano o ar com a mão.",
+      "tempo": "3 a 7 s"
+    },
+    {
+      "fala": "O que me salva é o Segredos da Natureza, da Coperalcool. Passo na bancada, na mesa, no chão…",
+      "visual": "Mostro o rótulo e limpo em cortes rápidos a bancada, a mesa e o chão, seguindo o modo de uso do rótulo.",
+      "tempo": "7 a 14 s"
+    },
+    {
+      "fala": "…e o cheiro de comida vira cheirinho de [essência].",
+      "visual": "Respiro fundo, de olhos fechados, com a cozinha já limpa.",
+      "tempo": "14 a 18 s"
+    },
+    {
+      "fala": "Quando a família chega, nem parece que teve caos.",
+      "visual": "Abro a porta e recebo abraços, com a mesa posta ao fundo.",
+      "tempo": "18 a 21 s"
+    },
+    {
+      "fala": "Cozinhar é comigo; o cheirinho, agora, é com ele. Entra no site da Coperalcool e escolhe a tua essência.",
+      "visual": "Pisco para a câmera com o Segredos da Natureza na mão, ao lado da travessa.",
+      "tempo": "21 a 25 s"
+    }
+  ],
+  "naoPodeFaltar": [
+    "Segredos da Natureza como chave da praticidade na limpeza de fim de ano",
+    "Um produto só, do piso à bancada",
+    "As palavras cheirinho e essência",
+    "Modo de uso mostrado como indica o rótulo",
+    "Sempre \"a Coperalcool\", no feminino",
+    "CTA que incentiva a compra no site da Coperalcool",
+    "Sem preço, sem marcas concorrentes e sem crianças"
+  ],
+  "gravacao": [
+    "Luz natural, em cozinha real e acolhedora",
+    "O caos da cozinha é bonito e rápido: farinha, panelas e travessas, nada sujo de verdade",
+    "Na cena da família, só adultos",
+    "Narração sem ruídos de fundo",
+    "Rótulo legível sempre que o produto aparece",
+    "Legenda da fala em fonte legível e com bom contraste"
+  ]
+}
