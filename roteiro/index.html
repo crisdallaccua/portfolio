@@ -92,6 +92,7 @@ footer{text-align:center;font-size:.85rem;color:var(--apoio);padding-top:36px}
 .erro{padding:60px 20px;text-align:center}
 @media(prefers-reduced-motion:no-preference){.caixa.aberta{animation:abre .2s ease-out}@keyframes abre{from{opacity:0;transform:translateY(-4px)}}}
 </style>
+<link rel="stylesheet" href="multi.css">
 </head>
 <body>
 <div class="wrap">
@@ -99,6 +100,7 @@ footer{text-align:center;font-size:.85rem;color:var(--apoio);padding-top:36px}
   <main id="app"><p class="erro">Carregando o roteiro…</p></main>
   <footer>Cris Dall' Accua · UGC e Influencer · Porto Alegre, RS · <a href="https://crisdallaccua.com" style="color:inherit">crisdallaccua.com</a></footer>
 </div>
+<script src="multi.js"></script>
 <script src="../js/banco.js"></script>
 <script>
 {
@@ -234,7 +236,7 @@ if (!id) {
 } else {
   fetch('r/' + id + '.json', { cache: 'no-store' })
     .then(r => { if (!r.ok) throw 0; return r.json(); })
-    .then(render)
+    .then(r => (Array.isArray(r.roteiros) && window.renderMulti) ? window.renderMulti(r, { app, esc, lerRascunho, guardar, chave, id, B, AVISO_URL }) : render(r))
     .catch(() => { app.innerHTML = '<p class="erro">Não encontrei este roteiro. Confira o link que você recebeu.</p>'; });
 }
 }
