@@ -6,8 +6,8 @@
   "formato": "2 vídeos verticais · 15 a 25 s cada",
   "creator": "Cris Dall' Accua",
   "imagem": {
-    "src": "https://images.tcdn.com.br/img/img_prod/1276830/combo_coperalcool_segredos_da_natureza_500_ml_1_20260218235227_e835fb6e6615.jpg",
-    "alt": "Linha Coperalcool Bacfree Segredos da Natureza 500 ml"
+    "src": "https://images.tcdn.com.br/img/img_prod/1276830/segredos_da_natureza_coperalcool_bacfree_cha_branco_equilibrio_da_natureza_500_ml_532_1_8f8df22c0ec53775416efcc3a30a3691.jpg",
+    "alt": "Coperalcool Bacfree Segredos da Natureza Equilíbrio da Natureza, chá branco, 500 ml"
   },
   "roteiros": [
     {
@@ -18,9 +18,9 @@
       "clima": {
         "texto": "Quarto claro, luz de janela e armário organizado. O clima é de ritual calmo de fim de ano, com o respiro fundo ao abrir a gaveta.",
         "imagem": {
-          "src": "https://images.tcdn.com.br/img/img_prod/1276830/combo_coperalcool_segredos_da_natureza_500_ml_323_6_dc30ce8d50ac9288cc8d66963ee35fc5.jpg",
-          "alt": "Segredos da Natureza sobre a madeira, com flores secas e mármore ao fundo",
-          "legenda": "Referência da marca para a luz e o tom acolhedor."
+          "src": "https://images.tcdn.com.br/img/img_prod/1276830/coperalcool_bacfree_segredos_da_natureza_500ml_encanto_das_flores_534_2_69f347a313c4ac1bfb773a6a7d8f5604.jpg",
+          "alt": "Segredos da Natureza Encanto das Flores, com flores secas ao fundo",
+          "legenda": "Encanto das Flores, uma das essências do kit."
         },
         "itens": [
           {
@@ -34,8 +34,8 @@
             "texto": "O calor do armário e da cômoda"
           },
           {
-            "nome": "Lavanda",
-            "cor": "#A893C4",
+            "nome": "Rosa",
+            "cor": "#D98BA0",
             "texto": "A delicadeza da essência ao abrir a gaveta"
           }
         ]
@@ -97,9 +97,9 @@
       "clima": {
         "texto": "Cozinha de verdade, com a correria do preparo e depois a bancada limpa e a mesa posta. O clima é de casa cheia, aconchego e família chegando.",
         "imagem": {
-          "src": "https://images.tcdn.com.br/img/img_prod/1276830/combo_coperalcool_segredos_da_natureza_500_ml_323_5_adef6539ec8ea18b8cb08dd98fa02340.jpg",
-          "alt": "Segredos da Natureza sobre um pano na bancada da cozinha",
-          "legenda": "Referência da marca para a cena de bancada."
+          "src": "https://images.tcdn.com.br/img/img_prod/1276830/coperalcool_bacfree_segredos_da_natureza_500ml_frescor_das_aguas_137_3_bdb7ed5a2515071c8db9b242d27bd496.jpg",
+          "alt": "Segredos da Natureza Frescor das Águas sobre um pano na bancada da cozinha",
+          "legenda": "Frescor das Águas, uma das essências do kit."
         },
         "itens": [
           {
@@ -108,8 +108,8 @@
             "texto": "A cozinha voltando ao normal depois do preparo"
           },
           {
-            "nome": "Ervas",
-            "cor": "#6E8B5B",
+            "nome": "Águas",
+            "cor": "#5BB8C1",
             "texto": "O frescor que toma o lugar do cheiro de comida"
           },
           {
