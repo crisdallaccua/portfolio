@@ -67,7 +67,7 @@
           "tempo": "19 a 22 s"
         },
         {
-          "fala": "Entra no site da Coperalcool e escolhe a essência do teu ano.",
+          "fala": "Entra no site da Coperalcool e escolhe a essência do seu ano.",
           "visual": "O Segredos da Natureza em cima da cômoda, com o armário arrumado ao fundo.",
           "tempo": "22 a 25 s"
         }
@@ -93,7 +93,7 @@
       "titulo": "Cozinhei pra família",
       "objetivo": "Mostrar o Segredos da Natureza na limpeza rápida antes da visita chegar: depois de cozinhar para a família, ele limpa a cozinha e troca o cheiro de comida pelo cheirinho da essência. Vídeo de conversão, levando ao site da Coperalcool.",
       "formato": "Vídeo vertical · 15 a 25 s",
-      "gancho": "Sabe quando tu cozinha pra receber a família?",
+      "gancho": "Sabe quando você cozinha pra receber a família?",
       "clima": {
         "texto": "Cozinha de verdade, com a correria do preparo e depois a bancada limpa e a mesa posta. O clima é de casa cheia, aconchego e família chegando.",
         "imagem": {
@@ -121,8 +121,8 @@
       },
       "cenas": [
         {
-          "fala": "Sabe quando tu cozinha pra receber a família?",
-          "visual": "Tiro uma travessa do forno, de avental, e olho para a câmera.",
+          "fala": "Sabe quando você cozinha pra receber a família?",
+          "visual": "Tiro uma travessa do forno.",
           "tempo": "0 a 3 s"
         },
         {
@@ -142,11 +142,11 @@
         },
         {
           "fala": "Quando a família chega, nem parece que teve caos.",
-          "visual": "Abro a porta e recebo abraços, com a mesa posta ao fundo.",
+          "visual": "A mesa posta e as nossas mãos, a minha e a do meu marido, brindando.",
           "tempo": "18 a 21 s"
         },
         {
-          "fala": "Cozinhar é comigo; o cheirinho, agora, é com ele. Entra no site da Coperalcool e escolhe a tua essência.",
+          "fala": "Cozinhar é comigo; o cheirinho, agora, é com ele. Entra no site da Coperalcool e escolhe a sua essência.",
           "visual": "Pisco para a câmera com o Segredos da Natureza na mão, ao lado da travessa.",
           "tempo": "21 a 25 s"
         }
@@ -163,7 +163,7 @@
       "gravacao": [
         "Luz natural, em cozinha real e acolhedora",
         "O caos da cozinha é bonito e rápido: farinha, panelas e travessas, nada sujo de verdade",
-        "Na cena da família, só adultos",
+        "Na cena da mesa posta, só as minhas mãos e as do meu marido",
         "Narração sem ruídos de fundo",
         "Rótulo legível sempre que o produto aparece",
         "Legenda da fala em fonte legível e com bom contraste"
