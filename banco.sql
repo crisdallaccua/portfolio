@@ -58,8 +58,13 @@ create table if not exists public.marcas (
   obs            text,
   ultimo_contato date,
   origem         text not null default 'painel' check (origem in ('painel', 'site')),
+  nicho          text,
+  favorita       boolean not null default false,
   exemplo        boolean not null default false
 );
+-- campos novos (nicho e favorita): entram também numa tabela que já existia
+alter table public.marcas add column if not exists nicho    text;
+alter table public.marcas add column if not exists favorita boolean not null default false;
 
 -- Sua agenda de gravar, editar e postar.
 create table if not exists public.calendario (
@@ -172,6 +177,8 @@ create policy "formulario do site cria lead" on public.marcas
     situacao = 'lead'
     and origem = 'site'
     and exemplo = false
+    and favorita = false
+    and nicho is null
     and char_length(nome) between 1 and 150
     and coalesce(char_length(email), 0) <= 200
     and coalesce(char_length(instagram), 0) <= 100
@@ -312,49 +319,3 @@ select
   (select count(*) from public.campanhas)  as campanhas,
   (select count(*) from public.marcados)   as marcados,
   (select count(*) from public.visitas)    as visitas;
-
-
--- ---------------------------------------------------------------------
--- 6. RESPOSTAS DOS ROTEIROS
--- A página crisdallaccua.com/roteiro/?id=... mostra o roteiro para a
--- marca. Quando ela aprova ou pede ajuste, a resposta entra aqui.
--- A marca só consegue ENVIAR a resposta. Ler, só a Cris (no painel).
--- ---------------------------------------------------------------------
-create table if not exists public.roteiro_respostas (
-  id        uuid primary key default gen_random_uuid(),
-  criado_em timestamptz not null default now(),
-  roteiro   text not null,
-  marca     text,
-  titulo    text,
-  decisao   text not null check (decisao in ('aprovado', 'ajuste')),
-  nome      text,
-  cenas     jsonb not null default '[]'::jsonb,
-  geral     text,
-  resolvida boolean not null default false
-);
-
-alter table public.roteiro_respostas enable row level security;
-revoke all on public.roteiro_respostas from anon;
-grant insert on public.roteiro_respostas to anon;
-grant select, insert, update, delete on public.roteiro_respostas to authenticated;
-
-drop policy if exists "cris faz tudo" on public.roteiro_respostas;
-create policy "cris faz tudo" on public.roteiro_respostas
-  for all to authenticated using (public.eh_a_cris()) with check (public.eh_a_cris());
-
-drop policy if exists "marca envia resposta" on public.roteiro_respostas;
-create policy "marca envia resposta" on public.roteiro_respostas
-  for insert to anon
-  with check (
-    resolvida = false
-    and char_length(roteiro) between 1 and 120
-    and coalesce(char_length(marca), 0) <= 120
-    and coalesce(char_length(titulo), 0) <= 300
-    and coalesce(char_length(nome), 0) <= 120
-    and coalesce(char_length(geral), 0) <= 4000
-    and jsonb_typeof(cenas) = 'array'
-    and jsonb_array_length(cenas) <= 40
-    and octet_length(cenas::text) <= 40000
-    and criado_em > now() - interval '1 hour'
-    and criado_em < now() + interval '1 hour'
-  );
