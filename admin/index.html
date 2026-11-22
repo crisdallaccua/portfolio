@@ -280,7 +280,6 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
     <h2>minha rotina</h2>
     <a href="#calendario" data-aba="calendario"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendário</a>
     <a href="#campanhas" data-aba="campanhas"><svg class="ic" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Campanhas</a>
-    <a href="#roteiros" data-aba="roteiros"><svg class="ic" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg>Roteiros</a>
     <a href="#checklist" data-aba="checklist"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checklist</a>
   </nav>
   <div class="menu-pe">
@@ -302,7 +301,6 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
   <section id="aba-marcas" data-aba="marcas" hidden></section>
   <section id="aba-calendario" data-aba="calendario" hidden></section>
   <section id="aba-campanhas" data-aba="campanhas" hidden></section>
-  <section id="aba-roteiros" data-aba="roteiros" hidden></section>
   <section id="aba-checklist" data-aba="checklist" hidden></section>
 </main>
 
@@ -373,6 +371,7 @@ const ICONE = {
   alca: '<svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></svg>',
   mais: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
   baixar: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+  subir: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 16V5M7 10l5-5 5 5M5 20h14"/></svg>',
   whats: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z"/></svg>',
   insta: '<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>',
   estrela: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
@@ -395,12 +394,11 @@ const CAMPOS = {
   calendario: ["titulo", "marca", "tipo", "data", "status"],
   campanhas: ["campanha", "cliente", "tipo", "status", "qtd", "valor", "prazo", "pagamento", "ativa", "favorita"],
   marcados: ["chave"],
-  visitas: ["data", "pagina", "origem"],
-  roteiro_respostas: ["roteiro", "marca", "decisao", "cenas", "geral", "resolvida"]
+  visitas: ["data", "pagina", "origem"]
 };
-const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas", roteiro_respostas: "respostas dos roteiros" };
-const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [], roteiro_respostas: [] };
-const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true, roteiro_respostas: true };
+const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas" };
+const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [] };
+const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true };
 const avisos = new Map();
 
 function avisa(chave, texto) { avisos.set(chave, texto); mostraAvisos(); }
@@ -450,16 +448,14 @@ async function carrega(tabela, ajusta) {
 
 async function carregaTudo() {
   const desde = new Date(); desde.setHours(0, 0, 0, 0); desde.setDate(desde.getDate() - 13);
-  const [v, m, c, k, mk, vi, ro] = await Promise.all([
+  const [v, m, c, k, mk, vi] = await Promise.all([
     carrega("videos", q => q.order("ordem", { ascending: true })),
     carrega("marcas", q => q.order("criado_em", { ascending: false })),
     carrega("calendario", q => q.order("data", { ascending: true })),
     carrega("campanhas", q => q.order("criado_em", { ascending: false })),
     carrega("marcados"),
-    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000)),
-    carrega("roteiro_respostas", q => q.order("criado_em", { ascending: false }))
+    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000))
   ]);
-  dados.roteiro_respostas = ro;
   dados.videos = v; dados.marcas = m; dados.calendario = c; dados.campanhas = k; dados.visitas = vi;
   dados.marcados = new Map(mk.filter(r => r.marcado !== false).map(r => [r.chave, true]));
 }
@@ -485,7 +481,6 @@ async function recarrega(tabela) {
   if (tabela === "marcas") dados.marcas = await carrega("marcas", q => q.order("criado_em", { ascending: false }));
   if (tabela === "calendario") dados.calendario = await carrega("calendario", q => q.order("data", { ascending: true }));
   if (tabela === "campanhas") dados.campanhas = await carrega("campanhas", q => q.order("criado_em", { ascending: false }));
-  if (tabela === "roteiro_respostas") dados.roteiro_respostas = await carrega("roteiro_respostas", q => q.order("criado_em", { ascending: false }));
   desenhaAba(abaAtual);
 }
 
@@ -557,7 +552,7 @@ const pilulaExemplo = (r) => r && r.exemplo ? ' <span class="pilula p-exemplo">e
 /* =====================================================================
    5. NAVEGAÇÃO ENTRE AS ABAS
    ===================================================================== */
-const ABAS = { portfolio: "Portfólio", marcas: "Marcas", calendario: "Calendário", campanhas: "Campanhas", roteiros: "Respostas dos roteiros", checklist: "Checklist do portfólio" };
+const ABAS = { portfolio: "Portfólio", marcas: "Marcas", calendario: "Calendário", campanhas: "Campanhas", checklist: "Checklist do portfólio" };
 let abaAtual = "portfolio";
 
 function vaiPara(aba) {
@@ -783,6 +778,8 @@ DESENHA.marcas = function (caixa) {
         <select class="sel" id="m-sit" aria-label="Filtrar por situação"><option value="">Todas as situações</option>${SITUACOES.map(s => `<option value="${s[0]}">${s[1]}</option>`).join("")}</select>
         <span class="esp"></span>
         <button class="btn" type="button" id="m-csv">${ICONE.baixar}Baixar CSV</button>
+        <button class="btn" type="button" id="m-importar" title="CSV, XLSX ou XLS">${ICONE.subir}Importar planilha</button>
+        <input type="file" id="m-arquivo" accept=".csv,.tsv,.txt,.xlsx,.xls,.xlsm,.ods,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" hidden>
         <button class="btn btn--forte" type="button" id="m-add">${ICONE.mais}Adicionar marca</button>
       </div>
       <div id="m-tabela"></div>`;
@@ -790,6 +787,8 @@ DESENHA.marcas = function (caixa) {
     $("#m-busca").addEventListener("input", (e) => { estadoMarcas.busca = e.target.value; tabelaMarcas(); });
     $("#m-sit").addEventListener("change", (e) => { estadoMarcas.situacao = e.target.value; tabelaMarcas(); });
     $("#m-add").addEventListener("click", () => formMarca());
+    $("#m-importar").addEventListener("click", () => { if (!funciona.marcas) { toast("A tabela de marcas não está respondendo agora.", true); return; } $("#m-arquivo").click(); });
+    $("#m-arquivo").addEventListener("change", (e) => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (f) importaPlanilha(f); });
     $("#m-csv").addEventListener("click", () => baixaCSV(`marcas-${hojeISO()}.csv`, [
       ["Marca", r => r.nome], ["Instagram", r => arroba(r.instagram)], ["E-mail", r => r.email], ["Telefone", r => r.telefone],
       ["Situação", r => nomeSituacao(r.situacao)], ["Observação", r => r.obs], ["Último contato", r => dataLonga(r.ultimo_contato)], ["Veio de", r => r.origem === "site" ? "Formulário do site" : "Painel"]
@@ -843,6 +842,153 @@ function formMarca(r) {
     aoSalvar: (val) => salva("marcas", r.id, val),
     aoApagar: novo ? null : () => apaga("marcas", r.id, `Apagar a marca "${r.nome}" da sua base? Isso não dá para desfazer.`)
   });
+}
+
+/* ---------- IMPORTAR PLANILHA DE MARCAS (prospecção) ----------
+   Aceita CSV, XLSX e XLS (o Excel e o Google Planilhas salvam nesses formatos).
+   Antes de gravar, mostra uma prévia: você confere qual coluna vai para qual campo,
+   escolhe a situação e vê quantas são novas e quantas já estavam na base. */
+const CAMPOS_IMPORT = [["nome", "Marca"], ["instagram", "Instagram"], ["email", "E-mail"], ["telefone", "Telefone"], ["obs", "Observação"], ["juntar", "Juntar na observação"], ["ignorar", "Não importar"]];
+function adivinhaCampo(cabecalho) {
+  const c = sem(cabecalho).replace(/[^a-z0-9@]/g, "");
+  if (!c) return "ignorar";
+  if (/^(marca|nome|empresa|brand|loja|cliente|nomedamarca|razaosocial)/.test(c)) return "nome";
+  if (/insta|^@|perfil|arroba|^ig$/.test(c)) return "instagram";
+  if (/email|^mail/.test(c)) return "email";
+  if (/telefone|whats|celular|fone|contato|^tel/.test(c)) return "telefone";
+  if (/^obs|observa|nota|coment|detalhe/.test(c)) return "obs";
+  return "juntar";
+}
+function lerCSV(texto) {
+  texto = texto.replace(/^﻿/, "");
+  const primeira = texto.split(/\r?\n/)[0] || "";
+  const sep = [";", "\t", ","].map(s => [s, primeira.split(s).length]).sort((a, b) => b[1] - a[1])[0][0];
+  const linhas = []; let linha = [], cel = "", aspas = false;
+  for (let i = 0; i < texto.length; i++) {
+    const ch = texto[i];
+    if (aspas) {
+      if (ch === '"') { if (texto[i + 1] === '"') { cel += '"'; i++; } else aspas = false; }
+      else cel += ch;
+    } else if (ch === '"') aspas = true;
+    else if (ch === sep) { linha.push(cel); cel = ""; }
+    else if (ch === "\n" || ch === "\r") { if (ch === "\r" && texto[i + 1] === "\n") i++; linha.push(cel); linhas.push(linha); linha = []; cel = ""; }
+    else cel += ch;
+  }
+  if (cel !== "" || linha.length) { linha.push(cel); linhas.push(linha); }
+  return linhas;
+}
+let carregandoXLSX = null;
+function precisaXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  if (!carregandoXLSX) carregandoXLSX = new Promise((ok, falha) => {
+    const s = document.createElement("script");
+    s.src = "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";
+    s.onload = ok; s.onerror = () => { carregandoXLSX = null; falha(new Error("xlsx")); };
+    document.head.appendChild(s);
+  });
+  return carregandoXLSX;
+}
+async function lerPlanilha(arquivo) {
+  const nome = arquivo.name.toLowerCase();
+  if (/\.(csv|txt|tsv)$/.test(nome)) return lerCSV(await arquivo.text());
+  if (/\.(xlsx|xls|xlsm|ods)$/.test(nome)) {
+    await precisaXLSX();
+    const livro = XLSX.read(await arquivo.arrayBuffer(), { type: "array" });
+    const folha = livro.Sheets[livro.SheetNames[0]];
+    return XLSX.utils.sheet_to_json(folha, { header: 1, raw: false, defval: "" });
+  }
+  throw new Error("formato");
+}
+async function importaPlanilha(arquivo) {
+  let linhas;
+  try { linhas = await lerPlanilha(arquivo); }
+  catch (e) {
+    toast(e.message === "formato" ? "Esse arquivo não é planilha. Use CSV, XLSX ou XLS." : e.message === "xlsx" ? "Não consegui abrir o leitor de Excel. Confira a internet ou salve a planilha como CSV." : "Não consegui ler essa planilha.", true);
+    return;
+  }
+  linhas = linhas.map(l => l.map(c => String(c == null ? "" : c).trim())).filter(l => l.some(c => c));
+  if (linhas.length < 2) { toast("A planilha está vazia ou só tem o cabeçalho.", true); return; }
+  const cab = linhas[0], corpo = linhas.slice(1);
+  const mapa = cab.map(adivinhaCampo);
+  if (!mapa.includes("nome")) mapa[0] = "nome";
+  const estado = { mapa, situacao: "lead" };
+
+  const linhaParaMarca = (l) => {
+    const m = { nome: "", instagram: "", email: "", telefone: "", obs: "" }, extras = [];
+    estado.mapa.forEach((campo, i) => {
+      const v = l[i] || ""; if (!v) return;
+      if (campo === "juntar") extras.push(`${cab[i] || "Coluna " + (i + 1)}: ${v}`);
+      else if (campo !== "ignorar") m[campo] = m[campo] ? m[campo] + " · " + v : v;
+    });
+    if (extras.length) m.obs = [m.obs, ...extras].filter(Boolean).join(" · ");
+    return m;
+  };
+  const chave = (t) => sem(t).replace(/^@/, "").replace(/^https?:\/\/(www\.)?instagram\.com\//, "").replace(/[^a-z0-9]/g, "");
+  const calcula = () => {
+    const nomes = new Set(dados.marcas.map(r => chave(r.nome)).filter(Boolean));
+    const instas = new Set(dados.marcas.map(r => chave(r.instagram)).filter(Boolean));
+    const novas = [], repetidas = [], semNome = [], dobradas = [];
+    corpo.forEach(l => {
+      const m = linhaParaMarca(l);
+      if (!m.nome.trim()) { semNome.push(m); return; }
+      const kn = chave(m.nome), ki = chave(m.instagram);
+      if (nomes.has(kn) || (ki && instas.has(ki))) { (novas.some(n => chave(n.nome) === kn || (ki && chave(n.instagram) === ki)) ? dobradas : repetidas).push(m); return; }
+      nomes.add(kn); if (ki) instas.add(ki);
+      novas.push(m);
+    });
+    return { novas, repetidas, semNome, dobradas };
+  };
+  const desenha = () => {
+    const r = calcula();
+    const amostra = r.novas.slice(0, 5);
+    $("#imp-colunas").innerHTML = cab.map((c, i) => `
+      <div class="campo"><label for="imp-c${i}">${esc(c || "Coluna " + (i + 1))}</label>
+        <select id="imp-c${i}" data-i="${i}">${CAMPOS_IMPORT.map(o => `<option value="${o[0]}"${estado.mapa[i] === o[0] ? " selected" : ""}>${o[1]}</option>`).join("")}</select>
+        <span class="dica">Ex: ${esc((corpo.find(l => l[i]) || [])[i] || "vazio")}</span></div>`).join("");
+    const n = (q, um, varios) => q === 1 ? um : varios.replace("#", q);
+    $("#imp-resumo").innerHTML = (r.novas.length ? `<b>${n(r.novas.length, "1 marca nova", "# marcas novas")}</b> para entrar.` : "Nenhuma marca nova.") +
+      (r.repetidas.length ? " " + n(r.repetidas.length, "1 já estava na sua base e fica de fora.", "# já estavam na sua base e ficam de fora.") : "") +
+      (r.dobradas.length ? " " + n(r.dobradas.length, "1 aparece repetida na planilha e entra uma vez só.", "# aparecem repetidas na planilha e entram uma vez só.") : "") +
+      (r.semNome.length ? " " + n(r.semNome.length, "1 linha sem o nome da marca fica de fora.", "# linhas sem o nome da marca ficam de fora.") : "");
+    $("#imp-previa").innerHTML = amostra.length ? `<div class="tabela-caixa"><table><thead><tr><th>Marca</th><th>Instagram</th><th>E-mail</th><th>Telefone</th><th>Observação</th></tr></thead><tbody>${amostra.map(m => `<tr><td>${esc(m.nome)}</td><td>${esc(arroba(m.instagram))}</td><td class="corta">${esc(m.email)}</td><td style="white-space:nowrap">${esc(m.telefone)}</td><td class="corta" title="${esc(m.obs)}">${esc(m.obs)}</td></tr>`).join("")}</tbody></table></div>${r.novas.length > 5 ? `<p class="dica" style="margin:6px 2px 0">Mostrando 5 de ${r.novas.length}.</p>` : ""}` : `<p class="vazio">Nenhuma marca nova para importar.</p>`;
+    $("#imp-salvar").disabled = !r.novas.length;
+    $("#imp-salvar").textContent = r.novas.length ? (r.novas.length === 1 ? "Importar 1 marca" : `Importar ${r.novas.length} marcas`) : "Importar";
+  };
+
+  abreJanela(`Importar planilha: ${arquivo.name}`, `
+    <p style="margin:0 0 12px;font-size:13px;color:var(--suave)">Confira para onde vai cada coluna. O que estiver em "Juntar na observação" entra na observação, com o nome da coluna.</p>
+    <div class="campos" id="imp-colunas"></div>
+    <div class="campos" style="margin-top:12px"><div class="campo"><label for="imp-sit">Situação dessas marcas</label>
+      <select id="imp-sit">${SITUACOES.map(s => `<option value="${s[0]}"${s[0] === estado.situacao ? " selected" : ""}>${s[1]}</option>`).join("")}</select>
+      <span class="dica">Todas entram com essa situação. Depois dá para mudar uma por uma.</span></div></div>
+    <p id="imp-resumo" style="margin:16px 0 8px;font-size:13px"></p>
+    <div id="imp-previa"></div>`,
+    `<span class="esp"></span><button class="btn" type="button" data-cancela>Cancelar</button><button class="btn btn--forte" type="button" id="imp-salvar">Importar</button>`, true);
+  $("[data-cancela]", janela).addEventListener("click", () => janela.close());
+  $("#imp-colunas").addEventListener("change", (e) => { const s = e.target.closest("select[data-i]"); if (!s) return; estado.mapa[+s.dataset.i] = s.value; desenha(); });
+  $("#imp-sit").addEventListener("change", (e) => { estado.situacao = e.target.value; });
+  $("#imp-salvar").addEventListener("click", async () => {
+    const { novas } = calcula();
+    if (!novas.length) return;
+    const b = $("#imp-salvar"); b.disabled = true; b.textContent = "Importando...";
+    const corta = (t, n) => { t = String(t || "").trim(); return t ? t.slice(0, n) : null; };
+    const registros = novas.map(m => ({ nome: corta(m.nome, 200), instagram: corta(m.instagram, 200), email: corta(m.email, 200), telefone: corta(m.telefone, 60), obs: corta(m.obs, 2000), situacao: estado.situacao, origem: "painel" }));
+    let feitas = 0;
+    for (let i = 0; i < registros.length; i += 200) {
+      const { error } = await sb.from("marcas").insert(registros.slice(i, i + 200));
+      if (error) {
+        toast((feitas ? `Entraram ${feitas}, mas parou no meio. ` : "") + explica(error, "marcas"), true);
+        b.disabled = false; b.textContent = "Tentar de novo";
+        if (feitas) await recarrega("marcas");
+        return;
+      }
+      feitas += Math.min(200, registros.length - i);
+    }
+    janela.close();
+    await recarrega("marcas");
+    toast(feitas === 1 ? "Pronto: 1 marca importada." : `Pronto: ${feitas} marcas importadas.`);
+  });
+  desenha();
 }
 
 /* =====================================================================
@@ -1119,45 +1265,6 @@ async function marca(chave, ligado) {
     : await sb.from("marcados").delete().eq("chave", chave);
   if (error) toast(explica(error, "marcados"), true);
 }
-
-/* =====================================================================
-   ABA ROTEIROS: respostas das marcas na página crisdallaccua.com/roteiro
-   ===================================================================== */
-DESENHA.roteiros = function (caixa) {
-  const lista = dados.roteiro_respostas || [];
-  const abertas = lista.filter(r => !r.resolvida).length;
-  const quando = (t) => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }); };
-  caixa.innerHTML = `
-    <div class="cartao"><p style="margin:0;font-size:13px;color:var(--suave)">Cada roteiro tem um link próprio, como <b>crisdallaccua.com/roteiro/?id=nome-do-roteiro</b>. Quando a marca aprova ou pede ajuste, a resposta aparece aqui. ${abertas ? `<b>${abertas} ${abertas === 1 ? "resposta aberta" : "respostas abertas"}.</b>` : ""}</p></div>
-    ${lista.length ? lista.map(r => {
-      const cenas = Array.isArray(r.cenas) ? r.cenas : [];
-      return `<div class="cartao" data-id="${esc(r.id)}" style="${r.resolvida ? "opacity:.6" : ""}">
-        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px">
-          <strong style="font-weight:500">${esc(r.marca || "Marca")}</strong>
-          <span class="pilula" style="${r.decisao === "aprovado" ? "background:#e3ecdf;color:#3f5b37" : "background:#f3e1d3;color:#8a4b23"}">${r.decisao === "aprovado" ? "Aprovado" : "Pediu ajuste"}</span>
-          ${r.resolvida ? '<span class="pilula p-exemplo">resolvida</span>' : ""}
-          <span style="margin-left:auto;font-size:12px;color:var(--suave)">${esc(quando(r.criado_em))}</span>
-        </div>
-        <p style="margin:0 0 6px;font-size:13px;color:var(--suave)">${esc(r.titulo || r.roteiro)}${r.nome ? " · respondido por " + esc(r.nome) : ""}</p>
-        ${cenas.length ? `<ul style="margin:8px 0;padding-left:18px">${cenas.map(c => `<li><b>Cena ${esc(c.cena)}:</b> ${esc(c.comentario)}</li>`).join("")}</ul>` : ""}
-        ${r.geral ? `<p style="margin:8px 0"><b>Comentário geral:</b> ${esc(r.geral)}</p>` : ""}
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
-          <a class="btn" href="../roteiro/?id=${encodeURIComponent(r.roteiro)}" target="_blank" rel="noopener">Abrir roteiro</a>
-          <button class="btn" type="button" data-resolver="${esc(r.id)}">${r.resolvida ? "Reabrir" : "Marcar como resolvida"}</button>
-          <button class="btn" type="button" data-apagar="${esc(r.id)}">Apagar</button>
-        </div>
-      </div>`;
-    }).join("") : '<div class="cartao"><p class="vazio">Nenhuma resposta ainda. Quando uma marca responder a um roteiro, ela aparece aqui.</p></div>'}`;
-  caixa.onclick = async (e) => {
-    const res = e.target.closest("[data-resolver]"), ap = e.target.closest("[data-apagar]");
-    if (res) {
-      const r = lista.find(x => String(x.id) === res.dataset.resolver); if (!r) return;
-      await salva("roteiro_respostas", r.id, { resolvida: !r.resolvida });
-    } else if (ap) {
-      await apaga("roteiro_respostas", ap.dataset.apagar, "Apagar esta resposta? Isso não dá para desfazer.");
-    }
-  };
-};
 
 DESENHA.checklist = function (caixa) {
   if (!B) { caixa.innerHTML = '<div class="cartao"><p class="vazio">Não encontrei o arquivo js/biblioteca.js. Ele precisa estar publicado junto com o site para esta aba funcionar.</p></div>'; return; }
