@@ -3,7 +3,7 @@
   "campanha": "Black Friday Época Cosméticos",
   "titulo": "Monte seu carrinho!",
   "objetivo": "Gerar desejo, senso de oportunidade e urgência, mostrando um carrinho de Black Friday com skincare, maquiagem, cabelo e perfumaria, com o desconto de cada produto, o cupom CARRINHOBLACK e o brinde, e levando o público direto para o site da Época.",
-  "formato": "Vídeo vertical para TikTok · cerca de 50 s",
+  "formato": "Vídeo vertical para TikTok · cerca de 43 s",
   "creator": "Cris Dall' Accua",
   "imagem": {
     "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/716139/1.-3348900378551-3348900378575-3348900425309.jpg.jpg?v=638690020272100000",
@@ -49,46 +49,46 @@
       "tempo": "3 a 7 s"
     },
     {
-      "fala": "Comecei pela pele, com o hidratante da Clinique, que tá com trinta e dois por cento off. É aquele clássico que deixa a pele macia e pronta pra make, sabe?",
+      "fala": "Comecei pela pele, com o hidratante da Clinique, porque é ele que deixa a minha pele pronta pra make.",
       "visual": "Pego o Clinique, aperto o pump e espalho no rosto.",
       "tela": "Clinique Dramatically Different • 32% OFF",
-      "tempo": "7 a 14 s"
+      "tempo": "7 a 12 s"
     },
     {
-      "fala": "Aí, com a pele pronta, entrou o corretivo Born This Way, da Too Faced, com trinta e quatro por cento off. Um pouquinho já cobre a olheira inteira.",
+      "fala": "Aí, com a pele pronta, o corretivo da Too Faced: um pouquinho e a olheira some.",
       "visual": "Aplico o corretivo embaixo do olho e esfumo com o dedo.",
       "tela": "Too Faced Born This Way • 34% OFF",
-      "tempo": "14 a 20 s"
+      "tempo": "12 a 16 s"
     },
     {
-      "fala": "E não adianta make linda com cabelo sem vida, né? Então veio a máscara Résistance, da Kérastase, com trinta e nove por cento off.",
+      "fala": "Só que não adianta make linda com cabelo sem vida, né? Então a máscara da Kérastase veio junto.",
       "visual": "Abro o pote, mostro a textura e passo nas pontas do cabelo.",
       "tela": "Kérastase Résistance • 39% OFF",
-      "tempo": "20 a 26 s"
+      "tempo": "16 a 21 s"
     },
     {
-      "fala": "Mas o que eu queria mesmo, fazia tempo, era o Hypnotic Poison, da Dior, com vinte e três por cento off. Gente… ele é docinho, com aquele fundo de baunilha e amêndoa. É o perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
+      "fala": "Mas o que eu queria mesmo, fazia tempo, era o Hypnotic Poison, da Dior. Gente… ele é docinho, com fundo de baunilha e amêndoa. É aquele perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
       "visual": "Pego o frasco com as duas mãos, borrifo no pescoço, fecho os olhos e sorrio.",
       "tela": "Dior Hypnotic Poison • 23% OFF",
-      "tempo": "26 a 36 s"
+      "tempo": "21 a 30 s"
     },
     {
-      "fala": "E com o cupom CARRINHOBLACK, nas compras acima de duzentos e noventa e nove reais, você ganha frete grátis e dez amostras. Fora o brinde, confere as regras lá no site.",
+      "fala": "E tudo isso com até trinta e nove por cento off. Ainda tem o cupom CARRINHOBLACK, que dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e tem brinde também, as regras tão no site.",
       "visual": "Mostro no celular o carrinho com o cupom digitado.",
-      "tela": "CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
-      "tempo": "36 a 44 s"
+      "tela": "até 39% OFF • CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
+      "tempo": "30 a 37 s"
     },
     {
-      "fala": "Então corre, porque a Black Friday acaba rápido. Entra no site da Época Cosméticos, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
+      "fala": "Mais de quinhentos reais de economia num carrinho só. Então corre, porque a Black Friday acaba rápido. Entra no site da Época, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
       "visual": "Seguro o celular com o site aberto ao lado do rosto e aponto para ele.",
       "tela": "epocacosmeticos.com.br • cupom CARRINHOBLACK ⏰ *Consulte as regras da campanha",
-      "tempo": "44 a 50 s"
+      "tempo": "37 a 43 s"
     }
   ],
   "naoPodeFaltar": [
     "Conceito \"Monte seu carrinho\" no gancho e no CTA",
     "Produtos de diferentes categorias: skincare, maquiagem, cabelo e perfumaria",
-    "Desconto e motivo de cada produto",
+    "Desconto de cada produto na tela e motivo de cada um na fala",
     "Cupom CARRINHOBLACK: frete grátis + 10 amostras nas compras acima de R$299",
     "Brinde especial, com \"Consulte as regras da campanha no site\" na tela",
     "Senso de urgência da Black Friday e CTA para o site da Época",
