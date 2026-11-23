@@ -2,16 +2,16 @@
   "marca": "Época Cosméticos",
   "campanha": "Black Friday Época Cosméticos",
   "titulo": "Monte seu carrinho!",
-  "objetivo": "Gerar desejo, senso de oportunidade e urgência, mostrando um carrinho de Black Friday com skincare, maquiagem, cabelo e perfumaria, com o desconto de cada produto, o cupom CARRINHOBLACK e o brinde, e levando o público direto para o site da Época.",
-  "formato": "Vídeo vertical para TikTok · cerca de 43 s",
+  "objetivo": "Gerar desejo, senso de oportunidade e urgência, montando ao vivo um carrinho de Black Friday no site da Época com skincare, maquiagem, cabelo e perfumaria, mostrando o desconto de cada produto, o cupom CARRINHOBLACK e o brinde, e levando o público direto para o site.",
+  "formato": "Vídeo vertical para TikTok · cerca de 44 s",
   "creator": "Cris Dall' Accua",
   "imagem": {
     "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/716139/1.-3348900378551-3348900378575-3348900425309.jpg.jpg?v=638690020272100000",
     "alt": "Perfume Hypnotic Poison Dior Eau de Toilette"
   },
-  "gancho": "Montei meu carrinho de Black Friday e economizei mais de quinhentos reais.",
+  "gancho": "Montei meu carrinho de Black Friday e olha: mais de quinhentos reais de economia.",
   "clima": {
-    "texto": "Penteadeira clara, luz natural e os quatro produtos lado a lado. O clima é de carrinho dos sonhos finalmente comprado, com o vermelho do Hypnotic Poison como estrela.",
+    "texto": "Sala clara, sofá e luz natural. O site da Época entra por cima das cenas enquanto eu falo, como se você estivesse montando o carrinho comigo, e o vermelho do Hypnotic Poison fecha o vídeo como estrela.",
     "imagem": {
       "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/716140/2.-3348900378575.jpg.jpg?v=638690020272270000",
       "alt": "Frasco do Hypnotic Poison Dior",
@@ -21,83 +21,84 @@
       {
         "nome": "Rosa Época",
         "cor": "#F2558B",
-        "texto": "Os textos na tela e o cupom"
+        "texto": "Os textos na tela, o cupom e o carrinho"
       },
       {
         "nome": "Vermelho Poison",
         "cor": "#B3121B",
-        "texto": "O frasco da Dior em close, no momento herói"
+        "texto": "O frasco da Dior em close, no final"
       },
       {
         "nome": "Black",
         "cor": "#1C1A1B",
-        "texto": "O fundo dos letreiros de Black Friday"
+        "texto": "O fundo do encerramento com o nome Época"
       }
     ]
   },
   "cenas": [
     {
-      "fala": "Montei meu carrinho de Black Friday e economizei mais de quinhentos reais.",
-      "visual": "Apareço com os quatro produtos na penteadeira à minha frente e abro os braços mostrando tudo.",
-      "tela": "economizei +R$ 500 🛒",
+      "fala": "Montei meu carrinho de Black Friday e olha: mais de quinhentos reais de economia.",
+      "visual": "Estou deitada no sofá, filmada de cima, mexendo no celular. As palavras aparecem espalhadas em volta de mim, e o valor da economia se monta letra por letra.",
+      "tela": "MONTEI MEU carrinho 🛒 · MAIS DE R$ 500 de economia",
       "tempo": "0 a 3 s"
     },
     {
-      "fala": "Pera aí, você ainda não montou o seu na Época Cosméticos? Olha só o meu.",
-      "visual": "Mostro no celular o meu carrinho no site da Época.",
+      "fala": "Pera aí, você ainda não montou o seu na Época Cosméticos? Vem montar comigo.",
+      "visual": "Sento no sofá e viro o celular para a câmera, com o site da Época aberto.",
       "tela": "Black Friday Época Cosméticos",
       "tempo": "3 a 7 s"
     },
     {
-      "fala": "Comecei pela pele, com o hidratante da Clinique, porque é ele que deixa a minha pele pronta pra make.",
-      "visual": "Pego o Clinique, aperto o pump e espalho no rosto.",
+      "fala": "Primeiro a pele: o hidratante da Clinique, que deixa a pele pronta pra make. Pro carrinho.",
+      "visual": "A página do hidratante entra flutuando por cima de mim, meio transparente. Depois, a tela do celular aparece inteira e eu toco em \"Adicionar à sacola\".",
       "tela": "Clinique Dramatically Different • 32% OFF",
       "tempo": "7 a 12 s"
     },
     {
-      "fala": "Aí, com a pele pronta, o corretivo da Too Faced: um pouquinho e a olheira some.",
-      "visual": "Aplico o corretivo embaixo do olho e esfumo com o dedo.",
+      "fala": "Aí, com a pele pronta, o corretivo da Too Faced, que cobre a olheira com um pouquinho só. Pro carrinho também.",
+      "visual": "Close do meu rosto olhando o celular, com a página do corretivo por cima. Toco em \"Adicionar à sacola\".",
       "tela": "Too Faced Born This Way • 34% OFF",
-      "tempo": "12 a 16 s"
+      "tempo": "12 a 17 s"
     },
     {
-      "fala": "Só que não adianta make linda com cabelo sem vida, né? Então a máscara da Kérastase veio junto.",
-      "visual": "Abro o pote, mostro a textura e passo nas pontas do cabelo.",
+      "fala": "Só que não adianta make linda com cabelo sem vida, né? Então a máscara da Kérastase. Carrinho.",
+      "visual": "Passo a mão no cabelo olhando o celular. A página da máscara entra por cima e eu coloco na sacola.",
       "tela": "Kérastase Résistance • 39% OFF",
-      "tempo": "16 a 21 s"
+      "tempo": "17 a 22 s"
     },
     {
-      "fala": "Mas o que eu queria mesmo, fazia tempo, era o Hypnotic Poison, da Dior. Gente… ele é docinho, com fundo de baunilha e amêndoa. É aquele perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
-      "visual": "Pego o frasco com as duas mãos, borrifo no pescoço, fecho os olhos e sorrio.",
+      "fala": "Mas o que eu queria mesmo, faz tempo, era o Hypnotic Poison, da Dior. Gente… ele é docinho, com fundo de baunilha e amêndoa. É aquele perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
+      "visual": "Coloco o Dior no carrinho e corta para mim com o frasco na mão, borrifando no pescoço, de olhos fechados, e sorrio.",
       "tela": "Dior Hypnotic Poison • 23% OFF",
-      "tempo": "21 a 30 s"
+      "tempo": "22 a 31 s"
     },
     {
-      "fala": "E tudo isso com até trinta e nove por cento off. Ainda tem o cupom CARRINHOBLACK, que dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e tem brinde também, as regras tão no site.",
-      "visual": "Mostro no celular o carrinho com o cupom digitado.",
+      "fala": "E tudo isso com até trinta e nove por cento off. Agora o cupom: CARRINHOBLACK, que dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e ainda tem bolsa de brinde, as regras tão no site.",
+      "visual": "A tela do carrinho aparece inteira, e o cupom CARRINHOBLACK se digita letra por letra no campo do cupom.",
       "tela": "até 39% OFF • CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
-      "tempo": "30 a 37 s"
+      "tempo": "31 a 38 s"
     },
     {
-      "fala": "Mais de quinhentos reais de economia num carrinho só. Então corre, porque a Black Friday acaba rápido. Entra no site da Época, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
-      "visual": "Seguro o celular com o site aberto ao lado do rosto e aponto para ele.",
+      "fala": "Olha o total: mais de quinhentos reais de economia num carrinho só. Então corre, porque a Black Friday acaba rápido. Entra no site da Época, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
+      "visual": "Mostro o celular na mão com o total do carrinho. No fim, o nome Época aparece gigante, com o vídeo dentro das letras, e abre para mim sorrindo.",
       "tela": "epocacosmeticos.com.br • cupom CARRINHOBLACK ⏰ *Consulte as regras da campanha",
-      "tempo": "37 a 43 s"
+      "tempo": "38 a 44 s"
     }
   ],
   "naoPodeFaltar": [
-    "Conceito \"Monte seu carrinho\" no gancho e no CTA",
+    "Conceito \"Monte seu carrinho\": o carrinho sendo montado no site da Época",
     "Produtos de diferentes categorias: skincare, maquiagem, cabelo e perfumaria",
     "Desconto de cada produto na tela e motivo de cada um na fala",
     "Cupom CARRINHOBLACK: frete grátis + 10 amostras nas compras acima de R$299",
-    "Brinde especial, com \"Consulte as regras da campanha no site\" na tela",
+    "Bolsa de brinde, com \"Consulte as regras da campanha no site\" na tela",
     "Senso de urgência da Black Friday e CTA para o site da Época",
     "Marcação @epocacosmeticos, #blackfridayepoca e #publi"
   ],
   "gravacao": [
-    "Luz natural de janela, numa penteadeira clara",
+    "Abertura filmada de cima, comigo deitada no sofá",
+    "Gravação de tela do celular montando o carrinho de verdade no site da Época",
+    "Luz natural de janela, numa sala clara",
     "Roupa básica em tom neutro, sem estampa e sem marca aparente",
-    "Produtos sempre com o rótulo legível para a câmera",
     "Preços e descontos conferidos no site no dia da gravação",
     "Só produtos vendidos e entregues pela Época Cosméticos"
   ]
