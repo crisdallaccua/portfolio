@@ -1037,7 +1037,7 @@ function itensDoCalendario() {
     itens.push({ origem: "cal", id: c.id, data: String(c.data).slice(0, 10), tipo: c.tipo || "gravar", texto: c.titulo || "", marca: c.marca, feito: c.status === "feito", reg: c });
   });
   if (estadoCal.filtro === "todos" || estadoCal.filtro === "prazos") dados.campanhas.forEach(k => {
-    if (!k.prazo || k.ativa === false) return;
+    if (!k.prazo || finalizada(k)) return;
     itens.push({ origem: "camp", id: k.id, data: String(k.prazo).slice(0, 10), tipo: "prazo", texto: "Prazo: " + (k.campanha || ""), marca: k.cliente, feito: k.status === "Entregue", reg: k });
   });
   return itens;
@@ -1072,7 +1072,7 @@ DESENHA.calendario = function (caixa) {
   /* Ficou pra trás: itens não feitos com data antes de hoje, e prazos vencidos de campanhas não entregues */
   const atrasados = [
     ...dados.calendario.filter(c => c.data && String(c.data).slice(0, 10) < hoje && c.status !== "feito").map(c => ({ origem: "cal", id: c.id, data: String(c.data).slice(0, 10), tipo: c.tipo, texto: c.titulo, marca: c.marca })),
-    ...dados.campanhas.filter(k => k.prazo && String(k.prazo).slice(0, 10) < hoje && k.status !== "Entregue" && k.ativa !== false).map(k => ({ origem: "camp", id: k.id, data: String(k.prazo).slice(0, 10), tipo: "prazo", texto: "Prazo: " + (k.campanha || ""), marca: k.cliente }))
+    ...dados.campanhas.filter(k => k.prazo && String(k.prazo).slice(0, 10) < hoje && k.status !== "Entregue" && !finalizada(k)).map(k => ({ origem: "camp", id: k.id, data: String(k.prazo).slice(0, 10), tipo: "prazo", texto: "Prazo: " + (k.campanha || ""), marca: k.cliente }))
   ].sort((a, b) => a.data.localeCompare(b.data));
 
   caixa.innerHTML = `
@@ -1152,6 +1152,9 @@ const STATUS_CAMP = [...FUNIL, NAO_FECHOU];
 const PAGAMENTOS = [["pendente", "Pendente"], ["pago", "Pago"], ["permuta", "Permuta"]];
 const nomePagamento = (p) => (PAGAMENTOS.find(x => x[0] === p) || PAGAMENTOS[0])[1];
 const fechou = (k) => k.status !== NAO_FECHOU;
+/* FINALIZADA É AUTOMÁTICO: não fechou, ou aprovada/entregue e já paga (ou permuta).
+   Entregue com pagamento pendente continua ativa, porque ainda falta receber. */
+function finalizada(k) { return k.status === NAO_FECHOU || ((k.status === "Entregue" || k.status === "Aprovado") && (k.pagamento === "pago" || k.pagamento === "permuta")); }
 const canaisDasCampanhas = () => [...new Set(dados.campanhas.map(k => String(k.canal || "").trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt-BR"));
 const estadoCamp = { filtro: "todas", busca: "", col: "fechada_em", asc: false };
 const COLUNAS_CAMP = [
@@ -1195,7 +1198,7 @@ DESENHA.campanhas = function (caixa) {
     $("#k-csv").addEventListener("click", () => baixaCSV(`campanhas-${hojeISO()}.csv`, [
       ["Favorita", k => k.favorita ? "sim" : ""], ["Campanha", k => k.campanha], ["Cliente", k => k.cliente], ["Fechou em", k => dataLonga(k.fechada_em)], ["Veio de", k => k.canal], ["Tipo", k => k.tipo], ["Status", k => k.status],
       ["Qtd", k => k.qtd], ["Valor", k => (Number(k.valor) || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2 })], ["Prazo", k => dataLonga(k.prazo)],
-      ["Pagamento", k => nomePagamento(k.pagamento)], ["Ativa", k => k.ativa === false ? "Finalizada" : "Ativa"]
+      ["Pagamento", k => nomePagamento(k.pagamento)], ["Ativa", k => finalizada(k) ? "Finalizada" : "Ativa"]
     ], campanhasOrdenadas()));
     $("#k-tabela").addEventListener("click", async (e) => {
       const th = e.target.closest("th[data-col]");
@@ -1208,7 +1211,7 @@ DESENHA.campanhas = function (caixa) {
   }
   /* faixa de números: o que não fechou fica fora das contas, e permuta não é dinheiro a receber */
   const todas = dados.campanhas.filter(fechou);
-  const ativas = todas.filter(k => k.ativa !== false).length;
+  const ativas = todas.filter(k => !finalizada(k)).length;
   const valorTotal = todas.reduce((s, k) => s + (Number(k.valor) || 0), 0);
   const qtdTotal = todas.reduce((s, k) => s + (Number(k.qtd) || 0), 0);
   const aReceber = todas.filter(k => k.pagamento === "pendente").reduce((s, k) => s + (Number(k.valor) || 0), 0);
@@ -1227,7 +1230,7 @@ function campanhasOrdenadas() {
   const col = COLUNAS_CAMP.find(c => c[0] === estadoCamp.col) || COLUNAS_CAMP[3];
   const dir = estadoCamp.asc ? 1 : -1;
   return dados.campanhas
-    .filter(k => estadoCamp.filtro === "todas" || (estadoCamp.filtro === "ativas" ? k.ativa !== false : k.ativa === false))
+    .filter(k => estadoCamp.filtro === "todas" || (estadoCamp.filtro === "ativas" ? !finalizada(k) : finalizada(k)))
     .filter(k => !b || sem(k.campanha).includes(b) || sem(k.cliente).includes(b) || sem(k.canal).includes(b))
     .slice().sort((x, y) => {
       const a = col[2](x), c = col[2](y);
@@ -1252,9 +1255,9 @@ function tabelaCampanhas() {
   alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr>${cab}</tr></thead><tbody>${
     lista.length ? lista.map(k => {
       const si = FUNIL.indexOf(k.status);
-      return `<tr class="clicavel${k.favorita ? " favorita" : ""}" data-id="${esc(k.id)}"${k.ativa === false ? ' style="opacity:.7"' : ""}>
+      return `<tr class="clicavel${k.favorita ? " favorita" : ""}" data-id="${esc(k.id)}"${finalizada(k) ? ' style="opacity:.7"' : ""}>
         <td style="width:40px"><button class="icone estrela${k.favorita ? " on" : ""}" type="button" data-estrela title="${k.favorita ? "Tirar destaque" : "Destacar"}">${k.favorita ? ICONE.estrelaCheia : ICONE.estrela}</button></td>
-        <td style="min-width:170px">${esc(k.campanha)}${pilulaExemplo(k)}${k.ativa === false ? '<span class="sub">finalizada</span>' : ""}</td>
+        <td style="min-width:170px">${esc(k.campanha)}${pilulaExemplo(k)}${finalizada(k) ? '<span class="sub">finalizada</span>' : ""}</td>
         <td>${esc(k.cliente || "")}</td>
         <td style="white-space:nowrap">${esc(dataLonga(k.fechada_em))}</td>
         <td style="white-space:nowrap">${esc(k.canal || "")}</td>
@@ -1282,11 +1285,10 @@ function formCampanha(k) {
       { nome: "qtd", rotulo: "Quantidade de vídeos", tipo: "number", valor: k.qtd == null ? 1 : k.qtd },
       { nome: "valor", rotulo: "Valor total (R$)", tipo: "number", valor: k.valor == null ? "" : k.valor },
       { nome: "prazo", rotulo: "Prazo", tipo: "date", valor: k.prazo ? String(k.prazo).slice(0, 10) : "" },
-      { nome: "pagamento", rotulo: "Pagamento", tipo: "select", opcoes: PAGAMENTOS, valor: k.pagamento || "pendente" },
-      { nome: "ativa", rotulo: "Ativa (desmarque quando finalizar)", tipo: "checkbox", valor: novo ? true : k.ativa !== false },
+      { nome: "pagamento", rotulo: "Pagamento", tipo: "select", opcoes: PAGAMENTOS, valor: k.pagamento || "pendente", dica: "Aprovado ou Entregue + Pago (ou Permuta), ou Não fechou: a campanha finaliza sozinha" },
       { nome: "favorita", rotulo: "Destacar com estrela", tipo: "checkbox", valor: !!k.favorita }
     ],
-    aoSalvar: (val) => salva("campanhas", k.id, val),
+    aoSalvar: (val) => salva("campanhas", k.id, { ...val, ativa: !finalizada(val) }),
     aoApagar: novo ? null : () => apaga("campanhas", k.id, `Apagar a campanha "${k.campanha}"? Isso não dá para desfazer.`)
   });
 }
