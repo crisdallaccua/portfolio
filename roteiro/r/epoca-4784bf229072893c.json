@@ -6,40 +6,28 @@
   "formato": "Vídeo vertical para Instagram Reels · cerca de 44 s",
   "creator": "Cris Dall' Accua",
   "imagem": {
-    "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/716139/1.-3348900378551-3348900378575-3348900425309.jpg.jpg?v=638690020272100000",
-    "alt": "Perfume Hypnotic Poison Dior Eau de Toilette"
+    "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/4193651/libre-yves-saint-laurent-perfume-feminino-eau-de-parfum-30ml--1-.jpg?v=639304416848400000",
+    "alt": "Perfume Libre Yves Saint Laurent Eau de Parfum 30 ml"
   },
-  "gancho": "Montei meu carrinho de Black Friday e olha: mais de quinhentos reais de economia.",
+  "gancho": "Montei meu carrinho de Black Friday e olha: mais de seiscentos reais de economia.",
   "clima": {
-    "texto": "Sala clara, sofá e luz natural. O site da Época entra por cima das cenas enquanto eu falo, como se você estivesse montando o carrinho comigo, e o vermelho do Hypnotic Poison fecha o vídeo como estrela.",
+    "texto": "Sala clara, sofá e luz natural. O site da Época entra por cima das cenas enquanto eu falo, como se você estivesse montando o carrinho comigo, e o dourado do Libre fecha o vídeo como estrela.",
     "imagem": {
-      "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/716140/2.-3348900378575.jpg.jpg?v=638690020272270000",
-      "alt": "Frasco do Hypnotic Poison Dior",
-      "legenda": "Referência do produto protagonista para o tom de vermelho e a luz."
+      "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/4193652/libre-yves-saint-laurent-perfume-feminino-eau-de-parfum-30ml--2-.jpg?v=639304416848700000",
+      "alt": "Frasco do Libre Yves Saint Laurent",
+      "legenda": "Referência do produto protagonista para o tom dourado e a luz."
     },
     "itens": [
-      {
-        "nome": "Rosa Época",
-        "cor": "#F2558B",
-        "texto": "Os textos na tela, o cupom e o carrinho"
-      },
-      {
-        "nome": "Vermelho Poison",
-        "cor": "#B3121B",
-        "texto": "O frasco da Dior em close, no final"
-      },
-      {
-        "nome": "Black",
-        "cor": "#1C1A1B",
-        "texto": "O fundo do encerramento com o nome Época"
-      }
+      { "nome": "Rosa Época", "cor": "#F2558B", "texto": "Os textos na tela, o cupom e o carrinho" },
+      { "nome": "Dourado Libre", "cor": "#C9A24B", "texto": "O frasco do Libre em close, no final" },
+      { "nome": "Black", "cor": "#1C1A1B", "texto": "O fundo do encerramento com o nome Época" }
     ]
   },
   "cenas": [
     {
-      "fala": "Montei meu carrinho de Black Friday e olha: mais de quinhentos reais de economia.",
+      "fala": "Montei meu carrinho de Black Friday e olha: mais de seiscentos reais de economia.",
       "visual": "Estou deitada no sofá, filmada de cima, mexendo no celular. As palavras aparecem espalhadas em volta de mim, e o valor da economia se monta letra por letra.",
-      "tela": "MONTEI MEU carrinho 🛒 · MAIS DE R$ 500 de economia",
+      "tela": "MONTEI MEU carrinho 🛒 · MAIS DE R$ 600 de economia",
       "tempo": "0 a 3 s"
     },
     {
@@ -67,19 +55,19 @@
       "tempo": "17 a 22 s"
     },
     {
-      "fala": "Mas o que eu queria mesmo, faz tempo, era o Hypnotic Poison, da Dior. Gente… ele é docinho, com fundo de baunilha e amêndoa. É aquele perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
-      "visual": "Coloco o Dior no carrinho e corta para mim com o frasco na mão, borrifando no pescoço, de olhos fechados, e sorrio.",
-      "tela": "Dior Hypnotic Poison • 23% OFF",
+      "fala": "Mas o que eu queria mesmo era o Libre, da Yves Saint Laurent. Gente… ele é floral, com lavanda e um fundinho de baunilha, elegante sem ser enjoativo. É aquele perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
+      "visual": "Coloco o Libre no carrinho e corta para mim com o frasco na mão, borrifando no pescoço, de olhos fechados, e sorrio.",
+      "tela": "YSL Libre Eau de Parfum 30 ml • 43% OFF",
       "tempo": "22 a 31 s"
     },
     {
-      "fala": "E tudo isso com até trinta e nove por cento off. Agora o cupom: CARRINHOBLACK, que dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e ainda tem bolsa de brinde, as regras tão no site.",
+      "fala": "E tudo isso com até quarenta e três por cento off. Agora o cupom: CARRINHOBLACK, que dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e ainda tem bolsa de brinde, as regras tão no site.",
       "visual": "A tela do carrinho aparece inteira, e o cupom CARRINHOBLACK se digita letra por letra no campo do cupom.",
-      "tela": "até 39% OFF • CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
+      "tela": "até 43% OFF • CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
       "tempo": "31 a 38 s"
     },
     {
-      "fala": "Olha o total: mais de quinhentos reais de economia num carrinho só. Então corre, porque a Black Friday acaba rápido. Entra no site da Época, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
+      "fala": "Olha o total: mais de seiscentos reais de economia num carrinho só. Então corre, porque a Black Friday acaba rápido. Entra no site da Época, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
       "visual": "Mostro o celular na mão com o total do carrinho. No fim, o nome Época aparece gigante, com o vídeo dentro das letras, e abre para mim sorrindo.",
       "tela": "epocacosmeticos.com.br • cupom CARRINHOBLACK ⏰ *Consulte as regras da campanha",
       "tempo": "38 a 44 s"
