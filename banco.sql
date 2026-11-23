@@ -87,15 +87,26 @@ create table if not exists public.campanhas (
   cliente    text,
   tipo       text not null default 'Conteúdo' check (tipo in ('Conteúdo', 'Publicidade')),
   status     text not null default 'Briefing'
-             check (status in ('Briefing', 'Roteiro', 'Aprovação Roteiro', 'Gravação', 'Edição', 'Aprovado', 'Entregue')),
+             check (status in ('Briefing', 'Roteiro', 'Aprovação Roteiro', 'Gravação', 'Edição', 'Aprovado', 'Entregue', 'Não fechou')),
   qtd        integer not null default 1 check (qtd >= 0),
   valor      numeric(12, 2) not null default 0 check (valor >= 0),
   prazo      date,
-  pagamento  text not null default 'pendente' check (pagamento in ('pendente', 'pago')),
+  pagamento  text not null default 'pendente' check (pagamento in ('pendente', 'pago', 'permuta')),
   ativa      boolean not null default true,
   favorita   boolean not null default false,
+  fechada_em date,
+  canal      text,
   exemplo    boolean not null default false
 );
+-- campos e opções novos (data em que fechou, de onde veio, "Não fechou" e "Permuta")
+alter table public.campanhas add column if not exists fechada_em date;
+alter table public.campanhas add column if not exists canal text;
+alter table public.campanhas drop constraint if exists campanhas_status_check;
+alter table public.campanhas add constraint campanhas_status_check
+  check (status in ('Briefing', 'Roteiro', 'Aprovação Roteiro', 'Gravação', 'Edição', 'Aprovado', 'Entregue', 'Não fechou'));
+alter table public.campanhas drop constraint if exists campanhas_pagamento_check;
+alter table public.campanhas add constraint campanhas_pagamento_check
+  check (pagamento in ('pendente', 'pago', 'permuta'));
 
 -- O que você já marcou no checklist. Cada item tem uma chave de texto.
 create table if not exists public.marcados (
