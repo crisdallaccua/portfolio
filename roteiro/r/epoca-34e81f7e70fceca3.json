@@ -49,46 +49,40 @@
       "tempo": "3 a 5 s"
     },
     {
-      "fala": "Comecei pelo hidratante da Clinique. Um só não faz mal, né?",
+      "fala": "Comecei pelo hidratante da Clinique, que eu sempre deixava pra depois. Um só não faz mal, né?",
       "visual": "A página do Clinique aparece atrás de mim. Aponto para o preço e faço \"só um\" com o dedo.",
       "tela": "Clinique Dramatically Different • 32% OFF",
-      "tempo": "5 a 9 s"
+      "tempo": "5 a 10 s"
     },
     {
-      "fala": "Só que um puxou o outro: veio o corretivo da Too Faced.",
-      "visual": "A página do corretivo aparece atrás de mim. Dou de ombros e rio.",
-      "tela": "Too Faced Born This Way • 34% OFF",
-      "tempo": "9 a 12 s"
+      "fala": "Só que um puxou o outro: o corretivo da Too Faced, a máscara da Kérastase…",
+      "visual": "As páginas do corretivo e da máscara passam rápido atrás de mim, uma depois da outra. Dou de ombros e rio.",
+      "tela": "Too Faced Born This Way • 34% OFF • o corretivo que todo mundo ama · Kérastase Résistance • 39% OFF • cabelo também merece",
+      "tempo": "10 a 14 s"
     },
     {
-      "fala": "Aí lembrei do cabelo: máscara da Kérastase.",
-      "visual": "Passo a mão no cabelo enquanto a página da máscara aparece atrás de mim.",
-      "tela": "Kérastase Résistance • 39% OFF",
-      "tempo": "12 a 14 s"
-    },
-    {
-      "fala": "E quando eu vi o Libre, meu perfume do coração, com quarenta e três por cento off… acabou a promessa.",
-      "visual": "A página do Libre aparece atrás de mim. Ponho a mão no peito e suspiro.",
+      "fala": "E quando eu vi o Libre, meu perfume do coração, com quarenta e três por cento off, acabou a promessa. Aquele floral com baunilha… gente.",
+      "visual": "A página do Libre aparece atrás de mim. Ponho a mão no peito, fecho os olhos e suspiro.",
       "tela": "YSL Libre Eau de Parfum 30 ml • 43% OFF",
-      "tempo": "14 a 20 s"
+      "tempo": "14 a 21 s"
     },
     {
-      "fala": "Pelo menos o cupom CARRINHOBLACK dá frete grátis e dez amostras acima de duzentos e noventa e nove. E ainda tem brinde.",
+      "fala": "Pelo menos o cupom CARRINHOBLACK dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e ainda tem brinde.",
       "visual": "O carrinho com o cupom aplicado aparece atrás de mim, e eu conto as amostras nos dedos.",
       "tela": "CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
-      "tempo": "20 a 26 s"
+      "tempo": "21 a 27 s"
     },
     {
-      "fala": "Jurou que não ia comprar? Te entendo. Monta o seu carrinho na Época com o cupom CARRINHOBLACK.",
+      "fala": "Jurou que não ia comprar? Te entendo. Monta o seu carrinho na Época.",
       "visual": "Desligo o efeito, volto a falar direto para a câmera e mostro o celular com o site aberto.",
       "tela": "epocacosmeticos.com.br • cupom CARRINHOBLACK ⏰ só na Black Friday • *Consulte as regras da campanha",
-      "tempo": "26 a 30 s"
+      "tempo": "27 a 30 s"
     }
   ],
   "naoPodeFaltar": [
     "Conceito \"Monte seu carrinho\": o meu carrinho da Época atrás de mim e o CTA para montar o seu",
     "Produtos de diferentes categorias: skincare, maquiagem, cabelo e perfumaria",
-    "Desconto de cada produto na tela",
+    "Desconto e motivo de cada produto (na fala ou na tela)",
     "Cupom CARRINHOBLACK: frete grátis + 10 amostras nas compras acima de R$299",
     "Bolsa de brinde, com \"Consulte as regras da campanha no site\" na tela",
     "Senso de urgência da Black Friday e CTA para o site da Época",
