@@ -3,7 +3,7 @@
   "campanha": "Black Friday Época Cosméticos",
   "titulo": "Monte seu carrinho!",
   "objetivo": "Gerar desejo, senso de oportunidade e urgência, montando ao vivo um carrinho de Black Friday no site da Época com skincare, maquiagem, cabelo e perfumaria, mostrando o desconto de cada produto, o cupom CARRINHOBLACK e o brinde, e levando o público direto para o site.",
-  "formato": "Vídeo vertical para Instagram Reels · cerca de 44 s",
+  "formato": "Vídeo vertical para Instagram Reels · 30 s",
   "creator": "Cris Dall' Accua",
   "imagem": {
     "src": "https://epocacosmeticos.vteximg.com.br/arquivos/ids/4193651/libre-yves-saint-laurent-perfume-feminino-eau-de-parfum-30ml--1-.jpg?v=639304416848400000",
@@ -18,9 +18,21 @@
       "legenda": "Referência do produto protagonista para o tom dourado e a luz."
     },
     "itens": [
-      { "nome": "Rosa Época", "cor": "#F2558B", "texto": "Os textos na tela, o cupom e o carrinho" },
-      { "nome": "Dourado Libre", "cor": "#C9A24B", "texto": "O frasco do Libre em close, no final" },
-      { "nome": "Black", "cor": "#1C1A1B", "texto": "O fundo do encerramento com o nome Época" }
+      {
+        "nome": "Rosa Época",
+        "cor": "#F2558B",
+        "texto": "Os textos na tela, o cupom e o carrinho"
+      },
+      {
+        "nome": "Dourado Libre",
+        "cor": "#C9A24B",
+        "texto": "O frasco do Libre em close, no final"
+      },
+      {
+        "nome": "Black",
+        "cor": "#1C1A1B",
+        "texto": "O fundo do encerramento com o nome Época"
+      }
     ]
   },
   "cenas": [
@@ -31,52 +43,52 @@
       "tempo": "0 a 3 s"
     },
     {
-      "fala": "Pera aí, você ainda não montou o seu na Época Cosméticos? Vem montar comigo.",
+      "fala": "Você ainda não montou o seu na Época? Vem comigo.",
       "visual": "Sento no sofá e viro o celular para a câmera, com o site da Época aberto.",
       "tela": "Black Friday Época Cosméticos",
-      "tempo": "3 a 7 s"
+      "tempo": "3 a 5 s"
     },
     {
-      "fala": "Primeiro a pele: o hidratante da Clinique, que deixa a pele pronta pra make. Pro carrinho.",
-      "visual": "A página do hidratante entra flutuando por cima de mim, meio transparente. Depois, a tela do celular aparece inteira e eu toco em \"Adicionar à sacola\".",
+      "fala": "Primeiro a pele: o hidratante da Clinique, que deixa tudo pronto pra make.",
+      "visual": "A página do hidratante entra flutuando por cima de mim, meio transparente, e eu toco em \"Adicionar à sacola\".",
       "tela": "Clinique Dramatically Different • 32% OFF",
-      "tempo": "7 a 12 s"
+      "tempo": "5 a 9 s"
     },
     {
-      "fala": "Aí, com a pele pronta, o corretivo da Too Faced, que cobre a olheira com um pouquinho só. Pro carrinho também.",
+      "fala": "Com a pele pronta, entra o corretivo da Too Faced.",
       "visual": "Close do meu rosto olhando o celular, com a página do corretivo por cima. Toco em \"Adicionar à sacola\".",
-      "tela": "Too Faced Born This Way • 34% OFF",
-      "tempo": "12 a 17 s"
+      "tela": "Too Faced Born This Way • 34% OFF • a cobertura que todo mundo ama",
+      "tempo": "9 a 12 s"
     },
     {
-      "fala": "Só que não adianta make linda com cabelo sem vida, né? Então a máscara da Kérastase. Carrinho.",
+      "fala": "E make linda pede cabelo bonito, então a máscara da Kérastase. Pro carrinho!",
       "visual": "Passo a mão no cabelo olhando o celular. A página da máscara entra por cima e eu coloco na sacola.",
-      "tela": "Kérastase Résistance • 39% OFF",
-      "tempo": "17 a 22 s"
+      "tela": "Kérastase Résistance • 39% OFF • cabelo também merece",
+      "tempo": "12 a 15 s"
     },
     {
-      "fala": "Mas o que eu queria mesmo era o Libre, da Yves Saint Laurent. Gente… ele é floral, com lavanda e um fundinho de baunilha, elegante sem ser enjoativo. É aquele perfume que alguém sente no elevador e pergunta qual é. Match perfeito.",
+      "fala": "Mas a estrela é o Libre, da Yves Saint Laurent: floral, com baunilha… match perfeito.",
       "visual": "Coloco o Libre no carrinho e corta para mim com o frasco na mão, borrifando no pescoço, de olhos fechados, e sorrio.",
       "tela": "YSL Libre Eau de Parfum 30 ml • 43% OFF",
-      "tempo": "22 a 31 s"
+      "tempo": "15 a 20 s"
     },
     {
-      "fala": "E tudo isso com até quarenta e três por cento off. Agora o cupom: CARRINHOBLACK, que dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, e ainda tem bolsa de brinde, as regras tão no site.",
+      "fala": "E o cupom CARRINHOBLACK dá frete grátis e dez amostras acima de duzentos e noventa e nove reais, fora o brinde.",
       "visual": "A tela do carrinho aparece inteira, e o cupom CARRINHOBLACK se digita letra por letra no campo do cupom.",
-      "tela": "até 43% OFF • CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
-      "tempo": "31 a 38 s"
+      "tela": "CARRINHOBLACK 🎁 frete grátis + 10 amostras acima de R$299 • + BRINDE 👜 *Consulte as regras da campanha no site",
+      "tempo": "20 a 25 s"
     },
     {
-      "fala": "Olha o total: mais de seiscentos reais de economia num carrinho só. Então corre, porque nesse preço pode esgotar a qualquer momento. Entra no site da Época, monta o seu carrinho e usa o cupom CARRINHOBLACK.",
+      "fala": "Mais de seiscentos reais de economia, e nesse preço pode esgotar. Corre e monta o seu na Época!",
       "visual": "Mostro o celular na mão com o total do carrinho. No fim, o nome Época aparece gigante, com o vídeo dentro das letras, e abre para mim sorrindo.",
       "tela": "epocacosmeticos.com.br • cupom CARRINHOBLACK ⏰ pode esgotar a qualquer momento • *Consulte as regras da campanha",
-      "tempo": "38 a 44 s"
+      "tempo": "25 a 30 s"
     }
   ],
   "naoPodeFaltar": [
     "Conceito \"Monte seu carrinho\": o carrinho sendo montado no site da Época",
     "Produtos de diferentes categorias: skincare, maquiagem, cabelo e perfumaria",
-    "Desconto de cada produto na tela e motivo de cada um na fala",
+    "Desconto e motivo de cada produto (na fala ou na tela)",
     "Cupom CARRINHOBLACK: frete grátis + 10 amostras nas compras acima de R$299",
     "Bolsa de brinde, com \"Consulte as regras da campanha no site\" na tela",
     "Senso de urgência da Black Friday e CTA para o site da Época",
