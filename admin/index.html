@@ -72,6 +72,7 @@ svg.ic{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke
 .faixa-num span{display:block;font-size:11px;color:var(--suave)}
 .faixa-num strong{display:block;font-size:18px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .faixa-num small{display:block;font-size:11px;color:var(--suave)}
+@media (min-width:901px) and (max-width:1200px){.faixa-num[style*="--n:6"]{grid-template-columns:repeat(3,1fr)}.faixa-num[style*="--n:6"]>div:nth-child(4){border-left:0}.faixa-num[style*="--n:6"]>div:nth-child(n+4){border-top:1px solid var(--linha)}}
 @media (max-width:900px){.faixa-num{grid-template-columns:repeat(2,1fr)}.faixa-num>div{border-left:0;border-top:1px solid var(--linha)}.faixa-num>div:nth-child(-n+2){border-top:0}.faixa-num>div:nth-child(even){border-left:1px solid var(--linha)}}
 .duas{display:grid;grid-template-columns:2fr 1fr;gap:16px}
 @media (max-width:1000px){.duas{grid-template-columns:1fr}}
@@ -98,6 +99,27 @@ select.sel{height:36px;padding:0 10px;border:1px solid var(--linha);border-radiu
 .pilula{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:400;white-space:nowrap;line-height:1.6}
 .p-exemplo{background:#ece4da;color:var(--suave);border:1px dashed var(--nude)}
 .p-site{background:#efe3d4;color:#7a5a3e}
+/* LEADS DO PORTFÓLIO */
+.leads-topo{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 12px}
+.leads-topo h3{margin:0;font-size:15px;font-weight:400;color:var(--texto)}
+.ao-vivo{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.06em;color:var(--verde)}
+.ao-vivo i{width:7px;height:7px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 0 rgba(79,107,69,.5);animation:pulsaVivo 1.8s infinite}
+@keyframes pulsaVivo{70%{box-shadow:0 0 0 7px rgba(79,107,69,0)}100%{box-shadow:0 0 0 0 rgba(79,107,69,0)}}
+@media (prefers-reduced-motion:reduce){.ao-vivo i{animation:none}}
+.leads{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;padding:12px 14px;border:1px solid #ece5dc;border-radius:10px;background:#fffdfa}
+.lead.novo{border-color:var(--caramelo);background:#fbf5ee}
+.lead-nome{font-size:14px;font-weight:400}
+.lead-nome .pilula{margin-left:6px;vertical-align:1px}
+.lead-quando{font-size:12px;color:var(--suave);white-space:nowrap;text-align:right}
+.lead-contato{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px}
+.lead-contato a{color:var(--caramelo);text-decoration:none}
+.lead-contato a:hover{text-decoration:underline}
+.lead-msg{grid-column:1 / -1;margin:0;padding:8px 10px;border-radius:6px;background:var(--papel);font-size:13px;color:var(--suave);white-space:pre-wrap}
+.lead-acoes{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px}
+.lead-acoes .btn{height:30px;padding:0 10px;font-size:12px}
+.p-novo{background:var(--caramelo);color:#fff}
+.menu nav a .conta-novo{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--caramelo);color:#fff;font-size:11px;line-height:20px;text-align:center}
 .s-lead{background:#efe3d4;color:#7a5a3e}
 .s-conversando{background:var(--amarelo-bg);color:var(--amarelo)}
 .s-cliente{background:var(--verde-bg);color:var(--verde)}
@@ -720,6 +742,8 @@ async function iniciaPainel() {
   await carregaTudo();
   carregado = true;
   desenhaAba(abaAtual);
+  marcaNovosNoMenu();
+  ligaVigiaLeads();
 }
 
 /* =====================================================================
@@ -731,6 +755,82 @@ const FORMATOS = ["", "Vídeo UGC", "Criativo para anúncio", "Publi no perfil",
 const ehYoutube = (l) => /(?:shorts\/|embed\/|youtu\.be\/|[?&]v=)[\w-]{11}/.test(String(l || ""));
 
 const DESENHA = {};
+
+/* ---------- LEADS DO PORTFÓLIO ----------
+   São as marcas que chegaram pelo formulário de contato ou pelo popup do site
+   (tabela marcas, origem "site" ou "popup"). Ficam na aba Portfólio, não em Marcas.
+   A lista se atualiza sozinha a cada 20 segundos. */
+const ORIGENS_LEAD = ["site", "popup"];
+const ehLead = (r) => ORIGENS_LEAD.includes(r.origem);
+const leadsDoSite = () => dados.marcas.filter(ehLead).sort((a, b) => String(b.criado_em || "").localeCompare(String(a.criado_em || "")));
+const leVistoAte = () => { try { return localStorage.getItem("leads-vistos-ate") || ""; } catch (e) { return ""; } };
+const gravaVistoAte = (t) => { try { localStorage.setItem("leads-vistos-ate", t); } catch (e) {} };
+function leadsNovos() { const ate = leVistoAte(); return leadsDoSite().filter(r => r.criado_em && (!ate || r.criado_em > ate)); }
+function contatoDoLead(r) {
+  const obs = String(r.obs || "");
+  const nome = (obs.match(/Contato:\s*([^\n]+)/) || [])[1] || "";
+  const msg = (obs.match(/Mensagem:\s*([\s\S]+)/) || [])[1] || "";
+  return { pessoa: nome.trim(), mensagem: msg.trim() };
+}
+function haQuanto(iso) {
+  const d = new Date(iso); if (isNaN(d)) return "";
+  const min = Math.round((Date.now() - d) / 60000);
+  if (min < 1) return "agora";
+  if (min < 60) return `há ${min} min`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `há ${h} h`;
+  return d.toLocaleDateString("pt-BR") + " " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
+function marcaNovosNoMenu() {
+  const n = leadsNovos().length;
+  const a = document.querySelector('.menu nav a[data-aba="portfolio"]'); if (!a) return;
+  let b = a.querySelector(".conta-novo");
+  if (!n) { if (b) b.remove(); document.title = document.title.replace(/^\(\d+\)\s*/, ""); return; }
+  if (!b) { b = document.createElement("span"); b.className = "conta-novo"; a.appendChild(b); }
+  b.textContent = n; b.title = n === 1 ? "1 lead novo" : n + " leads novos";
+  document.title = "(" + n + ") " + document.title.replace(/^\(\d+\)\s*/, "");
+}
+function blocoLeads() {
+  if (!funciona.marcas) return `<div class="cartao"><h3>Leads do portfólio</h3><p class="vazio">Não consegui ler a tabela de marcas. Veja o aviso lá em cima.</p></div>`;
+  const lista = leadsDoSite(), ate = leVistoAte();
+  const itens = lista.slice(0, 30).map(r => {
+    const c = contatoDoLead(r), novo = r.criado_em && (!ate || r.criado_em > ate);
+    const w = linkWhats(r.telefone);
+    return `<li class="lead${novo ? " novo" : ""}" data-lead="${esc(r.id)}">
+      <div class="lead-nome">${esc(r.nome)}${novo ? '<span class="pilula p-novo">novo</span>' : ""}<span class="pilula p-site">${r.origem === "popup" ? "popup" : "formulário"}</span></div>
+      <div class="lead-quando" title="${esc(new Date(r.criado_em).toLocaleString("pt-BR"))}">${esc(haQuanto(r.criado_em))}</div>
+      <div class="lead-contato">${c.pessoa && c.pessoa !== r.nome ? `<span>${esc(c.pessoa)}</span>` : ""}${r.email ? `<a href="mailto:${esc(r.email)}">${esc(r.email)}</a>` : ""}${w ? `<a href="${w}" target="_blank" rel="noopener">WhatsApp ${esc(r.telefone)}</a>` : ""}</div>
+      ${c.mensagem ? `<p class="lead-msg">${esc(c.mensagem)}</p>` : ""}
+      <div class="lead-acoes"><button class="btn" type="button" data-lead-mover>Levar para Marcas</button><button class="btn btn--perigo" type="button" data-lead-apaga>${ICONE.lixo}Apagar</button></div>
+    </li>`;
+  }).join("");
+  return `<div class="cartao">
+    <div class="leads-topo"><h3>Leads do portfólio</h3><span class="ao-vivo" title="A lista se atualiza sozinha a cada 20 segundos"><i></i>ao vivo</span><span class="esp" style="flex:1"></span><span style="font-size:12px;color:var(--suave)">${numero(lista.length)} no total</span></div>
+    ${lista.length ? `<ul class="leads">${itens}</ul>${lista.length > 30 ? `<p class="vazio">Mostrando os 30 mais recentes.</p>` : ""}` : `<p class="vazio">Quando alguém preencher o formulário de contato ou o popup do site, o contato aparece aqui na hora.</p>`}
+  </div>`;
+}
+async function moverLead(r) {
+  if (!confirm(`Levar "${r.nome}" para a aba Marcas? Ele sai desta lista e passa a ser uma marca da sua base.`)) return;
+  const quando = r.criado_em ? new Date(r.criado_em).toLocaleDateString("pt-BR") : "";
+  const nota = `Chegou pelo ${r.origem === "popup" ? "popup" : "formulário"} do portfólio${quando ? " em " + quando : ""}.`;
+  const ok = await salva("marcas", r.id, { origem: "painel", obs: [nota, r.obs].filter(Boolean).join("\n").slice(0, 4000) });
+  if (ok) toast("Foi para a aba Marcas.");
+}
+let vigiaLeads = null;
+async function buscaLeads() {
+  if (document.hidden || !funciona.marcas) return;
+  const { data, error } = await sb.from("marcas").select("*").in("origem", ORIGENS_LEAD).order("criado_em", { ascending: false }).limit(300);
+  if (error || !Array.isArray(data)) return;
+  const antes = new Set(leadsDoSite().map(r => String(r.id)));
+  const chegaram = data.filter(r => !antes.has(String(r.id)));
+  const mudou = chegaram.length || data.length !== antes.size;
+  dados.marcas = [...data, ...dados.marcas.filter(r => !ehLead(r))];
+  if (chegaram.length) toast(chegaram.length === 1 ? `Lead novo: ${chegaram[0].nome}` : `${chegaram.length} leads novos chegaram.`);
+  if (mudou && abaAtual === "portfolio" && !janela.open) desenhaAba("portfolio");
+  marcaNovosNoMenu();
+}
+function ligaVigiaLeads() { if (!vigiaLeads) vigiaLeads = setInterval(buscaLeads, 20000); document.addEventListener("visibilitychange", () => { if (!document.hidden) buscaLeads(); }); }
+
 DESENHA.portfolio = function (caixa) {
   const hoje = hojeISO();
   /* visitas por dia, últimos 14 dias */
@@ -764,8 +864,11 @@ DESENHA.portfolio = function (caixa) {
     ? `<p class="vazio">Aqui vai aparecer de onde as pessoas chegam no seu site: Instagram, Google, WhatsApp, link direto e outros.</p>`
     : `<ul class="origens">${origens.slice(0, 8).map(([o, n]) => `<li><div class="linha"><span>${esc(o)}</span><span>${n}</span></div><div class="trilho"><b style="width:${Math.round(divide(n, total14) * 100)}%"></b></div></li>`).join("")}</ul>`;
 
+  const leads = leadsDoSite();
+  const leads14 = leads.filter(r => r.criado_em && isoLocal(new Date(r.criado_em)) >= diasLista[0]).length;
   caixa.innerHTML = `
-    <div class="faixa-num" style="--n:5">
+    <div class="faixa-num" style="--n:6">
+      <div><span>Leads em 14 dias</span><strong>${numero(leads14)}</strong>${leads.length ? `<small>${numero(leads.length)} no total</small>` : ""}</div>
       <div><span>Visitas em 14 dias</span><strong>${numero(total14)}</strong></div>
       <div><span>Visitas hoje</span><strong>${numero(totalHoje)}</strong></div>
       <div><span>Vídeos no ar</span><strong>${numero(noAr.length)}</strong></div>
@@ -773,6 +876,7 @@ DESENHA.portfolio = function (caixa) {
       <div><span>De onde mais vêm</span><strong>${origens.length ? esc(origens[0][0]) : "Ainda nada"}</strong></div>
     </div>
     ${funciona.visitas ? "" : '<p class="vazio">As visitas não puderam ser lidas. Veja o aviso lá em cima.</p>'}
+    ${blocoLeads()}
     <div class="duas">
       <div class="cartao"><h3>Visitas nos últimos 14 dias</h3>${grafico}</div>
       <div class="cartao"><h3>Por onde chegaram</h3>${listaOrigens}</div>
@@ -785,6 +889,14 @@ DESENHA.portfolio = function (caixa) {
     <p style="font-size:12px;color:var(--suave);margin:8px 2px 0">Arraste pela alcinha para mudar a ordem dentro do nicho. O site mostra até ${VIDEOS_POR_NICHO_NO_SITE} vídeos visíveis por nicho, na ordem desta tabela.</p>`;
 
   $("#add-video").addEventListener("click", () => formVideo());
+  $$("[data-lead]", caixa).forEach(li => li.addEventListener("click", async (e) => {
+    const r = dados.marcas.find(x => String(x.id) === li.dataset.lead); if (!r) return;
+    if (e.target.closest("[data-lead-mover]")) await moverLead(r);
+    else if (e.target.closest("[data-lead-apaga]")) await apaga("marcas", r.id, `Apagar o lead "${r.nome}"? Isso não dá para desfazer.`);
+  }));
+  /* o que estava aqui agora já foi visto: o "novo" some na próxima vez */
+  if (leads[0] && leads[0].criado_em) gravaVistoAte(leads[0].criado_em > leVistoAte() ? leads[0].criado_em : leVistoAte());
+  marcaNovosNoMenu();
   const tb = $("tbody", caixa);
   if (!tb) return;
   tb.addEventListener("click", async (e) => {
@@ -954,7 +1066,7 @@ DESENHA.marcas = function (caixa) {
 function marcasFiltradas() {
   const b = sem(estadoMarcas.busca).replace(/^@/, "");
   const nicho = estadoMarcas.nicho;
-  return dados.marcas.filter(r => (!estadoMarcas.situacao || r.situacao === estadoMarcas.situacao)
+  return dados.marcas.filter(r => !ehLead(r)).filter(r => (!estadoMarcas.situacao || r.situacao === estadoMarcas.situacao)
     && (!nicho || (nicho === SEM_NICHO ? !String(r.nicho || "").trim() : sem(r.nicho) === sem(nicho)))
     && (!estadoMarcas.favoritas || r.favorita)
     && (!b || [r.nome, r.instagram, r.email, r.nicho].some(c => sem(c).includes(b))));
@@ -974,7 +1086,8 @@ function tabelaMarcas() {
   bFav.classList.toggle("ativo-fav", estadoMarcas.favoritas);
   if (!funciona.marcas) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Não consegui ler a tabela de marcas. Veja o aviso lá em cima.</p></div>`; return; }
   const lista = marcasFiltradas();
-  if (!dados.marcas.length) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Sua base está vazia. Clique em Adicionar marca, ou espere os contatos do formulário do site chegarem aqui.</p></div>`; return; }
+  const daBase = dados.marcas.filter(r => !ehLead(r));
+  if (!daBase.length) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Sua base está vazia. Clique em Adicionar marca, ou espere os contatos do formulário do site chegarem aqui.</p></div>`; return; }
   desenhaBarraSelecao(lista);
   alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr><th class="sel-cel"><span class="so-leitor">Selecionar</span></th><th style="width:40px"><span class="so-leitor">Favorita</span></th><th>Marca</th><th>Nicho</th><th>Instagram</th><th>E-mail</th><th>Telefone</th><th>Situação</th><th>Observação</th><th>Último contato</th></tr></thead><tbody>${
     lista.length ? lista.map(r => {
@@ -993,7 +1106,7 @@ function tabelaMarcas() {
         <td style="white-space:nowrap">${esc(dataLonga(r.ultimo_contato))}</td>
       </tr>`;
     }).join("") : `<tr><td colspan="10"><p class="vazio">${estadoMarcas.favoritas && !totalFav ? "Nenhuma favorita ainda. Clique na estrela ao lado da marca para favoritar." : "Nenhuma marca encontrada com esses filtros."}</p></td></tr>`
-  }</tbody></table></div><p style="font-size:12px;color:var(--suave);margin:8px 2px 0">${lista.length} de ${dados.marcas.length} marca(s). ${totalFav ? ` ${totalFav === 1 ? "1 favorita" : totalFav + " favoritas"}.` : ""} Clique na linha para editar, ou na estrela para favoritar.</p>`;
+  }</tbody></table></div><p style="font-size:12px;color:var(--suave);margin:8px 2px 0">${lista.length} de ${daBase.length} marca(s).${leadsDoSite().length ? ` Os ${leadsDoSite().length} contatos que chegaram pelo site ficam na aba Portfólio.` : ""} ${totalFav ? ` ${totalFav === 1 ? "1 favorita" : totalFav + " favoritas"}.` : ""} Clique na linha para editar, ou na estrela para favoritar.</p>`;
 }
 /* ---------- SELEÇÃO PARA A PROSPECÇÃO (fica salva no banco, coluna selecionada) ---------- */
 const emailValido = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || "").trim());
