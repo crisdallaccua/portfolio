@@ -38,7 +38,10 @@ Deno.serve(async (req) => {
   // 1. Só você, logada, pode usar.
   const auth = req.headers.get("Authorization") || "";
   const url = Deno.env.get("SUPABASE_URL")!;
-  const chavePublica = Deno.env.get("SUPABASE_ANON_KEY") || Deno.env.get("SUPABASE_PUBLISHABLE_KEY") || "";
+  let chavePublica = Deno.env.get("SUPABASE_ANON_KEY") || "";
+  if (!chavePublica) {
+    try { const k = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") || "{}"); chavePublica = k.default || Object.values(k)[0] || ""; } catch { /* sem chave pública */ }
+  }
   if (!auth.startsWith("Bearer ")) return responde({ erro: "Faça login no painel primeiro." }, 401);
   const banco = createClient(url, chavePublica, { global: { headers: { Authorization: auth } }, auth: { persistSession: false } });
   const { data: quem, error: erroLogin } = await banco.auth.getUser(auth.slice(7));
@@ -132,6 +135,9 @@ Deno.serve(async (req) => {
     await banco.from("email_envios").insert({
       email: d.email, marca: d.marca, assunto, status: ok ? "ok" : "erro", erro, resend_id: ok ? String(dados.id) : null, via: "resend",
     });
+
+    // Domínio ainda não verificado no Resend: ele só deixa mandar para você mesma. Para aqui.
+    if (!ok && r && r.status === 403 && /domain|testing emails|own email/i.test(erro || "")) break;
 
     // 6. Ritmo seguro.
     if (i < unicos.length - 1) await espera(ESPERA_ENTRE_ENVIOS);
