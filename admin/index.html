@@ -133,6 +133,16 @@ th.ativa .seta{opacity:1;color:var(--caramelo)}
 tr.favorita td:first-child{box-shadow:inset 3px 0 0 var(--caramelo)}
 .estrela{color:#c9b9a6}
 .estrela.on{color:var(--caramelo)}
+.sel-barra{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:0 0 10px;padding:8px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--papel);font-size:13px;min-height:44px}
+.sel-barra .esp{flex:1}
+.sel-num b{font-weight:500;color:var(--caramelo)}
+.link-btn{padding:0;border:0;background:none;color:var(--suave);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:13px}
+.link-btn:hover{color:var(--caramelo)}
+th.sel-cel,td.sel-cel{width:36px;padding-right:0}
+.caixinha{display:grid;place-items:center;width:28px;height:28px;cursor:pointer}
+.caixinha input{width:16px;height:16px;accent-color:var(--caramelo);cursor:pointer}
+.caixinha input:disabled{cursor:not-allowed;opacity:.35}
+tr.selecionada td{background:rgba(169,130,95,.07)}
 .so-leitor{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .btn.ativo-fav{border-color:var(--caramelo);background:rgba(169,130,95,.16);color:var(--texto)}
 .btn.ativo-fav .ic{color:var(--caramelo)}
@@ -272,6 +282,108 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
 .lista-dia .txt{flex:1;min-width:0}
 .lista-dia .txt span{display:block;font-size:11px;color:var(--suave)}
 .carregando{padding:30px;text-align:center;color:var(--suave)}
+
+/* =====================================================================
+   ABA PROSPECÇÃO
+   ===================================================================== */
+.pr-capa{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:22px;padding:26px 28px;margin-bottom:16px;border-radius:20px;color:#fbf6ef;background:linear-gradient(135deg,#a9825f 0%,#8c6a4b 55%,#6e5239 100%);box-shadow:0 14px 34px rgba(110,82,57,.22);overflow:hidden}
+.pr-capa::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.pr-capa-ic{display:grid;place-items:center;width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);flex-shrink:0}
+.pr-capa-ic svg.ic{width:26px;height:26px;stroke-width:1.4}
+.pr-capa-txt{flex:1 1 320px;min-width:0;position:relative;z-index:1}
+.pr-capa h2{margin:0 0 4px;font-size:24px;font-weight:400;letter-spacing:.01em}
+.pr-capa p{margin:0;font-size:14px;color:rgba(251,246,239,.86);max-width:560px}
+.pr-etiquetas{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pr-etiquetas span{padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);font-size:12px;white-space:nowrap}
+.pr-capa-num{position:relative;z-index:1;text-align:right;margin-left:auto}
+.pr-capa-num strong{display:block;font-size:44px;font-weight:300;line-height:1}
+.pr-capa-num span{font-size:12px;letter-spacing:.08em;color:rgba(251,246,239,.8)}
+
+.pr-cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.pr-cartao{position:relative;padding:14px 16px 14px 20px;border:1px solid var(--linha);border-radius:14px;background:var(--branco);overflow:hidden}
+.pr-cartao::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cor)}
+.pr-cartao strong{display:block;font-size:30px;font-weight:300;line-height:1.1;color:var(--cor)}
+.pr-cartao span{display:block;margin-top:2px;font-size:13px;color:var(--texto)}
+.pr-cartao small{display:block;margin-top:2px;font-size:11px;color:var(--suave)}
+
+.pr-grade{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:1000px){.pr-grade{grid-template-columns:1fr}}
+.pr-bloco{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.pr-bloco>h3{display:flex;align-items:center;gap:10px;margin:0 0 4px;font-size:15px;font-weight:400}
+.pr-bloco>h3 i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(169,130,95,.16);color:var(--caramelo);font-style:normal;font-size:12px}
+.pr-bloco>.pr-sub{margin:0 0 14px;font-size:12px;color:var(--suave)}
+.pr-origem{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--papel);font-size:12px;color:var(--suave)}
+.pr-origem svg.ic{color:var(--caramelo);width:16px;height:16px}
+.pr-bloco select,.pr-bloco input[type=text],.pr-bloco input[type=url],.pr-bloco input[type=email],.pr-bloco textarea{width:100%;border:1px solid var(--linha);border-radius:8px;background:#fff}
+.pr-bloco select,.pr-bloco input[type=text],.pr-bloco input[type=url],.pr-bloco input[type=email]{height:40px;padding:0 12px}
+.pr-bloco textarea{padding:12px;resize:vertical;line-height:1.6}
+.pr-bloco select:focus,.pr-bloco input:focus,.pr-bloco textarea:focus{outline:none;border-color:var(--caramelo);box-shadow:0 0 0 3px rgba(169,130,95,.15)}
+.pr-rot{display:block;margin:12px 0 5px;font-size:12px;color:var(--suave)}
+.pr-rot:first-child{margin-top:0}
+.pr-conta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px}
+.pr-conta b{font-weight:500;color:var(--caramelo)}
+.pr-conta span{color:var(--suave);font-size:12px}
+.pr-check{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:13px;cursor:pointer}
+.pr-check input{margin-top:3px;accent-color:var(--caramelo)}
+.pr-check small{display:block;color:var(--suave);font-size:11px}
+.pr-alerta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--amarelo-bg);color:var(--amarelo);font-size:13px}
+.pr-alerta.erro{background:var(--vermelho-bg);color:var(--vermelho)}
+.pr-alerta.ok{background:var(--verde-bg);color:var(--verde)}
+.pr-alerta .btn{background:#fff}
+.pr-modos{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin-bottom:14px;border-radius:10px;background:var(--papel);border:1px solid var(--linha)}
+.pr-modos button{height:36px;border:0;border-radius:7px;background:transparent;cursor:pointer;font-size:13px;color:var(--suave)}
+.pr-modos button.ativo{background:var(--branco);color:var(--texto);box-shadow:0 1px 4px rgba(59,50,43,.12)}
+.pr-chaves{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;font-size:11px;color:var(--suave)}
+.pr-chaves button{padding:2px 8px;border:1px dashed var(--caramelo);border-radius:999px;background:transparent;color:var(--caramelo);cursor:pointer;font-size:11px}
+.pr-codigo{font-family:ui-monospace,SFMono-Regular,Menlo,monospace!important;font-size:12px!important;line-height:1.5!important;min-height:320px}
+.pr-duas{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.pr-duas{grid-template-columns:1fr}}
+.pr-acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.pr-acoes .btn{height:40px}
+.pr-progresso{margin-top:14px}
+.pr-progresso .barra{height:8px;border-radius:999px;background:var(--papel);border:1px solid var(--linha);overflow:hidden}
+.pr-progresso .barra b{display:block;height:100%;width:0;background:linear-gradient(90deg,#a9825f,#6e5239);transition:width .3s}
+.pr-progresso p{margin:6px 0 0;font-size:12px;color:var(--suave)}
+.pr-resumo{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.pr-resumo div{padding:10px;border-radius:10px;background:var(--papel);text-align:center}
+.pr-resumo strong{display:block;font-size:22px;font-weight:300}
+.pr-resumo span{font-size:11px;color:var(--suave)}
+
+.pr-previa{position:sticky;top:16px}
+@media (max-width:1000px){.pr-previa{position:static}}
+.pr-previa-topo{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.pr-previa-topo span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--suave)}
+.pr-palco{padding:26px 22px;border-radius:18px;background:#e4dbd0;border:1px solid var(--linha)}
+.pr-janela{background:#fff;border-radius:14px;box-shadow:0 18px 40px rgba(59,50,43,.16),0 2px 6px rgba(59,50,43,.06);overflow:hidden}
+.pr-janela-cab{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;border-bottom:1px solid #efe8e0}
+.pr-avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#a9825f,#6e5239);color:#fff;font-size:16px;flex-shrink:0}
+.pr-janela-cab strong{display:block;font-size:16px;font-weight:500;line-height:1.3;word-break:break-word}
+.pr-janela-cab small{display:block;margin-top:2px;font-size:12px;color:var(--suave)}
+.pr-janela iframe{display:block;width:100%;height:420px;border:0;background:#fff}
+.pr-dica{margin:10px 4px 0;font-size:12px;color:var(--suave);text-align:center}
+dialog.tela-cheia{width:min(760px,calc(100% - 24px))}
+dialog.tela-cheia iframe{display:block;width:100%;height:70vh;border:0}
+
+.pr-fila{border:1px solid var(--linha);border-radius:12px;overflow:hidden;margin-top:12px}
+.pr-fila-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:var(--papel);font-size:13px}
+.pr-fila-corpo{padding:14px}
+.pr-fila-corpo h4{margin:0;font-size:15px;font-weight:400}
+.pr-fila-corpo .para{margin:2px 0 10px;font-size:12px;color:var(--suave)}
+.pr-fila-corpo pre{margin:0 0 12px;padding:12px;max-height:220px;overflow:auto;border-radius:8px;background:#fbf8f4;border:1px solid #efe8e0;white-space:pre-wrap;font:inherit;font-size:13px}
+
+.pr-hist-topo{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:10px}
+.pr-hist-topo h3{margin:0;font-size:15px;font-weight:400;flex:1}
+.pr-optout{display:flex;gap:8px;margin-top:6px}
+.pr-optout input{flex:1}
+.pr-lista-optout{list-style:none;margin:10px 0 0;padding:0;max-height:200px;overflow:auto}
+.pr-lista-optout li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #f0e9e0;font-size:13px}
+.st-ok{background:var(--verde-bg);color:var(--verde)}
+.st-erro{background:var(--vermelho-bg);color:var(--vermelho)}
+.pr-vazia{padding:30px 24px;text-align:center}
+.pr-vazia svg.ic{width:34px;height:34px;color:var(--caramelo);stroke-width:1.2}
+.pr-vazia h3{margin:10px 0 6px;font-size:17px;font-weight:400}
+.pr-vazia p{margin:0 auto 16px;max-width:420px;color:var(--suave)}
+@media (max-width:600px){.pr-capa{padding:22px 20px}.pr-capa-num{text-align:left;margin-left:0}.pr-capa-num strong{font-size:36px}}
 </style>
 </head>
 <body>
@@ -282,6 +394,7 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
     <h2>meu site</h2>
     <a href="#portfolio" data-aba="portfolio"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Portfólio</a>
     <a href="#marcas" data-aba="marcas"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>Marcas</a>
+    <a href="#prospeccao" data-aba="prospeccao"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>Prospecção</a>
     <h2>minha rotina</h2>
     <a href="#calendario" data-aba="calendario"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendário</a>
     <a href="#campanhas" data-aba="campanhas"><svg class="ic" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Campanhas</a>
@@ -304,6 +417,7 @@ dialog::backdrop{background:rgba(59,50,43,.4)}
 
   <section id="aba-portfolio" data-aba="portfolio" hidden></section>
   <section id="aba-marcas" data-aba="marcas" hidden></section>
+  <section id="aba-prospeccao" data-aba="prospeccao" hidden></section>
   <section id="aba-calendario" data-aba="calendario" hidden></section>
   <section id="aba-campanhas" data-aba="campanhas" hidden></section>
   <section id="aba-checklist" data-aba="checklist" hidden></section>
@@ -376,6 +490,10 @@ const ICONE = {
   alca: '<svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></svg>',
   mais: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
   baixar: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+  envelope: '<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>',
+  enviar: '<svg class="ic" viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></svg>',
+  copiar: '<svg class="ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>',
+  telaCheia: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
   subir: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 16V5M7 10l5-5 5 5M5 20h14"/></svg>',
   whats: '<svg class="ic" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z"/></svg>',
   insta: '<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>',
@@ -395,22 +513,24 @@ const ICONE = {
    ===================================================================== */
 const CAMPOS = {
   videos: ["titulo", "link", "nicho", "formato", "marca", "destaque", "ordem", "visivel"],
-  marcas: ["nome", "instagram", "email", "telefone", "situacao", "obs", "ultimo_contato", "nicho", "favorita"],
+  marcas: ["nome", "instagram", "email", "telefone", "situacao", "obs", "ultimo_contato", "nicho", "favorita", "selecionada"],
   calendario: ["titulo", "marca", "tipo", "data", "status"],
   campanhas: ["campanha", "cliente", "tipo", "status", "qtd", "valor", "prazo", "pagamento", "ativa", "favorita", "fechada_em", "canal"],
   marcados: ["chave"],
-  visitas: ["data", "pagina", "origem"]
+  visitas: ["data", "pagina", "origem"],
+  email_envios: ["email", "assunto", "status", "erro", "resend_id"],
+  email_optout: ["email"]
 };
-const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas" };
-const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [] };
-const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true };
+const NOME_TABELA = { videos: "vídeos", marcas: "marcas", calendario: "calendário", campanhas: "campanhas", marcados: "marcados (checklist)", visitas: "visitas", email_envios: "registro de envios (disparo.sql)", email_optout: "descadastro (disparo.sql)" };
+const dados = { videos: [], marcas: [], calendario: [], campanhas: [], marcados: new Map(), visitas: [], email_envios: [], email_optout: [] };
+const funciona = { videos: true, marcas: true, calendario: true, campanhas: true, marcados: true, visitas: true, email_envios: true, email_optout: true };
 const avisos = new Map();
 
 function avisa(chave, texto) { avisos.set(chave, texto); mostraAvisos(); }
 function mostraAvisos() {
   const caixa = $("#avisos");
   if (!avisos.size) { caixa.hidden = true; return; }
-  caixa.innerHTML = `<strong>O painel abriu, mas faltou uma parte no banco.</strong> O resto funciona normal.<ul>${[...avisos.values()].map(t => `<li>${esc(t)}</li>`).join("")}</ul>Para resolver, rode de novo o arquivo banco.sql no SQL Editor do Supabase.`;
+  caixa.innerHTML = `<strong>O painel abriu, mas faltou uma parte no banco.</strong> O resto funciona normal.<ul>${[...avisos.values()].map(t => `<li>${esc(t)}</li>`).join("")}</ul>Para resolver, rode no SQL Editor do Supabase o arquivo banco.sql (ou o disparo.sql, quando for da Prospecção).`;
   caixa.hidden = false;
 }
 
@@ -453,14 +573,17 @@ async function carrega(tabela, ajusta) {
 
 async function carregaTudo() {
   const desde = new Date(); desde.setHours(0, 0, 0, 0); desde.setDate(desde.getDate() - 13);
-  const [v, m, c, k, mk, vi] = await Promise.all([
+  const [v, m, c, k, mk, vi, ev, oo] = await Promise.all([
     carrega("videos", q => q.order("ordem", { ascending: true })),
     carrega("marcas", q => q.order("criado_em", { ascending: false })),
     carrega("calendario", q => q.order("data", { ascending: true })),
     carrega("campanhas", q => q.order("criado_em", { ascending: false })),
     carrega("marcados"),
-    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000))
+    carrega("visitas", q => q.gte("data", desde.toISOString()).order("data", { ascending: true }).limit(10000)),
+    carrega("email_envios", q => q.order("criado_em", { ascending: false }).limit(5000)),
+    carrega("email_optout")
   ]);
+  dados.email_envios = ev; dados.email_optout = oo;
   dados.videos = v; dados.marcas = m; dados.calendario = c; dados.campanhas = k; dados.visitas = vi;
   dados.marcados = new Map(mk.filter(r => r.marcado !== false).map(r => [r.chave, true]));
 }
@@ -486,6 +609,8 @@ async function recarrega(tabela) {
   if (tabela === "marcas") dados.marcas = await carrega("marcas", q => q.order("criado_em", { ascending: false }));
   if (tabela === "calendario") dados.calendario = await carrega("calendario", q => q.order("data", { ascending: true }));
   if (tabela === "campanhas") dados.campanhas = await carrega("campanhas", q => q.order("criado_em", { ascending: false }));
+  if (tabela === "email_envios") dados.email_envios = await carrega("email_envios", q => q.order("criado_em", { ascending: false }).limit(5000));
+  if (tabela === "email_optout") dados.email_optout = await carrega("email_optout");
   desenhaAba(abaAtual);
 }
 
@@ -557,7 +682,7 @@ const pilulaExemplo = (r) => r && r.exemplo ? ' <span class="pilula p-exemplo">e
 /* =====================================================================
    5. NAVEGAÇÃO ENTRE AS ABAS
    ===================================================================== */
-const ABAS = { portfolio: "Portfólio", marcas: "Marcas", calendario: "Calendário", campanhas: "Campanhas", checklist: "Checklist do portfólio" };
+const ABAS = { portfolio: "Portfólio", marcas: "Marcas", prospeccao: "Prospecção", calendario: "Calendário", campanhas: "Campanhas", checklist: "Checklist do portfólio" };
 let abaAtual = "portfolio";
 
 function vaiPara(aba) {
@@ -791,8 +916,15 @@ DESENHA.marcas = function (caixa) {
         <input type="file" id="m-arquivo" accept=".csv,.tsv,.txt,.xlsx,.xls,.xlsm,.ods,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" hidden>
         <button class="btn btn--forte" type="button" id="m-add">${ICONE.mais}Adicionar marca</button>
       </div>
+      <div class="sel-barra" id="m-selbarra"></div>
       <div id="m-tabela"></div>`;
     caixa.dataset.pronto = "1";
+    $("#m-selbarra").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-sel]"); if (!b) return;
+      if (b.dataset.sel === "filtro") marcaSelecao(marcasFiltradas().filter(temEmail).filter(r => !r.selecionada), true);
+      if (b.dataset.sel === "limpar") marcaSelecao(dados.marcas.filter(r => r.selecionada), false);
+      if (b.dataset.sel === "prospeccao") location.hash = "#prospeccao";
+    });
     $("#m-busca").addEventListener("input", (e) => { estadoMarcas.busca = e.target.value; tabelaMarcas(); });
     $("#m-sit").addEventListener("change", (e) => { estadoMarcas.situacao = e.target.value; tabelaMarcas(); });
     $("#m-nicho").addEventListener("change", (e) => { estadoMarcas.nicho = e.target.value; tabelaMarcas(); });
@@ -804,8 +936,12 @@ DESENHA.marcas = function (caixa) {
       ["Favorita", r => r.favorita ? "sim" : ""], ["Marca", r => r.nome], ["Nicho", r => r.nicho], ["Instagram", r => arroba(r.instagram)], ["E-mail", r => r.email], ["Telefone", r => r.telefone],
       ["Situação", r => nomeSituacao(r.situacao)], ["Observação", r => r.obs], ["Último contato", r => dataLonga(r.ultimo_contato)], ["Veio de", r => r.origem === "site" ? "Formulário do site" : "Painel"]
     ], marcasFiltradas()));
+    $("#m-tabela").addEventListener("change", (e) => {
+      const c = e.target.closest("input[data-seleciona]"); if (!c) return;
+      const r = dados.marcas.find(x => String(x.id) === c.dataset.seleciona); if (r) marcaSelecao([r], c.checked);
+    });
     $("#m-tabela").addEventListener("click", async (e) => {
-      if (e.target.closest("a")) return;
+      if (e.target.closest("a") || e.target.closest(".sel-cel")) return;
       const tr = e.target.closest("tr[data-id]"); if (!tr) return;
       const r = dados.marcas.find(x => String(x.id) === tr.dataset.id); if (!r) return;
       const estrela = e.target.closest("[data-estrela]");
@@ -825,6 +961,7 @@ function marcasFiltradas() {
 }
 function tabelaMarcas() {
   const alvo = $("#m-tabela");
+  if (!alvo) return;
   /* filtro de nicho: monta com os nichos que existem na sua base */
   const nichos = nichosDasMarcas();
   if (estadoMarcas.nicho && estadoMarcas.nicho !== SEM_NICHO && !nichos.some(n => sem(n) === sem(estadoMarcas.nicho))) estadoMarcas.nicho = "";
@@ -838,10 +975,13 @@ function tabelaMarcas() {
   if (!funciona.marcas) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Não consegui ler a tabela de marcas. Veja o aviso lá em cima.</p></div>`; return; }
   const lista = marcasFiltradas();
   if (!dados.marcas.length) { alvo.innerHTML = `<div class="tabela-caixa"><p class="vazio">Sua base está vazia. Clique em Adicionar marca, ou espere os contatos do formulário do site chegarem aqui.</p></div>`; return; }
-  alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr><th style="width:40px"><span class="so-leitor">Favorita</span></th><th>Marca</th><th>Nicho</th><th>Instagram</th><th>E-mail</th><th>Telefone</th><th>Situação</th><th>Observação</th><th>Último contato</th></tr></thead><tbody>${
+  desenhaBarraSelecao(lista);
+  alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr><th class="sel-cel"><span class="so-leitor">Selecionar</span></th><th style="width:40px"><span class="so-leitor">Favorita</span></th><th>Marca</th><th>Nicho</th><th>Instagram</th><th>E-mail</th><th>Telefone</th><th>Situação</th><th>Observação</th><th>Último contato</th></tr></thead><tbody>${
     lista.length ? lista.map(r => {
       const w = linkWhats(r.telefone), ig = linkInsta(r.instagram);
-      return `<tr class="clicavel${r.favorita ? " favorita" : ""}" data-id="${esc(r.id)}">
+      const pode = temEmail(r);
+      return `<tr class="clicavel${r.favorita ? " favorita" : ""}${r.selecionada ? " selecionada" : ""}" data-id="${esc(r.id)}">
+        <td class="sel-cel"><label class="caixinha" title="${pode ? (r.selecionada ? "Tirar da seleção" : "Selecionar para a Prospecção") : "Sem e-mail: não dá para selecionar"}"><input type="checkbox" data-seleciona="${esc(r.id)}"${r.selecionada ? " checked" : ""}${pode ? "" : " disabled"} aria-label="Selecionar ${esc(r.nome)}"></label></td>
         <td style="width:40px"><button class="icone estrela${r.favorita ? " on" : ""}" type="button" data-estrela title="${r.favorita ? "Tirar das favoritas" : "Favoritar"}" aria-label="${r.favorita ? "Tirar das favoritas" : "Favoritar"}: ${esc(r.nome)}">${r.favorita ? ICONE.estrelaCheia : ICONE.estrela}</button></td>
         <td><span style="font-weight:400">${esc(r.nome)}</span>${pilulaExemplo(r)}${r.origem === "site" ? ' <span class="pilula p-site">veio do site</span>' : ""}</td>
         <td>${esc(r.nicho || "")}</td>
@@ -852,9 +992,42 @@ function tabelaMarcas() {
         <td class="corta" title="${esc(r.obs || "")}">${esc(r.obs || "")}</td>
         <td style="white-space:nowrap">${esc(dataLonga(r.ultimo_contato))}</td>
       </tr>`;
-    }).join("") : `<tr><td colspan="9"><p class="vazio">${estadoMarcas.favoritas && !totalFav ? "Nenhuma favorita ainda. Clique na estrela ao lado da marca para favoritar." : "Nenhuma marca encontrada com esses filtros."}</p></td></tr>`
+    }).join("") : `<tr><td colspan="10"><p class="vazio">${estadoMarcas.favoritas && !totalFav ? "Nenhuma favorita ainda. Clique na estrela ao lado da marca para favoritar." : "Nenhuma marca encontrada com esses filtros."}</p></td></tr>`
   }</tbody></table></div><p style="font-size:12px;color:var(--suave);margin:8px 2px 0">${lista.length} de ${dados.marcas.length} marca(s). ${totalFav ? ` ${totalFav === 1 ? "1 favorita" : totalFav + " favoritas"}.` : ""} Clique na linha para editar, ou na estrela para favoritar.</p>`;
 }
+/* ---------- SELEÇÃO PARA A PROSPECÇÃO (fica salva no banco, coluna selecionada) ---------- */
+const emailValido = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || "").trim());
+const temEmail = (r) => emailValido(r.email);
+function desenhaBarraSelecao(lista) {
+  const barra = $("#m-selbarra"); if (!barra) return;
+  const total = dados.marcas.filter(r => r.selecionada).length;
+  const doFiltro = lista.filter(temEmail).filter(r => !r.selecionada).length;
+  barra.innerHTML = `<span class="sel-num"><b>${total}</b> ${total === 1 ? "marca selecionada" : "marcas selecionadas"}</span>
+    ${doFiltro ? `<button class="link-btn" type="button" data-sel="filtro">Selecionar as ${doFiltro} com e-mail deste filtro</button>` : ""}
+    ${total ? `<button class="link-btn" type="button" data-sel="limpar">Limpar seleção</button>` : ""}
+    <span class="esp"></span>
+    ${total ? `<button class="btn" type="button" data-sel="prospeccao">${ICONE.envelope}Ir para Prospecção</button>` : ""}`;
+}
+async function marcaSelecao(linhas, valor) {
+  const alvo = linhas.filter(r => valor ? temEmail(r) : true);
+  if (!alvo.length) return;
+  if (valor === false && alvo.length > 1 && !confirm(`Tirar a seleção de ${alvo.length} marcas?`)) { tabelaMarcas(); return; }
+  const antes = new Map(alvo.map(r => [r.id, r.selecionada]));
+  alvo.forEach(r => { r.selecionada = valor; });
+  tabelaMarcas();
+  const ids = alvo.map(r => r.id);
+  for (let i = 0; i < ids.length; i += 200) {
+    const { error } = await sb.from("marcas").update({ selecionada: valor }).in("id", ids.slice(i, i + 200));
+    if (error) {
+      alvo.forEach(r => { r.selecionada = antes.get(r.id); });
+      tabelaMarcas();
+      toast(explica(error, "marcas"), true);
+      return;
+    }
+  }
+  if (alvo.length > 1) toast(valor ? `${alvo.length} marcas selecionadas.` : "Seleção limpa.");
+}
+
 function formMarca(r) {
   const novo = !r; r = r || {};
   abreFormulario({
@@ -1291,6 +1464,476 @@ function formCampanha(k) {
     aoSalvar: (val) => salva("campanhas", k.id, { ...val, ativa: !finalizada(val) }),
     aoApagar: novo ? null : () => apaga("campanhas", k.id, `Apagar a campanha "${k.campanha}"? Isso não dá para desfazer.`)
   });
+}
+
+/* =====================================================================
+   9b. ABA PROSPECÇÃO
+   Os e-mails vêm SEMPRE da tabela de marcas. Dois jeitos de mandar:
+   pelo Resend (função enviar-emails no Supabase) ou rascunho pelo Gmail.
+   ===================================================================== */
+const MEU_EMAIL = (window.BANCO && window.BANCO.emailDaCris) || "contatocrisdallaccua@gmail.com";
+const MEU_NOME = "Cris Dall' Accua";
+const LOTE = 100;
+const RODAPE_SAIR = "Se não quiser mais receber meus e-mails, é só responder com SAIR.";
+const estadoPr = (() => {
+  const base = { envio: "resend", lista: "selecionadas", modo: "texto", assunto: "", texto: "", html: "", botaoTexto: "", botaoLink: "", pular: true, busca: "" };
+  try { return { ...base, ...JSON.parse(localStorage.getItem("prospeccao-rascunho") || "{}"), busca: "" }; } catch (e) { return base; }
+})();
+const guardaPr = () => { try { const { busca, ...resto } = estadoPr; localStorage.setItem("prospeccao-rascunho", JSON.stringify(resto)); } catch (e) {} };
+let filaGmail = null;     /* fila do modo rascunho */
+let enviando = false;
+
+const minus = (e) => String(e || "").trim().toLowerCase();
+const primeiroNome = (marca) => (String(marca || "").trim().split(/\s+/)[0] || String(marca || "")).trim();
+const trocaChaves = (t, marca, html) => {
+  const n = html ? esc(primeiroNome(marca)) : primeiroNome(marca), m = html ? esc(marca) : marca;
+  return String(t || "").replace(/\{\{\s*nome\s*\}\}/gi, n).replace(/\{\{\s*marca\s*\}\}/gi, m);
+};
+const optoutSet = () => new Set(dados.email_optout.map(r => minus(r.email)));
+const jaRecebeuSet = (assunto) => new Set(dados.email_envios.filter(r => r.status === "ok" && (!assunto || r.assunto === assunto)).map(r => minus(r.email)));
+const situacoesDaBase = () => {
+  const extra = [...new Set(dados.marcas.map(r => r.situacao).filter(Boolean))].filter(s => !SITUACOES.some(x => x[0] === s));
+  return [...SITUACOES, ...extra.map(s => [s, s])];
+};
+
+/* ---------- monta o e-mail ---------- */
+function linkifica(textoEscapado) {
+  return textoEscapado.replace(/(@?)(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+|\b[a-z0-9][a-z0-9-]*(?:\.[a-z0-9-]+)*\.(?:com\.br|com|net\.br|net|org\.br|org|io|co|app|me|site|store|shop|br)(?:\/[^\s<]*)?)/gi, (u, arroba, url) => {
+    if (arroba) return u; /* parte de um e-mail: deixa como está */
+    u = url;
+    const limpo = u.replace(/[.,;:!?)]+$/, ""), resto = u.slice(limpo.length);
+    const href = /^https?:/i.test(limpo) ? limpo : "https://" + limpo;
+    return `<a href="${href}" style="color:#8a6440;text-decoration:underline">${limpo}</a>${resto}`;
+  });
+}
+function emailDoTexto(texto, botaoTexto, botaoLink) {
+  const paragrafos = String(texto || "").replace(/\r/g, "").trim().split(/\n\s*\n/).filter(p => p.trim())
+    .map(p => `<p style="margin:0 0 16px">${linkifica(esc(p.trim())).replace(/\n/g, "<br>")}</p>`).join("\n      ");
+  let link = String(botaoLink || "").trim();
+  if (link && !/^(https?:|mailto:)/i.test(link)) link = "https://" + link;
+  const botao = botaoTexto && link ? `
+      <p style="margin:26px 0 8px"><a href="${esc(link)}" style="display:inline-block;background:#3b322b;color:#ffffff;text-decoration:none;padding:13px 24px;border-radius:8px;font-weight:bold;font-size:15px">${esc(botaoTexto)}</a></p>` : "";
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#ffffff">
+  <div style="max-width:560px;margin:0 auto;padding:32px 22px;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#2b2420">
+      ${paragrafos}${botao}
+      <p style="margin:34px 0 0;padding-top:14px;border-top:1px solid #eeeeee;font-size:11px;line-height:1.5;color:#9a8f86">${RODAPE_SAIR}</p>
+  </div>
+</body>
+</html>`;
+}
+const htmlAtual = () => estadoPr.modo === "html" ? estadoPr.html : emailDoTexto(estadoPr.texto, estadoPr.botaoTexto, estadoPr.botaoLink);
+function textoSimples(html) {
+  const d = new DOMParser().parseFromString(String(html || ""), "text/html");
+  d.querySelectorAll("br").forEach(b => b.replaceWith("\n"));
+  d.querySelectorAll("p,div,h1,h2,h3,li,tr").forEach(b => b.append("\n\n"));
+  d.querySelectorAll("a[href]").forEach(a => { const h = a.getAttribute("href"); if (h && !/^mailto:/i.test(h) && a.textContent.trim() !== h) a.append(` (${h})`); });
+  return (d.body.textContent || "").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+const textoGmail = (marca) => estadoPr.modo === "html" ? textoSimples(trocaChaves(estadoPr.html, marca, true))
+  : [trocaChaves(estadoPr.texto, marca, false).trim(), estadoPr.botaoTexto && estadoPr.botaoLink ? `${estadoPr.botaoTexto}: ${estadoPr.botaoLink}` : "", RODAPE_SAIR].filter(Boolean).join("\n\n");
+
+/* ---------- quem recebe ---------- */
+function opcoesLista() {
+  const comEmail = dados.marcas.filter(temEmail);
+  const op = [
+    ["selecionadas", `Só as marcas que eu selecionei (${dados.marcas.filter(r => r.selecionada && temEmail(r)).length})`],
+    ["teste", "Só pra mim (teste)"],
+    ["todas", `Todas as marcas com e-mail (${comEmail.length})`]
+  ];
+  situacoesDaBase().forEach(([v, t]) => op.push(["sit:" + v, `Só ${t.toLowerCase() === "lead" ? "os leads" : "quem está como " + t} (${comEmail.filter(r => r.situacao === v).length})`]));
+  return op;
+}
+function nomeDaLista(v) { const o = opcoesLista().find(x => x[0] === v); return o ? o[1].replace(/\s*\(\d+\)$/, "") : v; }
+function destinatarios() {
+  const lista = estadoPr.lista;
+  if (lista === "teste") return { envio: [{ email: MEU_EMAIL, marca: exemploMarca(), ids: [] }], semEmail: 0, repetidos: 0, descadastrados: 0, jaRecebeu: 0, base: 1 };
+  let base = dados.marcas;
+  if (lista === "selecionadas") base = base.filter(r => r.selecionada);
+  else if (lista.startsWith("sit:")) base = base.filter(r => r.situacao === lista.slice(4));
+  const semEmail = base.filter(r => !temEmail(r)).length;
+  const fora = optoutSet(), ja = estadoPr.pular && estadoPr.assunto.trim() ? jaRecebeuSet(estadoPr.assunto.trim()) : new Set();
+  const porEmail = new Map(); let repetidos = 0, descadastrados = 0, jaRecebeu = 0;
+  base.filter(temEmail).forEach(r => {
+    const e = minus(r.email);
+    if (porEmail.has(e)) { repetidos++; porEmail.get(e).ids.push(r.id); return; }
+    porEmail.set(e, { email: e, marca: String(r.nome || "").trim(), ids: [r.id] });
+  });
+  const envio = [];
+  porEmail.forEach(d => {
+    if (fora.has(d.email)) { descadastrados++; return; }
+    if (ja.has(d.email)) { jaRecebeu++; return; }
+    envio.push(d);
+  });
+  return { envio, semEmail, repetidos, descadastrados, jaRecebeu, base: base.length };
+}
+function exemploMarca() {
+  const sel = dados.marcas.find(r => r.selecionada && temEmail(r)) || dados.marcas.find(temEmail);
+  return sel ? String(sel.nome || "").trim() || "Natura" : "Natura";
+}
+
+/* ---------- a aba ---------- */
+DESENHA.prospeccao = function (caixa) {
+  const okEnv = funciona.email_envios, okOpt = funciona.email_optout;
+  const envOk = dados.email_envios.filter(r => r.status === "ok" && minus(r.email) !== minus(MEU_EMAIL));
+  const receberam = new Set(envOk.map(r => minus(r.email)));
+  const falhas = new Set(dados.email_envios.filter(r => r.status === "erro").map(r => minus(r.email)));
+  const fora = optoutSet();
+  const comEmail = dados.marcas.filter(temEmail);
+  const emailsBase = new Set(comEmail.map(r => minus(r.email)));
+  const aEnviar = [...emailsBase].filter(e => !receberam.has(e) && !fora.has(e)).length;
+  const traco = "-";
+  const cartao = (cor, num, nome, ctx) => `<div class="pr-cartao" style="--cor:${cor}"><strong>${num}</strong><span>${nome}</span>${ctx ? `<small>${ctx}</small>` : ""}</div>`;
+
+  caixa.innerHTML = `
+    <section class="pr-capa">
+      <div class="pr-capa-ic">${ICONE.envelope}</div>
+      <div class="pr-capa-txt">
+        <h2>Prospecção</h2>
+        <p>Manda o seu e-mail de apresentação para as marcas da sua base, cada uma chamada pelo nome.</p>
+        <div class="pr-etiquetas"><span>teste antes sempre</span><span>a chave vive no Supabase</span><span>quem responde SAIR sai da lista</span></div>
+      </div>
+      <div class="pr-capa-num"><strong>${okEnv && envOk.length ? numero(envOk.length) : traco}</strong><span>enviados até agora</span></div>
+    </section>
+    <div class="pr-cartoes">
+      ${cartao("#a9825f", funciona.marcas ? numero(emailsBase.size) : traco, "marcas com e-mail", funciona.marcas ? `de ${numero(dados.marcas.length)} na sua base` : "")}
+      ${cartao("#b0862c", funciona.marcas && okEnv ? numero(aEnviar) : traco, "a enviar", "nunca receberam nada")}
+      ${cartao("#4f7a4f", okEnv ? numero(receberam.size) : traco, "já receberam", okEnv ? "e-mails diferentes" : "falta o disparo.sql")}
+      ${cartao("#b0574a", okEnv ? numero(falhas.size) : traco, "falhas", okEnv && falhas.size ? "veja no histórico e limpe a base" : "")}
+      ${cartao("#5b7b99", okOpt ? numero(fora.size) : traco, "descadastrados", "nunca mais recebem")}
+    </div>
+    ${!okEnv || !okOpt ? `<div class="pr-alerta" style="margin:0 0 16px">Falta criar as tabelas da Prospecção no banco. Rode o arquivo disparo.sql no SQL Editor do Supabase. Enquanto isso, o modo rascunho pelo Gmail funciona, mas sem guardar o histórico.</div>` : ""}
+    ${!comEmail.length ? `
+      <div class="pr-bloco pr-vazia">${ICONE.envelope}<h3>Sua base ainda está sem e-mail</h3>
+        <p>Os e-mails da Prospecção vêm da sua aba Marcas. Cadastre o e-mail das marcas ou importe a sua planilha primeiro.</p>
+        <button class="btn btn--forte" type="button" data-ir="marcas">Ir para Marcas</button></div>` : `
+    <div class="pr-grade">
+      <div>
+        <div class="pr-bloco">
+          <h3><i>1</i>Como mandar</h3>
+          <p class="pr-sub">Pelo Resend sai tudo de uma vez. O rascunho abre o Gmail para cada marca, um por vez, e funciona sem configurar nada.</p>
+          <div class="pr-modos" id="pr-envio"><button type="button" data-envio="resend">Automático (Resend)</button><button type="button" data-envio="gmail">Rascunho pelo Gmail</button></div>
+        </div>
+        <div class="pr-bloco">
+          <h3><i>2</i>Pra quem vai</h3>
+          <div class="pr-origem"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>Os e-mails vêm da sua aba Marcas.</span></div>
+          <label class="pr-rot" for="pr-lista">Lista de destinatários</label>
+          <select id="pr-lista"></select>
+          <div id="pr-conta"></div>
+          <label class="pr-check"><input type="checkbox" id="pr-pular"><span>Pular quem já recebeu este mesmo assunto<small>Serve para continuar um disparo que parou no meio, sem mandar duas vezes.</small></span></label>
+        </div>
+        <div class="pr-bloco">
+          <h3><i>3</i>Escrever o e-mail</h3>
+          <p class="pr-sub">Use {{nome}} para o primeiro nome da marca e {{marca}} para o nome completo.</p>
+          <div class="pr-modos" id="pr-modo"><button type="button" data-modo="texto">Texto fácil</button><button type="button" data-modo="html">HTML</button></div>
+          <label class="pr-rot" for="pr-assunto">Assunto</label>
+          <input type="text" id="pr-assunto" placeholder="Ex: Conteúdo UGC para a {{marca}}">
+          <div id="pr-campo-texto">
+            <label class="pr-rot" for="pr-texto">Texto do e-mail</label>
+            <textarea id="pr-texto" rows="12" placeholder="Oi, {{nome}}! Tudo bem?&#10;&#10;Escreva aqui o seu e-mail normal. Pule uma linha para começar outro parágrafo."></textarea>
+            <div class="pr-chaves">Inserir: <button type="button" data-chave="{{nome}}">{{nome}}</button><button type="button" data-chave="{{marca}}">{{marca}}</button></div>
+            <div class="pr-duas">
+              <div><label class="pr-rot" for="pr-btn-txt">Texto do botão (opcional)</label><input type="text" id="pr-btn-txt" placeholder="Ex: Ver meu portfólio"></div>
+              <div><label class="pr-rot" for="pr-btn-link">Link do botão</label><input type="url" id="pr-btn-link" placeholder="https://crisdallaccua.com"></div>
+            </div>
+          </div>
+          <div id="pr-campo-html">
+            <label class="pr-rot" for="pr-html">HTML do e-mail (sai exatamente assim)</label>
+            <textarea id="pr-html" class="pr-codigo" spellcheck="false" placeholder="Cole aqui o HTML pronto do e-mail."></textarea>
+            <div class="pr-acoes" style="margin-top:8px"><button class="btn" type="button" id="pr-modelo">Começar do modelo pronto</button></div>
+            <div id="pr-aviso-sair"></div>
+          </div>
+        </div>
+        <div class="pr-bloco">
+          <h3><i>4</i>Enviar</h3>
+          <p class="pr-sub" id="pr-envio-dica"></p>
+          <div class="pr-acoes" id="pr-acoes"></div>
+          <div id="pr-andamento"></div>
+        </div>
+      </div>
+      <aside class="pr-previa">
+        <div class="pr-previa-topo"><span>Como vai chegar</span><button class="btn" type="button" id="pr-cheia">${ICONE.telaCheia}Ver em tela cheia</button></div>
+        <div class="pr-palco">
+          <div class="pr-janela">
+            <div class="pr-janela-cab"><div class="pr-avatar">${esc(MEU_NOME[0])}</div><div style="min-width:0"><strong id="pr-p-assunto"></strong><small>${esc(MEU_NOME)} &lt;${esc(MEU_EMAIL)}&gt; para você</small></div></div>
+            <iframe id="pr-p-corpo" title="Prévia do e-mail" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
+        <p class="pr-dica">Antes de disparar, mande o teste para você e abra no celular.</p>
+      </aside>
+    </div>`}
+    <div class="duas" style="margin-top:4px">
+      <div class="pr-bloco">
+        <div class="pr-hist-topo"><h3>Histórico de envios</h3><input class="busca" type="search" id="pr-busca" placeholder="Buscar por e-mail" aria-label="Buscar por e-mail no histórico"></div>
+        <div id="pr-historico"></div>
+      </div>
+      <div class="pr-bloco">
+        <h3>Descadastro</h3>
+        <p class="pr-sub">Quem responder SAIR responde no seu Gmail. Cole o e-mail aqui e ele nunca mais recebe.</p>
+        <form class="pr-optout" id="pr-optout"><input type="email" id="pr-optout-email" placeholder="email@marca.com" aria-label="E-mail para descadastrar" required><button class="btn" type="submit">Descadastrar</button></form>
+        <ul class="pr-lista-optout" id="pr-lista-optout"></ul>
+      </div>
+    </div>`;
+
+  $$("[data-ir]", caixa).forEach(b => b.addEventListener("click", () => { location.hash = "#" + b.dataset.ir; }));
+  historico(); listaOptout();
+  $("#pr-busca").value = estadoPr.busca;
+  $("#pr-busca").addEventListener("input", (e) => { estadoPr.busca = e.target.value; historico(); });
+  $("#pr-optout").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const em = minus($("#pr-optout-email").value);
+    if (!emailValido(em)) { toast("Esse e-mail não parece certo.", true); return; }
+    const { error } = await sb.from("email_optout").upsert({ email: em }, { onConflict: "email" });
+    if (error) { toast(explica(error, "email_optout"), true); return; }
+    toast("Descadastrado. Esse e-mail não recebe mais."); await recarrega("email_optout");
+  });
+  if (!comEmail.length) return;
+
+  /* liga os campos */
+  const lig = (sel, chave, ev = "input") => { const el = $(sel); el.value = estadoPr[chave]; el.addEventListener(ev, () => { estadoPr[chave] = el.value; guardaPr(); atualizaPr(); }); };
+  lig("#pr-assunto", "assunto"); lig("#pr-texto", "texto"); lig("#pr-btn-txt", "botaoTexto"); lig("#pr-btn-link", "botaoLink"); lig("#pr-html", "html");
+  $("#pr-pular").checked = estadoPr.pular;
+  $("#pr-pular").addEventListener("change", (e) => { estadoPr.pular = e.target.checked; guardaPr(); atualizaPr(); });
+  $("#pr-lista").addEventListener("change", (e) => { estadoPr.lista = e.target.value; filaGmail = null; guardaPr(); atualizaPr(); });
+  $("#pr-envio").addEventListener("click", (e) => { const b = e.target.closest("[data-envio]"); if (!b) return; estadoPr.envio = b.dataset.envio; guardaPr(); atualizaPr(); });
+  $("#pr-modo").addEventListener("click", (e) => { const b = e.target.closest("[data-modo]"); if (!b) return; estadoPr.modo = b.dataset.modo; guardaPr(); atualizaPr(); });
+  $$("[data-chave]", caixa).forEach(b => b.addEventListener("click", () => {
+    const t = $("#pr-texto"), i = t.selectionStart ?? t.value.length;
+    t.value = t.value.slice(0, i) + b.dataset.chave + t.value.slice(t.selectionEnd ?? i);
+    t.focus(); t.selectionStart = t.selectionEnd = i + b.dataset.chave.length;
+    estadoPr.texto = t.value; guardaPr(); atualizaPr();
+  }));
+  $("#pr-modelo").addEventListener("click", () => {
+    if (estadoPr.html.trim() && !confirm("Trocar o HTML que está no campo pelo modelo pronto?")) return;
+    estadoPr.html = emailDoTexto(estadoPr.texto || "Oi, {{nome}}! Tudo bem?\n\nEscreva aqui o seu texto.", estadoPr.botaoTexto, estadoPr.botaoLink);
+    $("#pr-html").value = estadoPr.html; guardaPr(); atualizaPr();
+  });
+  $("#pr-cheia").addEventListener("click", () => {
+    const j = abreJanela(trocaChaves(estadoPr.assunto, exemploMarca(), false) || "Sem assunto", `<iframe id="pr-cheia-corpo" title="E-mail em tela cheia" sandbox="allow-same-origin"></iframe>`, "", true);
+    j.classList.add("tela-cheia");
+    $("#pr-cheia-corpo").srcdoc = trocaChaves(htmlAtual(), exemploMarca(), true);
+  });
+  atualizaPr();
+};
+
+let previaTimer = null;
+function atualizaPr() {
+  if (!$("#pr-lista")) return;
+  /* modos */
+  $$("#pr-envio button").forEach(b => b.classList.toggle("ativo", b.dataset.envio === estadoPr.envio));
+  $$("#pr-modo button").forEach(b => b.classList.toggle("ativo", b.dataset.modo === estadoPr.modo));
+  $("#pr-campo-texto").hidden = estadoPr.modo !== "texto";
+  $("#pr-campo-html").hidden = estadoPr.modo !== "html";
+  /* lista */
+  const op = opcoesLista();
+  if (!op.some(o => o[0] === estadoPr.lista)) estadoPr.lista = "selecionadas";
+  $("#pr-lista").innerHTML = op.map(([v, t]) => `<option value="${esc(v)}"${v === estadoPr.lista ? " selected" : ""}>${esc(t)}</option>`).join("");
+  const d = destinatarios();
+  const n = d.envio.length;
+  const partes = [];
+  if (d.semEmail) partes.push(d.semEmail === 1 ? "1 sem e-mail ficou de fora" : `${d.semEmail} sem e-mail ficaram de fora`);
+  if (d.repetidos) partes.push(d.repetidos === 1 ? "1 com e-mail repetido (vai uma vez só)" : `${d.repetidos} com e-mail repetido (vão uma vez só)`);
+  if (d.descadastrados) partes.push(d.descadastrados === 1 ? "1 descadastrada" : `${d.descadastrados} descadastradas`);
+  if (d.jaRecebeu) partes.push(d.jaRecebeu === 1 ? "1 já recebeu este assunto" : `${d.jaRecebeu} já receberam este assunto`);
+  const selVazia = estadoPr.lista === "selecionadas" && !dados.marcas.some(r => r.selecionada && temEmail(r));
+  $("#pr-conta").innerHTML = selVazia
+    ? `<div class="pr-alerta">Nenhuma marca selecionada ainda. Marque as caixinhas na aba Marcas.<button class="btn" type="button" id="pr-ir-marcas">Ir para Marcas</button></div>`
+    : `<div class="pr-conta"><span><b>${numero(n)}</b> ${estadoPr.lista === "teste" ? "e-mail, para " + esc(MEU_EMAIL) : n === 1 ? "marca vai receber" : "marcas vão receber"}</span>${partes.length ? `<span>${partes.join(" · ")}</span>` : ""}</div>`;
+  const irM = $("#pr-ir-marcas"); if (irM) irM.addEventListener("click", () => { location.hash = "#marcas"; });
+  /* aviso do SAIR no modo HTML */
+  $("#pr-aviso-sair").innerHTML = estadoPr.modo === "html" && estadoPr.html.trim() && !/\bSAIR\b/i.test(estadoPr.html)
+    ? `<div class="pr-alerta erro">O seu HTML está sem o rodapé do SAIR. Coloque uma frase dizendo que é só responder SAIR para não receber mais.</div>` : "";
+  /* ações */
+  const gmail = estadoPr.envio === "gmail";
+  $("#pr-envio-dica").textContent = gmail
+    ? "Monta a fila com uma marca por vez. Você abre no Gmail, envia e marca como enviada."
+    : "Primeiro o teste para você. Depois o disparo, em lotes de 100, com confirmação antes.";
+  if (!enviando) $("#pr-acoes").innerHTML = gmail
+    ? `<button class="btn" type="button" id="pr-teste">${ICONE.envelope}Abrir teste pra mim no Gmail</button><button class="btn btn--forte" type="button" id="pr-fila-montar"${n && estadoPr.lista !== "teste" ? "" : " disabled"}>Montar a fila (${numero(estadoPr.lista === "teste" ? 0 : n)})</button>`
+    : `<button class="btn" type="button" id="pr-teste">${ICONE.envelope}Enviar teste pra mim</button><button class="btn btn--forte" type="button" id="pr-disparar"${n && estadoPr.lista !== "teste" ? "" : " disabled"}>${ICONE.enviar}Disparar para ${numero(estadoPr.lista === "teste" ? 0 : n)}</button>`;
+  const bt = $("#pr-teste"); if (bt) bt.onclick = () => gmail ? abreGmail({ email: MEU_EMAIL, marca: exemploMarca() }) : enviaTeste();
+  const bd = $("#pr-disparar"); if (bd) bd.onclick = confirmaDisparo;
+  const bf = $("#pr-fila-montar"); if (bf) bf.onclick = () => { filaGmail = { itens: destinatarios().envio, pos: 0, feitos: 0 }; desenhaFila(); };
+  if (gmail && filaGmail) desenhaFila(); else if (!enviando && !$("#pr-andamento").dataset.fixo) $("#pr-andamento").innerHTML = "";
+  /* prévia, com um pequeno atraso para não pesar enquanto digita */
+  clearTimeout(previaTimer);
+  previaTimer = setTimeout(() => {
+    const marca = exemploMarca();
+    $("#pr-p-assunto").textContent = trocaChaves(estadoPr.assunto, marca, false) || "Sem assunto";
+    const html = htmlAtual();
+    const fr = $("#pr-p-corpo");
+    fr.onload = () => { try { const h = fr.contentDocument.documentElement.scrollHeight; fr.style.height = Math.max(320, Math.min(h + 8, 900)) + "px"; } catch (e) {} };
+    fr.srcdoc = html.trim() ? trocaChaves(html, marca, true) : `<p style="font-family:Helvetica,Arial;color:#9a8f86;padding:24px">Escreva o e-mail ao lado e ele aparece aqui.</p>`;
+  }, 150);
+}
+
+/* ---------- histórico e descadastro ---------- */
+function historico() {
+  const alvo = $("#pr-historico"); if (!alvo) return;
+  if (!funciona.email_envios) { alvo.innerHTML = `<p class="vazio">O registro de envios ainda não existe. Rode o disparo.sql.</p>`; return; }
+  const b = minus(estadoPr.busca);
+  const lista = dados.email_envios.filter(r => !b || minus(r.email).includes(b));
+  if (!dados.email_envios.length) { alvo.innerHTML = `<p class="vazio">Nada enviado ainda. Comece pelo teste para você.</p>`; return; }
+  const mostra = lista.slice(0, 200);
+  const quando = (t) => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR") + " " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }); };
+  alvo.innerHTML = `<div class="tabela-caixa"><table><thead><tr><th>Para</th><th>Assunto</th><th>Quando</th><th>Situação</th></tr></thead><tbody>${
+    mostra.length ? mostra.map(r => `<tr>
+      <td class="corta"><span style="font-weight:400">${esc(r.marca || "")}</span><span class="sub">${esc(r.email)}</span></td>
+      <td class="corta" title="${esc(r.assunto)}">${esc(r.assunto)}</td>
+      <td style="white-space:nowrap">${esc(quando(r.criado_em))}</td>
+      <td>${r.status === "ok" ? `<span class="pilula st-ok">${r.via === "gmail" ? "enviado pelo Gmail" : "enviado"}</span>` : `<span class="pilula st-erro" title="${esc(r.erro || "")}">erro</span><span class="sub">${esc(r.erro || "")}</span>`}</td>
+    </tr>`).join("") : `<tr><td colspan="4"><p class="vazio">Nenhum envio para esse e-mail.</p></td></tr>`
+  }</tbody></table></div>${lista.length > 200 ? `<p class="pr-dica" style="text-align:left">Mostrando 200 de ${numero(lista.length)}. Use a busca para achar um e-mail.</p>` : ""}`;
+}
+function listaOptout() {
+  const ul = $("#pr-lista-optout"); if (!ul) return;
+  if (!funciona.email_optout) { ul.innerHTML = `<li><span class="sub">A tabela de descadastro ainda não existe. Rode o disparo.sql.</span></li>`; return; }
+  ul.innerHTML = dados.email_optout.length ? dados.email_optout.map(r => `<li><span class="corta">${esc(r.email)}</span><button class="link-btn" type="button" data-volta="${esc(r.email)}">permitir de novo</button></li>`).join("") : `<li><span class="sub">Ninguém pediu para sair.</span></li>`;
+  $$("[data-volta]", ul).forEach(b => b.addEventListener("click", async () => {
+    if (!confirm(`Deixar ${b.dataset.volta} receber e-mails de novo?`)) return;
+    const { error } = await sb.from("email_optout").delete().eq("email", b.dataset.volta);
+    if (error) { toast(explica(error, "email_optout"), true); return; }
+    await recarrega("email_optout");
+  }));
+}
+
+/* ---------- envio pelo Resend ---------- */
+function confereTexto() {
+  if (!estadoPr.assunto.trim()) { toast("Escreva o assunto.", true); $("#pr-assunto").focus(); return false; }
+  if (estadoPr.modo === "texto" && !estadoPr.texto.trim()) { toast("Escreva o texto do e-mail.", true); $("#pr-texto").focus(); return false; }
+  if (estadoPr.modo === "html" && !estadoPr.html.trim()) { toast("Cole o HTML do e-mail.", true); $("#pr-html").focus(); return false; }
+  if (estadoPr.botaoTexto.trim() && !estadoPr.botaoLink.trim() && estadoPr.modo === "texto") { toast("O botão precisa de um link.", true); $("#pr-btn-link").focus(); return false; }
+  return true;
+}
+async function chamaCarteiro(lista, pular) {
+  const { data } = await sb.auth.getSession();
+  const token = data && data.session && data.session.access_token;
+  if (!token) throw new Error("Sua sessão expirou. Entre de novo no painel.");
+  let r;
+  try {
+    r = await fetch(`${window.BANCO.url}/functions/v1/enviar-emails`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, apikey: window.BANCO.chave },
+      body: JSON.stringify({ destinatarios: lista.map(d => ({ email: d.email, marca: d.marca })), assunto: estadoPr.assunto.trim(), html: htmlAtual(), pularMesmoAssunto: pular })
+    });
+  } catch (e) { throw new Error("Não consegui falar com o Supabase. Confira a internet."); }
+  const corpo = await r.json().catch(() => ({}));
+  if (r.status === 404) throw new Error("A função enviar-emails ainda não está no Supabase. Siga o passo a passo para subir, ou use o Rascunho pelo Gmail.");
+  if (!r.ok) throw new Error(corpo.erro || corpo.message || `O Supabase respondeu com erro ${r.status}.`);
+  return corpo;
+}
+const semDominio = (res) => (res.resultados || []).some(x => /verify a domain|testing emails|own email address|domain is not verified/i.test(x.erro || ""));
+async function enviaTeste() {
+  if (!confereTexto()) return;
+  const b = $("#pr-teste"); b.disabled = true; b.textContent = "Enviando teste...";
+  let msg;
+  try {
+    const res = await chamaCarteiro([{ email: MEU_EMAIL, marca: exemploMarca() }], false);
+    if (res.cotaAcabou) msg = `<div class="pr-alerta erro">A cota de hoje do Resend acabou. Tente o teste amanhã.</div>`;
+    else if (res.enviados) msg = `<div class="pr-alerta ok">Teste enviado para ${esc(MEU_EMAIL)}. Abra no celular e confira o nome da marca no lugar certo.</div>`;
+    else msg = `<div class="pr-alerta erro">O teste não saiu: ${esc((res.resultados && res.resultados[0] && res.resultados[0].erro) || "erro desconhecido")}</div>`;
+  } catch (e) { msg = `<div class="pr-alerta erro">${esc(e.message)}</div>`; }
+  await recarrega("email_envios");
+  mostraAndamento(msg);
+}
+function mostraAndamento(html) { const a = $("#pr-andamento"); if (a) { a.innerHTML = html; a.dataset.fixo = "1"; } }
+function confirmaDisparo() {
+  if (!confereTexto()) return;
+  const d = destinatarios(); const n = d.envio.length;
+  if (!n) { toast("Ninguém para receber nessa lista.", true); return; }
+  const semSair = estadoPr.modo === "html" && !/\bSAIR\b/i.test(estadoPr.html);
+  abreJanela("Confirmar o disparo", `
+    <p style="margin:0 0 10px;font-size:15px">Vai para <b>${numero(n)} ${n === 1 ? "marca" : "marcas"}</b>, da lista <b>${esc(nomeDaLista(estadoPr.lista))}</b>, e não dá para desfazer.</p>
+    <p style="margin:0;color:var(--suave);font-size:13px">Assunto: ${esc(estadoPr.assunto)}</p>
+    ${semSair ? `<div class="pr-alerta erro">O HTML está sem o rodapé do SAIR. O recomendado é voltar e colocar antes de disparar.</div>` : ""}`,
+    `<span class="esp"></span><button class="btn" type="button" data-cancela>Cancelar</button><button class="btn btn--forte" type="button" id="pr-sim">Sim, disparar</button>`);
+  $("[data-cancela]", janela).addEventListener("click", () => janela.close());
+  $("#pr-sim").addEventListener("click", () => { janela.close(); dispara(d.envio); });
+}
+async function dispara(lista) {
+  enviando = true;
+  const total = lista.length, listaEra = estadoPr.lista;
+  let enviados = 0, falhas = 0, pulados = 0, feitos = 0, cota = false, dominio = false, erroGeral = "";
+  const okEmails = new Set();
+  $("#pr-acoes").innerHTML = `<button class="btn" type="button" disabled>Enviando...</button>`;
+  const pinta = () => mostraAndamento(`<div class="pr-progresso"><div class="barra"><b style="width:${Math.round(divide(feitos, total) * 100)}%"></b></div><p>${numero(feitos)} de ${numero(total)} processados. Não feche esta página.</p></div>`);
+  pinta();
+  for (let i = 0; i < lista.length; i += LOTE) {
+    const lote = lista.slice(i, i + LOTE);
+    try {
+      const res = await chamaCarteiro(lote, estadoPr.pular);
+      enviados += res.enviados || 0; falhas += res.falhas || 0; pulados += res.pulados || 0;
+      (res.resultados || []).filter(x => x.status === "ok").forEach(x => okEmails.add(minus(x.email)));
+      if (semDominio(res)) { dominio = true; feitos += lote.length; break; }
+      if (res.cotaAcabou) { cota = true; feitos += lote.length - (res.faltaram || 0); break; }
+    } catch (e) { erroGeral = e.message; break; }
+    feitos += lote.length; pinta();
+  }
+  const faltaram = total - enviados - falhas - pulados;
+  /* marca as marcas que receberam, com a data de hoje */
+  const ids = lista.filter(d => okEmails.has(d.email)).flatMap(d => d.ids);
+  for (let i = 0; i < ids.length; i += 200) await sb.from("marcas").update({ ultimo_contato: hojeISO() }).in("id", ids.slice(i, i + 200));
+  enviando = false;
+  await Promise.all([recarrega("email_envios"), recarrega("marcas")]);
+  mostraAndamento(`
+    <div class="pr-resumo"><div><strong>${numero(enviados)}</strong><span>enviados</span></div><div><strong>${numero(falhas)}</strong><span>falhas</span></div><div><strong>${numero(pulados)}</strong><span>pulados</span></div></div>
+    ${cota ? `<div class="pr-alerta erro">A cota diária do Resend acabou no meio do disparo. ${numero(Math.max(faltaram, 0))} ficaram faltando. Volte amanhã, cole o mesmo assunto e o mesmo texto e deixe marcada a caixinha de pular quem já recebeu: aí ele manda só para quem faltou.</div>` : ""}
+    ${dominio ? `<div class="pr-alerta erro">O Resend só está deixando mandar para você mesma, porque o seu domínio ainda não foi verificado lá. Verifique o crisdallaccua.com no Resend, ou use o Rascunho pelo Gmail por enquanto.</div>` : ""}
+    ${erroGeral ? `<div class="pr-alerta erro">${esc(erroGeral)} ${feitos ? "O que já tinha saído ficou registrado no histórico." : ""}</div>` : ""}
+    ${falhas && !dominio ? `<div class="pr-alerta">Os e-mails com falha ficaram no histórico, para você conferir e limpar a base.</div>` : ""}`);
+  if (listaEra === "selecionadas" && enviados && dados.marcas.some(r => r.selecionada) && confirm("Disparo feito. Quer limpar a seleção da aba Marcas?\n\nSe for mandar para a mesma lista de novo, clique em Cancelar.")) {
+    await marcaSelecao(dados.marcas.filter(r => r.selecionada), false);
+  }
+}
+
+/* ---------- modo rascunho pelo Gmail ---------- */
+function linkGmail(d) {
+  return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(d.email) + "&su=" + encodeURIComponent(trocaChaves(estadoPr.assunto, d.marca, false)) + "&body=" + encodeURIComponent(textoGmail(d.marca));
+}
+function abreGmail(d) { if (!confereTexto()) return; window.open(linkGmail(d), "_blank", "noopener"); }
+function desenhaFila() {
+  const a = $("#pr-andamento"); if (!a || !filaGmail) return;
+  a.dataset.fixo = "";
+  const f = filaGmail, item = f.itens[f.pos];
+  if (!item) {
+    a.innerHTML = `<div class="pr-alerta ok">Fila terminada: ${numero(f.feitos)} marcada${f.feitos === 1 ? "" : "s"} como enviada${f.feitos === 1 ? "" : "s"}.</div>`;
+    filaGmail = null; return;
+  }
+  a.innerHTML = `<div class="pr-fila">
+    <div class="pr-fila-cab"><span>${numero(f.pos + 1)} de ${numero(f.itens.length)}</span><span>${numero(f.feitos)} enviada${f.feitos === 1 ? "" : "s"}</span></div>
+    <div class="pr-fila-corpo">
+      <h4>${esc(item.marca)}</h4><p class="para">${esc(item.email)}</p>
+      <p style="margin:0 0 6px;font-size:13px"><b style="font-weight:500">${esc(trocaChaves(estadoPr.assunto, item.marca, false))}</b></p>
+      <pre>${esc(textoGmail(item.marca))}</pre>
+      <div class="pr-acoes">
+        <button class="btn" type="button" id="fl-copiar">${ICONE.copiar}Copiar o texto</button>
+        <button class="btn" type="button" id="fl-gmail">${ICONE.envelope}Abrir no Gmail</button>
+        <button class="btn btn--forte" type="button" id="fl-feito">Marquei como enviada</button>
+        <button class="link-btn" type="button" id="fl-pula">pular esta</button>
+      </div>
+    </div></div>`;
+  $("#fl-copiar").onclick = async () => {
+    const txt = textoGmail(item.marca), html = trocaChaves(htmlAtual(), item.marca, true);
+    try {
+      if (window.ClipboardItem) await navigator.clipboard.write([new ClipboardItem({ "text/html": new Blob([html], { type: "text/html" }), "text/plain": new Blob([txt], { type: "text/plain" }) })]);
+      else await navigator.clipboard.writeText(txt);
+      toast("Texto copiado.");
+    } catch (e) { try { await navigator.clipboard.writeText(txt); toast("Texto copiado."); } catch (x) { toast("Não consegui copiar. Selecione o texto e copie.", true); } }
+  };
+  $("#fl-gmail").onclick = () => abreGmail(item);
+  $("#fl-pula").onclick = () => { f.pos++; desenhaFila(); };
+  $("#fl-feito").onclick = async () => {
+    const b = $("#fl-feito"); b.disabled = true;
+    if (funciona.email_envios) {
+      const { error } = await sb.from("email_envios").insert({ email: item.email, marca: item.marca, assunto: estadoPr.assunto.trim(), status: "ok", via: "gmail" });
+      if (error) { toast(explica(error, "email_envios"), true); b.disabled = false; return; }
+    }
+    await sb.from("marcas").update({ ultimo_contato: hojeISO() }).in("id", item.ids);
+    f.feitos++; f.pos++;
+    await Promise.all([recarrega("email_envios"), recarrega("marcas")]);
+  };
 }
 
 /* =====================================================================
