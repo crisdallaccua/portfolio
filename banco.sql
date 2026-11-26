@@ -57,7 +57,7 @@ create table if not exists public.marcas (
                  check (situacao in ('lead', 'conversando', 'cliente', 'parada')),
   obs            text,
   ultimo_contato date,
-  origem         text not null default 'painel' check (origem in ('painel', 'site')),
+  origem         text not null default 'painel' check (origem in ('painel', 'site', 'popup')),
   nicho          text,
   favorita       boolean not null default false,
   exemplo        boolean not null default false
@@ -65,6 +65,10 @@ create table if not exists public.marcas (
 -- campos novos (nicho e favorita): entram também numa tabela que já existia
 alter table public.marcas add column if not exists nicho    text;
 alter table public.marcas add column if not exists favorita boolean not null default false;
+alter table public.marcas add column if not exists selecionada boolean not null default false;
+-- origem "popup": contatos que chegam pelo popup do portfólio
+alter table public.marcas drop constraint if exists marcas_origem_check;
+alter table public.marcas add constraint marcas_origem_check check (origem in ('painel', 'site', 'popup'));
 
 -- Sua agenda de gravar, editar e postar.
 create table if not exists public.calendario (
@@ -186,9 +190,10 @@ create policy "formulario do site cria lead" on public.marcas
   for insert to anon
   with check (
     situacao = 'lead'
-    and origem = 'site'
+    and origem in ('site', 'popup')
     and exemplo = false
     and favorita = false
+    and selecionada = false
     and nicho is null
     and char_length(nome) between 1 and 150
     and coalesce(char_length(email), 0) <= 200
